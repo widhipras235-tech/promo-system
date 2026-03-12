@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Cek Promo</title>
+
+<link rel="manifest" href="manifest.json">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<h2>Cek Promo</h2>
+
+<input id="search" placeholder="SKU / Artikel">
+
+<select id="divisi">
+
+<option value="">Semua Divisi</option>
+<option>divisi1</option>
+<option>divisi2</option>
+<option>divisi3</option>
+<option>divisi4</option>
+
+</select>
+
+<button onclick="scan()">Scan Barcode</button>
+
+<div id="result"></div>
+
+<script src="../lib/fuse.min.js"></script>
+
+<script src="../lib/html5-qrcode.min.js"></script>
+
+<script src="app.js"></script>
+
+</body>
+</html>
