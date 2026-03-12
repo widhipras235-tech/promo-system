@@ -1,19 +1,42 @@
-let DB={}
-let fuse
+let DB = []
+let SKU_INDEX = {}
+let ARTICLE_INDEX = {}
 
 async function loadDB(){
 
-const promo=await fetch("../db/promo.json").then(r=>r.json())
+DB = await fetch("db/promo.json").then(r=>r.json())
+SKU_INDEX = await fetch("db/sku_index.json").then(r=>r.json())
+ARTICLE_INDEX = await fetch("db/article_index.json").then(r=>r.json())
 
-const sku=await fetch("../db/sku_index.json").then(r=>r.json())
+}
 
-DB.promo=promo
-DB.sku=sku
+loadDB()
 
-fuse=new Fuse(promo,{
-keys:["article"],
-threshold:0.3
-})
+async function search(){
+
+const q = document
+.getElementById("search")
+.value
+.trim()
+.toUpperCase()
+
+let resultIndex = []
+
+if(SKU_INDEX[q])
+resultIndex = SKU_INDEX[q]
+
+else if(ARTICLE_INDEX[q])
+resultIndex = ARTICLE_INDEX[q]
+
+if(resultIndex.length == 0){
+
+result.innerHTML = "Data tidak ditemukan"
+
+return
+
+}
+
+show(DB[resultIndex[0]])
 
 }
 
@@ -41,7 +64,7 @@ Acara : ${item.acara}<br>
 
 Division : ${item.division}<br>
 
-Sumber File : ${item.file}<br>
+File : ${item.file}<br>
 
 Sheet : ${item.sheet}
 
@@ -50,33 +73,3 @@ Sheet : ${item.sheet}
 `
 
 }
-
-function search(q){
-
-if(DB.sku[q]){
-
-show(DB.promo[DB.sku[q]])
-
-return
-
-}
-
-const r=fuse.search(q)
-
-if(r.length){
-
-show(r[0].item)
-
-}
-
-}
-
-document.getElementById("search")
-
-.addEventListener("input",e=>{
-
-search(e.target.value)
-
-})
-
-loadDB()
