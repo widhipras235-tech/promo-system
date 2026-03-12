@@ -19,19 +19,31 @@ threshold:0.3
 
 function show(item){
 
-document.getElementById("result").innerHTML=`
+result.innerHTML = `
 
 <div class="card">
 
+<h3>${item.deskripsi}</h3>
+
+Brand : ${item.brand}<br>
+
 SKU : ${item.sku}<br>
 
-Artikel : ${item.article}<br>
+Harga Normal : Rp ${item.harga_normal}<br>
 
-Normal : ${item.normal}<br>
+Harga Promo : Rp ${item.harga_promo}<br>
 
-Promo : ${item.promo_price}<br>
+Diskon : ${item.diskon}<br>
 
-Divisi : ${item.divisi}
+Berlaku : ${item.berlaku}<br>
+
+Acara : ${item.acara}<br>
+
+Division : ${item.division}<br>
+
+Sumber File : ${item.file}<br>
+
+Sheet : ${item.sheet}
 
 </div>
 

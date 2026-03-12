@@ -1,23 +1,11 @@
 {
   "name": "promo-system",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "PWA cek promo",
+  "main": "build/convert_excel.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node build/convert_excel.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/widhipras235-tech/promo-system.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/widhipras235-tech/promo-system/issues"
-  },
-  "homepage": "https://github.com/widhipras235-tech/promo-system#readme",
   "dependencies": {
     "xlsx": "^0.18.5"
   }
