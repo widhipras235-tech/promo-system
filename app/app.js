@@ -133,15 +133,37 @@ diskon=d+"%"
 
 else{
 
-// jika B3 jangan diubah
+// ====================
+// B3 DISKON
+// ====================
+
 if(isB3){
 
-promoDisplay=promo
-diskon=""
+let match = promoText.match(/B(\d+).*?(\d+)%/)
+
+if(match){
+
+let qty = match[1]
+let disc = match[2]
+
+promoDisplay = "B"+qty+"D"+disc
+diskon = "BXGY"
+
+}else{
+
+promoDisplay = promo
+diskon = ""
 
 }
 
-// diskon normal
+normalDisplay = rupiah(normal)
+
+}
+
+// ====================
+// DISKON NORMAL
+// ====================
+
 else{
 
 if(String(diskon).toUpperCase().includes("PERCENTAGE")){
