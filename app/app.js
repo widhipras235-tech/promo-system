@@ -84,44 +84,53 @@ let diskon = item.diskon || ""
 
 const promoText = String(hargaPromo).toUpperCase()
 
-// fungsi format rupiah
+// format rupiah
 function rupiah(v){
 
 if(!v) return ""
 
-if(!isNaN(v)){
-return "Rp. " + v
+let n = String(v).replace(/[^\d]/g,"")
+
+if(n==="") return v
+
+return "Rp. " + n
+
 }
 
-return v
-
-}
+// format harga normal
+hargaNormal = rupiah(hargaNormal)
 
 // SPECIAL PRICE → harga normal dicoret
 if(promoText.includes("SPECIAL")){
 
-hargaNormal = `<s>${rupiah(hargaNormal)}</s>`
+hargaNormal = `<span style="text-decoration:line-through">${rupiah(item.harga_normal)}</span>`
 
 }
 
-// jika harga normal angka
-else{
-hargaNormal = rupiah(hargaNormal)
-}
+// harga promo jika angka
+if(!isNaN(String(hargaPromo).replace(/[^\d]/g,""))){
 
-// jika promo berupa angka
-if(!isNaN(hargaPromo) && hargaPromo!=""){
 hargaPromo = rupiah(hargaPromo)
+
 }
 
-// jika promo diskon
-if(promoText.includes("DISKON")){
+// diskon %
+if(promoText.includes("%")){
 
 const match = promoText.match(/(\d+)%/)
 
 if(match){
+
 diskon = match[1] + "%"
+
 }
+
+}
+
+// hilangkan kata PERCENTAGE
+if(String(diskon).toUpperCase().includes("PERCENTAGE")){
+
+diskon = ""
 
 }
 
