@@ -2,17 +2,32 @@ let DB = []
 let SKU_INDEX = {}
 let ARTICLE_INDEX = {}
 
-async function loadDB(){
+const result = document.getElementById("result")
 
-DB = await fetch("db/promo.json").then(r=>r.json())
-SKU_INDEX = await fetch("db/sku_index.json").then(r=>r.json())
-ARTICLE_INDEX = await fetch("db/article_index.json").then(r=>r.json())
+async function loadDatabase(){
+
+try{
+
+DB = await fetch("../db/promo.json").then(r=>r.json())
+
+SKU_INDEX = await fetch("../db/sku_index.json").then(r=>r.json())
+
+ARTICLE_INDEX = await fetch("../db/article_index.json").then(r=>r.json())
+
+console.log("Database loaded:",DB.length)
+
+}catch(e){
+
+console.error("Database gagal dimuat",e)
 
 }
 
-loadDB()
+}
 
-async function search(){
+window.onload = loadDatabase
+
+
+function search(){
 
 const q = document
 .getElementById("search")
@@ -20,53 +35,60 @@ const q = document
 .trim()
 .toUpperCase()
 
-let resultIndex = []
+if(!q) return
 
-if(SKU_INDEX[q])
-resultIndex = SKU_INDEX[q]
+let index=[]
 
-else if(ARTICLE_INDEX[q])
-resultIndex = ARTICLE_INDEX[q]
+if(SKU_INDEX[q]){
 
-if(resultIndex.length == 0){
+index = SKU_INDEX[q]
 
-result.innerHTML = "Data tidak ditemukan"
+}else if(ARTICLE_INDEX[q]){
+
+index = ARTICLE_INDEX[q]
+
+}
+
+if(index.length==0){
+
+result.innerHTML="Data tidak ditemukan"
 
 return
 
 }
 
-show(DB[resultIndex[0]])
+show(DB[index[0]])
 
 }
 
+
 function show(item){
 
-result.innerHTML = `
+result.innerHTML=`
 
 <div class="card">
 
 <h3>${item.deskripsi}</h3>
 
-Brand : ${item.brand}<br>
+<b>Brand :</b> ${item.brand}<br>
 
-SKU : ${item.sku}<br>
+<b>SKU :</b> ${item.sku}<br>
 
-Harga Normal : Rp ${item.harga_normal}<br>
+<b>Harga Normal :</b> Rp ${item.harga_normal}<br>
 
-Harga Promo : Rp ${item.harga_promo}<br>
+<b>Harga Promo :</b> Rp ${item.harga_promo}<br>
 
-Diskon : ${item.diskon}<br>
+<b>Diskon :</b> ${item.diskon}<br>
 
-Berlaku : ${item.berlaku}<br>
+<b>Berlaku :</b> ${item.berlaku}<br>
 
-Acara : ${item.acara}<br>
+<b>Acara :</b> ${item.acara}<br>
 
-Division : ${item.division}<br>
+<b>Division :</b> ${item.division}<br>
 
-File : ${item.file}<br>
+<b>File :</b> ${item.file}<br>
 
-Sheet : ${item.sheet}
+<b>Sheet :</b> ${item.sheet}
 
 </div>
 
