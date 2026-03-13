@@ -1,4 +1,6 @@
 let DB=[]
+let fuse
+
 const result=document.getElementById("result")
 const searchInput=document.getElementById("search")
 
@@ -6,25 +8,26 @@ async function loadDatabase(){
 
 result.innerHTML="Loading database..."
 
+try{
+
 DB = await fetch("../db/promo.json").then(r=>r.json())
+
+fuse = new Fuse(DB,{
+keys:[
+"sku",
+"artikel",
+"deskripsi",
+"brand"
+],
+threshold:0.35,
+ignoreLocation:true
+})
 
 result.innerHTML=""
 
-}
+}catch(e){
 
-async function loadDatabase(){
-
-let cache = localStorage.getItem("promoDB")
-
-if(cache){
-
-DB = JSON.parse(cache)
-
-}else{
-
-DB = await fetch("../db/promo.json").then(r=>r.json())
-
-localStorage.setItem("promoDB",JSON.stringify(DB))
+result.innerHTML="Database gagal dimuat"
 
 }
 
@@ -35,7 +38,7 @@ window.onload=loadDatabase
 
 searchInput.addEventListener("input", e=>{
 
-let q=e.target.value.trim().toLowerCase()
+let q=e.target.value.trim()
 
 if(q.length<2){
 
@@ -51,29 +54,61 @@ search(q)
 
 function search(q){
 
+q=q.toUpperCase()
+
 const divisi=document.getElementById("divisi").value
 
-let data = DB.filter(x =>
-x.search_index.includes(q)
-)
+let data=[]
 
+// SKU search
+data=DB.filter(x=>String(x.sku).includes(q))
+
+// artikel / deskripsi / brand search
+if(data.length==0){
+
+data=fuse.search(q).map(x=>x.item)
+
+}
+
+// filter divisi
 if(divisi){
 
 data=data.filter(x=>x.division===divisi)
 
 }
 
+// limit hasil
 data=data.slice(0,30)
 
 render(data)
 
 }
 
+
+function number(v){
+
+return Number(String(v).replace(/[^\d]/g,""))
+
+}
+
+function rupiah(v){
+
+let n=number(v)
+
+if(!n) return v
+
+return "Rp "+new Intl.NumberFormat("id-ID").format(n)
+
+}
+
+
 function render(data){
 
 if(data.length==0){
+
 result.innerHTML="Promo tidak ditemukan"
 return
+
 }
 
 let html=""
@@ -86,22 +121,6 @@ let diskon=item.diskon || ""
 
 let promoText=(promo+" "+item.acara+" "+diskon).toUpperCase()
 
-function number(v){
-return Number(String(v).replace(/[^\d]/g,""))
-}
-
-function rupiah(v){
-let n=number(v)
-if(!n) return v
-return "Rp. "+n
-}
-
-function rupiah(n){
-
-return new Intl.NumberFormat("id-ID").format(n)
-
-}
-
 let normalDisplay=rupiah(normal)
 let promoDisplay=promo
 
@@ -112,9 +131,7 @@ let isB3=promoText.includes("B3")
 let isSpecial=promoText.includes("SPECIAL")
 let isSharp=promoText.includes("SHARP")
 
-// ======================
-// SHARP PRICE
-// ======================
+// ================= SHARP PRICE
 
 if(isSharp){
 
@@ -124,9 +141,7 @@ diskon="SHARP PRICE"
 
 }
 
-// ======================
-// SPECIAL PRICE
-// ======================
+// ================= SPECIAL PRICE
 
 else if(isSpecial){
 
@@ -135,9 +150,7 @@ promoDisplay=promo
 
 }
 
-// ======================
-// B3 DISKON
-// ======================
+// ================= B3 DISKON
 
 else if(isB3){
 
@@ -157,9 +170,7 @@ normalDisplay=rupiah(normal)
 
 }
 
-// ======================
-// DISKON NORMAL
-// ======================
+// ================= DISKON NORMAL
 
 else{
 
@@ -221,6 +232,8 @@ result.innerHTML=html
 
 }
 
+
+
 function scan(){
 
 const scanner=new Html5Qrcode("reader")
@@ -232,10 +245,13 @@ scanner.start(
 barcode=>{
 
 searchInput.value=barcode
+
 search(barcode)
 
 scanner.stop()
 
-})
+}
+
+)
 
 }
