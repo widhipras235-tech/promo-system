@@ -78,6 +78,17 @@ show(DB[index[0]])
 
 function show(item){
 
+let hargaNormal=item.harga_normal
+let hargaPromo=item.harga_promo
+
+if(
+hargaPromo.toUpperCase().includes("SPECIAL")
+){
+
+hargaNormal=`<s>Rp ${hargaNormal}</s>`
+
+}
+
 result.innerHTML=`
 
 <div class="card">
@@ -88,9 +99,9 @@ result.innerHTML=`
 
 <b>SKU :</b> ${item.sku}<br>
 
-<b>Harga Normal :</b> Rp ${item.harga_normal}<br>
+<b>Harga Normal :</b> ${hargaNormal}<br>
 
-<b>Harga Promo :</b> Rp ${item.harga_promo}<br>
+<b>Harga Promo :</b> ${hargaPromo}<br>
 
 <b>Diskon :</b> ${item.diskon}<br>
 

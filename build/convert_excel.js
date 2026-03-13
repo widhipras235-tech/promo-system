@@ -1,105 +1,165 @@
-const fs = require("fs");
-const path = require("path");
-const XLSX = require("xlsx");
+const fs = require("fs")
+const path = require("path")
+const XLSX = require("xlsx")
 
-const folders = [
-"excel/divisi1",
-"excel/divisi2",
-"excel/divisi3",
-"excel/divisi4"
-];
+const BASE="excel"
 
-let promo = [];
-let skuIndex = {};
-let articleIndex = {};
+const DIVISI=[
+"divisi1",
+"divisi2",
+"divisi3",
+"divisi4"
+]
+
+let promo=[]
+let skuIndex={}
+let articleIndex={}
 
 function norm(v){
-if(!v) return "";
-return String(v).trim();
+if(!v) return ""
+return String(v).trim()
 }
 
-function addItem(item){
+function find(row,keys){
 
-promo.push(item);
+for(let k in row){
 
-if(item.sku){
-if(!skuIndex[item.sku]) skuIndex[item.sku] = [];
-skuIndex[item.sku].push(promo.length-1);
-}
+const name=k.toUpperCase()
 
-if(item.article){
-if(!articleIndex[item.article]) articleIndex[item.article] = [];
-articleIndex[item.article].push(promo.length-1);
-}
+for(let key of keys){
+
+if(name.includes(key))
+return row[k]
 
 }
 
-folders.forEach(folder=>{
+}
 
-if(!fs.existsSync(folder)) return;
+return ""
+}
 
-fs.readdirSync(folder).forEach(file=>{
+function excelDate(v){
 
-if(!file.endsWith(".xlsx")) return;
+if(!v) return ""
 
-const filePath = path.join(folder,file);
+if(typeof v==="number"){
 
-const wb = XLSX.readFile(filePath);
+const d=XLSX.SSF.parse_date_code(v)
+
+return `${d.d}-${d.m}-${d.y}`
+
+}
+
+return String(v)
+
+}
+
+DIVISI.forEach(div=>{
+
+const folder=path.join(BASE,div)
+
+if(!fs.existsSync(folder)) return
+
+const files=fs.readdirSync(folder)
+
+files.forEach(file=>{
+
+if(!file.endsWith(".xlsx")) return
+
+const filePath=path.join(folder,file)
+
+const wb=XLSX.readFile(filePath,{cellDates:true})
 
 wb.SheetNames.forEach(sheetName=>{
 
-const rows = XLSX.utils.sheet_to_json(
+const rows=XLSX.utils.sheet_to_json(
 wb.Sheets[sheetName],
-{defval:""}
-);
+{raw:false,defval:""}
+)
 
 rows.forEach(r=>{
 
-addItem({
+const hargaNormal=find(r,["NORMAL"])
+const hargaPromo=find(r,["PROMO","SHARP","SPECIAL"])
 
-deskripsi: norm(r["DESCRIPTION"]),
+const item={
 
-brand: norm(r["BRAND"]),
+deskripsi:norm(find(r,["DESC"])),
 
-sku: norm(r["SKU"]),
+brand:norm(find(r,["BRAND"])),
 
-article: norm(r["ARTICLE"]),
+sku:norm(find(r,["SKU"])),
 
-harga_normal: r["HARGA NORMAL"] || 0,
+article:norm(find(r,["ARTICLE"])),
 
-harga_promo: r["HARGA PROMO"] || 0,
+harga_normal:norm(hargaNormal),
 
-diskon: norm(r["DISKON"]),
+harga_promo:norm(hargaPromo),
+
+diskon:norm(find(r,["DISC"])),
 
 berlaku:
-norm(r["FROM DATE"]) + " - " + norm(r["TO DATE"]),
+excelDate(find(r,["FROM"]))+
+" - "+
+excelDate(find(r,["TO"])),
 
-acara: norm(r["ACARA"]),
+acara:norm(find(r,["EVENT","ACARA"])),
 
-division: norm(r["DIVISION"] || folder),
+division:div,
 
-file: file,
+file:file,
 
-sheet: sheetName
+sheet:sheetName
 
-});
+}
 
-});
+promo.push(item)
 
-});
+const i=promo.length-1
 
-});
+if(item.sku){
 
-});
+if(!skuIndex[item.sku])
+skuIndex[item.sku]=[]
+
+skuIndex[item.sku].push(i)
+
+}
+
+if(item.article){
+
+if(!articleIndex[item.article])
+articleIndex[item.article]=[]
+
+articleIndex[item.article].push(i)
+
+}
+
+})
+
+})
+
+})
+
+})
 
 if(!fs.existsSync("db"))
-fs.mkdirSync("db");
+fs.mkdirSync("db")
 
-fs.writeFileSync("db/promo.json",JSON.stringify(promo));
+fs.writeFileSync(
+"db/promo.json",
+JSON.stringify(promo,null,2)
+)
 
-fs.writeFileSync("db/sku_index.json",JSON.stringify(skuIndex));
+fs.writeFileSync(
+"db/sku_index.json",
+JSON.stringify(skuIndex)
+)
 
-fs.writeFileSync("db/article_index.json",JSON.stringify(articleIndex));
+fs.writeFileSync(
+"db/article_index.json",
+JSON.stringify(articleIndex)
+)
 
-console.log("Database selesai dibuat");
-console.log("Total promo:",promo.length);
+console.log("DATABASE SELESAI")
+console.log("TOTAL PROMO:",promo.length)
