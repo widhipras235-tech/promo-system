@@ -102,17 +102,16 @@ const promoNum = number(hargaPromo)
 let normalDisplay = rupiah(hargaNormal)
 let promoDisplay = hargaPromo
 
-// SPECIAL PRICE → harga coret
-if(String(hargaPromo).toUpperCase().includes("SPECIAL")){
-normalDisplay = `<span style="text-decoration:line-through">${rupiah(hargaNormal)}</span>`
-}
-
 // promo angka
 if(promoNum){
 promoDisplay = rupiah(hargaPromo)
 }
 
-// hitung diskon jika PERCENTAGE
+// ======================
+// HITUNG DISKON
+// ======================
+
+// jika diskon = PERCENTAGE
 if(String(diskon).toUpperCase().includes("PERCENTAGE")){
 
 if(normalNum && promoNum){
@@ -122,14 +121,12 @@ let d = Math.round((normalNum - promoNum) / normalNum * 100)
 diskon = d + "%"
 
 }else{
-
 diskon = ""
-
 }
 
 }
 
-// ambil % dari teks lain
+// ambil % dari teks promo
 if(!diskon){
 
 const text = (item.harga_promo + " " + item.acara).toUpperCase()
@@ -141,6 +138,28 @@ diskon = match[1] + "%"
 }
 
 }
+
+// ======================
+// LOGIKA HARGA CORET
+// ======================
+
+const promoText = (item.harga_promo + " " + item.acara).toUpperCase()
+
+const isB3 = promoText.includes("B3")
+
+if(
+!isB3 &&
+(
+promoText.includes("SPECIAL") ||
+diskon
+)
+){
+
+normalDisplay = `<span style="text-decoration:line-through">${rupiah(hargaNormal)}</span>`
+
+}
+
+// ======================
 
 result.innerHTML = `
 
