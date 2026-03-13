@@ -82,58 +82,40 @@ let hargaNormal = item.harga_normal
 let hargaPromo = item.harga_promo
 let diskon = item.diskon || ""
 
-const promoText = String(hargaPromo).toUpperCase()
+const promoText = String(hargaPromo + " " + item.acara).toUpperCase()
 
-// format rupiah
+// fungsi format rupiah
 function rupiah(v){
-
 if(!v) return ""
 
-let n = String(v).replace(/[^\d]/g,"")
+let num = String(v).replace(/[^\d]/g,"")
 
-if(n==="") return v
+if(num === "") return v
 
-return "Rp. " + n
-
+return "Rp. " + num
 }
 
 // format harga normal
-hargaNormal = rupiah(hargaNormal)
+let normalDisplay = rupiah(hargaNormal)
 
-// SPECIAL PRICE → harga normal dicoret
+// cek SPECIAL PRICE
 if(promoText.includes("SPECIAL")){
-
-hargaNormal = `<span style="text-decoration:line-through">${rupiah(item.harga_normal)}</span>`
-
+normalDisplay = `<span style="text-decoration:line-through">${rupiah(hargaNormal)}</span>`
 }
 
-// harga promo jika angka
+// format harga promo jika angka
 if(!isNaN(String(hargaPromo).replace(/[^\d]/g,""))){
-
 hargaPromo = rupiah(hargaPromo)
-
 }
 
-// diskon %
-if(promoText.includes("%")){
-
-const match = promoText.match(/(\d+)%/)
+// ambil diskon %
+const match = promoText.match(/(\d+)\s*%/)
 
 if(match){
-
 diskon = match[1] + "%"
-
 }
 
-}
-
-// hilangkan kata PERCENTAGE
-if(String(diskon).toUpperCase().includes("PERCENTAGE")){
-
-diskon = ""
-
-}
-
+// tampilkan hasil
 result.innerHTML = `
 
 <div class="card">
@@ -144,7 +126,7 @@ result.innerHTML = `
 
 <b>SKU :</b> ${item.sku}<br>
 
-<b>Harga Normal :</b> ${hargaNormal}<br>
+<b>Harga Normal :</b> ${normalDisplay}<br>
 
 <b>Harga Promo :</b> ${hargaPromo}<br>
 
@@ -163,5 +145,4 @@ result.innerHTML = `
 </div>
 
 `
-
 }
