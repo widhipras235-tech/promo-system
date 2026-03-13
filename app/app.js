@@ -10,16 +10,15 @@ DB = await fetch("../db/promo.json").then(r=>r.json())
 
 fuse = new Fuse(DB,{
 keys:[
-"sku",
-"artikel",
-"deskripsi",
-"brand",
-"acara",
-"division"
+{ name:"sku", weight:0.4 },
+{ name:"artikel", weight:0.3 },
+{ name:"deskripsi", weight:0.3 },
+{ name:"brand", weight:0.2 },
+{ name:"acara", weight:0.1 }
 ],
 threshold:0.35,
 ignoreLocation:true,
-minMatchCharLength:2
+includeScore:true
 })
 
 }
@@ -27,11 +26,11 @@ minMatchCharLength:2
 window.onload=loadDatabase
 
 
-searchInput.addEventListener("keyup", e=>{
+searchInput.addEventListener("input", e=>{
 
 let q=e.target.value.trim()
 
-if(q.length<3) return
+if(q.length<2) return
 
 search(q)
 
@@ -40,27 +39,27 @@ search(q)
 
 function search(q){
 
-q=q.trim()
+q = q.trim().toLowerCase()
 
-const divisi=document.getElementById("divisi").value
+const divisi = document.getElementById("divisi").value
 
 let data=[]
 
-// SKU exact search
-data=DB.filter(x=>String(x.sku).includes(q))
+// EXACT SKU
+data = DB.filter(x =>
+String(x.sku).toLowerCase().includes(q)
+)
 
-// fuzzy search jika tidak ditemukan
+// jika tidak ditemukan → fuzzy search
 if(data.length==0){
 
-data=fuse.search(q).map(x=>x.item)
+data = fuse.search(q).map(r=>r.item)
 
 }
 
 // filter divisi
 if(divisi){
-
-data=data.filter(x=>x.division===divisi)
-
+data = data.filter(x=>x.division===divisi)
 }
 
 render(data)
