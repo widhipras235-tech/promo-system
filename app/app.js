@@ -1,179 +1,124 @@
-let DB = []
-let SKU_INDEX = {}
-let ARTICLE_INDEX = {}
+let DB=[]
+let fuse
 
-let databaseReady = false
-
-const result = document.getElementById("result")
+const result=document.getElementById("result")
 
 async function loadDatabase(){
 
-try{
-
 DB = await fetch("../db/promo.json").then(r=>r.json())
 
-SKU_INDEX = await fetch("../db/sku_index.json").then(r=>r.json())
+fuse = new Fuse(DB,{
+keys:["artikel","deskripsi"],
+threshold:0.3
+})
 
-ARTICLE_INDEX = await fetch("../db/article_index.json").then(r=>r.json())
-
-databaseReady = true
-
-console.log("Database loaded:",DB.length)
-
-}catch(e){
-
-console.error("Database gagal dimuat",e)
+loadBrand()
 
 }
 
-}
-
-window.onload = loadDatabase
-
+window.onload=loadDatabase
 
 function search(){
 
-if(!databaseReady){
+const q=document.getElementById("search").value.toUpperCase()
 
-result.innerHTML = "Database sedang dimuat..."
+let data=[]
 
+// SKU search
+data = DB.filter(x=>x.sku==q)
+
+// artikel search
+if(data.length==0){
+
+data = fuse.search(q).map(x=>x.item)
+
+}
+
+show(data)
+
+}
+
+function show(data){
+
+if(data.length==0){
+
+result.innerHTML="Promo tidak ditemukan"
 return
 
 }
 
-const q = document
-.getElementById("search")
-.value
-.trim()
-.toUpperCase()
+let html=""
 
-if(!q) return
+data.forEach(item=>{
 
-let index=[]
+let normal=item.harga_normal
+let promo=item.harga_promo
+let diskon=""
 
-if(SKU_INDEX[q]){
+let promoText=(promo+" "+item.acara).toUpperCase()
 
-index = SKU_INDEX[q]
+let normalDisplay=normal
+let promoDisplay=promo
 
-}
-
-else if(ARTICLE_INDEX[q]){
-
-index = ARTICLE_INDEX[q]
-
-}
-
-if(index.length==0){
-
-result.innerHTML="Data tidak ditemukan"
-
-return
-
-}
-
-show(DB[index[0]])
-
-}
-
-
-function show(item){
-
-let hargaNormal = item.harga_normal
-let hargaPromo = item.harga_promo
-let diskon = item.diskon || ""
-
-function number(v){
-return Number(String(v).replace(/[^\d]/g,""))
-}
-
-function rupiah(v){
-let n = number(v)
-if(!n) return v
-return "Rp. " + n
-}
-
-const normalNum = number(hargaNormal)
-const promoNum = number(hargaPromo)
-
-let normalDisplay = rupiah(hargaNormal)
-let promoDisplay = rupiah(hargaPromo)
-
-const promoText = (item.harga_promo + " " + item.acara + " " + item.diskon).toUpperCase()
-
-const isB3 = promoText.includes("B3")
-const isSpecial = promoText.includes("SPECIAL") || promoText.includes("SPESIAL")
-const isSharp = promoText.includes("SHARP")
-
-// ======================
 // SHARP PRICE
-// ======================
+if(promoText.includes("SHARP")){
 
-if(isSharp){
-
-normalDisplay = "@" + rupiah(hargaNormal)
-promoDisplay = rupiah(hargaNormal)
-diskon = "SHARP PRICE"
+normalDisplay="@Rp "+normal
+promoDisplay="Rp "+normal
+diskon="SHARP PRICE"
 
 }
 
-// ======================
-// HITUNG DISKON
-// ======================
+// SPECIAL PRICE
+else if(promoText.includes("SPECIAL")){
 
+normalDisplay=`<span class="old">Rp ${normal}</span>`
+promoDisplay=promo
+
+}
+
+// DISKON %
 else{
 
-if(String(diskon).toUpperCase().includes("PERCENTAGE") && normalNum && promoNum){
+let n=Number(normal)
+let p=Number(promo)
 
-let d = Math.round((normalNum - promoNum) / normalNum * 100)
+if(n && p){
 
-diskon = d + "%"
+let d=Math.round((n-p)/n*100)
 
-}
+diskon=d+"%"
 
-const match = promoText.match(/(\d+)\s*%/)
+normalDisplay=`<span class="old">Rp ${normal}</span>`
+promoDisplay="Rp "+promo
 
-if(match){
-diskon = match[1] + "%"
-}
-
-// ======================
-// HARGA CORET
-// ======================
-
-if(!isB3 && (diskon || isSpecial)){
-normalDisplay = `<s>${rupiah(hargaNormal)}</s>`
 }
 
 }
 
-result.innerHTML = `
+html+=`
 
 <div class="card">
 
 <h3>${item.deskripsi}</h3>
 
-<b>Brand :</b> ${item.brand}<br>
+Brand : ${item.brand}<br>
+SKU : ${item.sku}<br>
 
-<b>SKU :</b> ${item.sku}<br>
+Harga Normal : ${normalDisplay}<br>
+Harga Promo : ${promoDisplay}<br>
+Diskon : ${diskon}<br>
 
-<b>Harga Normal :</b> ${normalDisplay}<br>
-
-<b>Harga Promo :</b> ${promoDisplay}<br>
-
-<b>Diskon :</b> ${diskon}<br>
-
-<b>Berlaku :</b> ${item.berlaku}<br>
-
-<b>Acara :</b> ${item.acara}<br>
-
-<b>Division :</b> ${item.division}<br>
-
-<b>File :</b> ${item.file}<br>
-
-<b>Sheet :</b> ${item.sheet}
+Berlaku : ${item.berlaku}<br>
+Acara : ${item.acara}<br>
+Divisi : ${item.division}<br>
 
 </div>
 
 `
+
+})
+
+result.innerHTML=html
 
 }
