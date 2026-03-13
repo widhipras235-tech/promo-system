@@ -2,6 +2,7 @@ let DB=[]
 let fuse
 
 const result=document.getElementById("result")
+const searchInput=document.getElementById("search")
 
 async function loadDatabase(){
 
@@ -12,33 +13,53 @@ keys:["artikel","deskripsi"],
 threshold:0.3
 })
 
-loadBrand()
-
 }
 
 window.onload=loadDatabase
 
-function search(){
 
-const q=document.getElementById("search").value.toUpperCase()
+searchInput.addEventListener("keyup", e=>{
+
+let q=e.target.value.trim()
+
+if(q.length<3) return
+
+search(q)
+
+})
+
+
+function search(q){
+
+q=q.toUpperCase()
+
+const divisi=document.getElementById("divisi").value
 
 let data=[]
 
-// SKU search
-data = DB.filter(x=>x.sku==q)
+// SKU exact
+data=DB.filter(x=>x.sku==q)
 
-// artikel search
+// artikel fuzzy
 if(data.length==0){
 
-data = fuse.search(q).map(x=>x.item)
+data=fuse.search(q).map(x=>x.item)
 
 }
 
-show(data)
+// filter divisi
+if(divisi){
+
+data=data.filter(x=>x.division===divisi)
 
 }
 
-function show(data){
+render(data)
+
+}
+
+
+function render(data){
 
 if(data.length==0){
 
@@ -57,7 +78,7 @@ let diskon=""
 
 let promoText=(promo+" "+item.acara).toUpperCase()
 
-let normalDisplay=normal
+let normalDisplay="Rp "+normal
 let promoDisplay=promo
 
 // SHARP PRICE
@@ -120,5 +141,28 @@ Divisi : ${item.division}<br>
 })
 
 result.innerHTML=html
+
+}
+
+
+function scan(){
+
+const scanner=new Html5Qrcode("reader")
+
+scanner.start(
+{facingMode:"environment"},
+{fps:10,qrbox:250},
+
+barcode=>{
+
+document.getElementById("search").value=barcode
+
+search(barcode)
+
+scanner.stop()
+
+}
+
+)
 
 }
