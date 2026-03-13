@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
 <meta charset="UTF-8">
@@ -22,22 +23,24 @@
 <select id="divisi">
 
 <option value="">Semua Divisi</option>
-<option>divisi1</option>
-<option>divisi2</option>
-<option>divisi3</option>
-<option>divisi4</option>
+<option value="divisi1">Divisi 1</option>
+<option value="divisi2">Divisi 2</option>
+<option value="divisi3">Divisi 3</option>
+<option value="divisi4">Divisi 4</option>
 
 </select>
+
+<button onclick="search()">Cari</button>
 
 <button onclick="scan()">Scan Barcode</button>
 
 <div id="result"></div>
 
 <script src="../lib/fuse.min.js"></script>
-
 <script src="../lib/html5-qrcode.min.js"></script>
 
 <script src="app.js"></script>
 
 </body>
+
 </html>
