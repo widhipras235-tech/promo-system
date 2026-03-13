@@ -78,18 +78,54 @@ show(DB[index[0]])
 
 function show(item){
 
-let hargaNormal=item.harga_normal
-let hargaPromo=item.harga_promo
+let hargaNormal = item.harga_normal
+let hargaPromo = item.harga_promo
+let diskon = item.diskon || ""
 
-if(
-hargaPromo.toUpperCase().includes("SPECIAL")
-){
+const promoText = String(hargaPromo).toUpperCase()
 
-hargaNormal=`<s>Rp ${hargaNormal}</s>`
+// fungsi format rupiah
+function rupiah(v){
+
+if(!v) return ""
+
+if(!isNaN(v)){
+return "Rp. " + v
+}
+
+return v
 
 }
 
-result.innerHTML=`
+// SPECIAL PRICE → harga normal dicoret
+if(promoText.includes("SPECIAL")){
+
+hargaNormal = `<s>${rupiah(hargaNormal)}</s>`
+
+}
+
+// jika harga normal angka
+else{
+hargaNormal = rupiah(hargaNormal)
+}
+
+// jika promo berupa angka
+if(!isNaN(hargaPromo) && hargaPromo!=""){
+hargaPromo = rupiah(hargaPromo)
+}
+
+// jika promo diskon
+if(promoText.includes("DISKON")){
+
+const match = promoText.match(/(\d+)%/)
+
+if(match){
+diskon = match[1] + "%"
+}
+
+}
+
+result.innerHTML = `
 
 <div class="card">
 
@@ -103,7 +139,7 @@ result.innerHTML=`
 
 <b>Harga Promo :</b> ${hargaPromo}<br>
 
-<b>Diskon :</b> ${item.diskon}<br>
+<b>Diskon :</b> ${diskon}<br>
 
 <b>Berlaku :</b> ${item.berlaku}<br>
 
