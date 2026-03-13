@@ -9,8 +9,17 @@ async function loadDatabase(){
 DB = await fetch("../db/promo.json").then(r=>r.json())
 
 fuse = new Fuse(DB,{
-keys:["artikel","deskripsi"],
-threshold:0.3
+keys:[
+"sku",
+"artikel",
+"deskripsi",
+"brand",
+"acara",
+"division"
+],
+threshold:0.35,
+ignoreLocation:true,
+minMatchCharLength:2
 })
 
 }
@@ -31,16 +40,16 @@ search(q)
 
 function search(q){
 
-q=q.toUpperCase()
+q=q.trim()
 
 const divisi=document.getElementById("divisi").value
 
 let data=[]
 
-// SKU exact
-data=DB.filter(x=>x.sku==q)
+// SKU exact search
+data=DB.filter(x=>String(x.sku).includes(q))
 
-// artikel fuzzy
+// fuzzy search jika tidak ditemukan
 if(data.length==0){
 
 data=fuse.search(q).map(x=>x.item)
