@@ -10,22 +10,21 @@ result.innerHTML="Loading database..."
 
 try{
 
-DB = await fetch("../db/promo.json").then(r=>r.json())
+let res = await fetch("../db/promo.json")
 
-fuse = new Fuse(DB,{
-keys:[
-"sku",
-"artikel",
-"deskripsi",
-"brand"
-],
-threshold:0.35,
-ignoreLocation:true
-})
+if(!res.ok){
+throw new Error("File promo.json tidak ditemukan")
+}
+
+DB = await res.json()
+
+console.log("DB loaded:",DB.length)
 
 result.innerHTML=""
 
 }catch(e){
+
+console.error(e)
 
 result.innerHTML="Database gagal dimuat"
 
