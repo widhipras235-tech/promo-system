@@ -127,10 +127,51 @@ diskon=d+"%"
 
 }
 
+// ====================
+// DISKON
+// ====================
+
+else{
+
+// jika B3 jangan diubah
+if(isB3){
+
+promoDisplay=promo
+diskon=""
+
+}
+
+// diskon normal
+else{
+
+if(String(diskon).toUpperCase().includes("PERCENTAGE")){
+
+if(normalNum && promoNum){
+
+let d=Math.round((normalNum-promoNum)/normalNum*100)
+
+diskon=d+"%"
+
+}
+
+}
+
 let match=promoText.match(/(\d+)\s*%/)
 
 if(match){
 diskon=match[1]+"%"
+}
+
+if(diskon){
+normalDisplay=`<s>${rupiah(normal)}</s>`
+}
+
+if(promoNum){
+promoDisplay=rupiah(promo)
+}
+
+}
+
 }
 
 if(!isB3 && diskon){
