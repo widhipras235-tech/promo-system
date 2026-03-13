@@ -95,7 +95,10 @@ let isB3=promoText.includes("B3")
 let isSpecial=promoText.includes("SPECIAL")
 let isSharp=promoText.includes("SHARP")
 
+// ======================
 // SHARP PRICE
+// ======================
+
 if(isSharp){
 
 normalDisplay="@"+rupiah(normal)
@@ -104,7 +107,10 @@ diskon="SHARP PRICE"
 
 }
 
+// ======================
 // SPECIAL PRICE
+// ======================
+
 else if(isSpecial){
 
 normalDisplay=`<s>${rupiah(normal)}</s>`
@@ -112,57 +118,31 @@ promoDisplay=promo
 
 }
 
-// DISKON
-else{
-
-if(String(diskon).toUpperCase().includes("PERCENTAGE")){
-
-if(normalNum && promoNum){
-
-let d=Math.round((normalNum-promoNum)/normalNum*100)
-
-diskon=d+"%"
-
-}
-
-}
-
-// ====================
-// DISKON
-// ====================
-
-else{
-
-// ====================
+// ======================
 // B3 DISKON
-// ====================
+// ======================
 
-if(isB3){
+else if(isB3){
 
-let match = promoText.match(/B(\d+).*?(\d+)%/)
+let match = promoText.match(/B\s*(\d+).*?(\d+)%/)
 
 if(match){
 
-let qty = match[1]
-let disc = match[2]
+let qty=match[1]
+let disc=match[2]
 
-promoDisplay = "B"+qty+"D"+disc
-diskon = "BXGY"
-
-}else{
-
-promoDisplay = promo
-diskon = ""
+promoDisplay="B"+qty+"D"+disc
+diskon="BXGY"
 
 }
 
-normalDisplay = rupiah(normal)
+normalDisplay=rupiah(normal)
 
 }
 
-// ====================
+// ======================
 // DISKON NORMAL
-// ====================
+// ======================
 
 else{
 
@@ -185,18 +165,6 @@ diskon=match[1]+"%"
 }
 
 if(diskon){
-normalDisplay=`<s>${rupiah(normal)}</s>`
-}
-
-if(promoNum){
-promoDisplay=rupiah(promo)
-}
-
-}
-
-}
-
-if(!isB3 && diskon){
 normalDisplay=`<s>${rupiah(normal)}</s>`
 }
 
