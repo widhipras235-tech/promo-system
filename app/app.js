@@ -80,53 +80,65 @@ function show(item){
 
 let hargaNormal = item.harga_normal
 let hargaPromo = item.harga_promo
-let diskon = ""
+let diskon = item.diskon || ""
 
-const promoText = (item.harga_promo + " " + item.diskon + " " + item.acara).toUpperCase()
-
-function getNumber(v){
+function number(v){
 return Number(String(v).replace(/[^\d]/g,""))
 }
 
 function rupiah(v){
 
-let num = getNumber(v)
+let n = number(v)
 
-if(!num) return v
+if(!n) return v
 
-return "Rp. " + num
+return "Rp. " + n
 
 }
 
-// angka asli
-const normalNum = getNumber(hargaNormal)
-const promoNum = getNumber(hargaPromo)
+const normalNum = number(hargaNormal)
+const promoNum = number(hargaPromo)
 
-// SPECIAL PRICE → harga normal dicoret
 let normalDisplay = rupiah(hargaNormal)
+let promoDisplay = hargaPromo
 
-if(promoText.includes("SPECIAL")){
+// SPECIAL PRICE → harga coret
+if(String(hargaPromo).toUpperCase().includes("SPECIAL")){
 normalDisplay = `<span style="text-decoration:line-through">${rupiah(hargaNormal)}</span>`
 }
 
-// promo berupa angka
+// promo angka
 if(promoNum){
-hargaPromo = rupiah(hargaPromo)
+promoDisplay = rupiah(hargaPromo)
 }
 
-// DISKON dari teks %
-const match = promoText.match(/(\d+)\s*%/)
+// hitung diskon jika PERCENTAGE
+if(String(diskon).toUpperCase().includes("PERCENTAGE")){
 
-if(match){
-diskon = match[1] + "%"
-}
-
-// jika diskon = PERCENTAGE → hitung otomatis
-if(promoText.includes("PERCENTAGE") && normalNum && promoNum){
+if(normalNum && promoNum){
 
 let d = Math.round((normalNum - promoNum) / normalNum * 100)
 
 diskon = d + "%"
+
+}else{
+
+diskon = ""
+
+}
+
+}
+
+// ambil % dari teks lain
+if(!diskon){
+
+const text = (item.harga_promo + " " + item.acara).toUpperCase()
+
+const match = text.match(/(\d+)\s*%/)
+
+if(match){
+diskon = match[1] + "%"
+}
 
 }
 
@@ -142,7 +154,7 @@ result.innerHTML = `
 
 <b>Harga Normal :</b> ${normalDisplay}<br>
 
-<b>Harga Promo :</b> ${hargaPromo}<br>
+<b>Harga Promo :</b> ${promoDisplay}<br>
 
 <b>Diskon :</b> ${diskon}<br>
 
