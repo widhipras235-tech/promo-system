@@ -74,45 +74,87 @@ data.forEach(item=>{
 
 let normal=item.harga_normal
 let promo=item.harga_promo
-let diskon=""
+let diskon=item.diskon || ""
 
-let promoText=(promo+" "+item.acara).toUpperCase()
+let promoText=(promo+" "+item.acara+" "+diskon).toUpperCase()
 
-let normalDisplay="Rp "+normal
+function number(v){
+return Number(String(v).replace(/[^\d]/g,""))
+}
+
+function rupiah(v){
+let n=number(v)
+if(!n) return v
+return "Rp. "+n
+}
+
+let normalDisplay=rupiah(normal)
 let promoDisplay=promo
 
-// SHARP PRICE
-if(promoText.includes("SHARP")){
+let normalNum=number(normal)
+let promoNum=number(promo)
 
-normalDisplay="@Rp "+normal
-promoDisplay="Rp "+normal
+let isB3=promoText.includes("B3")
+let isSpecial=promoText.includes("SPECIAL")
+let isSharp=promoText.includes("SHARP")
+
+// ====================
+// SHARP PRICE
+// ====================
+
+if(isSharp){
+
+normalDisplay="@"+rupiah(normal)
+promoDisplay=rupiah(normal)
 diskon="SHARP PRICE"
 
 }
 
+// ====================
 // SPECIAL PRICE
-else if(promoText.includes("SPECIAL")){
+// ====================
 
-normalDisplay=`<span class="old">Rp ${normal}</span>`
+else if(isSpecial){
+
+normalDisplay=`<s>${rupiah(normal)}</s>`
 promoDisplay=promo
 
 }
 
-// DISKON %
+// ====================
+// DISKON PERCENTAGE
+// ====================
+
 else{
 
-let n=Number(normal)
-let p=Number(promo)
+if(String(diskon).toUpperCase().includes("PERCENTAGE")){
 
-if(n && p){
+if(normalNum && promoNum){
 
-let d=Math.round((n-p)/n*100)
+let d=Math.round((normalNum-promoNum)/normalNum*100)
 
 diskon=d+"%"
 
-normalDisplay=`<span class="old">Rp ${normal}</span>`
-promoDisplay="Rp "+promo
+}
 
+}
+
+// ambil % dari teks
+let match=promoText.match(/(\d+)\s*%/)
+
+if(match){
+diskon=match[1]+"%"
+}
+
+// coret harga jika diskon
+if(!isB3 && diskon){
+
+normalDisplay=`<s>${rupiah(normal)}</s>`
+}
+
+// promo angka
+if(promoNum){
+promoDisplay=rupiah(promo)
 }
 
 }
