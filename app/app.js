@@ -2,6 +2,8 @@ let DB = []
 let SKU_INDEX = {}
 let ARTICLE_INDEX = {}
 
+let databaseReady = false
+
 const result = document.getElementById("result")
 
 async function loadDatabase(){
@@ -13,6 +15,8 @@ DB = await fetch("../db/promo.json").then(r=>r.json())
 SKU_INDEX = await fetch("../db/sku_index.json").then(r=>r.json())
 
 ARTICLE_INDEX = await fetch("../db/article_index.json").then(r=>r.json())
+
+databaseReady = true
 
 console.log("Database loaded:",DB.length)
 
@@ -29,6 +33,14 @@ window.onload = loadDatabase
 
 function search(){
 
+if(!databaseReady){
+
+result.innerHTML = "Database sedang dimuat..."
+
+return
+
+}
+
 const q = document
 .getElementById("search")
 .value
@@ -43,7 +55,9 @@ if(SKU_INDEX[q]){
 
 index = SKU_INDEX[q]
 
-}else if(ARTICLE_INDEX[q]){
+}
+
+else if(ARTICLE_INDEX[q]){
 
 index = ARTICLE_INDEX[q]
 
