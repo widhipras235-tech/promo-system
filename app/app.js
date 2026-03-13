@@ -1,25 +1,32 @@
 let DB=[]
-let fuse
-
 const result=document.getElementById("result")
 const searchInput=document.getElementById("search")
 
 async function loadDatabase(){
 
+result.innerHTML="Loading database..."
+
 DB = await fetch("../db/promo.json").then(r=>r.json())
 
-fuse = new Fuse(DB,{
-keys:[
-{ name:"sku", weight:0.4 },
-{ name:"artikel", weight:0.3 },
-{ name:"deskripsi", weight:0.3 },
-{ name:"brand", weight:0.2 },
-{ name:"acara", weight:0.1 }
-],
-threshold:0.35,
-ignoreLocation:true,
-includeScore:true
-})
+result.innerHTML=""
+
+}
+
+async function loadDatabase(){
+
+let cache = localStorage.getItem("promoDB")
+
+if(cache){
+
+DB = JSON.parse(cache)
+
+}else{
+
+DB = await fetch("../db/promo.json").then(r=>r.json())
+
+localStorage.setItem("promoDB",JSON.stringify(DB))
+
+}
 
 }
 
@@ -28,9 +35,14 @@ window.onload=loadDatabase
 
 searchInput.addEventListener("input", e=>{
 
-let q=e.target.value.trim()
+let q=e.target.value.trim().toLowerCase()
 
-if(q.length<2) return
+if(q.length<2){
+
+result.innerHTML=""
+return
+
+}
 
 search(q)
 
@@ -39,28 +51,19 @@ search(q)
 
 function search(q){
 
-q = q.trim().toLowerCase()
+const divisi=document.getElementById("divisi").value
 
-const divisi = document.getElementById("divisi").value
-
-let data=[]
-
-// EXACT SKU
-data = DB.filter(x =>
-String(x.sku).toLowerCase().includes(q)
+let data = DB.filter(x =>
+x.search_index.includes(q)
 )
 
-// jika tidak ditemukan → fuzzy search
-if(data.length==0){
-
-data = fuse.search(q).map(r=>r.item)
-
-}
-
-// filter divisi
 if(divisi){
-data = data.filter(x=>x.division===divisi)
+
+data=data.filter(x=>x.division===divisi)
+
 }
+
+data=data.slice(0,30)
 
 render(data)
 
@@ -91,6 +94,12 @@ function rupiah(v){
 let n=number(v)
 if(!n) return v
 return "Rp. "+n
+}
+
+function rupiah(n){
+
+return new Intl.NumberFormat("id-ID").format(n)
+
 }
 
 let normalDisplay=rupiah(normal)
@@ -212,7 +221,6 @@ result.innerHTML=html
 
 }
 
-
 function scan(){
 
 const scanner=new Html5Qrcode("reader")
@@ -223,14 +231,11 @@ scanner.start(
 
 barcode=>{
 
-document.getElementById("search").value=barcode
-
+searchInput.value=barcode
 search(barcode)
 
 scanner.stop()
 
-}
-
-)
+})
 
 }
