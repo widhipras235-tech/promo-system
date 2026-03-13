@@ -80,42 +80,56 @@ function show(item){
 
 let hargaNormal = item.harga_normal
 let hargaPromo = item.harga_promo
-let diskon = item.diskon || ""
+let diskon = ""
 
-const promoText = String(hargaPromo + " " + item.acara).toUpperCase()
+const promoText = (item.harga_promo + " " + item.diskon + " " + item.acara).toUpperCase()
 
-// fungsi format rupiah
-function rupiah(v){
-if(!v) return ""
-
-let num = String(v).replace(/[^\d]/g,"")
-
-if(num === "") return v
-
-return "Rp. " + num
+function getNumber(v){
+return Number(String(v).replace(/[^\d]/g,""))
 }
 
-// format harga normal
+function rupiah(v){
+
+let num = getNumber(v)
+
+if(!num) return v
+
+return "Rp. " + num
+
+}
+
+// angka asli
+const normalNum = getNumber(hargaNormal)
+const promoNum = getNumber(hargaPromo)
+
+// SPECIAL PRICE → harga normal dicoret
 let normalDisplay = rupiah(hargaNormal)
 
-// cek SPECIAL PRICE
 if(promoText.includes("SPECIAL")){
 normalDisplay = `<span style="text-decoration:line-through">${rupiah(hargaNormal)}</span>`
 }
 
-// format harga promo jika angka
-if(!isNaN(String(hargaPromo).replace(/[^\d]/g,""))){
+// promo berupa angka
+if(promoNum){
 hargaPromo = rupiah(hargaPromo)
 }
 
-// ambil diskon %
+// DISKON dari teks %
 const match = promoText.match(/(\d+)\s*%/)
 
 if(match){
 diskon = match[1] + "%"
 }
 
-// tampilkan hasil
+// jika diskon = PERCENTAGE → hitung otomatis
+if(promoText.includes("PERCENTAGE") && normalNum && promoNum){
+
+let d = Math.round((normalNum - promoNum) / normalNum * 100)
+
+diskon = d + "%"
+
+}
+
 result.innerHTML = `
 
 <div class="card">
@@ -145,4 +159,5 @@ result.innerHTML = `
 </div>
 
 `
+
 }
