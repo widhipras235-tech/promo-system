@@ -9,13 +9,11 @@ result.innerHTML="Loading database..."
 
 try{
 
-const res = await fetch("/promo-system/db/promo.json")
+const res=await fetch("/promo-system/db/promo.json")
 
-if(!res.ok){
-throw new Error("promo.json tidak ditemukan")
-}
+if(!res.ok) throw new Error("promo.json tidak ditemukan")
 
-DB = await res.json()
+DB=await res.json()
 
 console.log("Database loaded:",DB.length)
 
@@ -34,7 +32,7 @@ window.onload=loadDatabase
 
 
 
-searchInput.addEventListener("input", e=>{
+searchInput.addEventListener("input",e=>{
 
 let q=e.target.value.trim().toLowerCase()
 
@@ -55,9 +53,9 @@ function search(q){
 
 const divisi=document.getElementById("divisi").value
 
-let data = DB.filter(item=>{
+let data=DB.filter(item=>{
 
-return (
+return(
 
 String(item.sku).toLowerCase().includes(q) ||
 String(item.artikel).toLowerCase().includes(q) ||
@@ -69,14 +67,10 @@ String(item.brand).toLowerCase().includes(q)
 })
 
 if(divisi){
-
 data=data.filter(x=>x.division===divisi)
-
 }
 
-data=data.slice(0,30)
-
-render(data)
+render(data.slice(0,30))
 
 }
 
@@ -106,21 +100,34 @@ let normalNum=Number(String(normal).replace(/[^\d]/g,""))
 let promoNum=Number(String(promo).replace(/[^\d]/g,""))
 
 let result={
+
 normal:rupiah(normalNum),
-promo:promo,
+promo:"",
 diskon:diskon,
 coret:false
+
 }
 
-let percent=text.match(/(\d+)\s*%/)
-let b3=text.match(/B3.*?(\d+)%/)
-let b1d=text.match(/B1.*?(\d+)%/)
-let hargaK=text.match(/(\d+)\s*K/)
-
-let isB1G1=text.includes("B1G1") || text.includes("BELI 1 GRATIS 1")
-let isB2G1=text.includes("B2G1") || text.includes("BELI 2 GRATIS 1")
 
 
+function match(regex){
+
+let m=text.match(regex)
+return m ? m[1] : null
+
+}
+
+
+
+let b3=match(/B3D(\d+)/)
+let b1d=match(/B1D(\d+)/)
+let bxgy=text.match(/B(\d+)G(\d+)/)
+let percent=match(/(\d+)%/)
+let hargaK=match(/(\d+)K/)
+
+
+
+// SHARP PRICE
 
 if(text.includes("SHARP")){
 
@@ -134,6 +141,8 @@ return result
 
 
 
+// SPECIAL PRICE
+
 if(text.includes("SPECIAL")){
 
 result.normal=rupiah(normalNum)
@@ -146,21 +155,12 @@ return result
 
 
 
-if(b1d && isB2G1){
-
-result.normal=rupiah(normalNum)
-result.promo="B1D"+b1d[1]+", B2G1"
-
-return result
-
-}
-
-
+// B3D10
 
 if(b3){
 
 result.normal=rupiah(normalNum)
-result.promo="B3D"+b3[1]
+result.promo="B3D"+b3
 result.diskon="BXGY"
 
 return result
@@ -169,10 +169,12 @@ return result
 
 
 
-if(isB1G1){
+// KOMBO B1D20 + B2G1
+
+if(b1d && bxgy){
 
 result.normal=rupiah(normalNum)
-result.promo="B1G1"
+result.promo="B1D"+b1d+", B"+bxgy[1]+"G"+bxgy[2]
 
 return result
 
@@ -180,20 +182,25 @@ return result
 
 
 
-if(isB2G1){
+// BXGY (B1G1 / B1G2 / B2G1 dll)
+
+if(bxgy){
 
 result.normal=rupiah(normalNum)
-result.promo="B2G1"
+result.promo="B"+bxgy[1]+"G"+bxgy[2]
+result.diskon="BXGY"
 
 return result
 
 }
 
 
+
+// PROMO NOMINAL (129K)
 
 if(hargaK){
 
-let price=parseInt(hargaK[1])*1000
+let price=parseInt(hargaK)*1000
 
 result.normal=rupiah(normalNum)
 result.promo=rupiah(price)
@@ -204,6 +211,20 @@ return result
 }
 
 
+
+// DISKON %
+
+if(percent){
+
+result.normal=rupiah(normalNum)
+result.diskon=percent+"%"
+result.coret=true
+
+}
+
+
+
+// PERCENTAGE dari Excel
 
 if(String(diskon).toUpperCase().includes("PERCENTAGE")){
 
@@ -220,20 +241,15 @@ result.coret=true
 
 
 
-if(percent){
-
-result.diskon=percent[1]+"%"
-result.coret=true
-
-}
-
-
+// NOMINAL PROMO
 
 if(promoNum){
 
 result.promo=rupiah(promoNum)
 
 }
+
+
 
 return result
 
@@ -295,13 +311,14 @@ function scan(){
 const scanner=new Html5Qrcode("reader")
 
 scanner.start(
+
 {facingMode:"environment"},
+
 {fps:10,qrbox:250},
 
 barcode=>{
 
 searchInput.value=barcode
-
 search(barcode)
 
 scanner.stop()
