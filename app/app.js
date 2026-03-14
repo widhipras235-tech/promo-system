@@ -10,13 +10,17 @@ result.innerHTML="Loading database..."
 
 try{
 
-const res=await fetch("../db/promo.json")
+const res = await fetch("/promo-system/db/promo.json")
 
-DB=await res.json()
+if(!res.ok){
+throw new Error("promo.json tidak ditemukan")
+}
 
-console.log("DB Loaded:",DB.length)
+DB = await res.json()
 
-fuse=new Fuse(DB,{
+console.log("DB loaded:",DB.length)
+
+fuse = new Fuse(DB,{
 keys:[
 {name:"sku",weight:0.5},
 {name:"artikel",weight:0.25},
@@ -24,32 +28,18 @@ keys:[
 {name:"brand",weight:0.1}
 ],
 threshold:0.4,
-ignoreLocation:true,
-minMatchCharLength:2
+ignoreLocation:true
 })
 
 result.innerHTML=""
 
-}catch(e){
+}catch(err){
 
-console.error(e)
+console.error("ERROR LOAD DB:",err)
+
 result.innerHTML="Database gagal dimuat"
 
 }
-
-}
-
-window.onload=loadDatabase
-
-
-searchInput.addEventListener("input",e=>{
-
-let q=e.target.value.trim()
-
-if(q.length<2){
-
-result.innerHTML=""
-return
 
 }
 
