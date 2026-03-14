@@ -1,5 +1,4 @@
 let DB=[]
-let fuse
 
 const result=document.getElementById("result")
 const searchInput=document.getElementById("search")
@@ -18,28 +17,31 @@ throw new Error("promo.json tidak ditemukan")
 
 DB = await res.json()
 
-console.log("DB loaded:",DB.length)
-
-fuse = new Fuse(DB,{
-keys:[
-{name:"sku",weight:0.5},
-{name:"artikel",weight:0.25},
-{name:"deskripsi",weight:0.15},
-{name:"brand",weight:0.1}
-],
-threshold:0.4,
-ignoreLocation:true
-})
+console.log("Database loaded:",DB.length)
 
 result.innerHTML=""
 
-}catch(err){
+}catch(e){
 
-console.error("ERROR LOAD DB:",err)
+console.error(e)
 
 result.innerHTML="Database gagal dimuat"
 
 }
+
+}
+
+window.onload=loadDatabase
+
+
+searchInput.addEventListener("input", e=>{
+
+let q=e.target.value.trim().toLowerCase()
+
+if(q.length<2){
+
+result.innerHTML=""
+return
 
 }
 
@@ -52,17 +54,18 @@ function search(q){
 
 const divisi=document.getElementById("divisi").value
 
-let data=[]
+let data = DB.filter(item=>{
 
-// PRIORITAS SKU
-data=DB.filter(x=>String(x.sku).includes(q))
+return (
 
-// jika tidak ada gunakan Fuse
-if(data.length===0){
+String(item.sku).toLowerCase().includes(q) ||
+String(item.artikel).toLowerCase().includes(q) ||
+String(item.deskripsi).toLowerCase().includes(q) ||
+String(item.brand).toLowerCase().includes(q)
 
-data=fuse.search(q).map(x=>x.item)
+)
 
-}
+})
 
 // filter divisi
 if(divisi){
@@ -71,7 +74,7 @@ data=data.filter(x=>x.division===divisi)
 
 }
 
-// limit hasil
+// batasi hasil
 data=data.slice(0,30)
 
 render(data)
@@ -113,7 +116,7 @@ data.forEach(item=>{
 
 let normal=item.harga_normal
 let promo=item.harga_promo
-let diskon=item.diskon||""
+let diskon=item.diskon || ""
 
 let promoText=(promo+" "+item.acara+" "+diskon).toUpperCase()
 
@@ -127,7 +130,7 @@ let isB3=promoText.includes("B3")
 let isSpecial=promoText.includes("SPECIAL")
 let isSharp=promoText.includes("SHARP")
 
-// ===== SHARP PRICE =====
+// ===== SHARP PRICE
 
 if(isSharp){
 
@@ -137,7 +140,7 @@ diskon="SHARP PRICE"
 
 }
 
-// ===== SPECIAL PRICE =====
+// ===== SPECIAL PRICE
 
 else if(isSpecial){
 
@@ -146,7 +149,7 @@ promoDisplay=rupiah(promo)
 
 }
 
-// ===== B3 DISKON =====
+// ===== B3 DISKON
 
 else if(isB3){
 
@@ -166,7 +169,7 @@ normalDisplay=rupiah(normal)
 
 }
 
-// ===== DISKON NORMAL =====
+// ===== DISKON NORMAL
 
 else{
 
@@ -227,29 +230,5 @@ html+=`
 })
 
 result.innerHTML=html
-
-}
-
-
-
-function scan(){
-
-const scanner=new Html5Qrcode("reader")
-
-scanner.start(
-{facingMode:"environment"},
-{fps:10,qrbox:250},
-
-barcode=>{
-
-searchInput.value=barcode
-
-search(barcode)
-
-scanner.stop()
-
-}
-
-)
 
 }
