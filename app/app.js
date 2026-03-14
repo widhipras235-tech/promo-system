@@ -10,22 +10,29 @@ result.innerHTML="Loading database..."
 
 try{
 
-let res = await fetch("../db/promo.json")
+const res=await fetch("../db/promo.json")
 
-if(!res.ok){
-throw new Error("File promo.json tidak ditemukan")
-}
+DB=await res.json()
 
-DB = await res.json()
+console.log("DB Loaded:",DB.length)
 
-console.log("DB loaded:",DB.length)
+fuse=new Fuse(DB,{
+keys:[
+{name:"sku",weight:0.5},
+{name:"artikel",weight:0.25},
+{name:"deskripsi",weight:0.15},
+{name:"brand",weight:0.1}
+],
+threshold:0.4,
+ignoreLocation:true,
+minMatchCharLength:2
+})
 
 result.innerHTML=""
 
 }catch(e){
 
 console.error(e)
-
 result.innerHTML="Database gagal dimuat"
 
 }
@@ -35,7 +42,7 @@ result.innerHTML="Database gagal dimuat"
 window.onload=loadDatabase
 
 
-searchInput.addEventListener("input", e=>{
+searchInput.addEventListener("input",e=>{
 
 let q=e.target.value.trim()
 
@@ -53,17 +60,15 @@ search(q)
 
 function search(q){
 
-q=q.toUpperCase()
-
 const divisi=document.getElementById("divisi").value
 
 let data=[]
 
-// SKU search
+// PRIORITAS SKU
 data=DB.filter(x=>String(x.sku).includes(q))
 
-// artikel / deskripsi / brand search
-if(data.length==0){
+// jika tidak ada gunakan Fuse
+if(data.length===0){
 
 data=fuse.search(q).map(x=>x.item)
 
@@ -84,6 +89,7 @@ render(data)
 }
 
 
+
 function number(v){
 
 return Number(String(v).replace(/[^\d]/g,""))
@@ -101,9 +107,10 @@ return "Rp "+new Intl.NumberFormat("id-ID").format(n)
 }
 
 
+
 function render(data){
 
-if(data.length==0){
+if(data.length===0){
 
 result.innerHTML="Promo tidak ditemukan"
 return
@@ -116,7 +123,7 @@ data.forEach(item=>{
 
 let normal=item.harga_normal
 let promo=item.harga_promo
-let diskon=item.diskon || ""
+let diskon=item.diskon||""
 
 let promoText=(promo+" "+item.acara+" "+diskon).toUpperCase()
 
@@ -130,7 +137,7 @@ let isB3=promoText.includes("B3")
 let isSpecial=promoText.includes("SPECIAL")
 let isSharp=promoText.includes("SHARP")
 
-// ================= SHARP PRICE
+// ===== SHARP PRICE =====
 
 if(isSharp){
 
@@ -140,20 +147,20 @@ diskon="SHARP PRICE"
 
 }
 
-// ================= SPECIAL PRICE
+// ===== SPECIAL PRICE =====
 
 else if(isSpecial){
 
 normalDisplay=`<s>${rupiah(normal)}</s>`
-promoDisplay=promo
+promoDisplay=rupiah(promo)
 
 }
 
-// ================= B3 DISKON
+// ===== B3 DISKON =====
 
 else if(isB3){
 
-let match = promoText.match(/B\s*(\d+).*?(\d+)%/)
+let match=promoText.match(/B\s*(\d+).*?(\d+)%/)
 
 if(match){
 
@@ -169,7 +176,7 @@ normalDisplay=rupiah(normal)
 
 }
 
-// ================= DISKON NORMAL
+// ===== DISKON NORMAL =====
 
 else{
 
@@ -200,6 +207,8 @@ promoDisplay=rupiah(promo)
 }
 
 }
+
+
 
 html+=`
 
