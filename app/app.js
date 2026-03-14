@@ -100,34 +100,27 @@ let normalNum=Number(String(normal).replace(/[^\d]/g,""))
 let promoNum=Number(String(promo).replace(/[^\d]/g,""))
 
 let result={
-
 normal:rupiah(normalNum),
 promo:"",
 diskon:diskon,
 coret:false
-
 }
 
 
 
-function match(regex){
+// ===== REGEX =====
 
-let m=text.match(regex)
-return m ? m[1] : null
-
-}
-
-
-
-let b3=match(/B3D(\d+)/)
-let b1d=match(/B1D(\d+)/)
+let sp=text.match(/SP\s*(\d+)\s*K/)
+let hargaK=text.match(/(\d+)\s*K/)
+let hargaNominal=text.match(/\b(\d{2,3})\.?(\d{3})\b/)
 let bxgy=text.match(/B(\d+)G(\d+)/)
-let percent=match(/(\d+)%/)
-let hargaK=match(/(\d+)K/)
+let b3=text.match(/B3D(\d+)/)
+let b1d=text.match(/B1D(\d+)/)
+let percent=text.match(/(\d+)\s*%/)
 
 
 
-// SHARP PRICE
+// ===== SHARP PRICE =====
 
 if(text.includes("SHARP")){
 
@@ -141,12 +134,15 @@ return result
 
 
 
-// SPECIAL PRICE
+// ===== SPECIAL PRICE SP129K =====
 
-if(text.includes("SPECIAL")){
+if(sp){
+
+let price=parseInt(sp[1])*1000
 
 result.normal=rupiah(normalNum)
-result.promo=rupiah(promoNum)
+result.promo=rupiah(price)
+result.diskon="SPECIAL PRICE"
 result.coret=true
 
 return result
@@ -155,12 +151,12 @@ return result
 
 
 
-// B3D10
+// ===== B3D10 =====
 
 if(b3){
 
 result.normal=rupiah(normalNum)
-result.promo="B3D"+b3
+result.promo="B3D"+b3[1]
 result.diskon="BXGY"
 
 return result
@@ -169,12 +165,12 @@ return result
 
 
 
-// KOMBO B1D20 + B2G1
+// ===== KOMBO B1D20 + B2G1 =====
 
 if(b1d && bxgy){
 
 result.normal=rupiah(normalNum)
-result.promo="B1D"+b1d+", B"+bxgy[1]+"G"+bxgy[2]
+result.promo="B1D"+b1d[1]+", B"+bxgy[1]+"G"+bxgy[2]
 
 return result
 
@@ -182,7 +178,7 @@ return result
 
 
 
-// BXGY (B1G1 / B1G2 / B2G1 dll)
+// ===== BXGY =====
 
 if(bxgy){
 
@@ -196,11 +192,11 @@ return result
 
 
 
-// PROMO NOMINAL (129K)
+// ===== NOMINAL 129K =====
 
 if(hargaK){
 
-let price=parseInt(hargaK)*1000
+let price=parseInt(hargaK[1])*1000
 
 result.normal=rupiah(normalNum)
 result.promo=rupiah(price)
@@ -212,19 +208,39 @@ return result
 
 
 
-// DISKON %
+// ===== NOMINAL 99.000 =====
+
+if(hargaNominal){
+
+let price=parseInt(hargaNominal[0].replace(".",""))
+
+if(price<normalNum){
+
+result.normal=rupiah(normalNum)
+result.promo=rupiah(price)
+result.coret=true
+
+return result
+
+}
+
+}
+
+
+
+// ===== DISKON % =====
 
 if(percent){
 
 result.normal=rupiah(normalNum)
-result.diskon=percent+"%"
+result.diskon=percent[1]+"%"
 result.coret=true
 
 }
 
 
 
-// PERCENTAGE dari Excel
+// ===== PERCENTAGE EXCEL =====
 
 if(String(diskon).toUpperCase().includes("PERCENTAGE")){
 
@@ -241,15 +257,13 @@ result.coret=true
 
 
 
-// NOMINAL PROMO
+// ===== DEFAULT NOMINAL =====
 
 if(promoNum){
 
 result.promo=rupiah(promoNum)
 
 }
-
-
 
 return result
 
@@ -311,9 +325,7 @@ function scan(){
 const scanner=new Html5Qrcode("reader")
 
 scanner.start(
-
 {facingMode:"environment"},
-
 {fps:10,qrbox:250},
 
 barcode=>{
