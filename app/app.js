@@ -108,7 +108,7 @@ coret:false
 
 
 
-// ===== REGEX =====
+// REGEX
 
 let sp=text.match(/SP\s*(\d+)\s*K/)
 let hargaK=text.match(/(\d+)\s*K/)
@@ -117,6 +117,46 @@ let bxgy=text.match(/B(\d+)G(\d+)/)
 let b3=text.match(/B3D(\d+)/)
 let b1d=text.match(/B1D(\d+)/)
 let percent=text.match(/(\d+)\s*%/)
+
+
+
+// ===== DISKON % =====
+
+if(percent){
+
+let p=parseInt(percent[1])
+
+let promoCalc=Math.round(normalNum*(100-p)/100)
+
+result.normal=rupiah(normalNum)
+result.promo=rupiah(promoCalc)
+result.diskon=p+"%"
+result.coret=true
+
+return result
+
+}
+
+
+
+// ===== PERCENTAGE EXCEL =====
+
+if(String(diskon).toUpperCase().includes("PERCENTAGE")){
+
+if(normalNum && promoNum){
+
+let d=Math.round((normalNum-promoNum)/normalNum*100)
+
+result.normal=rupiah(normalNum)
+result.promo=rupiah(promoNum)
+result.diskon=d+"%"
+result.coret=true
+
+return result
+
+}
+
+}
 
 
 
@@ -228,35 +268,6 @@ return result
 
 
 
-// ===== DISKON % =====
-
-if(percent){
-
-result.normal=rupiah(normalNum)
-result.diskon=percent[1]+"%"
-result.coret=true
-
-}
-
-
-
-// ===== PERCENTAGE EXCEL =====
-
-if(String(diskon).toUpperCase().includes("PERCENTAGE")){
-
-if(normalNum && promoNum){
-
-let d=Math.round((normalNum-promoNum)/normalNum*100)
-
-result.diskon=d+"%"
-result.coret=true
-
-}
-
-}
-
-
-
 // ===== DEFAULT NOMINAL =====
 
 if(promoNum){
@@ -315,28 +326,5 @@ html+=`
 })
 
 result.innerHTML=html
-
-}
-
-
-
-function scan(){
-
-const scanner=new Html5Qrcode("reader")
-
-scanner.start(
-{facingMode:"environment"},
-{fps:10,qrbox:250},
-
-barcode=>{
-
-searchInput.value=barcode
-search(barcode)
-
-scanner.stop()
-
-}
-
-)
 
 }
