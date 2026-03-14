@@ -24,7 +24,6 @@ result.innerHTML=""
 }catch(e){
 
 console.error(e)
-
 result.innerHTML="Database gagal dimuat"
 
 }
@@ -32,6 +31,7 @@ result.innerHTML="Database gagal dimuat"
 }
 
 window.onload=loadDatabase
+
 
 
 searchInput.addEventListener("input", e=>{
@@ -48,6 +48,7 @@ return
 search(q)
 
 })
+
 
 
 function search(q){
@@ -67,14 +68,12 @@ String(item.brand).toLowerCase().includes(q)
 
 })
 
-// filter divisi
 if(divisi){
 
 data=data.filter(x=>x.division===divisi)
 
 }
 
-// batasi hasil
 data=data.slice(0,30)
 
 render(data)
@@ -83,19 +82,160 @@ render(data)
 
 
 
-function number(v){
+function rupiah(n){
 
-return Number(String(v).replace(/[^\d]/g,""))
+n=Number(String(n).replace(/[^\d]/g,""))
+
+if(!n) return ""
+
+return "Rp "+new Intl.NumberFormat("id-ID").format(n)
 
 }
 
-function rupiah(v){
 
-let n=number(v)
 
-if(!n) return v
+function promoEngine(item){
 
-return "Rp "+new Intl.NumberFormat("id-ID").format(n)
+let normal=item.harga_normal
+let promo=item.harga_promo
+let diskon=item.diskon || ""
+
+let text=(promo+" "+item.acara+" "+diskon).toUpperCase()
+
+let normalNum=Number(String(normal).replace(/[^\d]/g,""))
+let promoNum=Number(String(promo).replace(/[^\d]/g,""))
+
+let result={
+normal:rupiah(normalNum),
+promo:promo,
+diskon:diskon,
+coret:false
+}
+
+let percent=text.match(/(\d+)\s*%/)
+let b3=text.match(/B3.*?(\d+)%/)
+let b1d=text.match(/B1.*?(\d+)%/)
+let hargaK=text.match(/(\d+)\s*K/)
+
+let isB1G1=text.includes("B1G1") || text.includes("BELI 1 GRATIS 1")
+let isB2G1=text.includes("B2G1") || text.includes("BELI 2 GRATIS 1")
+
+
+
+if(text.includes("SHARP")){
+
+result.normal="@"+rupiah(normalNum)
+result.promo=rupiah(normalNum)
+result.diskon="SHARP PRICE"
+
+return result
+
+}
+
+
+
+if(text.includes("SPECIAL")){
+
+result.normal=rupiah(normalNum)
+result.promo=rupiah(promoNum)
+result.coret=true
+
+return result
+
+}
+
+
+
+if(b1d && isB2G1){
+
+result.normal=rupiah(normalNum)
+result.promo="B1D"+b1d[1]+", B2G1"
+
+return result
+
+}
+
+
+
+if(b3){
+
+result.normal=rupiah(normalNum)
+result.promo="B3D"+b3[1]
+result.diskon="BXGY"
+
+return result
+
+}
+
+
+
+if(isB1G1){
+
+result.normal=rupiah(normalNum)
+result.promo="B1G1"
+
+return result
+
+}
+
+
+
+if(isB2G1){
+
+result.normal=rupiah(normalNum)
+result.promo="B2G1"
+
+return result
+
+}
+
+
+
+if(hargaK){
+
+let price=parseInt(hargaK[1])*1000
+
+result.normal=rupiah(normalNum)
+result.promo=rupiah(price)
+result.coret=true
+
+return result
+
+}
+
+
+
+if(String(diskon).toUpperCase().includes("PERCENTAGE")){
+
+if(normalNum && promoNum){
+
+let d=Math.round((normalNum-promoNum)/normalNum*100)
+
+result.diskon=d+"%"
+result.coret=true
+
+}
+
+}
+
+
+
+if(percent){
+
+result.diskon=percent[1]+"%"
+result.coret=true
+
+}
+
+
+
+if(promoNum){
+
+result.promo=rupiah(promoNum)
+
+}
+
+return result
 
 }
 
@@ -114,94 +254,9 @@ let html=""
 
 data.forEach(item=>{
 
-let normal=item.harga_normal
-let promo=item.harga_promo
-let diskon=item.diskon || ""
+let p=promoEngine(item)
 
-let promoText=(promo+" "+item.acara+" "+diskon).toUpperCase()
-
-let normalDisplay=rupiah(normal)
-let promoDisplay=promo
-
-let normalNum=number(normal)
-let promoNum=number(promo)
-
-let isB3=promoText.includes("B3")
-let isSpecial=promoText.includes("SPECIAL")
-let isSharp=promoText.includes("SHARP")
-
-// ===== SHARP PRICE
-
-if(isSharp){
-
-normalDisplay="@"+rupiah(normal)
-promoDisplay=rupiah(normal)
-diskon="SHARP PRICE"
-
-}
-
-// ===== SPECIAL PRICE
-
-else if(isSpecial){
-
-normalDisplay=`<s>${rupiah(normal)}</s>`
-promoDisplay=rupiah(promo)
-
-}
-
-// ===== B3 DISKON
-
-else if(isB3){
-
-let match=promoText.match(/B\s*(\d+).*?(\d+)%/)
-
-if(match){
-
-let qty=match[1]
-let disc=match[2]
-
-promoDisplay="B"+qty+"D"+disc
-diskon="BXGY"
-
-}
-
-normalDisplay=rupiah(normal)
-
-}
-
-// ===== DISKON NORMAL
-
-else{
-
-if(String(diskon).toUpperCase().includes("PERCENTAGE")){
-
-if(normalNum && promoNum){
-
-let d=Math.round((normalNum-promoNum)/normalNum*100)
-
-diskon=d+"%"
-
-}
-
-}
-
-let match=promoText.match(/(\d+)\s*%/)
-
-if(match){
-diskon=match[1]+"%"
-}
-
-if(diskon){
-normalDisplay=`<s>${rupiah(normal)}</s>`
-}
-
-if(promoNum){
-promoDisplay=rupiah(promo)
-}
-
-}
-
-
+let normalDisplay=p.coret ? `<s>${p.normal}</s>` : p.normal
 
 html+=`
 
@@ -213,8 +268,8 @@ html+=`
 <b>SKU :</b> ${item.sku}<br>
 
 <b>Harga Normal :</b> ${normalDisplay}<br>
-<b>Harga Promo :</b> ${promoDisplay}<br>
-<b>Diskon :</b> ${diskon}<br>
+<b>Harga Promo :</b> ${p.promo}<br>
+<b>Diskon :</b> ${p.diskon}<br>
 
 <b>Berlaku :</b> ${item.berlaku}<br>
 <b>Acara :</b> ${item.acara}<br>
@@ -230,5 +285,29 @@ html+=`
 })
 
 result.innerHTML=html
+
+}
+
+
+
+function scan(){
+
+const scanner=new Html5Qrcode("reader")
+
+scanner.start(
+{facingMode:"environment"},
+{fps:10,qrbox:250},
+
+barcode=>{
+
+searchInput.value=barcode
+
+search(barcode)
+
+scanner.stop()
+
+}
+
+)
 
 }
