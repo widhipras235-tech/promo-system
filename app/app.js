@@ -4,9 +4,9 @@ const result=document.getElementById("result")
 const searchInput=document.getElementById("search")
 
 
-/* =========================
+/* ================================
 LOAD DATABASE SPLIT
-========================= */
+================================ */
 
 async function loadDatabase(){
 
@@ -48,9 +48,9 @@ window.onload=loadDatabase
 
 
 
-/* =========================
+/* ================================
 SEARCH
-========================= */
+================================ */
 
 searchInput.addEventListener("input",e=>{
 
@@ -70,6 +70,8 @@ search(q)
 
 function search(q){
 
+const divisi=document.getElementById("divisi")?.value || ""
+
 let data=DB.filter(item=>{
 
 return(
@@ -83,15 +85,21 @@ String(item.brand).toLowerCase().includes(q)
 
 })
 
+if(divisi){
+
+data=data.filter(x=>x.division===divisi)
+
+}
+
 render(data.slice(0,30))
 
 }
 
 
 
-/* =========================
+/* ================================
 FORMAT RUPIAH
-========================= */
+================================ */
 
 function rupiah(n){
 
@@ -105,9 +113,9 @@ return "Rp "+new Intl.NumberFormat("id-ID").format(n)
 
 
 
-/* =========================
+/* ================================
 STATUS PROMO
-========================= */
+================================ */
 
 function getPromoStatus(range){
 
@@ -131,9 +139,9 @@ return "AKTIF"
 
 
 
-/* =========================
-PROMO ENGINE V10
-========================= */
+/* ================================
+PROMO ENGINE V9
+================================ */
 
 function promoEngine(item){
 
@@ -147,14 +155,13 @@ let normalNum=Number(String(normal).replace(/[^\d]/g,""))
 
 let result={
 
-normal:rupiah(normalNum),
-promo:"",
+normal: rupiah(normalNum),
+promo: "",
 promoLabel:"",
 coret:false,
 hideLabel:false
 
 }
-
 
 
 /* =================
@@ -165,30 +172,14 @@ let bxgy=text.match(/B\d+(G|D)\d+/g)
 
 if(bxgy){
 
-result.promo=bxgy.join(" ")
+let code=bxgy.join(" ")
+
+result.promo=code
 result.hideLabel=true
 
 return result
 
 }
-
-
-
-/* =================
-BUY X GET Y
-================= */
-
-let buyGet=text.match(/BUY\s*(\d+)\s*GET\s*(\d+)/)
-
-if(buyGet){
-
-result.promo="B"+buyGet[1]+"G"+buyGet[2]
-result.hideLabel=true
-
-return result
-
-}
-
 
 
 /* =================
@@ -199,13 +190,15 @@ let buyDisc=text.match(/BUY\s*(\d+).*?(\d+)\s*%/)
 
 if(buyDisc){
 
-result.promo="B"+buyDisc[1]+"D"+buyDisc[2]
+let qty=buyDisc[1]
+let disc=buyDisc[2]
+
+result.promo="B"+qty+"D"+disc
 result.hideLabel=true
 
 return result
 
 }
-
 
 
 /* =================
@@ -232,7 +225,6 @@ return result
 }
 
 
-
 /* =================
 SHARP PRICE
 ================= */
@@ -246,35 +238,6 @@ result.promoLabel="SHARP PRICE"
 return result
 
 }
-
-
-
-/* =================
-CLEARANCE
-================= */
-
-if(text.includes("CLEARANCE")){
-
-result.promoLabel="CLEARANCE"
-
-return result
-
-}
-
-
-
-/* =================
-NETT PRICE
-================= */
-
-if(text.includes("NETT")){
-
-result.promoLabel="NETT"
-
-return result
-
-}
-
 
 
 /* =================
@@ -305,9 +268,9 @@ return result
 
 
 
-/* =========================
-RENDER RESULT
-========================= */
+/* ================================
+RENDER
+================================ */
 
 function render(data){
 
@@ -368,10 +331,21 @@ ${p.promo}
 
 ${promoText}
 
-<div class="meta">Berlaku: ${item.berlaku}</div>
-<div class="meta">Divisi: ${item.division}</div>
-<div class="meta">File: ${item.file}</div>
-<div class="meta">Sheet: ${item.sheet}</div>
+<div class="meta">
+Berlaku: ${item.berlaku}
+</div>
+
+<div class="meta">
+Divisi: ${item.division}
+</div>
+
+<div class="meta">
+File: ${item.file}
+</div>
+
+<div class="meta">
+Sheet: ${item.sheet}
+</div>
 
 </div>
 
