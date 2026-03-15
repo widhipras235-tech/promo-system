@@ -22,7 +22,6 @@ result.innerHTML="Database gagal dimuat"
 window.onload=loadDatabase
 
 
-
 searchInput.addEventListener("input",e=>{
 
 let q=e.target.value.toLowerCase()
@@ -39,30 +38,35 @@ search(q)
 })
 
 
-
 function search(q){
+
+const divisi=document.getElementById("divisi").value
 
 let data=DB.filter(item=>{
 
 return(
 
 String(item.sku).toLowerCase().includes(q) ||
-
 String(item.artikel).toLowerCase().includes(q) ||
-
 String(item.deskripsi).toLowerCase().includes(q) ||
-
 String(item.brand).toLowerCase().includes(q)
 
 )
 
 })
 
+if(divisi){
+
+data=data.filter(x=>x.division===divisi)
+
+}
+
 render(data.slice(0,30))
 
 }
 
 
+/* FORMAT RUPIAH */
 
 function rupiah(n){
 
@@ -73,6 +77,7 @@ return "Rp "+new Intl.NumberFormat("id-ID").format(n)
 }
 
 
+/* STATUS PROMO */
 
 function getPromoStatus(range){
 
@@ -95,6 +100,7 @@ return "AKTIF"
 }
 
 
+/* PROMO ENGINE */
 
 function promoEngine(item){
 
@@ -108,13 +114,16 @@ let normalNum=Number(String(normal).replace(/[^\d]/g,""))
 let promoNum=Number(String(promo).replace(/[^\d]/g,""))
 
 let result={
+
 normal:rupiah(normalNum),
 promo:"",
 diskon:diskon,
 coret:false
+
 }
 
 
+/* DISKON % */
 
 let percent=text.match(/(\d+)\s*%/)
 
@@ -134,6 +143,7 @@ return result
 }
 
 
+/* SHARP PRICE */
 
 if(text.includes("SHARP")){
 
@@ -146,6 +156,7 @@ return result
 }
 
 
+/* SPECIAL PRICE */
 
 let sp=text.match(/SP\s*(\d+)\s*K/)
 
@@ -157,7 +168,6 @@ result.normal=rupiah(normalNum)
 result.promo=rupiah(price)
 
 result.diskon="SPECIAL PRICE"
-
 result.coret=true
 
 return result
@@ -165,6 +175,7 @@ return result
 }
 
 
+/* BXGY */
 
 let bxgy=text.match(/B(\d+)G(\d+)/)
 
@@ -179,6 +190,7 @@ return result
 }
 
 
+/* NOMINAL */
 
 if(promoNum){
 
@@ -191,6 +203,7 @@ return result
 }
 
 
+/* RENDER */
 
 function render(data){
 
@@ -214,15 +227,7 @@ let statusClass="aktif"
 if(status==="BELUM AKTIF") statusClass="belum"
 if(status==="BERAKHIR") statusClass="berakhir"
 
-let normalDisplay=p.coret
-
-? `<span class="price-normal">${p.normal}</span>`
-: `<span>${p.normal}</span>`
-
-let promoDisplay=p.promo
-
-? `<div class="promo">${p.promo}</div>`
-: ""
+let normalClass=p.coret ? "price-normal coret" : "price-normal"
 
 html+=`
 
@@ -240,12 +245,12 @@ ${status}
 
 </div>
 
-<div class="price-area">
+<div class="${normalClass}">
+${p.normal}
+</div>
 
-${normalDisplay}
-
-${promoDisplay}
-
+<div class="price-promo">
+${p.promo}
 </div>
 
 <div class="diskon">
