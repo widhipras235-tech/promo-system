@@ -4,7 +4,9 @@ const result=document.getElementById("result")
 const searchInput=document.getElementById("search")
 
 
-/* LOAD DATABASE */
+/* =====================
+LOAD DATABASE
+===================== */
 
 async function loadDatabase(){
 
@@ -34,7 +36,9 @@ window.onload=loadDatabase
 
 
 
-/* SEARCH */
+/* =====================
+SEARCH
+===================== */
 
 searchInput.addEventListener("input",e=>{
 
@@ -79,7 +83,9 @@ render(data.slice(0,30))
 
 
 
-/* FORMAT RUPIAH */
+/* =====================
+FORMAT RUPIAH
+===================== */
 
 function rupiah(n){
 
@@ -93,7 +99,9 @@ return "Rp "+new Intl.NumberFormat("id-ID").format(n)
 
 
 
-/* STATUS PROMO */
+/* =====================
+STATUS PROMO
+===================== */
 
 function getPromoStatus(range){
 
@@ -117,7 +125,9 @@ return "AKTIF"
 
 
 
-/* PROMO ENGINE */
+/* =====================
+PROMO ENGINE
+===================== */
 
 function promoEngine(item){
 
@@ -140,8 +150,7 @@ hideLabel:false
 }
 
 
-
-/* BXGY PROMO */
+/* ===== BXGY PROMO ===== */
 
 let bxgy=text.match(/B\d+(G|D)\d+/)
 
@@ -158,8 +167,7 @@ return result
 }
 
 
-
-/* DISKON % */
+/* ===== DISKON % ===== */
 
 let percent=text.match(/(\d+)\s*%/)
 
@@ -182,8 +190,7 @@ return result
 }
 
 
-
-/* SHARP PRICE */
+/* ===== SHARP PRICE ===== */
 
 if(text.includes("SHARP")){
 
@@ -198,8 +205,7 @@ return result
 }
 
 
-
-/* SPECIAL PRICE */
+/* ===== SPECIAL PRICE ===== */
 
 let sp=text.match(/SP\s*(\d+)\s*K/)
 
@@ -220,16 +226,15 @@ return result
 }
 
 
-
-/* DEFAULT */
-
 return result
 
 }
 
 
 
-/* RENDER */
+/* =====================
+RENDER CARD
+===================== */
 
 function render(data){
 
@@ -285,14 +290,6 @@ Brand: ${item.brand}
 SKU: ${item.sku}
 </div>
 
-<div class="meta">
-Divisi: ${item.division}
-</div>
-
-<div class="meta">
-Acara: ${item.acara}
-</div>
-
 <div class="${normalClass}">
 ${p.normal}
 </div>
@@ -307,6 +304,10 @@ ${promoText}
 
 <div>
 Berlaku: ${item.berlaku}
+</div>
+
+<div>
+Divisi: ${item.division}
 </div>
 
 <div>
