@@ -1,29 +1,169 @@
 body{
-
 font-family:Arial;
-padding:15px;
+margin:0;
+background:#f4f4f4;
+}
 
+.header{
+background:#ff2d2d;
+padding:20px;
+text-align:center;
+color:white;
+border-bottom-left-radius:20px;
+border-bottom-right-radius:20px;
+}
+
+.logo h1{
+margin:0;
+font-size:26px;
+}
+
+.logo p{
+margin:5px 0 10px;
+font-size:13px;
+}
+
+.search-box{
+display:flex;
+justify-content:center;
+}
+
+.search-box input{
+
+width:80%;
+padding:12px;
+
+border-radius:25px;
+border:none;
+
+}
+
+.search-btn{
+
+margin-left:-40px;
+background:#2d2dff;
+border:none;
+
+color:white;
+
+width:32px;
+height:32px;
+
+border-radius:50%;
+
+}
+
+.filter{
+margin-top:10px;
+}
+
+.filter select{
+padding:6px;
+border-radius:6px;
+}
+
+main{
+padding:15px;
 }
 
 .card{
 
-border:1px solid #ddd;
-padding:12px;
-margin-top:10px;
-border-radius:8px;
-background:#fff;
+background:white;
+padding:16px;
+
+border-radius:15px;
+
+margin-bottom:15px;
+
+box-shadow:0 4px 10px rgba(0,0,0,0.12);
 
 }
 
-.old{
+.card-header{
 
+display:flex;
+justify-content:space-between;
+
+}
+
+.title{
+font-weight:bold;
+font-size:15px;
+}
+
+.status{
+
+font-size:11px;
+padding:4px 10px;
+
+border-radius:10px;
+
+color:white;
+font-weight:bold;
+
+}
+
+.status.aktif{
+background:#2e9e44;
+}
+
+.status.belum{
+background:#ff9800;
+}
+
+.status.berakhir{
+background:#d32f2f;
+}
+
+.price-area{
+margin-top:8px;
+}
+
+.price-normal{
+color:#999;
 text-decoration:line-through;
-color:#999;
-
 }
 
-s{
+.promo{
+color:#d40000;
+font-size:20px;
+font-weight:bold;
+}
 
-color:#999;
+.diskon{
+color:#2e9e44;
+font-weight:bold;
+margin-top:4px;
+}
+
+.meta{
+margin-top:10px;
+font-size:12px;
+color:#555;
+}
+
+.scan-btn{
+
+position:fixed;
+
+bottom:20px;
+left:50%;
+
+transform:translateX(-50%);
+
+background:#ff2d2d;
+
+border:none;
+
+width:60px;
+height:60px;
+
+border-radius:50%;
+
+font-size:26px;
+
+color:white;
+
+box-shadow:0 6px 12px rgba(0,0,0,0.2);
 
 }
