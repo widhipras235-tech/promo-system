@@ -1,42 +1,53 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="id">
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>Cek Promo</title>
+<title>Promo Matahari</title>
 
-<link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
-<h2>Cek Promo</h2>
+<header class="header">
 
-<input id="search" placeholder="SKU / Artikel / Nama Barang">
+<div class="logo">
+<h1>matahari</h1>
+<p>Cek Promo • Scan SKU • Online</p>
+</div>
+
+<div class="search-box">
+
+<input id="search" placeholder="Cari SKU, artikel, promo, file...">
+
+<button class="search-btn">🔍</button>
+
+</div>
+
+<div class="filter">
 
 <select id="divisi">
-
 <option value="">Semua Divisi</option>
-<option>divisi1</option>
-<option>divisi2</option>
-<option>divisi3</option>
-<option>divisi4</option>
-
+<option value="divisi1">divisi1</option>
+<option value="divisi2">divisi2</option>
+<option value="divisi3">divisi3</option>
 </select>
 
-<button onclick="scan()">Scan Barcode</button>
+</div>
 
-<div id="reader"></div>
+</header>
+
+<main>
 
 <div id="result"></div>
 
-<script src="../lib/fuse.min.js"></script>
-<script src="../lib/html5-qrcode.min.js"></script>
+</main>
+
+<button class="scan-btn">📷</button>
 
 <script src="app.js"></script>
 
