@@ -3,15 +3,29 @@ let DB=[]
 const result=document.getElementById("result")
 const searchInput=document.getElementById("search")
 
+/* LOAD DATABASE */
+
 async function loadDatabase(){
+
+result.innerHTML="Loading database..."
 
 try{
 
-const res=await fetch("db/promo.json")
+const res = await fetch("../db/promo.json")
 
-DB=await res.json()
+if(!res.ok){
+throw new Error("promo.json tidak ditemukan")
+}
+
+DB = await res.json()
+
+console.log("Database loaded:",DB.length)
+
+result.innerHTML=""
 
 }catch(e){
+
+console.error(e)
 
 result.innerHTML="Database gagal dimuat"
 
@@ -22,9 +36,11 @@ result.innerHTML="Database gagal dimuat"
 window.onload=loadDatabase
 
 
+/* SEARCH */
+
 searchInput.addEventListener("input",e=>{
 
-let q=e.target.value.toLowerCase()
+let q=e.target.value.toLowerCase().trim()
 
 if(q.length<2){
 
@@ -56,9 +72,7 @@ String(item.brand).toLowerCase().includes(q)
 })
 
 if(divisi){
-
 data=data.filter(x=>x.division===divisi)
-
 }
 
 render(data.slice(0,30))
@@ -71,6 +85,8 @@ render(data.slice(0,30))
 function rupiah(n){
 
 n=Number(String(n).replace(/[^\d]/g,""))
+
+if(!n) return ""
 
 return "Rp "+new Intl.NumberFormat("id-ID").format(n)
 
@@ -190,7 +206,7 @@ return result
 }
 
 
-/* NOMINAL */
+/* NOMINAL PROMO */
 
 if(promoNum){
 
