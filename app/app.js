@@ -88,11 +88,48 @@ return "Rp "+new Intl.NumberFormat("id-ID").format(n)
 
 
 
+function getPromoStatus(range){
+
+if(!range) return ""
+
+let parts=range.split("-")
+
+if(parts.length<2) return ""
+
+let start=new Date(parts[0].trim())
+let end=new Date(parts[1].trim())
+
+let today=new Date()
+
+start.setHours(0,0,0,0)
+end.setHours(23,59,59,999)
+
+if(today<start) return "BELUM AKTIF"
+if(today>end) return "BERAKHIR"
+
+return "AKTIF"
+
+}
+
+
+
+function statusColor(status){
+
+if(status==="AKTIF") return "green"
+if(status==="BELUM AKTIF") return "orange"
+if(status==="BERAKHIR") return "red"
+
+return "black"
+
+}
+
+
+
 function promoEngine(item){
 
 let normal=item.harga_normal
 let promo=item.harga_promo
-let diskon=item.diskon || ""
+let diskon=item.diskon||""
 
 let text=(promo+" "+item.acara+" "+diskon).toUpperCase()
 
@@ -108,8 +145,6 @@ coret:false
 
 
 
-// REGEX
-
 let sp=text.match(/SP\s*(\d+)\s*K/)
 let hargaK=text.match(/(\d+)\s*K/)
 let hargaNominal=text.match(/\b(\d{2,3})\.?(\d{3})\b/)
@@ -119,8 +154,6 @@ let b1d=text.match(/B1D(\d+)/)
 let percent=text.match(/(\d+)\s*%/)
 
 
-
-// ===== DISKON % =====
 
 if(percent){
 
@@ -138,8 +171,6 @@ return result
 }
 
 
-
-// ===== PERCENTAGE EXCEL =====
 
 if(String(diskon).toUpperCase().includes("PERCENTAGE")){
 
@@ -160,8 +191,6 @@ return result
 
 
 
-// ===== SHARP PRICE =====
-
 if(text.includes("SHARP")){
 
 result.normal="@"+rupiah(normalNum)
@@ -173,8 +202,6 @@ return result
 }
 
 
-
-// ===== SPECIAL PRICE SP129K =====
 
 if(sp){
 
@@ -191,8 +218,6 @@ return result
 
 
 
-// ===== B3D10 =====
-
 if(b3){
 
 result.normal=rupiah(normalNum)
@@ -205,8 +230,6 @@ return result
 
 
 
-// ===== KOMBO B1D20 + B2G1 =====
-
 if(b1d && bxgy){
 
 result.normal=rupiah(normalNum)
@@ -217,8 +240,6 @@ return result
 }
 
 
-
-// ===== BXGY =====
 
 if(bxgy){
 
@@ -231,8 +252,6 @@ return result
 }
 
 
-
-// ===== NOMINAL 129K =====
 
 if(hargaK){
 
@@ -247,8 +266,6 @@ return result
 }
 
 
-
-// ===== NOMINAL 99.000 =====
 
 if(hargaNominal){
 
@@ -267,8 +284,6 @@ return result
 }
 
 
-
-// ===== DEFAULT NOMINAL =====
 
 if(promoNum){
 
@@ -297,6 +312,10 @@ data.forEach(item=>{
 
 let p=promoEngine(item)
 
+let status=getPromoStatus(item.berlaku)
+
+let color=statusColor(status)
+
 let normalDisplay=p.coret ? `<s>${p.normal}</s>` : p.normal
 
 html+=`
@@ -312,7 +331,13 @@ html+=`
 <b>Harga Promo :</b> ${p.promo}<br>
 <b>Diskon :</b> ${p.diskon}<br>
 
+<b>Status :</b> 
+<span style="color:${color};font-weight:bold">
+${status}
+</span><br>
+
 <b>Berlaku :</b> ${item.berlaku}<br>
+
 <b>Acara :</b> ${item.acara}<br>
 <b>Divisi :</b> ${item.division}<br>
 
