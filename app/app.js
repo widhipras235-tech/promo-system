@@ -128,11 +128,10 @@ return "AKTIF"
 /* =====================
 PROMO ENGINE
 ===================== */
-
 function promoEngine(item){
 
 let normal=item.harga_normal
-let promo=item.harga_promo
+let promo=item.harga_promo||""
 let acara=item.acara||""
 
 let text=(promo+" "+acara).toUpperCase()
@@ -140,97 +139,96 @@ let text=(promo+" "+acara).toUpperCase()
 let normalNum=Number(String(normal).replace(/[^\d]/g,""))
 
 let result={
-
 normal:rupiah(normalNum),
 promo:"",
 promoLabel:"",
 coret:false,
 hideLabel:false
-
 }
 
 
-/* ===== BXGY PROMO ===== */
+/* ======================
+BXGY PROMO
+====================== */
 
 let bxgy=text.match(/B\d+(G|D)\d+/)
 
 if(bxgy){
 
-result.normal=rupiah(normalNum)
-
 result.promo=bxgy[0]
-
 result.hideLabel=true
 
 return result
-
 }
 
 
-/* ===== DISKON % ===== */
+/* ======================
+DISKON %
+70% / D70 / D75 / D90
+====================== */
 
 let percent=text.match(/(\d+)\s*%/)
+let disc=text.match(/D(\d{1,3})/)
+
+let p=null
 
 if(percent){
+p=parseInt(percent[1])
+}
 
-let p=parseInt(percent[1])
+if(disc){
+p=parseInt(disc[1])
+}
+
+if(p){
 
 let promoCalc=Math.round(normalNum*(100-p)/100)
 
 result.normal=rupiah(normalNum)
-
 result.promo=rupiah(promoCalc)
-
 result.promoLabel=p+"%"
-
 result.coret=true
 
 return result
-
 }
 
 
-/* ===== SHARP PRICE ===== */
+/* ======================
+SHARP PRICE
+====================== */
 
 if(text.includes("SHARP")){
 
 result.normal="@"+rupiah(normalNum)
-
 result.promo=rupiah(normalNum)
-
 result.promoLabel="SHARP PRICE"
 
 return result
-
 }
 
 
-/* ===== SPECIAL PRICE ===== */
+/* ======================
+SPECIAL PRICE
+====================== */
 
-let sp=text.match(/SP\s*(\d+)\s*K/)
+let sp=text.match(/(\d+)\s*K/)
 
 if(sp){
 
 let price=parseInt(sp[1])*1000
 
 result.normal=rupiah(normalNum)
-
 result.promo=rupiah(price)
-
 result.promoLabel="SPECIAL PRICE"
-
 result.coret=true
 
 return result
-
 }
 
 
 return result
 
 }
-
-
 
 /* =====================
 RENDER CARD
