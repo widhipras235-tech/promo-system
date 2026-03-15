@@ -121,17 +121,12 @@ font-size:15px;
 /* STATUS */
 
 .status{
-
-font-size:11px;
-
+display:inline-block;
 padding:4px 10px;
-
+font-size:11px;
+font-weight:700;
 border-radius:10px;
-
-color:white;
-
-font-weight:bold;
-
+letter-spacing:0.5px;
 }
 
 .status.aktif{
