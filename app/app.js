@@ -4,9 +4,9 @@ const result=document.getElementById("result")
 const searchInput=document.getElementById("search")
 
 
-/* =====================
-LOAD DATABASE
-===================== */
+/* =========================
+LOAD DATABASE SPLIT
+========================= */
 
 async function loadDatabase(){
 
@@ -14,31 +14,21 @@ result.innerHTML="Loading database..."
 
 try{
 
-let all=[]
+let promises=[]
 
 for(let i=1;i<=62;i++){
 
-try{
-
-let res=await fetch(`../db/promo_${i}.json`)
-
-if(res.ok){
-
-let data=await res.json()
-
-all=all.concat(data)
+promises.push(
+fetch(`../db/promo_${i}.json`)
+.then(r=>r.json())
+.catch(()=>[])
+)
 
 }
 
-}catch(e){
+let data=await Promise.all(promises)
 
-console.log("skip promo_"+i)
-
-}
-
-}
-
-DB=all
+DB=data.flat()
 
 console.log("Database loaded:",DB.length)
 
@@ -58,9 +48,9 @@ window.onload=loadDatabase
 
 
 
-/* =====================
+/* =========================
 SEARCH
-===================== */
+========================= */
 
 searchInput.addEventListener("input",e=>{
 
@@ -80,8 +70,6 @@ search(q)
 
 function search(q){
 
-const divisi=document.getElementById("divisi").value
-
 let data=DB.filter(item=>{
 
 return(
@@ -95,19 +83,15 @@ String(item.brand).toLowerCase().includes(q)
 
 })
 
-if(divisi){
-data=data.filter(x=>x.division===divisi)
-}
-
 render(data.slice(0,30))
 
 }
 
 
 
-/* =====================
+/* =========================
 FORMAT RUPIAH
-===================== */
+========================= */
 
 function rupiah(n){
 
@@ -121,9 +105,9 @@ return "Rp "+new Intl.NumberFormat("id-ID").format(n)
 
 
 
-/* =====================
+/* =========================
 STATUS PROMO
-===================== */
+========================= */
 
 function getPromoStatus(range){
 
@@ -147,62 +131,161 @@ return "AKTIF"
 
 
 
-/* =====================
-PROMO ENGINE
-===================== */
+/* =========================
+PROMO ENGINE V10
+========================= */
+
 function promoEngine(item){
 
 let normal=item.harga_normal
-let promo=item.harga_promo||""
-let acara=item.acara||""
+let promo=item.harga_promo || ""
+let acara=item.acara || ""
 
 let text=(promo+" "+acara).toUpperCase()
 
 let normalNum=Number(String(normal).replace(/[^\d]/g,""))
 
 let result={
+
 normal:rupiah(normalNum),
 promo:"",
 promoLabel:"",
 coret:false,
 hideLabel:false
+
 }
 
 
-/* ======================
-BXGY PROMO
-====================== */
 
-let bxgy=text.match(/B\d+(G|D)\d+/)
+/* =================
+BXGY PROMO
+================= */
+
+let bxgy=text.match(/B\d+(G|D)\d+/g)
 
 if(bxgy){
 
-result.promo=bxgy[0]
+result.promo=bxgy.join(" ")
 result.hideLabel=true
 
 return result
+
 }
 
 
-/* ======================
+
+/* =================
+BUY X GET Y
+================= */
+
+let buyGet=text.match(/BUY\s*(\d+)\s*GET\s*(\d+)/)
+
+if(buyGet){
+
+result.promo="B"+buyGet[1]+"G"+buyGet[2]
+result.hideLabel=true
+
+return result
+
+}
+
+
+
+/* =================
+BUY X DISKON X%
+================= */
+
+let buyDisc=text.match(/BUY\s*(\d+).*?(\d+)\s*%/)
+
+if(buyDisc){
+
+result.promo="B"+buyDisc[1]+"D"+buyDisc[2]
+result.hideLabel=true
+
+return result
+
+}
+
+
+
+/* =================
+SPECIAL PRICE
+================= */
+
+if(text.includes("SPECIAL")){
+
+let price=text.match(/(\d{2,3})[.,]?(\d{3})/)
+
+if(price){
+
+let sp=parseInt(price[1]+price[2])
+
+result.normal=rupiah(normalNum)
+result.promo=rupiah(sp)
+result.promoLabel="SPECIAL PRICE"
+result.coret=true
+
+return result
+
+}
+
+}
+
+
+
+/* =================
+SHARP PRICE
+================= */
+
+if(text.includes("SHARP")){
+
+result.normal="@"+rupiah(normalNum)
+result.promo=rupiah(normalNum)
+result.promoLabel="SHARP PRICE"
+
+return result
+
+}
+
+
+
+/* =================
+CLEARANCE
+================= */
+
+if(text.includes("CLEARANCE")){
+
+result.promoLabel="CLEARANCE"
+
+return result
+
+}
+
+
+
+/* =================
+NETT PRICE
+================= */
+
+if(text.includes("NETT")){
+
+result.promoLabel="NETT"
+
+return result
+
+}
+
+
+
+/* =================
 DISKON %
-70% / D70 / D75 / D90
-====================== */
+================= */
 
 let percent=text.match(/(\d+)\s*%/)
-let disc=text.match(/D(\d{1,3})/)
-
-let p=null
 
 if(percent){
-p=parseInt(percent[1])
-}
 
-if(disc){
-p=parseInt(disc[1])
-}
-
-if(p){
+let p=parseInt(percent[1])
 
 let promoCalc=Math.round(normalNum*(100-p)/100)
 
@@ -212,39 +295,7 @@ result.promoLabel=p+"%"
 result.coret=true
 
 return result
-}
 
-
-/* ======================
-SHARP PRICE
-====================== */
-
-if(text.includes("SHARP")){
-
-result.normal="@"+rupiah(normalNum)
-result.promo=rupiah(normalNum)
-result.promoLabel="SHARP PRICE"
-
-return result
-}
-
-
-/* ======================
-SPECIAL PRICE
-====================== */
-
-let sp=text.match(/(\d+)\s*K/)
-
-if(sp){
-
-let price=parseInt(sp[1])*1000
-
-result.normal=rupiah(normalNum)
-result.promo=rupiah(price)
-result.promoLabel="SPECIAL PRICE"
-result.coret=true
-
-return result
 }
 
 
@@ -252,9 +303,11 @@ return result
 
 }
 
-/* =====================
-RENDER CARD
-===================== */
+
+
+/* =========================
+RENDER RESULT
+========================= */
 
 function render(data){
 
@@ -302,13 +355,8 @@ ${status}
 
 </div>
 
-<div class="meta">
-Brand: ${item.brand}
-</div>
-
-<div class="meta">
-SKU: ${item.sku}
-</div>
+<div class="meta">Brand: ${item.brand}</div>
+<div class="meta">SKU: ${item.sku}</div>
 
 <div class="${normalClass}">
 ${p.normal}
@@ -320,25 +368,10 @@ ${p.promo}
 
 ${promoText}
 
-<div class="meta">
-
-<div>
-Berlaku: ${item.berlaku}
-</div>
-
-<div>
-Divisi: ${item.division}
-</div>
-
-<div>
-📄 ${item.file}
-</div>
-
-<div>
-📑 ${item.sheet}
-</div>
-
-</div>
+<div class="meta">Berlaku: ${item.berlaku}</div>
+<div class="meta">Divisi: ${item.division}</div>
+<div class="meta">File: ${item.file}</div>
+<div class="meta">Sheet: ${item.sheet}</div>
 
 </div>
 
