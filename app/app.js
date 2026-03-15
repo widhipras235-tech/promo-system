@@ -14,11 +14,33 @@ result.innerHTML="Loading database..."
 
 try{
 
-const res=await fetch("../db/promo.json")
+let all=[]
 
-if(!res.ok) throw new Error("Database tidak ditemukan")
+for(let i=1;i<=62;i++){
 
-DB=await res.json()
+try{
+
+let res=await fetch(`../db/promo_${i}.json`)
+
+if(res.ok){
+
+let data=await res.json()
+
+all=all.concat(data)
+
+}
+
+}catch(e){
+
+console.log("skip promo_"+i)
+
+}
+
+}
+
+DB=all
+
+console.log("Database loaded:",DB.length)
 
 result.innerHTML=""
 
