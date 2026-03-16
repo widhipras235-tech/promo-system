@@ -2,58 +2,24 @@ const fs = require("fs")
 const path = require("path")
 const XLSX = require("xlsx")
 
-const BASE="excel"
-const SPLIT_SIZE=1000
+const BASE = "excel"
+const OUTPUT = "db"
+const SPLIT_SIZE = 1000
 
-const DIVISI=[
-"divisi1",
-"divisi2",
-"divisi3",
-"divisi4"
-]
-
-let promo=[]
-let skuIndex={}
-let articleIndex={}
-
-
-/* =========================
-NORMALIZE TEXT
-========================= */
+let promo = []
+let skuIndex = {}
+let articleIndex = {}
 
 function norm(v){
 if(!v) return ""
 return String(v).trim()
 }
 
-
-/* =========================
-BERSIHKAN HARGA
-========================= */
-
-function cleanPrice(v){
-
-if(!v) return ""
-
-let num=String(v)
-.replace(/[^\d]/g,"")
-
-return num ? Number(num) : ""
-
-}
-
-
-/* =========================
-FIND COLUMN FLEXIBLE
-========================= */
-
 function find(row,keys){
 
 for(let k in row){
 
-const name=k
-.toUpperCase()
-.replace(/\s/g,"")
+const name = k.toUpperCase()
 
 for(let key of keys){
 
@@ -68,28 +34,15 @@ return ""
 
 }
 
-
-/* =========================
-FORMAT TANGGAL EXCEL
-========================= */
-
 function excelDate(v){
 
 if(!v) return ""
 
 if(typeof v==="number"){
 
-const d=XLSX.SSF.parse_date_code(v)
-
-if(!d) return ""
+const d = XLSX.SSF.parse_date_code(v)
 
 return `${d.d}-${d.m}-${d.y}`
-
-}
-
-if(v instanceof Date){
-
-return `${v.getDate()}-${v.getMonth()+1}-${v.getFullYear()}`
 
 }
 
@@ -97,109 +50,78 @@ return String(v)
 
 }
 
+console.log("SCAN FOLDER EXCEL...")
 
-/* =========================
-READ EXCEL
-========================= */
+const folders = fs.readdirSync(BASE)
 
-DIVISI.forEach(div=>{
+folders.forEach(div=>{
 
-const folder=path.join(BASE,div)
+const folder = path.join(BASE,div)
 
-if(!fs.existsSync(folder)) return
+if(!fs.statSync(folder).isDirectory()) return
 
-const files=fs.readdirSync(folder)
+console.log("DIVISI:",div)
+
+const files = fs.readdirSync(folder)
 
 files.forEach(file=>{
 
 if(!file.endsWith(".xlsx")) return
 
-const filePath=path.join(folder,file)
+const filePath = path.join(folder,file)
 
-console.log("READ:",filePath)
+console.log("FILE:",file)
 
-const wb=XLSX.readFile(filePath,{cellDates:true})
+const wb = XLSX.readFile(filePath,{cellDates:true})
 
 wb.SheetNames.forEach(sheetName=>{
 
-const rows=XLSX.utils.sheet_to_json(
+console.log("SHEET:",sheetName)
+
+const rows = XLSX.utils.sheet_to_json(
 wb.Sheets[sheetName],
 {raw:false,defval:""}
 )
 
 rows.forEach(r=>{
 
-const hargaNormal=find(r,[
-"NORMAL",
-"HARGANORMAL",
-"PRICE"
-])
+const hargaNormal = find(r,["NORMAL","REG"])
+const hargaPromo = find(r,["PROMO","SHARP","SPECIAL"])
 
-const hargaPromo=find(r,[
-"PROMO",
-"SHARP",
-"SPECIAL",
-"SP"
-])
+const item = {
 
-const item={
+deskripsi: norm(find(r,["DESC","DESCR","DESCRIPTION"])),
 
-deskripsi:norm(find(r,[
-"DESC",
-"DESKRIPSI",
-"DESCRIPTION"
-])),
+brand: norm(find(r,["BRAND"])),
 
-brand:norm(find(r,[
-"BRAND"
-])),
+sku: norm(find(r,["SKU","BARCODE"])),
 
-sku:norm(find(r,[
-"SKU",
-"BARCODE"
-])),
+article: norm(find(r,["ARTICLE","STYLE"])),
 
-article:norm(find(r,[
-"ARTICLE",
-"ARTIKEL"
-])),
+harga_normal: norm(hargaNormal),
 
-harga_normal:cleanPrice(hargaNormal),
+harga_promo: norm(hargaPromo),
 
-harga_promo:norm(hargaPromo),
-
-diskon:norm(find(r,[
-"DISC",
-"DISKON",
-"DISCOUNT"
-])),
+diskon: norm(find(r,["DISC","DISCOUNT"])),
 
 berlaku:
-excelDate(find(r,["FROM","START"]))+
-" - "+
+excelDate(find(r,["FROM","START"])) +
+" - " +
 excelDate(find(r,["TO","END"])),
 
-acara:norm(find(r,[
-"EVENT",
-"ACARA"
-])),
+acara: norm(find(r,["EVENT","ACARA","PROMO"])),
 
-division:div,
+division: div,
 
-file:file,
+file: file,
 
-sheet:sheetName
+sheet: sheetName
 
 }
 
-if(!item.sku && !item.deskripsi) return
-
 promo.push(item)
 
-const i=promo.length-1
-
-
-/* INDEX SKU */
+const i = promo.length-1
 
 if(item.sku){
 
@@ -209,9 +131,6 @@ skuIndex[item.sku]=[]
 skuIndex[item.sku].push(i)
 
 }
-
-
-/* INDEX ARTICLE */
 
 if(item.article){
 
@@ -230,59 +149,42 @@ articleIndex[item.article].push(i)
 
 })
 
+if(!fs.existsSync(OUTPUT))
+fs.mkdirSync(OUTPUT)
 
-/* =========================
-SAVE DATABASE
-========================= */
-
-if(!fs.existsSync("db"))
-fs.mkdirSync("db")
-
-
-/* MASTER DATABASE */
+console.log("TOTAL DATA:",promo.length)
 
 fs.writeFileSync(
-"db/promo.json",
-JSON.stringify(promo,null,2)
+`${OUTPUT}/promo.json`,
+JSON.stringify(promo)
 )
 
+fs.writeFileSync(
+`${OUTPUT}/sku_index.json`,
+JSON.stringify(skuIndex)
+)
 
-/* =========================
-AUTO SPLIT JSON
-========================= */
+fs.writeFileSync(
+`${OUTPUT}/article_index.json`,
+JSON.stringify(articleIndex)
+)
 
-let part=1
+console.log("SPLIT DATABASE...")
+
+let part = 1
 
 for(let i=0;i<promo.length;i+=SPLIT_SIZE){
 
-let chunk=promo.slice(i,i+SPLIT_SIZE)
+const chunk = promo.slice(i,i+SPLIT_SIZE)
 
 fs.writeFileSync(
-`db/promo_${part}.json`,
+`${OUTPUT}/promo_${part}.json`,
 JSON.stringify(chunk)
 )
-
-console.log("CREATE promo_"+part+".json")
 
 part++
 
 }
 
-
-/* =========================
-SAVE INDEX
-========================= */
-
-fs.writeFileSync(
-"db/sku_index.json",
-JSON.stringify(skuIndex)
-)
-
-fs.writeFileSync(
-"db/article_index.json",
-JSON.stringify(articleIndex)
-)
-
-console.log("DATABASE SELESAI")
-console.log("TOTAL PROMO:",promo.length)
-console.log("TOTAL SPLIT:",part-1)
+console.log("CONVERT SELESAI")
+console.log("TOTAL FILE SPLIT:",part-1)
