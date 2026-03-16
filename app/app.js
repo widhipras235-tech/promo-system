@@ -56,10 +56,10 @@ if(!q) return
 let found = DB.find(item =>{
 
 return (
-(item.sku && item.sku.toUpperCase().includes(q)) ||
-(item.artikel && item.artikel.toUpperCase().includes(q)) ||
-(item.deskripsi && item.deskripsi.toUpperCase().includes(q)) ||
-(item.brand && item.brand.toUpperCase().includes(q))
+(item.sku && item.sku.toString().toUpperCase().includes(q)) ||
+(item.artikel && item.artikel.toString().toUpperCase().includes(q)) ||
+(item.deskripsi && item.deskripsi.toString().toUpperCase().includes(q)) ||
+(item.brand && item.brand.toString().toUpperCase().includes(q))
 )
 
 })
@@ -82,7 +82,7 @@ FORMAT RUPIAH
 
 function rupiah(n){
 
-if(!n) return ""
+if(n===undefined || n===null) return ""
 
 n = Number(n)
 
@@ -101,36 +101,39 @@ if(!v) return null
 
 if(v instanceof Date) return v
 
+/* Excel serial number */
+
 if(typeof v === "number"){
 
-let d = new Date((v-25569)*86400*1000)
-return d
+return new Date((v-25569)*86400*1000)
 
 }
 
 v = v.toString().trim()
 
+/* yyyy-mm-dd atau dd-mm-yyyy */
+
 if(v.includes("-")){
 
 let p = v.split("-")
 
-if(p[2]){
+if(p[0].length===4){
+
+return new Date(p[0],p[1]-1,p[2])
+
+}
 
 return new Date(p[2],p[1]-1,p[0])
 
 }
 
-}
+/* dd/mm/yyyy */
 
 if(v.includes("/")){
 
 let p = v.split("/")
 
-if(p[2]){
-
 return new Date(p[2],p[1]-1,p[0])
-
-}
 
 }
 
@@ -201,15 +204,14 @@ let promoLabel = ""
 let hidePromo = false
 
 
-/* B3D10 B1G1 B2G1 B1G2 dll */
+/* BUNDLE PROMO */
 
 if(
 promoText.includes("B3D10") ||
 promoText.includes("B1G1") ||
 promoText.includes("B2G1") ||
 promoText.includes("B1G2") ||
-promoText.includes("B1D20") ||
-promoText.includes("B2G1")
+promoText.includes("B1D20")
 ){
 
 promoHTML = promoText
@@ -247,23 +249,27 @@ return {normalHTML,promoHTML,promoLabel,hidePromo}
 }
 
 
-/* DISKON % */
+/* DISKON % atau D70 */
 
-if(diskon && diskon.toString().includes("%")){
+let percent = null
 
-let d = parseFloat(diskon)
+if(diskon){
 
-if(!isNaN(d)){
+let m = diskon.toString().match(/\d+/)
 
-let hitung = normal - (normal * d /100)
+if(m) percent = parseFloat(m[0])
+
+}
+
+if(percent){
+
+let hitung = normal - (normal * percent /100)
 
 normalHTML = `<s>${rupiah(normal)}</s>`
 promoHTML = rupiah(Math.round(hitung))
-promoLabel = diskon
+promoLabel = percent + "%"
 
 return {normalHTML,promoHTML,promoLabel,hidePromo}
-
-}
 
 }
 
