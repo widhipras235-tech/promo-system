@@ -190,12 +190,10 @@ item.end ||
 item.tgl_akhir ||
 (item.berlaku ? item.berlaku.split("-")[1] : null)
 
-if(!start || !end) return ""
+if(!start || !end) return "AKTIF"
 
 start = parseDate(start)
 end = parseDate(end)
-
-if(!start || !end) return ""
 
 let today = new Date()
 
@@ -204,6 +202,7 @@ start.setHours(0,0,0,0)
 end.setHours(23,59,59,999)
 
 if(today < start) return "BELUM AKTIF"
+
 if(today > end) return "BERAKHIR"
 
 return "AKTIF"
@@ -215,42 +214,18 @@ return "AKTIF"
 RENDER RESULT
 ========================= */
 
-function render(data){
+let status = getStatus(item)
 
-if(data.length===0){
+let badgeClass = "status aktif"
 
-result.innerHTML="Data tidak ditemukan"
-return
+if(status === "BELUM AKTIF") badgeClass = "status belum"
+if(status === "BERAKHIR") badgeClass = "status habis"
 
-}
-
-let html=""
-
-data.forEach(item=>{
-
-let status=getStatus(item.berlaku)
-
-let statusClass="aktif"
-
-if(status==="BELUM AKTIF") statusClass="belum"
-if(status==="BERAKHIR") statusClass="berakhir"
-
-html+=`
-
-<div class="card">
-
-<div class="card-header">
-
-<div class="title">
-${item.deskripsi || "-"}
-</div>
-
-<div class="status ${statusClass}">
+let statusHTML = `
+<div class="${badgeClass}">
 ${status}
 </div>
-
-</div>
-
+`
 <div class="meta">Brand: ${item.brand||"-"}</div>
 <div class="meta">SKU: ${item.sku||"-"}</div>
 
