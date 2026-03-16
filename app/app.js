@@ -99,32 +99,118 @@ return "Rp "+num.toLocaleString("id-ID")
 
 
 /* =========================
-PARSE DATE (FIX EXCEL)
+AUTO DATE PARSER (ALL EXCEL FORMAT)
 ========================= */
 
-function parseDate(str){
+function parseDate(value){
 
-if(!str) return null
+if(!value) return null
 
-str=str.trim()
+/* jika angka (Excel Serial Date) */
+
+if(!isNaN(value)){
+
+let excelEpoch = new Date(1899,11,30)
+let date = new Date(excelEpoch.getTime() + value * 86400000)
+
+return date
+
+}
+
+let str = String(value).trim()
+
+/* dd/mm/yyyy */
 
 if(str.includes("/")){
 
-let p=str.split("/")
+let p = str.split("/")
+
+if(p.length===3){
+
+let d=parseInt(p[0])
+let m=parseInt(p[1])-1
+let y=parseInt(p[2])
+
+return new Date(y,m,d)
+
+}
+
+}
+
+/* yyyy-mm-dd */
+
+if(str.includes("-")){
+
+let p = str.split("-")
+
+if(p.length===3){
+
+/* yyyy-mm-dd */
+
+if(p[0].length===4){
+
+return new Date(p[0],p[1]-1,p[2])
+
+}
+
+/* dd-mm-yyyy */
 
 return new Date(p[2],p[1]-1,p[0])
 
 }
 
-if(str.includes("-")){
+}
 
-let d=new Date(str)
+/* fallback javascript */
+
+let d = new Date(str)
 
 if(!isNaN(d)) return d
 
+return null
+
 }
 
-return new Date(str)
+
+
+/* =========================
+STATUS PROMO ENGINE
+========================= */
+
+function getStatus(range){
+
+if(!range) return ""
+
+let parts = String(range).split("-")
+
+if(parts.length < 2) return ""
+
+let start = parseDate(parts[0].trim())
+let end = parseDate(parts[1].trim())
+
+if(!start || !end) return ""
+
+let today = new Date()
+
+today.setHours(0,0,0,0)
+start.setHours(0,0,0,0)
+end.setHours(23,59,59,999)
+
+/* STATUS LOGIC */
+
+if(today < start){
+
+return "BELUM AKTIF"
+
+}
+
+if(today > end){
+
+return "BERAKHIR"
+
+}
+
+return "AKTIF"
 
 }
 
