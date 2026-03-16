@@ -15,10 +15,26 @@ let all = []
 
 for(let i=1;i<=files;i++){
 
-let res = await fetch(`../db/promo_${i}.json`)
+let url = `../db/promo_${i}.json`
+
+try{
+
+let res = await fetch(url)
+
+if(!res.ok){
+console.warn("File tidak ditemukan:",url)
+continue
+}
+
 let data = await res.json()
 
 all = all.concat(data)
+
+}catch(e){
+
+console.warn("Error load:",url)
+
+}
 
 }
 
