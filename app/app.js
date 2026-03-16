@@ -4,9 +4,9 @@ const result=document.getElementById("result")
 const searchInput=document.getElementById("search")
 
 
-/* ================================
+/* =========================
 LOAD DATABASE SPLIT
-================================ */
+========================= */
 
 async function loadDatabase(){
 
@@ -48,9 +48,9 @@ window.onload=loadDatabase
 
 
 
-/* ================================
+/* =========================
 SEARCH
-================================ */
+========================= */
 
 searchInput.addEventListener("input",e=>{
 
@@ -70,8 +70,6 @@ search(q)
 
 function search(q){
 
-const divisi=document.getElementById("divisi")?.value || ""
-
 let data=DB.filter(item=>{
 
 return(
@@ -85,21 +83,15 @@ String(item.brand).toLowerCase().includes(q)
 
 })
 
-if(divisi){
-
-data=data.filter(x=>x.division===divisi)
-
-}
-
 render(data.slice(0,30))
 
 }
 
 
 
-/* ================================
+/* =========================
 FORMAT RUPIAH
-================================ */
+========================= */
 
 function rupiah(n){
 
@@ -113,9 +105,37 @@ return "Rp "+new Intl.NumberFormat("id-ID").format(n)
 
 
 
-/* ================================
+/* =========================
+PARSE DATE
+========================= */
+
+function parseDate(str){
+
+str=str.trim()
+
+if(str.includes("/")){
+
+let p=str.split("/")
+
+return new Date(p[2],p[1]-1,p[0])
+
+}
+
+if(str.includes("-")){
+
+return new Date(str)
+
+}
+
+return new Date(str)
+
+}
+
+
+
+/* =========================
 STATUS PROMO
-================================ */
+========================= */
 
 function getPromoStatus(range){
 
@@ -125,13 +145,15 @@ let parts=range.split("-")
 
 if(parts.length<2) return ""
 
-let start=new Date(parts[0].trim())
-let end=new Date(parts[1].trim())
+let start=parseDate(parts[0])
+let end=parseDate(parts[1])
 
 let today=new Date()
 
-if(today<start) return "BELUM AKTIF"
-if(today>end) return "BERAKHIR"
+today.setHours(0,0,0,0)
+
+if(today < start) return "BELUM AKTIF"
+if(today > end) return "BERAKHIR"
 
 return "AKTIF"
 
@@ -139,17 +161,18 @@ return "AKTIF"
 
 
 
-/* ================================
-PROMO ENGINE V12
-================================ */
+/* =========================
+PROMO ENGINE V13
+========================= */
 
 function promoEngine(item){
 
 let normal=item.harga_normal
 let promo=item.harga_promo || ""
 let acara=item.acara || ""
+let sheet=item.sheet || ""
 
-let text=(promo+" "+acara).toUpperCase()
+let text=(promo+" "+acara+" "+sheet).toUpperCase()
 
 let normalNum=Number(String(normal).replace(/[^\d]/g,""))
 
@@ -162,33 +185,7 @@ hideLabel:false
 }
 
 
-/* =====================
-PRICE PARSER
-===================== */
-
-function parsePrice(str){
-
-let k=str.match(/(\d+)\s*K/)
-
-if(k) return parseInt(k[1])*1000
-
-let dot=str.match(/(\d{2,3})[.,](\d{3})/)
-
-if(dot) return parseInt(dot[1]+dot[2])
-
-let raw=str.match(/\d{5,6}/)
-
-if(raw) return parseInt(raw[0])
-
-return null
-
-}
-
-
-
-/* =====================
-BXGY CODE
-===================== */
+/* BXGY PROMO */
 
 let bxgy=text.match(/B\d+(G|D)\d+/g)
 
@@ -198,13 +195,11 @@ result.promo=bxgy.join(" ")
 result.hideLabel=true
 
 return result
+
 }
 
 
-
-/* =====================
-BUY X GET Y
-===================== */
+/* BUY X GET Y */
 
 let buyGet=text.match(/BUY\s*(\d+)\s*(GET|FREE)\s*(\d+)/)
 
@@ -214,13 +209,11 @@ result.promo="B"+buyGet[1]+"G"+buyGet[3]
 result.hideLabel=true
 
 return result
+
 }
 
 
-
-/* =====================
-BUY X DISC
-===================== */
+/* BUY X DISKON */
 
 let buyDisc=text.match(/BUY\s*(\d+).*?(DISC|DISKON)\s*(\d+)/)
 
@@ -230,19 +223,19 @@ result.promo="B"+buyDisc[1]+"D"+buyDisc[3]
 result.hideLabel=true
 
 return result
+
 }
 
 
-
-/* =====================
-SPECIAL PRICE
-===================== */
+/* SPECIAL PRICE */
 
 if(text.includes("SPECIAL")){
 
-let sp=parsePrice(text)
+let price=text.match(/(\d{2,3})[.,]?(\d{3})/)
 
-if(sp){
+if(price){
+
+let sp=parseInt(price[1]+price[2])
 
 result.normal=rupiah(normalNum)
 result.promo=rupiah(sp)
@@ -256,10 +249,7 @@ return result
 }
 
 
-
-/* =====================
-SHARP PRICE
-===================== */
+/* SHARP PRICE */
 
 if(text.includes("SHARP")){
 
@@ -272,10 +262,7 @@ return result
 }
 
 
-
-/* =====================
-DISCOUNT %
-===================== */
+/* DISKON */
 
 let percent=text.match(/(\d+)\s*%/)
 
@@ -295,15 +282,15 @@ return result
 }
 
 
+/* PRICE FORMAT 129K */
 
-/* =====================
-SPECIAL PRICE WITHOUT LABEL
-ex: 129K
-===================== */
+let k=text.match(/(\d+)\s*K/)
 
-let price=parsePrice(text)
+if(k){
 
-if(price && price<normalNum){
+let price=parseInt(k[1])*1000
+
+if(price < normalNum){
 
 result.normal=rupiah(normalNum)
 result.promo=rupiah(price)
@@ -314,11 +301,10 @@ return result
 
 }
 
+}
 
 
-/* =====================
-PROMO LABEL
-===================== */
+/* LABEL */
 
 if(text.includes("CLEARANCE")){
 
@@ -334,30 +320,16 @@ return result
 
 }
 
-if(text.includes("FLASH")){
-
-result.promoLabel="FLASH SALE"
-return result
-
-}
-
-if(text.includes("LIMIT")){
-
-result.promoLabel="LIMITED OFFER"
-return result
-
-}
-
-
 
 return result
 
 }
 
 
-/* ================================
+
+/* =========================
 RENDER
-================================ */
+========================= */
 
 function render(data){
 
@@ -395,9 +367,7 @@ html+=`
 
 <div class="card-header">
 
-<div class="title">
-${item.deskripsi}
-</div>
+<div class="title">${item.deskripsi}</div>
 
 <div class="status ${statusClass}">
 ${status}
@@ -418,21 +388,10 @@ ${p.promo}
 
 ${promoText}
 
-<div class="meta">
-Berlaku: ${item.berlaku}
-</div>
-
-<div class="meta">
-Divisi: ${item.division}
-</div>
-
-<div class="meta">
-File: ${item.file}
-</div>
-
-<div class="meta">
-Sheet: ${item.sheet}
-</div>
+<div class="meta">Berlaku: ${item.berlaku}</div>
+<div class="meta">Divisi: ${item.division}</div>
+<div class="meta">File: ${item.file}</div>
+<div class="meta">Sheet: ${item.sheet}</div>
 
 </div>
 
