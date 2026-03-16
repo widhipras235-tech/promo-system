@@ -140,7 +140,7 @@ return "AKTIF"
 
 
 /* ================================
-PROMO ENGINE V9
+PROMO ENGINE V12
 ================================ */
 
 function promoEngine(item){
@@ -154,64 +154,95 @@ let text=(promo+" "+acara).toUpperCase()
 let normalNum=Number(String(normal).replace(/[^\d]/g,""))
 
 let result={
-
-normal: rupiah(normalNum),
-promo: "",
+normal:rupiah(normalNum),
+promo:"",
 promoLabel:"",
 coret:false,
 hideLabel:false
+}
+
+
+/* =====================
+PRICE PARSER
+===================== */
+
+function parsePrice(str){
+
+let k=str.match(/(\d+)\s*K/)
+
+if(k) return parseInt(k[1])*1000
+
+let dot=str.match(/(\d{2,3})[.,](\d{3})/)
+
+if(dot) return parseInt(dot[1]+dot[2])
+
+let raw=str.match(/\d{5,6}/)
+
+if(raw) return parseInt(raw[0])
+
+return null
 
 }
 
 
-/* =================
-BXGY PROMO
-================= */
+
+/* =====================
+BXGY CODE
+===================== */
 
 let bxgy=text.match(/B\d+(G|D)\d+/g)
 
 if(bxgy){
 
-let code=bxgy.join(" ")
-
-result.promo=code
+result.promo=bxgy.join(" ")
 result.hideLabel=true
 
 return result
-
 }
 
 
-/* =================
-BUY X DISKON X%
-================= */
 
-let buyDisc=text.match(/BUY\s*(\d+).*?(\d+)\s*%/)
+/* =====================
+BUY X GET Y
+===================== */
+
+let buyGet=text.match(/BUY\s*(\d+)\s*(GET|FREE)\s*(\d+)/)
+
+if(buyGet){
+
+result.promo="B"+buyGet[1]+"G"+buyGet[3]
+result.hideLabel=true
+
+return result
+}
+
+
+
+/* =====================
+BUY X DISC
+===================== */
+
+let buyDisc=text.match(/BUY\s*(\d+).*?(DISC|DISKON)\s*(\d+)/)
 
 if(buyDisc){
 
-let qty=buyDisc[1]
-let disc=buyDisc[2]
-
-result.promo="B"+qty+"D"+disc
+result.promo="B"+buyDisc[1]+"D"+buyDisc[3]
 result.hideLabel=true
 
 return result
-
 }
 
 
-/* =================
+
+/* =====================
 SPECIAL PRICE
-================= */
+===================== */
 
 if(text.includes("SPECIAL")){
 
-let price=text.match(/(\d{2,3})[.,]?(\d{3})/)
+let sp=parsePrice(text)
 
-if(price){
-
-let sp=parseInt(price[1]+price[2])
+if(sp){
 
 result.normal=rupiah(normalNum)
 result.promo=rupiah(sp)
@@ -225,9 +256,10 @@ return result
 }
 
 
-/* =================
+
+/* =====================
 SHARP PRICE
-================= */
+===================== */
 
 if(text.includes("SHARP")){
 
@@ -240,9 +272,10 @@ return result
 }
 
 
-/* =================
-DISKON %
-================= */
+
+/* =====================
+DISCOUNT %
+===================== */
 
 let percent=text.match(/(\d+)\s*%/)
 
@@ -262,10 +295,64 @@ return result
 }
 
 
+
+/* =====================
+SPECIAL PRICE WITHOUT LABEL
+ex: 129K
+===================== */
+
+let price=parsePrice(text)
+
+if(price && price<normalNum){
+
+result.normal=rupiah(normalNum)
+result.promo=rupiah(price)
+result.promoLabel="SPECIAL PRICE"
+result.coret=true
+
 return result
 
 }
 
+
+
+/* =====================
+PROMO LABEL
+===================== */
+
+if(text.includes("CLEARANCE")){
+
+result.promoLabel="CLEARANCE"
+return result
+
+}
+
+if(text.includes("NETT")){
+
+result.promoLabel="NETT"
+return result
+
+}
+
+if(text.includes("FLASH")){
+
+result.promoLabel="FLASH SALE"
+return result
+
+}
+
+if(text.includes("LIMIT")){
+
+result.promoLabel="LIMITED OFFER"
+return result
+
+}
+
+
+
+return result
+
+}
 
 
 /* ================================
