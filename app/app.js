@@ -34,14 +34,14 @@ console.log("Database loaded:",DB.length)
 }catch(e){
 
 console.error("Database gagal dimuat",e)
-result.innerHTML = "Database gagal dimuat"
+document.getElementById("result").innerHTML =
+"Database gagal dimuat"
 
 }
 
 }
 
 window.onload = loadDatabase
-
 
 /* ===============================
 AUTO DATE PARSER
