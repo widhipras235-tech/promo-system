@@ -172,50 +172,6 @@ return null
 }
 
 
-
-/* =========================
-STATUS PROMO ENGINE
-========================= */
-
-function getStatus(range){
-
-if(!range) return ""
-
-let parts = String(range).split("-")
-
-if(parts.length < 2) return ""
-
-let start = parseDate(parts[0].trim())
-let end = parseDate(parts[1].trim())
-
-if(!start || !end) return ""
-
-let today = new Date()
-
-today.setHours(0,0,0,0)
-start.setHours(0,0,0,0)
-end.setHours(23,59,59,999)
-
-/* STATUS LOGIC */
-
-if(today < start){
-
-return "BELUM AKTIF"
-
-}
-
-if(today > end){
-
-return "BERAKHIR"
-
-}
-
-return "AKTIF"
-
-}
-
-
-
 /* =========================
 STATUS PROMO
 ========================= */
@@ -226,20 +182,36 @@ let start =
 item.mulai ||
 item.start ||
 item.tgl_mulai ||
-(item.berlaku ? item.berlaku.split("-")[0] : null)
+null
 
 let end =
 item.akhir ||
 item.end ||
 item.tgl_akhir ||
-(item.berlaku ? item.berlaku.split("-")[1] : null)
+null
 
-if(!start || !end) return ""
+
+/* jika ada kolom berlaku */
+
+if(item.berlaku){
+
+let parts = String(item.berlaku).split(" - ")
+
+if(parts.length===2){
+
+start = start || parts[0]
+end = end || parts[1]
+
+}
+
+}
+
 
 start = parseDate(start)
 end = parseDate(end)
 
 if(!start || !end) return ""
+
 
 let today = new Date()
 
@@ -247,13 +219,14 @@ today.setHours(0,0,0,0)
 start.setHours(0,0,0,0)
 end.setHours(23,59,59,999)
 
+
 if(today < start) return "BELUM AKTIF"
+
 if(today > end) return "BERAKHIR"
 
 return "AKTIF"
 
 }
-
 
 /* =========================
 RENDER RESULT
