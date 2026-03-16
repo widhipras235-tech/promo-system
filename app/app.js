@@ -176,16 +176,24 @@ return null
 STATUS PROMO ENGINE
 ========================= */
 
-function getStatus(range){
+function getStatus(item){
 
-if(!range) return ""
+let start =
+item.mulai ||
+item.start ||
+item.tgl_mulai ||
+(item.berlaku ? item.berlaku.split("-")[0] : null)
 
-let parts = String(range).split("-")
+let end =
+item.akhir ||
+item.end ||
+item.tgl_akhir ||
+(item.berlaku ? item.berlaku.split("-")[1] : null)
 
-if(parts.length < 2) return ""
+if(!start || !end) return ""
 
-let start = parseDate(parts[0].trim())
-let end = parseDate(parts[1].trim())
+start = parseDate(start)
+end = parseDate(end)
 
 if(!start || !end) return ""
 
@@ -195,19 +203,8 @@ today.setHours(0,0,0,0)
 start.setHours(0,0,0,0)
 end.setHours(23,59,59,999)
 
-/* STATUS LOGIC */
-
-if(today < start){
-
-return "BELUM AKTIF"
-
-}
-
-if(today > end){
-
-return "BERAKHIR"
-
-}
+if(today < start) return "BELUM AKTIF"
+if(today > end) return "BERAKHIR"
 
 return "AKTIF"
 
