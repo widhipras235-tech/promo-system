@@ -122,26 +122,24 @@ font-size:15px;
 
 .status{
 display:inline-block;
-padding:2px 8px;
-font-size:10px;
-font-weight:700;
-border-radius:8px;
-color:#fff;
-width:auto;
-white-space:nowrap;
-line-height:1.2;
+padding:4px 10px;
+border-radius:6px;
+font-size:12px;
+font-weight:bold;
+color:white;
 }
 
 .status.aktif{
-background:#2e9e44;
+background:#2ecc71;
 }
 
 .status.belum{
-background:#ff9800;
+background:#f1c40f;
+color:#000;
 }
 
-.status.berakhir{
-background:#d32f2f;
+.status.habis{
+background:#7f8c8d;
 }
 
 /* PRICE */
