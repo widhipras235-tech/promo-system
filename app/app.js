@@ -1,42 +1,34 @@
-let DB=[]
+let DB = []
 
-const result=document.getElementById("result")
-const searchInput=document.getElementById("search")
+const result = document.getElementById("result")
 
-
-/* =========================
+/* ===============================
 LOAD DATABASE SPLIT
-========================= */
+=============================== */
 
 async function loadDatabase(){
 
-result.innerHTML="Memuat database..."
-
 try{
 
-let promises=[]
+let files = 62
+let all = []
 
-for(let i=1;i<=62;i++){
+for(let i=1;i<=files;i++){
 
-promises.push(
-fetch(`../db/promo_${i}.json`)
-.then(res=>res.json())
-.catch(()=>[])
-)
+let res = await fetch(`../db/promo_${i}.json`)
+let data = await res.json()
+
+all = all.concat(data)
 
 }
 
-let data=await Promise.all(promises)
+DB = all
 
-DB=data.flat()
-
-console.log("TOTAL DATA:",DB.length)
-
-result.innerHTML=""
+console.log("Database loaded:",DB.length)
 
 }catch(e){
 
-console.error(e)
+console.error("Database gagal dimuat",e)
 
 result.innerHTML="Database gagal dimuat"
 
@@ -44,116 +36,85 @@ result.innerHTML="Database gagal dimuat"
 
 }
 
-window.onload=loadDatabase
+window.onload = loadDatabase
 
 
+/* ===============================
+SEARCH ENGINE
+=============================== */
 
-/* =========================
-SEARCH
-========================= */
+function search(){
 
-searchInput.addEventListener("input",function(){
+let q = document
+.getElementById("search")
+.value
+.trim()
+.toUpperCase()
 
-let q=this.value.toLowerCase().trim()
+if(!q) return
 
-if(q.length<2){
+let found = DB.find(item =>{
 
-result.innerHTML=""
-return
-
-}
-
-let filtered=DB.filter(item=>{
-
-return(
-
-String(item.sku||"").toLowerCase().includes(q) ||
-String(item.artikel||"").toLowerCase().includes(q) ||
-String(item.deskripsi||"").toLowerCase().includes(q) ||
-String(item.brand||"").toLowerCase().includes(q)
-
+return (
+(item.sku && item.sku.toUpperCase().includes(q)) ||
+(item.artikel && item.artikel.toUpperCase().includes(q)) ||
+(item.deskripsi && item.deskripsi.toUpperCase().includes(q)) ||
+(item.brand && item.brand.toUpperCase().includes(q))
 )
 
 })
 
-render(filtered.slice(0,50))
+if(!found){
 
-})
+result.innerHTML="Data tidak ditemukan"
+return
+
+}
+
+show(found)
+
+}
 
 
-
-/* =========================
+/* ===============================
 FORMAT RUPIAH
-========================= */
+=============================== */
 
 function rupiah(n){
 
 if(!n) return ""
 
-let num=Number(String(n).replace(/[^\d]/g,""))
+n = Number(n)
 
-return "Rp "+num.toLocaleString("id-ID")
-
-}
-
-
-
-/* =========================
-AUTO DATE PARSER (ALL EXCEL FORMAT)
-========================= */
-
-function parseDate(value){
-
-if(!value) return null
-
-/* jika angka (Excel Serial Date) */
-
-if(!isNaN(value)){
-
-let excelEpoch = new Date(1899,11,30)
-let date = new Date(excelEpoch.getTime() + value * 86400000)
-
-return date
+return "Rp " + n.toLocaleString("id-ID")
 
 }
 
-let str = String(value).trim()
 
-/* dd/mm/yyyy */
+/* ===============================
+PARSE DATE (AUTO DETECT)
+=============================== */
 
-if(str.includes("/")){
+function parseDate(v){
 
-let p = str.split("/")
+if(!v) return null
 
-if(p.length===3){
+if(v instanceof Date) return v
 
-let d=parseInt(p[0])
-let m=parseInt(p[1])-1
-let y=parseInt(p[2])
+if(typeof v === "number"){
 
-return new Date(y,m,d)
-
-}
+let d = new Date((v-25569)*86400*1000)
+return d
 
 }
 
-/* yyyy-mm-dd */
+v = v.toString().trim()
 
-if(str.includes("-")){
+if(v.includes("-")){
 
-let p = str.split("-")
+let p = v.split("-")
 
-if(p.length===3){
-
-/* yyyy-mm-dd */
-
-if(p[0].length===4){
-
-return new Date(p[0],p[1]-1,p[2])
-
-}
-
-/* dd-mm-yyyy */
+if(p[2]){
 
 return new Date(p[2],p[1]-1,p[0])
 
@@ -161,9 +122,19 @@ return new Date(p[2],p[1]-1,p[0])
 
 }
 
-/* fallback javascript */
+if(v.includes("/")){
 
-let d = new Date(str)
+let p = v.split("/")
+
+if(p[2]){
+
+return new Date(p[2],p[1]-1,p[0])
+
+}
+
+}
+
+let d = new Date(v)
 
 if(!isNaN(d)) return d
 
@@ -172,9 +143,9 @@ return null
 }
 
 
-/* =========================
-STATUS PROMO ENGINE
-========================= */
+/* ===============================
+STATUS ENGINE
+=============================== */
 
 function getStatus(item){
 
@@ -195,6 +166,8 @@ if(!start || !end) return "AKTIF"
 start = parseDate(start)
 end = parseDate(end)
 
+if(!start || !end) return "AKTIF"
+
 let today = new Date()
 
 today.setHours(0,0,0,0)
@@ -202,7 +175,6 @@ start.setHours(0,0,0,0)
 end.setHours(23,59,59,999)
 
 if(today < start) return "BELUM AKTIF"
-
 if(today > end) return "BERAKHIR"
 
 return "AKTIF"
@@ -210,47 +182,151 @@ return "AKTIF"
 }
 
 
-/* =========================
+/* ===============================
+PROMO ENGINE
+=============================== */
+
+function promoLogic(item){
+
+let normal = item.harga_normal
+let promo = item.harga_promo
+let diskon = item.diskon || ""
+
+let promoText = promo ? promo.toString().toUpperCase() : ""
+
+let normalHTML = rupiah(normal)
+let promoHTML = ""
+let promoLabel = ""
+
+let hidePromo = false
+
+
+/* B3D10 B1G1 B2G1 B1G2 dll */
+
+if(
+promoText.includes("B3D10") ||
+promoText.includes("B1G1") ||
+promoText.includes("B2G1") ||
+promoText.includes("B1G2") ||
+promoText.includes("B1D20") ||
+promoText.includes("B2G1")
+){
+
+promoHTML = promoText
+promoLabel = ""
+hidePromo = true
+
+return {normalHTML,promoHTML,promoLabel,hidePromo}
+
+}
+
+
+/* SHARP PRICE */
+
+if(promoText.includes("SHARP")){
+
+normalHTML = "@"+rupiah(normal)
+promoHTML = rupiah(normal)
+promoLabel = "SHARP PRICE"
+
+return {normalHTML,promoHTML,promoLabel,hidePromo}
+
+}
+
+
+/* SPECIAL PRICE */
+
+if(promoText.includes("SPECIAL")){
+
+normalHTML = `<s>${rupiah(normal)}</s>`
+promoHTML = rupiah(promo)
+promoLabel = ""
+
+return {normalHTML,promoHTML,promoLabel,hidePromo}
+
+}
+
+
+/* DISKON % */
+
+if(diskon && diskon.toString().includes("%")){
+
+let d = parseFloat(diskon)
+
+if(!isNaN(d)){
+
+let hitung = normal - (normal * d /100)
+
+normalHTML = `<s>${rupiah(normal)}</s>`
+promoHTML = rupiah(Math.round(hitung))
+promoLabel = diskon
+
+return {normalHTML,promoHTML,promoLabel,hidePromo}
+
+}
+
+}
+
+
+/* fallback */
+
+promoHTML = promo ? rupiah(promo) : ""
+
+return {normalHTML,promoHTML,promoLabel,hidePromo}
+
+}
+
+
+/* ===============================
 RENDER RESULT
-========================= */
+=============================== */
+
+function show(item){
+
+let p = promoLogic(item)
 
 let status = getStatus(item)
 
-let badgeClass = "status aktif"
+let statusClass = "status aktif"
 
-if(status === "BELUM AKTIF") badgeClass = "status belum"
-if(status === "BERAKHIR") badgeClass = "status habis"
+if(status==="BELUM AKTIF") statusClass="status belum"
+if(status==="BERAKHIR") statusClass="status habis"
 
-let statusHTML = `
-<div class="${badgeClass}">
-${status}
+result.innerHTML=`
+
+<div class="card">
+
+<h3>${item.deskripsi}</h3>
+
+<div class="${statusClass}">${status}</div>
+
+<br>
+
+<b>Brand :</b> ${item.brand}<br>
+<b>SKU :</b> ${item.sku}<br>
+
+<br>
+
+<div class="harga-normal">${p.normalHTML}</div>
+
+<div class="harga-promo">${p.promoHTML}</div>
+
+${!p.hidePromo ? `<div class="promo">${p.promoLabel}</div>`:""}
+
+<br>
+
+<b>Berlaku :</b> ${item.berlaku}<br>
+<b>Divisi :</b> ${item.division}<br>
+
+<br>
+
+<small>
+File : ${item.file}<br>
+Sheet : ${item.sheet}
+</small>
+
 </div>
+
 `
-<div class="meta">Brand: ${item.brand||"-"}</div>
-<div class="meta">SKU: ${item.sku||"-"}</div>
-
-<div class="price-normal">
-${rupiah(item.harga_normal)}
-</div>
-
-<div class="price-promo">
-${item.harga_promo || "-"}
-</div>
-
-<div class="meta">Promo: ${item.promo || "-"}</div>
-
-<div class="meta">Berlaku: ${item.berlaku||"-"}</div>
-
-<div class="meta">Divisi: ${item.division||"-"}</div>
-
-<div class="meta">Sheet: ${item.sheet||"-"}</div>
-
-</div>
-
-`
-
-})
-
-result.innerHTML=html
 
 }
