@@ -5,6 +5,9 @@ const xlsx = require("xlsx")
 const INPUT_DIR = path.resolve("excel")
 const OUTPUT_DIR = path.resolve("db")
 
+// jumlah maksimal data per file
+const MAX_PER_FILE = 5000
+
 if (!fs.existsSync(INPUT_DIR)) {
   console.log("❌ Folder excel tidak ditemukan")
   process.exit(0)
@@ -25,12 +28,10 @@ function getAllExcelFiles(dir) {
     const filePath = path.join(dir, file)
     const stat = fs.statSync(filePath)
 
-    if (stat && stat.isDirectory()) {
+    if (stat.isDirectory()) {
       results = results.concat(getAllExcelFiles(filePath))
-    } else {
-      if (file.endsWith(".xlsx")) {
-        results.push(filePath)
-      }
+    } else if (file.endsWith(".xlsx")) {
+      results.push(filePath)
     }
   })
 
@@ -59,13 +60,12 @@ function findHeaderRow(sheet) {
   return 0
 }
 
+// =========================
+// PROSES FILE
+// =========================
 const excelFiles = getAllExcelFiles(INPUT_DIR)
 
 console.log("FILES FOUND:", excelFiles)
-
-if (excelFiles.length === 0) {
-  console.log("⚠️ Tidak ada file Excel ditemukan")
-}
 
 excelFiles.forEach(filePath => {
   console.log("📄 Processing:", filePath)
@@ -76,7 +76,6 @@ excelFiles.forEach(filePath => {
     workbook.SheetNames.forEach(sheetName => {
       try {
         const sheet = workbook.Sheets[sheetName]
-
         const headerRow = findHeaderRow(sheet)
 
         const json = xlsx.utils.sheet_to_json(sheet, {
@@ -124,9 +123,31 @@ excelFiles.forEach(filePath => {
 
 console.log("TOTAL DATA:", allData.length)
 
-fs.writeFileSync(
-  path.join(OUTPUT_DIR, "promo.json"),
-  JSON.stringify(allData, null, 2)
-)
+// =========================
+// HAPUS FILE LAMA
+// =========================
+fs.readdirSync(OUTPUT_DIR).forEach(file => {
+  if (file.startsWith("promo_")) {
+    fs.unlinkSync(path.join(OUTPUT_DIR, file))
+  }
+})
 
-console.log("✅ Convert selesai")
+// =========================
+// SPLIT & SIMPAN
+// =========================
+let fileIndex = 1
+
+for (let i = 0; i < allData.length; i += MAX_PER_FILE) {
+  const chunk = allData.slice(i, i + MAX_PER_FILE)
+
+  const fileName = `promo_${fileIndex}.json`
+  const filePath = path.join(OUTPUT_DIR, fileName)
+
+  fs.writeFileSync(filePath, JSON.stringify(chunk, null, 2))
+
+  console.log(`✅ Saved: ${fileName} (${chunk.length} data)`)
+
+  fileIndex++
+}
+
+console.log("🎉 Convert & split selesai")
