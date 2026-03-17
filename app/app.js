@@ -5,10 +5,9 @@ let ARTICLE_INDEX={}
 const result=document.getElementById("result")
 const searchInput=document.getElementById("search")
 
-
-/* ========================
-LOAD DATABASE
-======================== */
+/* =========================
+LOAD DATABASE (AUTO SPLIT DETECT)
+========================= */
 
 async function loadDatabase(){
 
@@ -34,17 +33,15 @@ all=all.concat(data)
 i++
 
 }catch(e){
-
 break
-
 }
 
 }
 
 DB=all
 
-SKU_INDEX=await fetch("../db/sku_index.json").then(r=>r.json())
-ARTICLE_INDEX=await fetch("../db/article_index.json").then(r=>r.json())
+SKU_INDEX=await fetch("../db/sku_index.json").then(r=>r.json()).catch(()=>({}))
+ARTICLE_INDEX=await fetch("../db/article_index.json").then(r=>r.json()).catch(()=>({}))
 
 console.log("TOTAL DATA:",DB.length)
 
@@ -53,7 +50,6 @@ result.innerHTML=""
 }catch(e){
 
 console.error(e)
-
 result.innerHTML="Database gagal dimuat"
 
 }
@@ -63,9 +59,9 @@ result.innerHTML="Database gagal dimuat"
 window.onload=loadDatabase
 
 
-/* ========================
+/* =========================
 FORMAT RUPIAH
-======================== */
+========================= */
 
 function rupiah(n){
 
@@ -78,9 +74,9 @@ return "Rp "+num.toLocaleString("id-ID")
 }
 
 
-/* ========================
-DATE PARSER
-======================== */
+/* =========================
+DATE PARSER UNIVERSAL
+========================= */
 
 function parseDate(v){
 
@@ -122,9 +118,9 @@ return null
 }
 
 
-/* ========================
-STATUS ENGINE
-======================== */
+/* =========================
+STATUS ENGINE FINAL (FIX BUG)
+========================= */
 
 function getStatus(item){
 
@@ -153,9 +149,9 @@ return "AKTIF"
 }
 
 
-/* ========================
-FAST SEARCH ENGINE
-======================== */
+/* =========================
+PROMO ENGINE V15 SEARCH
+========================= */
 
 function search(q){
 
@@ -163,9 +159,9 @@ q=String(q).toLowerCase().trim()
 
 if(!q) return []
 
-let result=[]
-
-/* SKU EXACT */
+/* ======================
+1. SKU EXACT (SUPER FAST)
+====================== */
 
 if(SKU_INDEX[q]){
 
@@ -173,7 +169,9 @@ return SKU_INDEX[q].map(i=>DB[i])
 
 }
 
-/* ARTICLE EXACT */
+/* ======================
+2. ARTICLE EXACT
+====================== */
 
 if(ARTICLE_INDEX[q]){
 
@@ -181,15 +179,19 @@ return ARTICLE_INDEX[q].map(i=>DB[i])
 
 }
 
-/* SKU PARTIAL */
+/* ======================
+3. SKU PARTIAL
+====================== */
 
-result=DB.filter(item=>
+let result=DB.filter(item=>
 String(item.sku||"").toLowerCase().includes(q)
 )
 
 if(result.length>0) return result
 
-/* ARTICLE PARTIAL */
+/* ======================
+4. ARTICLE PARTIAL
+====================== */
 
 result=DB.filter(item=>
 String(item.article||"").toLowerCase().includes(q)
@@ -197,7 +199,9 @@ String(item.article||"").toLowerCase().includes(q)
 
 if(result.length>0) return result
 
-/* TEXT SEARCH */
+/* ======================
+5. TEXT SEARCH
+====================== */
 
 result=DB.filter(item=>
 
@@ -208,12 +212,13 @@ String(item.brand||"").toLowerCase().includes(q)
 )
 
 return result
+
 }
 
 
-/* ========================
+/* =========================
 SEARCH INPUT
-======================== */
+========================= */
 
 searchInput.addEventListener("input",function(){
 
@@ -221,14 +226,15 @@ let q=this.value
 
 let data=search(q)
 
-render(data.slice(0,50))
+/* tampilkan lebih banyak hasil */
+render(data.slice(0,100))
 
 })
 
 
-/* ========================
-RENDER RESULT
-======================== */
+/* =========================
+RENDER RESULT FINAL
+========================= */
 
 function render(data){
 
@@ -261,7 +267,7 @@ ${item.deskripsi||"-"}
 </div>
 
 <div class="status ${statusClass}">
-${status}
+${status||""}
 </div>
 
 </div>
