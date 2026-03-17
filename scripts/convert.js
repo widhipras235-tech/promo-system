@@ -1,9 +1,14 @@
-import fs from "fs"
-import path from "path"
-import xlsx from "xlsx"
+const fs = require("fs")
+const path = require("path")
+const xlsx = require("xlsx")
 
-const INPUT_DIR = "./excel"
-const OUTPUT_DIR = "./db"
+const INPUT_DIR = path.resolve("excel")
+const OUTPUT_DIR = path.resolve("db")
+
+if (!fs.existsSync(INPUT_DIR)) {
+  console.log("❌ Folder excel tidak ditemukan")
+  process.exit(0)
+}
 
 if (!fs.existsSync(OUTPUT_DIR)) {
   fs.mkdirSync(OUTPUT_DIR)
@@ -11,9 +16,6 @@ if (!fs.existsSync(OUTPUT_DIR)) {
 
 let allData = []
 
-/* =========================
-SCAN SEMUA FILE (RECURSIVE)
-========================= */
 function getAllExcelFiles(dir) {
   let results = []
 
@@ -35,16 +37,10 @@ function getAllExcelFiles(dir) {
   return results
 }
 
-/* =========================
-NORMALIZE HEADER
-========================= */
 function normalizeKey(key) {
   return String(key).toLowerCase().replace(/\s+/g, "")
 }
 
-/* =========================
-CARI HEADER
-========================= */
 function findHeaderRow(sheet) {
   const rows = xlsx.utils.sheet_to_json(sheet, { header: 1 })
 
@@ -63,12 +59,13 @@ function findHeaderRow(sheet) {
   return 0
 }
 
-/* =========================
-PROSES FILE
-========================= */
 const excelFiles = getAllExcelFiles(INPUT_DIR)
 
 console.log("FILES FOUND:", excelFiles)
+
+if (excelFiles.length === 0) {
+  console.log("⚠️ Tidak ada file Excel ditemukan")
+}
 
 excelFiles.forEach(filePath => {
   console.log("📄 Processing:", filePath)
@@ -127,9 +124,6 @@ excelFiles.forEach(filePath => {
 
 console.log("TOTAL DATA:", allData.length)
 
-/* =========================
-SIMPAN JSON
-========================= */
 fs.writeFileSync(
   path.join(OUTPUT_DIR, "promo.json"),
   JSON.stringify(allData, null, 2)
