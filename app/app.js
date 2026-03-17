@@ -173,15 +173,6 @@ String(item.brand||"").toLowerCase().includes(q)
 
 }
 
-/* ======================
-1. SKU EXACT (SUPER FAST)
-====================== */
-
-if(SKU_INDEX[q]){
-
-return SKU_INDEX[q].map(i=>DB[i])
-
-}
 
 /* ======================
 2. ARTICLE EXACT
