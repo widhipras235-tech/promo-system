@@ -16,21 +16,32 @@ result.innerHTML="Memuat database..."
 
 try{
 
-let promises=[]
+let i=1
+let all=[]
 
-for(let i=1;i<=62;i++){
+while(true){
 
-promises.push(
-fetch(`../db/promo_${i}.json`)
-.then(r=>r.json())
-.catch(()=>[])
-)
+try{
+
+let res=await fetch(`../db/promo_${i}.json`)
+
+if(!res.ok) break
+
+let data=await res.json()
+
+all=all.concat(data)
+
+i++
+
+}catch(e){
+
+break
 
 }
 
-let data=await Promise.all(promises)
+}
 
-DB=data.flat()
+DB=all
 
 SKU_INDEX=await fetch("../db/sku_index.json").then(r=>r.json())
 ARTICLE_INDEX=await fetch("../db/article_index.json").then(r=>r.json())
@@ -42,6 +53,7 @@ result.innerHTML=""
 }catch(e){
 
 console.error(e)
+
 result.innerHTML="Database gagal dimuat"
 
 }
