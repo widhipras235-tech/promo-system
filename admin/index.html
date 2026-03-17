@@ -1,61 +1,46 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>Admin File Manager</title>
+<title>Admin Drive</title>
 
 <style>
 body{
-  font-family: Arial;
   margin:0;
+  font-family:Arial;
   background:#f1f3f4;
 }
 
-/* HEADER */
 .header{
   background:#fff;
-  padding:15px 20px;
-  font-size:20px;
+  padding:15px;
   font-weight:bold;
-  box-shadow:0 2px 4px rgba(0,0,0,0.1);
+  box-shadow:0 2px 5px rgba(0,0,0,0.1);
 }
 
-/* CONTAINER */
 .container{
   padding:20px;
 }
 
-/* UPLOAD */
-.upload-box{
-  background:#fff;
-  padding:20px;
-  border-radius:10px;
-  margin-bottom:20px;
-  text-align:center;
-  border:2px dashed #ccc;
-  cursor:pointer;
+.breadcrumb{
+  margin-bottom:15px;
 }
 
-/* FILE GRID */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
   gap:15px;
 }
 
-/* FILE CARD */
 .card{
   background:#fff;
   padding:15px;
   border-radius:10px;
   box-shadow:0 2px 5px rgba(0,0,0,0.1);
-  position:relative;
+  cursor:pointer;
 }
 
-.file-name{
-  font-size:14px;
-  word-break:break-word;
-}
+.folder{ font-weight:bold; }
 
 .actions{
   margin-top:10px;
@@ -65,106 +50,210 @@ body{
 
 button{
   border:none;
-  padding:5px 8px;
+  padding:5px;
   border-radius:5px;
   cursor:pointer;
 }
-
-.rename{ background:#2196f3; color:#fff;}
-.delete{ background:#f44336; color:#fff;}
 </style>
 </head>
 
 <body>
 
-<div class="header">📁 Admin File Manager</div>
+<div class="header">📁 Admin GitHub Drive</div>
 
 <div class="container">
 
-  <!-- Upload -->
-  <div class="upload-box" onclick="document.getElementById('fileInput').click()">
-    Klik / Drag file Excel ke sini
-    <input type="file" id="fileInput" multiple hidden>
-  </div>
+  <div class="breadcrumb" id="path"></div>
 
-  <!-- File List -->
-  <div class="grid" id="fileList"></div>
+  <button onclick="createFolder()">+ Folder</button>
+  <button onclick="uploadFile()">Upload File</button>
+
+  <input type="file" id="fileInput" hidden>
+
+  <div class="grid" id="list"></div>
 
 </div>
 
 <script>
-let files = []
+const OWNER = "widhipras235-tech"
+const REPO = "promo-system"
+const TOKEN = "ISI_TOKEN_KAMU_DISINI"
 
-/* LOAD DARI LOCAL STORAGE */
-function loadFiles(){
-  files = JSON.parse(localStorage.getItem("files") || "[]")
-  render()
-}
+let currentPath = ""
 
-/* SAVE */
-function saveFiles(){
-  localStorage.setItem("files", JSON.stringify(files))
-}
+/* =========================
+FETCH FILES
+========================= */
+async function loadFiles(){
 
-/* UPLOAD */
-document.getElementById("fileInput").addEventListener("change", function(e){
-
-  let selected = Array.from(e.target.files)
-
-  selected.forEach(f=>{
-    files.push({
-      name: f.name,
-      size: f.size,
-      date: new Date().toLocaleString()
-    })
+  let res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${currentPath}`,{
+    headers:{
+      Authorization: `token ${TOKEN}`
+    }
   })
 
-  saveFiles()
-  render()
+  let data = await res.json()
 
-})
+  render(data)
+  updatePath()
 
-/* RENDER */
-function render(){
+}
+
+/* =========================
+RENDER
+========================= */
+function render(data){
 
   let html=""
 
-  files.forEach((f,i)=>{
+  data.forEach(item=>{
 
-    html+=`
-    <div class="card">
-      <div class="file-name">${f.name}</div>
-      <div style="font-size:12px;color:#666">${f.date}</div>
+    if(item.type==="dir"){
+      html+=`
+      <div class="card folder" onclick="openFolder('${item.path}')">
+        📁 ${item.name}
+      </div>`
+    }else{
+      html+=`
+      <div class="card">
+        📄 ${item.name}
 
-      <div class="actions">
-        <button class="rename" onclick="renameFile(${i})">Rename</button>
-        <button class="delete" onclick="deleteFile(${i})">Delete</button>
-      </div>
-    </div>
-    `
+        <div class="actions">
+          <button onclick="moveFile('${item.path}')">Move</button>
+          <button onclick="deleteFile('${item.path}','${item.sha}')">Delete</button>
+        </div>
+      </div>`
+    }
+
   })
 
-  document.getElementById("fileList").innerHTML = html
+  document.getElementById("list").innerHTML=html
 
 }
 
-/* DELETE */
-function deleteFile(i){
-  if(confirm("Hapus file?")){
-    files.splice(i,1)
-    saveFiles()
-    render()
-  }
+/* =========================
+NAVIGASI
+========================= */
+function openFolder(path){
+  currentPath = path
+  loadFiles()
 }
 
-/* RENAME */
-function renameFile(i){
-  let newName = prompt("Nama baru:", files[i].name)
-  if(newName){
-    files[i].name = newName
-    saveFiles()
-    render()
+function updatePath(){
+  document.getElementById("path").innerText = "/" + currentPath
+}
+
+/* =========================
+CREATE FOLDER
+========================= */
+async function createFolder(){
+
+  let name = prompt("Nama folder:")
+
+  if(!name) return
+
+  let path = currentPath + "/" + name + "/.keep"
+
+  await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`,{
+    method:"PUT",
+    headers:{
+      Authorization:`token ${TOKEN}`,
+      "Content-Type":"application/json"
+    },
+    body: JSON.stringify({
+      message:"create folder",
+      content:btoa("")
+    })
+  })
+
+  loadFiles()
+}
+
+/* =========================
+UPLOAD FILE
+========================= */
+function uploadFile(){
+  document.getElementById("fileInput").click()
+}
+
+document.getElementById("fileInput").addEventListener("change", async function(e){
+
+  let file = e.target.files[0]
+  let reader = new FileReader()
+
+  reader.onload = async function(){
+
+    let content = reader.result.split(",")[1]
+
+    await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${currentPath}/${file.name}`,{
+      method:"PUT",
+      headers:{
+        Authorization:`token ${TOKEN}`
+      },
+      body: JSON.stringify({
+        message:"upload file",
+        content:content
+      })
+    })
+
+    loadFiles()
   }
+
+  reader.readAsDataURL(file)
+
+})
+
+/* =========================
+DELETE
+========================= */
+async function deleteFile(path,sha){
+
+  if(!confirm("Hapus file?")) return
+
+  await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`,{
+    method:"DELETE",
+    headers:{
+      Authorization:`token ${TOKEN}`
+    },
+    body: JSON.stringify({
+      message:"delete file",
+      sha:sha
+    })
+  })
+
+  loadFiles()
+}
+
+/* =========================
+MOVE FILE
+========================= */
+async function moveFile(oldPath){
+
+  let newPath = prompt("Pindahkan ke path baru:")
+
+  if(!newPath) return
+
+  // ambil file
+  let res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${oldPath}`,{
+    headers:{ Authorization:`token ${TOKEN}` }
+  })
+
+  let data = await res.json()
+
+  // upload ke lokasi baru
+  await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${newPath}`,{
+    method:"PUT",
+    headers:{ Authorization:`token ${TOKEN}` },
+    body: JSON.stringify({
+      message:"move file",
+      content:data.content
+    })
+  })
+
+  // hapus lama
+  await deleteFile(oldPath, data.sha)
+
+  loadFiles()
 }
 
 loadFiles()
