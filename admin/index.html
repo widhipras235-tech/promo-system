@@ -1,7 +1,174 @@
-<h2>Upload Excel Promo</h2>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Admin File Manager</title>
 
-<input type="file" id="fileUpload" multiple>
+<style>
+body{
+  font-family: Arial;
+  margin:0;
+  background:#f1f3f4;
+}
 
-<button onclick="upload()">Upload</button>
+/* HEADER */
+.header{
+  background:#fff;
+  padding:15px 20px;
+  font-size:20px;
+  font-weight:bold;
+  box-shadow:0 2px 4px rgba(0,0,0,0.1);
+}
 
-<script src="admin.js"></script>
+/* CONTAINER */
+.container{
+  padding:20px;
+}
+
+/* UPLOAD */
+.upload-box{
+  background:#fff;
+  padding:20px;
+  border-radius:10px;
+  margin-bottom:20px;
+  text-align:center;
+  border:2px dashed #ccc;
+  cursor:pointer;
+}
+
+/* FILE GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:15px;
+}
+
+/* FILE CARD */
+.card{
+  background:#fff;
+  padding:15px;
+  border-radius:10px;
+  box-shadow:0 2px 5px rgba(0,0,0,0.1);
+  position:relative;
+}
+
+.file-name{
+  font-size:14px;
+  word-break:break-word;
+}
+
+.actions{
+  margin-top:10px;
+  display:flex;
+  justify-content:space-between;
+}
+
+button{
+  border:none;
+  padding:5px 8px;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+.rename{ background:#2196f3; color:#fff;}
+.delete{ background:#f44336; color:#fff;}
+</style>
+</head>
+
+<body>
+
+<div class="header">📁 Admin File Manager</div>
+
+<div class="container">
+
+  <!-- Upload -->
+  <div class="upload-box" onclick="document.getElementById('fileInput').click()">
+    Klik / Drag file Excel ke sini
+    <input type="file" id="fileInput" multiple hidden>
+  </div>
+
+  <!-- File List -->
+  <div class="grid" id="fileList"></div>
+
+</div>
+
+<script>
+let files = []
+
+/* LOAD DARI LOCAL STORAGE */
+function loadFiles(){
+  files = JSON.parse(localStorage.getItem("files") || "[]")
+  render()
+}
+
+/* SAVE */
+function saveFiles(){
+  localStorage.setItem("files", JSON.stringify(files))
+}
+
+/* UPLOAD */
+document.getElementById("fileInput").addEventListener("change", function(e){
+
+  let selected = Array.from(e.target.files)
+
+  selected.forEach(f=>{
+    files.push({
+      name: f.name,
+      size: f.size,
+      date: new Date().toLocaleString()
+    })
+  })
+
+  saveFiles()
+  render()
+
+})
+
+/* RENDER */
+function render(){
+
+  let html=""
+
+  files.forEach((f,i)=>{
+
+    html+=`
+    <div class="card">
+      <div class="file-name">${f.name}</div>
+      <div style="font-size:12px;color:#666">${f.date}</div>
+
+      <div class="actions">
+        <button class="rename" onclick="renameFile(${i})">Rename</button>
+        <button class="delete" onclick="deleteFile(${i})">Delete</button>
+      </div>
+    </div>
+    `
+  })
+
+  document.getElementById("fileList").innerHTML = html
+
+}
+
+/* DELETE */
+function deleteFile(i){
+  if(confirm("Hapus file?")){
+    files.splice(i,1)
+    saveFiles()
+    render()
+  }
+}
+
+/* RENAME */
+function renameFile(i){
+  let newName = prompt("Nama baru:", files[i].name)
+  if(newName){
+    files[i].name = newName
+    saveFiles()
+    render()
+  }
+}
+
+loadFiles()
+</script>
+
+</body>
+</html>
