@@ -9,21 +9,41 @@ if (!fs.existsSync(OUTPUT_DIR)) {
   fs.mkdirSync(OUTPUT_DIR)
 }
 
-const files = fs.readdirSync(INPUT_DIR)
-
 let allData = []
 
 /* =========================
-FUNGSI NORMALISASI HEADER
+SCAN SEMUA FILE (RECURSIVE)
 ========================= */
-function normalizeKey(key) {
-  return String(key)
-    .toLowerCase()
-    .replace(/\s+/g, "")
+function getAllExcelFiles(dir) {
+  let results = []
+
+  const list = fs.readdirSync(dir)
+
+  list.forEach(file => {
+    const filePath = path.join(dir, file)
+    const stat = fs.statSync(filePath)
+
+    if (stat && stat.isDirectory()) {
+      results = results.concat(getAllExcelFiles(filePath))
+    } else {
+      if (file.endsWith(".xlsx")) {
+        results.push(filePath)
+      }
+    }
+  })
+
+  return results
 }
 
 /* =========================
-CARI HEADER OTOMATIS
+NORMALIZE HEADER
+========================= */
+function normalizeKey(key) {
+  return String(key).toLowerCase().replace(/\s+/g, "")
+}
+
+/* =========================
+CARI HEADER
 ========================= */
 function findHeaderRow(sheet) {
   const rows = xlsx.utils.sheet_to_json(sheet, { header: 1 })
@@ -46,13 +66,14 @@ function findHeaderRow(sheet) {
 /* =========================
 PROSES FILE
 ========================= */
-files.forEach(file => {
-  if (!file.endsWith(".xlsx")) return
+const excelFiles = getAllExcelFiles(INPUT_DIR)
 
-  console.log("📄 Processing:", file)
+console.log("FILES FOUND:", excelFiles)
+
+excelFiles.forEach(filePath => {
+  console.log("📄 Processing:", filePath)
 
   try {
-    const filePath = path.join(INPUT_DIR, file)
     const workbook = xlsx.readFile(filePath)
 
     workbook.SheetNames.forEach(sheetName => {
@@ -88,7 +109,7 @@ files.forEach(file => {
           return {
             ...newRow,
             sheet: sheetName,
-            source: file
+            source: filePath
           }
         })
 
@@ -100,7 +121,7 @@ files.forEach(file => {
     })
 
   } catch (err) {
-    console.log("❌ File error:", file, err.message)
+    console.log("❌ File error:", filePath, err.message)
   }
 })
 
