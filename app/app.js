@@ -135,32 +135,34 @@ function getStatus(item) {
 SEARCH ENGINE (FINAL FIX)
 ========================= */
 
-function search(q) {
+function search(q){
 
   q = String(q).toLowerCase().trim()
-  if (!q) return []
+  if(!q) return []
 
   /* 1. SKU EXACT */
-  if (SKU_INDEX[q]) {
-    return SKU_INDEX[q].map(i => DB[i])
+  if(SKU_INDEX[q]){
+    return SKU_INDEX[q].map(i=>DB[i]).slice(0,200)
   }
 
   /* 2. ARTICLE EXACT */
-  if (ARTICLE_INDEX[q]) {
-    return ARTICLE_INDEX[q].map(i => DB[i])
+  if(ARTICLE_INDEX[q]){
+    return ARTICLE_INDEX[q].map(i=>DB[i]).slice(0,200)
   }
 
   /* 3. SKU PARTIAL */
   let result = DB.filter(item =>
-    String(item.sku || "").toLowerCase().includes(q)
+    String(item.sku || "")
+      .replace(/\D/g,"")
+      .includes(q.replace(/\D/g,""))
   )
-  if (result.length > 0) return result
+  if(result.length > 0) return result.slice(0,200)
 
   /* 4. ARTICLE PARTIAL */
   result = DB.filter(item =>
     String(item.article || "").toLowerCase().includes(q)
   )
-  if (result.length > 0) return result
+  if(result.length > 0) return result.slice(0,200)
 
   /* 5. TEXT SEARCH */
   result = DB.filter(item =>
@@ -168,7 +170,8 @@ function search(q) {
     String(item.brand || "").toLowerCase().includes(q)
   )
 
-  return result
+  return result.slice(0,200)
+
 }
 
 /* =========================
