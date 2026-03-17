@@ -1,280 +1,117 @@
-const fs = require("fs")
-const path = require("path")
-const XLSX = require("xlsx")
+import fs from "fs"
+import path from "path"
+import xlsx from "xlsx"
 
-const BASE = "excel"
+const INPUT_DIR = "./excel"
+const OUTPUT_DIR = "./db"
 
-const DIVISI = [
-"divisi1",
-"divisi2",
-"divisi3",
-"divisi4"
-]
-
-let promo = []
-
-/* =========================
-NORMALIZER
-========================= */
-
-function clean(str){
-return String(str||"")
-.toLowerCase()
-.replace(/\s/g,"")
-.replace(/[^a-z0-9]/g,"")
+if (!fs.existsSync(OUTPUT_DIR)) {
+  fs.mkdirSync(OUTPUT_DIR)
 }
 
-function norm(v){
-return String(v||"").trim()
+const files = fs.readdirSync(INPUT_DIR)
+
+let allData = []
+
+/* =========================
+FUNGSI NORMALISASI HEADER
+========================= */
+function normalizeKey(key) {
+  return String(key)
+    .toLowerCase()
+    .replace(/\s+/g, "")
 }
 
 /* =========================
-SMART COLUMN DETECTOR (AI)
+CARI HEADER OTOMATIS
 ========================= */
+function findHeaderRow(sheet) {
+  const rows = xlsx.utils.sheet_to_json(sheet, { header: 1 })
 
-function detect(row){
+  for (let i = 0; i < rows.length; i++) {
+    const row = rows[i].join(" ").toLowerCase()
 
-let map = {
-sku:"",
-article:"",
-deskripsi:"",
-brand:"",
-normal:"",
-promo:"",
-diskon:"",
-from:"",
-to:"",
-event:""
-}
+    if (
+      row.includes("sku") ||
+      row.includes("article") ||
+      row.includes("deskripsi")
+    ) {
+      return i
+    }
+  }
 
-for(let key in row){
-
-let k = clean(key)
-let val = row[key]
-
-/* SKU DETECTION */
-if(
-k.includes("sku") ||
-k.includes("barcode") ||
-k.includes("plu") ||
-k.includes("kodebarang") ||
-k.includes("kodeitem")
-){
-map.sku = val
-}
-
-/* ARTICLE */
-if(
-k.includes("artikel") ||
-k.includes("article") ||
-k.includes("style") ||
-k.includes("item")
-){
-map.article = val
-}
-
-/* DESKRIPSI */
-if(
-k.includes("desc") ||
-k.includes("nama") ||
-k.includes("produk") ||
-k.includes("description")
-){
-map.deskripsi = val
-}
-
-/* BRAND */
-if(k.includes("brand")){
-map.brand = val
-}
-
-/* HARGA NORMAL */
-if(
-k.includes("normal") ||
-k.includes("hargaawal") ||
-k.includes("price")
-){
-map.normal = val
-}
-
-/* HARGA PROMO */
-if(
-k.includes("promo") ||
-k.includes("special") ||
-k.includes("sharp")
-){
-map.promo = val
-}
-
-/* DISKON */
-if(
-k.includes("disc") ||
-k.includes("diskon")
-){
-map.diskon = val
-}
-
-/* DATE FROM */
-if(
-k.includes("from") ||
-k.includes("start") ||
-k.includes("mulai")
-){
-map.from = val
-}
-
-/* DATE TO */
-if(
-k.includes("to") ||
-k.includes("end") ||
-k.includes("akhir")
-){
-map.to = val
-}
-
-/* EVENT */
-if(
-k.includes("event") ||
-k.includes("acara")
-){
-map.event = val
-}
-
-}
-
-return map
+  return 0
 }
 
 /* =========================
-DATE FIX
+PROSES FILE
 ========================= */
+files.forEach(file => {
+  if (!file.endsWith(".xlsx")) return
 
-function excelDate(v){
+  console.log("📄 Processing:", file)
 
-if(!v) return ""
+  try {
+    const filePath = path.join(INPUT_DIR, file)
+    const workbook = xlsx.readFile(filePath)
 
-if(typeof v === "number"){
+    workbook.SheetNames.forEach(sheetName => {
+      try {
+        const sheet = workbook.Sheets[sheetName]
 
-const d = XLSX.SSF.parse_date_code(v)
+        const headerRow = findHeaderRow(sheet)
 
-return `${d.d}-${d.m}-${d.y}`
+        const json = xlsx.utils.sheet_to_json(sheet, {
+          range: headerRow,
+          defval: ""
+        })
 
-}
+        if (!json.length) return
 
-return String(v)
-}
+        const cleaned = json.map(row => {
+          let newRow = {}
 
-/* =========================
-PROCESS EXCEL
-========================= */
+          Object.keys(row).forEach(key => {
+            const nk = normalizeKey(key)
 
-DIVISI.forEach(div=>{
+            if (nk.includes("sku")) newRow.sku = row[key]
+            else if (nk.includes("article")) newRow.article = row[key]
+            else if (nk.includes("desc")) newRow.deskripsi = row[key]
+            else if (nk.includes("brand")) newRow.brand = row[key]
+            else if (nk.includes("normal")) newRow.harga_normal = row[key]
+            else if (nk.includes("promo")) newRow.harga_promo = row[key]
+            else if (nk.includes("mulai")) newRow.mulai = row[key]
+            else if (nk.includes("akhir")) newRow.akhir = row[key]
+            else newRow[nk] = row[key]
+          })
 
-const folder = path.join(BASE,div)
+          return {
+            ...newRow,
+            sheet: sheetName,
+            source: file
+          }
+        })
 
-if(!fs.existsSync(folder)) return
+        allData = allData.concat(cleaned)
 
-const files = fs.readdirSync(folder)
+      } catch (err) {
+        console.log("❌ Sheet error:", sheetName, err.message)
+      }
+    })
 
-files.forEach(file=>{
-
-if(!file.endsWith(".xlsx")) return
-
-const filePath = path.join(folder,file)
-
-const wb = XLSX.readFile(filePath,{cellDates:true})
-
-wb.SheetNames.forEach(sheetName=>{
-
-const rows = XLSX.utils.sheet_to_json(
-wb.Sheets[sheetName],
-{defval:""}
-)
-
-rows.forEach(r=>{
-
-const d = detect(r)
-
-/* VALIDASI (ANTI DATA KOSONG) */
-
-if(
-!d.sku &&
-!d.article &&
-!d.deskripsi
-){
-return
-}
-
-const item = {
-
-deskripsi: norm(d.deskripsi),
-brand: norm(d.brand),
-sku: norm(d.sku),
-article: norm(d.article),
-
-harga_normal: norm(d.normal),
-harga_promo: norm(d.promo),
-diskon: norm(d.diskon),
-
-berlaku:
-excelDate(d.from)+" - "+excelDate(d.to),
-
-acara: norm(d.event),
-
-division: div,
-file: file,
-sheet: sheetName
-
-}
-
-promo.push(item)
-
-/* DEBUG KHUSUS (biar ketahuan error file) */
-if(!item.sku){
-console.log("SKU KOSONG:", file, sheetName, item.deskripsi)
-}
-
+  } catch (err) {
+    console.log("❌ File error:", file, err.message)
+  }
 })
 
-})
-
-})
-
-})
+console.log("TOTAL DATA:", allData.length)
 
 /* =========================
-SPLIT DATABASE
+SIMPAN JSON
 ========================= */
-
-if(!fs.existsSync("db")){
-fs.mkdirSync("db")
-}
-
-const chunk = 1000
-let index = 1
-
-for(let i=0;i<promo.length;i+=chunk){
-
-const part = promo.slice(i,i+chunk)
-
 fs.writeFileSync(
-`db/promo_${index}.json`,
-JSON.stringify(part,null,2)
+  path.join(OUTPUT_DIR, "promo.json"),
+  JSON.stringify(allData, null, 2)
 )
 
-index++
-
-}
-
-/* MASTER FILE */
-
-fs.writeFileSync(
-"db/promo.json",
-JSON.stringify(promo,null,2)
-)
-
-console.log("================================")
-console.log("DATABASE SELESAI")
-console.log("TOTAL PROMO:", promo.length)
-console.log("TOTAL FILE SPLIT:", index-1)
-console.log("================================")
+console.log("✅ Convert selesai")
