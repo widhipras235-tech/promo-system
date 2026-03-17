@@ -3,42 +3,157 @@ const path = require("path")
 const XLSX = require("xlsx")
 
 const BASE = "excel"
-const OUTPUT = "db"
-const SPLIT_SIZE = 1000
+
+const DIVISI = [
+"divisi1",
+"divisi2",
+"divisi3",
+"divisi4"
+]
 
 let promo = []
-let skuIndex = {}
-let articleIndex = {}
+
+/* =========================
+NORMALIZER
+========================= */
+
+function clean(str){
+return String(str||"")
+.toLowerCase()
+.replace(/\s/g,"")
+.replace(/[^a-z0-9]/g,"")
+}
 
 function norm(v){
-if(!v) return ""
-return String(v).trim()
+return String(v||"").trim()
 }
 
-function find(row,keys){
+/* =========================
+SMART COLUMN DETECTOR (AI)
+========================= */
 
-for(let k in row){
+function detect(row){
 
-const name = k.toUpperCase()
+let map = {
+sku:"",
+article:"",
+deskripsi:"",
+brand:"",
+normal:"",
+promo:"",
+diskon:"",
+from:"",
+to:"",
+event:""
+}
 
-for(let key of keys){
+for(let key in row){
 
-if(name.includes(key))
-return row[k]
+let k = clean(key)
+let val = row[key]
 
+/* SKU DETECTION */
+if(
+k.includes("sku") ||
+k.includes("barcode") ||
+k.includes("plu") ||
+k.includes("kodebarang") ||
+k.includes("kodeitem")
+){
+map.sku = val
+}
+
+/* ARTICLE */
+if(
+k.includes("artikel") ||
+k.includes("article") ||
+k.includes("style") ||
+k.includes("item")
+){
+map.article = val
+}
+
+/* DESKRIPSI */
+if(
+k.includes("desc") ||
+k.includes("nama") ||
+k.includes("produk") ||
+k.includes("description")
+){
+map.deskripsi = val
+}
+
+/* BRAND */
+if(k.includes("brand")){
+map.brand = val
+}
+
+/* HARGA NORMAL */
+if(
+k.includes("normal") ||
+k.includes("hargaawal") ||
+k.includes("price")
+){
+map.normal = val
+}
+
+/* HARGA PROMO */
+if(
+k.includes("promo") ||
+k.includes("special") ||
+k.includes("sharp")
+){
+map.promo = val
+}
+
+/* DISKON */
+if(
+k.includes("disc") ||
+k.includes("diskon")
+){
+map.diskon = val
+}
+
+/* DATE FROM */
+if(
+k.includes("from") ||
+k.includes("start") ||
+k.includes("mulai")
+){
+map.from = val
+}
+
+/* DATE TO */
+if(
+k.includes("to") ||
+k.includes("end") ||
+k.includes("akhir")
+){
+map.to = val
+}
+
+/* EVENT */
+if(
+k.includes("event") ||
+k.includes("acara")
+){
+map.event = val
 }
 
 }
 
-return ""
-
+return map
 }
+
+/* =========================
+DATE FIX
+========================= */
 
 function excelDate(v){
 
 if(!v) return ""
 
-if(typeof v==="number"){
+if(typeof v === "number"){
 
 const d = XLSX.SSF.parse_date_code(v)
 
@@ -47,20 +162,17 @@ return `${d.d}-${d.m}-${d.y}`
 }
 
 return String(v)
-
 }
 
-console.log("SCAN FOLDER EXCEL...")
+/* =========================
+PROCESS EXCEL
+========================= */
 
-const folders = fs.readdirSync(BASE)
-
-folders.forEach(div=>{
+DIVISI.forEach(div=>{
 
 const folder = path.join(BASE,div)
 
-if(!fs.statSync(folder).isDirectory()) return
-
-console.log("DIVISI:",div)
+if(!fs.existsSync(folder)) return
 
 const files = fs.readdirSync(folder)
 
@@ -70,75 +182,56 @@ if(!file.endsWith(".xlsx")) return
 
 const filePath = path.join(folder,file)
 
-console.log("FILE:",file)
-
 const wb = XLSX.readFile(filePath,{cellDates:true})
 
 wb.SheetNames.forEach(sheetName=>{
 
-console.log("SHEET:",sheetName)
-
 const rows = XLSX.utils.sheet_to_json(
 wb.Sheets[sheetName],
-{raw:false,defval:""}
+{defval:""}
 )
 
 rows.forEach(r=>{
 
-const hargaNormal = find(r,["NORMAL","REG"])
-const hargaPromo = find(r,["PROMO","SHARP","SPECIAL"])
+const d = detect(r)
+
+/* VALIDASI (ANTI DATA KOSONG) */
+
+if(
+!d.sku &&
+!d.article &&
+!d.deskripsi
+){
+return
+}
 
 const item = {
 
-deskripsi: norm(find(r,["DESC","DESCR","DESCRIPTION"])),
+deskripsi: norm(d.deskripsi),
+brand: norm(d.brand),
+sku: norm(d.sku),
+article: norm(d.article),
 
-brand: norm(find(r,["BRAND"])),
-
-sku: norm(find(r,["SKU","BARCODE"])),
-
-article: norm(find(r,["ARTICLE","STYLE"])),
-
-harga_normal: norm(hargaNormal),
-
-harga_promo: norm(hargaPromo),
-
-diskon: norm(find(r,["DISC","DISCOUNT"])),
+harga_normal: norm(d.normal),
+harga_promo: norm(d.promo),
+diskon: norm(d.diskon),
 
 berlaku:
-excelDate(find(r,["FROM","START"])) +
-" - " +
-excelDate(find(r,["TO","END"])),
+excelDate(d.from)+" - "+excelDate(d.to),
 
-acara: norm(find(r,["EVENT","ACARA","PROMO"])),
+acara: norm(d.event),
 
 division: div,
-
 file: file,
-
 sheet: sheetName
 
 }
 
 promo.push(item)
 
-const i = promo.length-1
-
-if(item.sku){
-
-if(!skuIndex[item.sku])
-skuIndex[item.sku]=[]
-
-skuIndex[item.sku].push(i)
-
-}
-
-if(item.article){
-
-if(!articleIndex[item.article])
-articleIndex[item.article]=[]
-
-articleIndex[item.article].push(i)
-
+/* DEBUG KHUSUS (biar ketahuan error file) */
+if(!item.sku){
+console.log("SKU KOSONG:", file, sheetName, item.deskripsi)
 }
 
 })
@@ -149,42 +242,39 @@ articleIndex[item.article].push(i)
 
 })
 
-if(!fs.existsSync(OUTPUT))
-fs.mkdirSync(OUTPUT)
+/* =========================
+SPLIT DATABASE
+========================= */
 
-console.log("TOTAL DATA:",promo.length)
+if(!fs.existsSync("db")){
+fs.mkdirSync("db")
+}
 
-fs.writeFileSync(
-`${OUTPUT}/promo.json`,
-JSON.stringify(promo)
-)
+const chunk = 1000
+let index = 1
 
-fs.writeFileSync(
-`${OUTPUT}/sku_index.json`,
-JSON.stringify(skuIndex)
-)
+for(let i=0;i<promo.length;i+=chunk){
 
-fs.writeFileSync(
-`${OUTPUT}/article_index.json`,
-JSON.stringify(articleIndex)
-)
-
-console.log("SPLIT DATABASE...")
-
-let part = 1
-
-for(let i=0;i<promo.length;i+=SPLIT_SIZE){
-
-const chunk = promo.slice(i,i+SPLIT_SIZE)
+const part = promo.slice(i,i+chunk)
 
 fs.writeFileSync(
-`${OUTPUT}/promo_${part}.json`,
-JSON.stringify(chunk)
+`db/promo_${index}.json`,
+JSON.stringify(part,null,2)
 )
 
-part++
+index++
 
 }
 
-console.log("CONVERT SELESAI")
-console.log("TOTAL FILE SPLIT:",part-1)
+/* MASTER FILE */
+
+fs.writeFileSync(
+"db/promo.json",
+JSON.stringify(promo,null,2)
+)
+
+console.log("================================")
+console.log("DATABASE SELESAI")
+console.log("TOTAL PROMO:", promo.length)
+console.log("TOTAL FILE SPLIT:", index-1)
+console.log("================================")
