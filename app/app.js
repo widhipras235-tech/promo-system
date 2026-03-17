@@ -159,6 +159,20 @@ q=String(q).toLowerCase().trim()
 
 if(!q) return []
 
+return DB.filter(item=>
+
+String(item.sku||"").toLowerCase().includes(q) ||
+
+String(item.article||"").toLowerCase().includes(q) ||
+
+String(item.deskripsi||"").toLowerCase().includes(q) ||
+
+String(item.brand||"").toLowerCase().includes(q)
+
+)
+
+}
+
 /* ======================
 1. SKU EXACT (SUPER FAST)
 ====================== */
