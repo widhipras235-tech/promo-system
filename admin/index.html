@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Drive</title>
 
 <style>
@@ -11,85 +12,138 @@ body{
   background:#f1f3f4;
 }
 
+/* HEADER */
 .header{
   background:#fff;
-  padding:15px;
+  padding:12px 15px;
   font-weight:bold;
-  box-shadow:0 2px 5px rgba(0,0,0,0.1);
-}
-
-.container{
-  padding:20px;
-}
-
-.breadcrumb{
-  margin-bottom:15px;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-  gap:15px;
-}
-
-.card{
-  background:#fff;
-  padding:15px;
-  border-radius:10px;
-  box-shadow:0 2px 5px rgba(0,0,0,0.1);
-  cursor:pointer;
-}
-
-.folder{ font-weight:bold; }
-
-.actions{
-  margin-top:10px;
   display:flex;
   justify-content:space-between;
+  align-items:center;
+  box-shadow:0 2px 5px rgba(0,0,0,0.1);
 }
 
-button{
+/* CONTAINER */
+.container{
+  padding:10px;
+}
+
+/* BREADCRUMB */
+.breadcrumb{
+  font-size:12px;
+  margin-bottom:10px;
+  overflow-x:auto;
+  white-space:nowrap;
+}
+
+/* ACTION BUTTON */
+.actions-top{
+  display:flex;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+.actions-top button{
+  flex:1;
+  padding:10px;
   border:none;
-  padding:5px;
+  border-radius:8px;
+  background:#2196f3;
+  color:#fff;
+  font-size:14px;
+}
+
+/* LIST VIEW (MOBILE FRIENDLY) */
+.list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+/* ITEM */
+.item{
+  background:#fff;
+  padding:12px;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* LEFT */
+.left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+/* ICON */
+.icon{
+  font-size:22px;
+}
+
+/* NAME */
+.name{
+  font-size:14px;
+  word-break:break-word;
+}
+
+/* ACTION BTN */
+.btn{
+  border:none;
+  padding:5px 8px;
   border-radius:5px;
-  cursor:pointer;
+  font-size:12px;
+}
+
+.delete{ background:#f44336; color:#fff;}
+.move{ background:#ff9800; color:#fff;}
+
+@media(min-width:768px){
+  .list{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">📁 Admin GitHub Drive</div>
+<div class="header">
+  📁 Admin Drive
+</div>
 
 <div class="container">
 
   <div class="breadcrumb" id="path"></div>
 
-  <button onclick="createFolder()">+ Folder</button>
-  <button onclick="uploadFile()">Upload File</button>
+  <div class="actions-top">
+    <button onclick="createFolder()">+ Folder</button>
+    <button onclick="uploadFile()">Upload</button>
+  </div>
 
   <input type="file" id="fileInput" hidden>
 
-  <div class="grid" id="list"></div>
+  <div class="list" id="list"></div>
 
 </div>
 
 <script>
 const OWNER = "widhipras235-tech"
 const REPO = "promo-system"
-const TOKEN = "ISI_TOKEN_KAMU_DISINI"
+const TOKEN = "ISI_TOKEN_KAMU"
 
 let currentPath = ""
 
 /* =========================
-FETCH FILES
+LOAD FILES
 ========================= */
 async function loadFiles(){
 
   let res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${currentPath}`,{
-    headers:{
-      Authorization: `token ${TOKEN}`
-    }
+    headers:{ Authorization:`token ${TOKEN}` }
   })
 
   let data = await res.json()
@@ -108,39 +162,66 @@ function render(data){
 
   data.forEach(item=>{
 
-    if(item.type==="dir"){
-      html+=`
-      <div class="card folder" onclick="openFolder('${item.path}')">
-        📁 ${item.name}
-      </div>`
-    }else{
-      html+=`
-      <div class="card">
-        📄 ${item.name}
+    let icon = item.type==="dir" ? "📁" : "📄"
 
-        <div class="actions">
-          <button onclick="moveFile('${item.path}')">Move</button>
-          <button onclick="deleteFile('${item.path}','${item.sha}')">Delete</button>
-        </div>
-      </div>`
-    }
+    html+=`
+    <div class="item">
 
+      <div class="left" onclick="${item.type==="dir" ? `openFolder('${item.path}')` : ""}">
+        <div class="icon">${icon}</div>
+        <div class="name">${item.name}</div>
+      </div>
+
+      ${item.type==="file" ? `
+      <div>
+        <button class="btn move" onclick="moveFile('${item.path}')">Move</button>
+        <button class="btn delete" onclick="deleteFile('${item.path}','${item.sha}')">Hapus</button>
+      </div>
+      ` : ""}
+
+    </div>
+    `
   })
 
-  document.getElementById("list").innerHTML=html
+  document.getElementById("list").innerHTML = html
 
 }
 
 /* =========================
-NAVIGASI
+BREADCRUMB NAVIGATION
+========================= */
+function updatePath(){
+
+  let parts = currentPath.split("/").filter(x=>x)
+
+  let html = `<span onclick="goRoot()">root</span>`
+
+  let path = ""
+
+  parts.forEach(p=>{
+    path += "/" + p
+    html += ` / <span onclick="goPath('${path}')">${p}</span>`
+  })
+
+  document.getElementById("path").innerHTML = html
+}
+
+function goRoot(){
+  currentPath = ""
+  loadFiles()
+}
+
+function goPath(p){
+  currentPath = p
+  loadFiles()
+}
+
+/* =========================
+OPEN FOLDER
 ========================= */
 function openFolder(path){
   currentPath = path
   loadFiles()
-}
-
-function updatePath(){
-  document.getElementById("path").innerText = "/" + currentPath
 }
 
 /* =========================
@@ -149,17 +230,13 @@ CREATE FOLDER
 async function createFolder(){
 
   let name = prompt("Nama folder:")
-
   if(!name) return
 
-  let path = currentPath + "/" + name + "/.keep"
+  let path = `${currentPath}/${name}/.keep`
 
   await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`,{
     method:"PUT",
-    headers:{
-      Authorization:`token ${TOKEN}`,
-      "Content-Type":"application/json"
-    },
+    headers:{ Authorization:`token ${TOKEN}` },
     body: JSON.stringify({
       message:"create folder",
       content:btoa("")
@@ -170,13 +247,13 @@ async function createFolder(){
 }
 
 /* =========================
-UPLOAD FILE
+UPLOAD
 ========================= */
 function uploadFile(){
   document.getElementById("fileInput").click()
 }
 
-document.getElementById("fileInput").addEventListener("change", async function(e){
+document.getElementById("fileInput").addEventListener("change",function(e){
 
   let file = e.target.files[0]
   let reader = new FileReader()
@@ -187,9 +264,7 @@ document.getElementById("fileInput").addEventListener("change", async function(e
 
     await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${currentPath}/${file.name}`,{
       method:"PUT",
-      headers:{
-        Authorization:`token ${TOKEN}`
-      },
+      headers:{ Authorization:`token ${TOKEN}` },
       body: JSON.stringify({
         message:"upload file",
         content:content
@@ -200,7 +275,6 @@ document.getElementById("fileInput").addEventListener("change", async function(e
   }
 
   reader.readAsDataURL(file)
-
 })
 
 /* =========================
@@ -212,11 +286,9 @@ async function deleteFile(path,sha){
 
   await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`,{
     method:"DELETE",
-    headers:{
-      Authorization:`token ${TOKEN}`
-    },
+    headers:{ Authorization:`token ${TOKEN}` },
     body: JSON.stringify({
-      message:"delete file",
+      message:"delete",
       sha:sha
     })
   })
@@ -229,18 +301,15 @@ MOVE FILE
 ========================= */
 async function moveFile(oldPath){
 
-  let newPath = prompt("Pindahkan ke path baru:")
-
+  let newPath = prompt("Path tujuan (contoh: excel/file.xlsx)")
   if(!newPath) return
 
-  // ambil file
   let res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${oldPath}`,{
     headers:{ Authorization:`token ${TOKEN}` }
   })
 
   let data = await res.json()
 
-  // upload ke lokasi baru
   await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${newPath}`,{
     method:"PUT",
     headers:{ Authorization:`token ${TOKEN}` },
@@ -250,7 +319,6 @@ async function moveFile(oldPath){
     })
   })
 
-  // hapus lama
   await deleteFile(oldPath, data.sha)
 
   loadFiles()
