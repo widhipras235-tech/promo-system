@@ -147,9 +147,11 @@ FAST SEARCH ENGINE
 
 function search(q){
 
-q=q.toLowerCase().trim()
+q=String(q).toLowerCase().trim()
 
-if(q.length<2) return []
+if(!q) return []
+
+let result=[]
 
 /* SKU EXACT */
 
@@ -167,15 +169,25 @@ return ARTICLE_INDEX[q].map(i=>DB[i])
 
 }
 
-/* FALLBACK SEARCH */
+/* SKU PARTIAL */
 
-return DB.filter(item=>{
+result=DB.filter(item=>
+String(item.sku||"").toLowerCase().includes(q)
+)
 
-return(
+if(result.length>0) return result
 
-String(item.sku||"").toLowerCase().includes(q) ||
+/* ARTICLE PARTIAL */
 
-String(item.article||"").toLowerCase().includes(q) ||
+result=DB.filter(item=>
+String(item.article||"").toLowerCase().includes(q)
+)
+
+if(result.length>0) return result
+
+/* TEXT SEARCH */
+
+result=DB.filter(item=>
 
 String(item.deskripsi||"").toLowerCase().includes(q) ||
 
@@ -183,8 +195,7 @@ String(item.brand||"").toLowerCase().includes(q)
 
 )
 
-})
-
+return result
 }
 
 
