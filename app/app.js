@@ -1,12 +1,14 @@
 let DB=[]
+let SKU_INDEX={}
+let ARTICLE_INDEX={}
 
 const result=document.getElementById("result")
 const searchInput=document.getElementById("search")
 
 
-/* =========================
-LOAD DATABASE SPLIT
-========================= */
+/* ========================
+LOAD DATABASE
+======================== */
 
 async function loadDatabase(){
 
@@ -20,7 +22,7 @@ for(let i=1;i<=62;i++){
 
 promises.push(
 fetch(`../db/promo_${i}.json`)
-.then(res=>res.json())
+.then(r=>r.json())
 .catch(()=>[])
 )
 
@@ -30,6 +32,9 @@ let data=await Promise.all(promises)
 
 DB=data.flat()
 
+SKU_INDEX=await fetch("../db/sku_index.json").then(r=>r.json())
+ARTICLE_INDEX=await fetch("../db/article_index.json").then(r=>r.json())
+
 console.log("TOTAL DATA:",DB.length)
 
 result.innerHTML=""
@@ -37,7 +42,6 @@ result.innerHTML=""
 }catch(e){
 
 console.error(e)
-
 result.innerHTML="Database gagal dimuat"
 
 }
@@ -47,44 +51,9 @@ result.innerHTML="Database gagal dimuat"
 window.onload=loadDatabase
 
 
-
-/* =========================
-SEARCH
-========================= */
-
-searchInput.addEventListener("input",function(){
-
-let q=this.value.toLowerCase().trim()
-
-if(q.length<2){
-
-result.innerHTML=""
-return
-
-}
-
-let filtered=DB.filter(item=>{
-
-return(
-
-String(item.sku||"").toLowerCase().includes(q) ||
-String(item.artikel||"").toLowerCase().includes(q) ||
-String(item.deskripsi||"").toLowerCase().includes(q) ||
-String(item.brand||"").toLowerCase().includes(q)
-
-)
-
-})
-
-render(filtered.slice(0,50))
-
-})
-
-
-
-/* =========================
+/* ========================
 FORMAT RUPIAH
-========================= */
+======================== */
 
 function rupiah(n){
 
@@ -97,73 +66,42 @@ return "Rp "+num.toLocaleString("id-ID")
 }
 
 
+/* ========================
+DATE PARSER
+======================== */
 
-/* =========================
-AUTO DATE PARSER (ALL EXCEL FORMAT)
-========================= */
+function parseDate(v){
 
-function parseDate(value){
+if(!v) return null
 
-if(!value) return null
+if(!isNaN(v)){
 
-/* jika angka (Excel Serial Date) */
-
-if(!isNaN(value)){
-
-let excelEpoch = new Date(1899,11,30)
-let date = new Date(excelEpoch.getTime() + value * 86400000)
-
-return date
+let epoch=new Date(1899,11,30)
+return new Date(epoch.getTime()+v*86400000)
 
 }
 
-let str = String(value).trim()
-
-/* dd/mm/yyyy */
+let str=String(v).trim()
 
 if(str.includes("/")){
 
-let p = str.split("/")
-
-if(p.length===3){
-
-let d=parseInt(p[0])
-let m=parseInt(p[1])-1
-let y=parseInt(p[2])
-
-return new Date(y,m,d)
+let p=str.split("/")
+return new Date(p[2],p[1]-1,p[0])
 
 }
-
-}
-
-/* yyyy-mm-dd */
 
 if(str.includes("-")){
 
-let p = str.split("-")
+let p=str.split("-")
 
-if(p.length===3){
-
-/* yyyy-mm-dd */
-
-if(p[0].length===4){
-
+if(p[0].length==4)
 return new Date(p[0],p[1]-1,p[2])
-
-}
-
-/* dd-mm-yyyy */
 
 return new Date(p[2],p[1]-1,p[0])
 
 }
 
-}
-
-/* fallback javascript */
-
-let d = new Date(str)
+let d=new Date(str)
 
 if(!isNaN(d)) return d
 
@@ -172,65 +110,102 @@ return null
 }
 
 
-/* =========================
-STATUS PROMO
-========================= */
+/* ========================
+STATUS ENGINE
+======================== */
 
 function getStatus(item){
 
-let start =
-item.mulai ||
-item.start ||
-item.tgl_mulai ||
-null
+let start=item.mulai||item.start||item.tgl_mulai||(item.berlaku?item.berlaku.split("-")[0]:null)
 
-let end =
-item.akhir ||
-item.end ||
-item.tgl_akhir ||
-null
+let end=item.akhir||item.end||item.tgl_akhir||(item.berlaku?item.berlaku.split("-")[1]:null)
 
+if(!start||!end) return ""
 
-/* jika ada kolom berlaku */
+start=parseDate(start)
+end=parseDate(end)
 
-if(item.berlaku){
+if(!start||!end) return ""
 
-let parts = String(item.berlaku).split(" - ")
-
-if(parts.length===2){
-
-start = start || parts[0]
-end = end || parts[1]
-
-}
-
-}
-
-
-start = parseDate(start)
-end = parseDate(end)
-
-if(!start || !end) return ""
-
-
-let today = new Date()
+let today=new Date()
 
 today.setHours(0,0,0,0)
 start.setHours(0,0,0,0)
 end.setHours(23,59,59,999)
 
-
-if(today < start) return "BELUM AKTIF"
-
-if(today > end) return "BERAKHIR"
+if(today<start) return "BELUM AKTIF"
+if(today>end) return "BERAKHIR"
 
 return "AKTIF"
 
 }
 
-/* =========================
+
+/* ========================
+FAST SEARCH ENGINE
+======================== */
+
+function search(q){
+
+q=q.toLowerCase().trim()
+
+if(q.length<2) return []
+
+/* SKU EXACT */
+
+if(SKU_INDEX[q]){
+
+return SKU_INDEX[q].map(i=>DB[i])
+
+}
+
+/* ARTICLE EXACT */
+
+if(ARTICLE_INDEX[q]){
+
+return ARTICLE_INDEX[q].map(i=>DB[i])
+
+}
+
+/* FALLBACK SEARCH */
+
+return DB.filter(item=>{
+
+return(
+
+String(item.sku||"").toLowerCase().includes(q) ||
+
+String(item.article||"").toLowerCase().includes(q) ||
+
+String(item.deskripsi||"").toLowerCase().includes(q) ||
+
+String(item.brand||"").toLowerCase().includes(q)
+
+)
+
+})
+
+}
+
+
+/* ========================
+SEARCH INPUT
+======================== */
+
+searchInput.addEventListener("input",function(){
+
+let q=this.value
+
+let data=search(q)
+
+render(data.slice(0,50))
+
+})
+
+
+/* ========================
 RENDER RESULT
-========================= */
+======================== */
 
 function render(data){
 
@@ -245,7 +220,7 @@ let html=""
 
 data.forEach(item=>{
 
-let status = getStatus(item)
+let status=getStatus(item)
 
 let statusClass="aktif"
 
@@ -259,7 +234,7 @@ html+=`
 <div class="card-header">
 
 <div class="title">
-${item.deskripsi || "-"}
+${item.deskripsi||"-"}
 </div>
 
 <div class="status ${statusClass}">
@@ -276,10 +251,10 @@ ${rupiah(item.harga_normal)}
 </div>
 
 <div class="price-promo">
-${item.harga_promo || "-"}
+${item.harga_promo||"-"}
 </div>
 
-<div class="meta">Promo: ${item.promo || "-"}</div>
+<div class="meta">Promo: ${item.acara||"-"}</div>
 
 <div class="meta">Berlaku: ${item.berlaku||"-"}</div>
 
