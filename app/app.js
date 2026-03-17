@@ -159,29 +159,20 @@ q=String(q).toLowerCase().trim()
 
 if(!q) return []
 
-return DB.filter(item=>
+/* ======================
+1. SKU EXACT (SUPER FAST)
+====================== */
 
-String(item.sku||"").toLowerCase().includes(q) ||
-
-String(item.article||"").toLowerCase().includes(q) ||
-
-String(item.deskripsi||"").toLowerCase().includes(q) ||
-
-String(item.brand||"").toLowerCase().includes(q)
-
-)
-
+if(SKU_INDEX[q]){
+  return SKU_INDEX[q].map(i=>DB[i])
 }
-
 
 /* ======================
 2. ARTICLE EXACT
 ====================== */
 
 if(ARTICLE_INDEX[q]){
-
-return ARTICLE_INDEX[q].map(i=>DB[i])
-
+  return ARTICLE_INDEX[q].map(i=>DB[i])
 }
 
 /* ======================
@@ -219,7 +210,6 @@ String(item.brand||"").toLowerCase().includes(q)
 return result
 
 }
-
 
 /* =========================
 SEARCH INPUT
