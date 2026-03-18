@@ -1,6 +1,14 @@
-let DB = [];
+let DB=[]
+let SKU_INDEX={}
+let ARTICLE_INDEX={}
 
-// LOAD DATABASE
+const result=document.getElementById("result")
+const searchInput=document.getElementById("search")
+
+/* =========================
+LOAD DATABASE + INDEX
+========================= */
+
 async function loadDatabase(){
 
 result.innerHTML="Memuat database..."
@@ -29,6 +37,24 @@ break
 
 DB=all
 
+/* BUILD INDEX (AMAN) */
+DB.forEach((item,i)=>{
+
+let sku=String(item.sku||"").toLowerCase()
+let art=String(item.article||"").toLowerCase()
+
+if(sku){
+if(!SKU_INDEX[sku]) SKU_INDEX[sku]=[]
+SKU_INDEX[sku].push(i)
+}
+
+if(art){
+if(!ARTICLE_INDEX[art]) ARTICLE_INDEX[art]=[]
+ARTICLE_INDEX[art].push(i)
+}
+
+})
+
 console.log("TOTAL DATA:",DB.length)
 
 result.innerHTML=""
@@ -45,101 +71,127 @@ result.innerHTML="Database gagal dimuat"
 window.onload=loadDatabase
 
 
-// FORMAT RUPIAH
-function formatRupiah(angka){
-  if(!angka) return "-";
-  return Number(angka).toLocaleString("id-ID");
+/* =========================
+FORMAT RUPIAH
+========================= */
+
+function rupiah(n){
+
+if(!n) return ""
+
+let num=Number(String(n).replace(/[^\d]/g,""))
+
+if(!num) return n
+
+return "Rp "+num.toLocaleString("id-ID")
+
 }
 
-// RENDER ITEM
-function renderItem(item){
 
-  let hasPromoPrice = item.harga_promo && item.harga_promo != item.harga_normal;
-  let hasDiskon = item.diskon && item.diskon !== "";
+/* =========================
+PARSE DATE
+========================= */
 
-  return `
-  <div class="card">
+function parseDate(v){
 
-    <div class="title">
-      ${item.deskripsi || "-"}
-    </div>
+if(!v) return null
 
-    <div class="content">
+let str=String(v).trim()
 
-      ${item.brand ? `<div><b>Brand:</b> ${item.brand}</div>` : ""}
-      ${item.sku ? `<div><b>SKU:</b> ${item.sku}</div>` : ""}
-      ${item.article ? `<div><b>Article:</b> ${item.article}</div>` : ""}
-
-      <!-- HARGA -->
-      <div class="price">
-
-        ${hasPromoPrice 
-        ? `
-          <div class="price-normal" style="text-decoration:line-through;color:#888;">
-            Rp ${formatRupiah(item.harga_normal)}
-          </div>
-          <div class="price-promo" style="color:green;font-weight:bold;">
-            Rp ${formatRupiah(item.harga_promo)}
-          </div>
-        `
-        : `
-          <div class="price-normal" style="font-weight:bold;">
-            Rp ${formatRupiah(item.harga_normal)}
-          </div>
-        `
-        }
-
-      </div>
-
-      ${hasDiskon ? `<div style="color:green;"><b>Diskon:</b> ${item.diskon}</div>` : ""}
-
-      ${item.divisi ? `<div><b>Divisi:</b> ${item.divisi}</div>` : ""}
-
-      ${(item.from_date || item.to_date) 
-        ? `<div><b>Berlaku:</b> ${item.from_date || "-"} s/d ${item.to_date || "-"}</div>` 
-        : ""
-      }
-
-      ${item.file ? `<div><b>Sumber:</b> ${item.file}</div>` : ""}
-      ${item.sheet ? `<div><b>Sheet:</b> ${item.sheet}</div>` : ""}
-
-    </div>
-
-  </div>
-  `;
+if(str.includes("/")){
+let p=str.split("/")
+return new Date(p[2],p[1]-1,p[0])
 }
 
-// SEARCH FUNCTION
-function searchData(keyword){
+if(str.includes("-")){
+let p=str.split("-")
 
-  keyword = keyword.toLowerCase();
+if(p[0].length==4)
+return new Date(p[0],p[1]-1,p[2])
 
-  const result = DB.filter(item =>
-    (item.deskripsi && item.deskripsi.toLowerCase().includes(keyword)) ||
-    (item.sku && item.sku.toString().includes(keyword)) ||
-    (item.article && item.article.toLowerCase().includes(keyword))
-  );
-
-  renderResult(result);
+return new Date(p[2],p[1]-1,p[0])
 }
 
-// RENDER RESULT
-function renderResult(data){
+let d=new Date(str)
+if(!isNaN(d)) return d
 
-  const container = document.getElementById("result");
+return null
 
-  if(data.length === 0){
-    container.innerHTML = `<p style="text-align:center;">Data tidak ditemukan</p>`;
-    return;
-  }
-
-  container.innerHTML = data.map(item => renderItem(item)).join("");
 }
 
-// INIT
-loadDB();
 
-// EVENT SEARCH (INPUT)
-document.getElementById("search").addEventListener("input", function(){
-  searchData(this.value);
-});
+/* =========================
+STATUS
+========================= */
+
+function getStatus(item){
+
+if(!item.berlaku) return ""
+
+let p=item.berlaku.split("-")
+if(p.length<2) return ""
+
+let start=parseDate(p[0])
+let end=parseDate(p[1])
+
+if(!start||!end) return ""
+
+let today=new Date()
+
+today.setHours(0,0,0,0)
+start.setHours(0,0,0,0)
+end.setHours(23,59,59,999)
+
+if(today<start) return "BELUM AKTIF"
+if(today>end) return "BERAKHIR"
+
+return "AKTIF"
+
+}
+
+
+/* =========================
+SEARCH V13 (INDEX + FALLBACK)
+========================= */
+
+function search(q){
+
+q=String(q).toLowerCase().trim()
+
+if(!q) return []
+
+/* 1. SKU EXACT */
+if(SKU_INDEX[q]){
+return SKU_INDEX[q].map(i=>DB[i])
+}
+
+/* 2. ARTICLE EXACT */
+if(ARTICLE_INDEX[q]){
+return ARTICLE_INDEX[q].map(i=>DB[i])
+}
+
+/* 3. FALLBACK KE DB */
+return DB.filter(item=>
+
+String(item.sku||"").toLowerCase().includes(q) ||
+
+String(item.article||"").toLowerCase().includes(q) ||
+
+String(item.deskripsi||"").toLowerCase().includes(q) ||
+
+String(item.brand||"").toLowerCase().includes(q)
+
+)
+
+}
+
+
+/* =========================
+EVENT SEARCH
+========================= */
+
+searchInput.addEventListener("input",function(){
+
+let data=search(this.value)
+
+render(data
