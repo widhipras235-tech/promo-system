@@ -1,258 +1,158 @@
-let DB_CACHE = {}
+/* =========================
+INIT
+========================= */
+
+let DB = []
 let SKU_INDEX = {}
 let ARTICLE_INDEX = {}
 
 const result = document.getElementById("result")
+const searchInput = document.getElementById("search")
 
 
-/* ===============================
-BASE PATH AUTO (ANTI ERROR PATH)
-=============================== */
+/* =========================
+LOAD DATABASE (AUTO LOOP FILE)
+========================= */
 
-const BASE_PATH = location.pathname.includes("/app/") ? "../db/" : "/db/"
+async function loadDatabase(){
 
-
-/* ===============================
-LOAD INDEX
-=============================== */
-
-async function loadIndex(){
-
-result.innerHTML = "Memuat index..."
+result.innerHTML = "Memuat database..."
 
 try{
 
-let skuRes = await fetch(BASE_PATH + "sku_index.json")
-let articleRes = await fetch(BASE_PATH + "article_index.json")
+let i = 1
+let all = []
 
-if(!skuRes.ok || !articleRes.ok){
-throw "Index tidak ditemukan"
-}
-
-SKU_INDEX = await skuRes.json()
-ARTICLE_INDEX = await articleRes.json()
-
-// NORMALISASI JADI UPPERCASE
-SKU_INDEX = normalizeIndex(SKU_INDEX)
-ARTICLE_INDEX = normalizeIndex(ARTICLE_INDEX)
-
-result.innerHTML = "Siap digunakan"
-
-console.log("Index OK")
-
-}catch(e){
-
-console.error("Load index error:",e)
-result.innerHTML = "Gagal load index"
-
-}
-
-}
-
-window.addEventListener("load", loadIndex)
-
-
-
-/* ===============================
-NORMALISASI INDEX
-=============================== */
-
-function normalizeIndex(obj){
-
-let newObj = {}
-
-for(let key in obj){
-
-let k = key.toString().trim().toUpperCase()
-let v = obj[key].replace("db/","").trim()
-
-newObj[k] = v
-
-}
-
-return newObj
-
-}
-
-
-
-/* ===============================
-LOAD FILE (CACHE)
-=============================== */
-
-async function getData(file){
-
-if(DB_CACHE[file]) return DB_CACHE[file]
+while(true){
 
 try{
+let res = await fetch(`../db/promo_${i}.json`)
 
-let res = await fetch(BASE_PATH + file)
-
-if(!res.ok) return []
+if(!res.ok) break
 
 let data = await res.json()
 
-DB_CACHE[file] = data
+if(Array.isArray(data)){
+all = all.concat(data)
+}else{
+console.warn("Format bukan array di file:", i)
+}
 
-return data
+console.log("Loaded file:", i, "Jumlah:", data.length)
+
+i++
+
+}catch(err){
+console.warn("Stop load di file:", i)
+break
+}
+
+}
+
+DB = all
+
+/* =========================
+BUILD INDEX
+========================= */
+
+DB.forEach((item, index)=>{
+
+let sku = String(item.sku || "").toLowerCase().trim()
+let art = String(item.article || "").toLowerCase().trim()
+
+if(sku){
+if(!SKU_INDEX[sku]) SKU_INDEX[sku] = []
+SKU_INDEX[sku].push(index)
+}
+
+if(art){
+if(!ARTICLE_INDEX[art]) ARTICLE_INDEX[art] = []
+ARTICLE_INDEX[art].push(index)
+}
+
+})
+
+console.log("TOTAL DATA:", DB.length)
+
+result.innerHTML = "<p>Database siap. Silakan cari.</p>"
 
 }catch(e){
 
-console.error("Load file gagal:",file)
-return []
+console.error("Gagal load database:", e)
+result.innerHTML = "Database gagal dimuat"
 
 }
 
 }
 
+window.onload = loadDatabase
 
 
-/* ===============================
-SEARCH ENGINE FINAL
-=============================== */
-
-async function search(){
-
-let q = document.getElementById("search").value.trim().toUpperCase()
-
-if(!q) return
-
-result.innerHTML = "Mencari..."
-
-
-// ==== CARI DI INDEX ====
-
-let file = SKU_INDEX[q] || ARTICLE_INDEX[q] || null
-
-
-// ==== JIKA INDEX TIDAK KETEMU ====
-
-if(!file){
-
-result.innerHTML = "Data tidak ditemukan"
-return
-
-}
-
-
-// ==== LOAD FILE ====
-
-let data = await getData(file)
-
-
-// ==== CARI DATA ====
-
-let found = data.find(item => {
-
-let sku = (item.sku || item.SKU || "").toString().trim().toUpperCase()
-let artikel = (item.artikel || item.ARTIKEL || "").toString().trim().toUpperCase()
-let desk = (item.deskripsi || item.DESKRIPSI || "").toString().toUpperCase()
-let brand = (item.brand || item.BRAND || "").toString().toUpperCase()
-
-return (
-sku === q ||
-artikel === q ||
-desk.includes(q) ||
-brand.includes(q)
-)
-
-})
-
-
-// ==== FALLBACK SEARCH (ANTI GAGAL) ====
-
-if(!found){
-
-found = data.find(item => {
-return JSON.stringify(item).toUpperCase().includes(q)
-})
-
-}
-
-
-if(!found){
-
-result.innerHTML = "Data tidak ditemukan"
-return
-
-}
-
-
-show(found)
-
-}
-
-
-
-/* ===============================
+/* =========================
 FORMAT RUPIAH
-=============================== */
+========================= */
 
 function rupiah(n){
 
 if(!n) return ""
 
-n = Number(n)
-if(isNaN(n)) return ""
+let num = Number(String(n).replace(/[^\d]/g,""))
 
-return "Rp " + n.toLocaleString("id-ID")
+if(!num) return n
+
+return "Rp " + num.toLocaleString("id-ID")
 
 }
 
 
-
-/* ===============================
+/* =========================
 PARSE DATE
-=============================== */
+========================= */
 
 function parseDate(v){
 
 if(!v) return null
 
-if(typeof v === "number"){
-return new Date((v - 25569) * 86400 * 1000)
+let str = String(v).trim()
+
+if(str.includes("/")){
+let p = str.split("/")
+return new Date(p[2], p[1]-1, p[0])
 }
 
-v = v.toString().trim()
+if(str.includes("-")){
+let p = str.split("-")
 
-if(v.includes("-")){
-let p = v.split("-")
-if(p.length===3) return new Date(p[2],p[1]-1,p[0])
+if(p[0].length == 4){
+return new Date(p[0], p[1]-1, p[2])
+}else{
+return new Date(p[2], p[1]-1, p[0])
+}
 }
 
-if(v.includes("/")){
-let p = v.split("/")
-if(p.length===3) return new Date(p[2],p[1]-1,p[0])
-}
+let d = new Date(str)
+if(!isNaN(d)) return d
 
-let d = new Date(v)
-return isNaN(d) ? null : d
+return null
 
 }
 
 
-
-/* ===============================
-STATUS ENGINE
-=============================== */
+/* =========================
+STATUS PROMO
+========================= */
 
 function getStatus(item){
 
-let start = item.mulai || item.start || item.tgl_mulai || null
-let end = item.akhir || item.end || item.tgl_akhir || null
+if(!item.berlaku) return ""
 
-if(item.berlaku){
-let b = item.berlaku.split("-")
-if(b.length===2){
-start = start || b[0]
-end = end || b[1]
-}
-}
+let p = item.berlaku.split("-")
+if(p.length < 2) return ""
 
-start = parseDate(start)
-end = parseDate(end)
+let start = parseDate(p[0])
+let end = parseDate(p[1])
 
-if(!start || !end) return "AKTIF"
+if(!start || !end) return ""
 
 let today = new Date()
 
@@ -268,135 +168,114 @@ return "AKTIF"
 }
 
 
+/* =========================
+SEARCH ENGINE (INDEX + FALLBACK)
+========================= */
 
-/* ===============================
-PROMO ENGINE
-=============================== */
+function search(q){
 
-function promoLogic(item){
+q = String(q).toLowerCase().trim()
 
-let normal = Number(item.harga_normal) || 0
-let promo = item.harga_promo
-let diskon = item.diskon || ""
+if(!q) return []
 
-let promoText = promo ? promo.toString().toUpperCase() : ""
-
-let normalHTML = rupiah(normal)
-let promoHTML = ""
-let promoLabel = ""
-let hidePromo = false
-
-
-if(
-promoText.includes("B3D10") ||
-promoText.includes("B1G1") ||
-promoText.includes("B2G1") ||
-promoText.includes("B1G2")
-){
-promoHTML = promoText
-hidePromo = true
-return {normalHTML,promoHTML,promoLabel,hidePromo}
+/* SKU EXACT */
+if(SKU_INDEX[q]){
+return SKU_INDEX[q].map(i => DB[i])
 }
 
-
-if(promoText.includes("SHARP")){
-normalHTML = "@"+rupiah(normal)
-promoHTML = rupiah(normal)
-promoLabel = "SHARP PRICE"
-return {normalHTML,promoHTML,promoLabel,hidePromo}
+/* ARTICLE EXACT */
+if(ARTICLE_INDEX[q]){
+return ARTICLE_INDEX[q].map(i => DB[i])
 }
 
+/* FALLBACK */
+return DB.filter(item =>
 
-if(promoText.includes("SPECIAL")){
-normalHTML = `<s>${rupiah(normal)}</s>`
-promoHTML = rupiah(promo)
-return {normalHTML,promoHTML,promoLabel,hidePromo}
-}
+String(item.sku || "").toLowerCase().includes(q) ||
+String(item.article || "").toLowerCase().includes(q) ||
+String(item.deskripsi || "").toLowerCase().includes(q) ||
+String(item.brand || "").toLowerCase().includes(q)
 
-
-if(diskon){
-
-let d = parseFloat(diskon)
-
-if(!isNaN(d)){
-let hitung = normal - (normal * d /100)
-normalHTML = `<s>${rupiah(normal)}</s>`
-promoHTML = rupiah(Math.round(hitung))
-promoLabel = diskon
-return {normalHTML,promoHTML,promoLabel,hidePromo}
-}
+)
 
 }
 
 
-promoHTML = promo ? rupiah(promo) : ""
-
-return {normalHTML,promoHTML,promoLabel,hidePromo}
-
-}
-
-
-
-/* ===============================
+/* =========================
 RENDER
-=============================== */
+========================= */
 
-function show(item){
+function render(data){
 
-let p = promoLogic(item)
+if(!data || !data.length){
+result.innerHTML = "<p>Tidak ditemukan</p>"
+return
+}
+
+let html = ""
+
+data.forEach(item=>{
+
 let status = getStatus(item)
 
-let statusClass = "status aktif"
-if(status==="BELUM AKTIF") statusClass="status belum"
-if(status==="BERAKHIR") statusClass="status habis"
-
-
-result.innerHTML = `
-
+html += `
 <div class="card">
+  
+  <div style="display:flex;justify-content:space-between">
+    <b>${item.deskripsi || "-"}</b>
+    <span style="
+      background:${status=="AKTIF"?"green":"gray"};
+      color:white;
+      padding:3px 8px;
+      border-radius:10px;
+      font-size:11px;
+    ">
+      ${status}
+    </span>
+  </div>
 
-<h3>${item.deskripsi || item.DESKRIPSI || ""}</h3>
+  <div style="margin-top:5px">
+    ${rupiah(item.price || item.harga || "")}
+  </div>
 
-<div class="${statusClass}">${status}</div>
+  <div style="color:green">
+    ${item.promo || ""}
+  </div>
 
-<br>
+  <div style="font-size:12px;color:#666">
+    SKU: ${item.sku || "-"} | ART: ${item.article || "-"}
+  </div>
 
-<b>Brand :</b> ${item.brand || item.BRAND || ""}<br>
-<b>SKU :</b> ${item.sku || item.SKU || ""}<br>
-<b>Artikel :</b> ${item.artikel || item.ARTIKEL || ""}<br>
-
-<br>
-
-<div class="harga-normal">${p.normalHTML}</div>
-<div class="harga-promo">${p.promoHTML}</div>
-
-${!p.hidePromo ? `<div class="promo">${p.promoLabel}</div>` : ""}
-
-<br>
-
-<b>Berlaku :</b> ${item.berlaku || ""}<br>
-<b>Divisi :</b> ${item.division || ""}<br>
-
-<br>
-
-<small>
-File : ${item.file || ""}<br>
-Sheet : ${item.sheet || ""}
-</small>
+  <div style="font-size:12px;color:#999">
+    Berlaku: ${item.berlaku || "-"}
+  </div>
 
 </div>
-
 `
+})
+
+result.innerHTML = html
 
 }
 
 
+/* =========================
+EVENT SEARCH
+========================= */
 
-/* ===============================
-TRIGGER SEARCH
-=============================== */
+searchInput.addEventListener("input", function(){
 
-document.getElementById("search")
-.addEventListener("keyup", function(e){
-if(e.key === "Enter") search()
+let val = this.value
+
+if(!val){
+result.innerHTML = ""
+return
+}
+
+let data = search(val)
+
+console.log("Hasil:", data.length)
+
+render(data)
+
 })
