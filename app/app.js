@@ -11,30 +11,44 @@ LOAD DATABASE (AUTO MULTI FILE)
 async function loadDatabase() {
   result.innerHTML = "Memuat database..."
 
-  try {
-    let i = 1
-    let total = 0
+  let i = 1
+  let total = 0
 
-    while (true) {
-      try {
-        const res = await fetch(`db/promo_${i}.json`)
+  while (true) {
+    try {
+      console.log("Ambil file:", `db/promo_${i}.json`)
 
-        if (!res.ok) break
+      const res = await fetch(`db/promo_${i}.json`)
 
-        const data = await res.json()
-
-        DB = DB.concat(data)
-        total += data.length
-
-        console.log(`Loaded promo_${i}.json (${data.length})`)
-
-        i++
-      } catch {
+      if (!res.ok) {
+        console.log("STOP di file:", i)
         break
       }
-    }
 
-    READY = true
+      const data = await res.json()
+
+      console.log("DATA:", data.length)
+
+      DB = DB.concat(data)
+      total += data.length
+
+      i++
+    } catch (err) {
+      console.log("ERROR:", err)
+      break
+    }
+  }
+
+  console.log("TOTAL FINAL:", total)
+
+  if (total === 0) {
+    result.innerHTML = "❌ Database kosong / gagal load"
+  } else {
+    result.innerHTML = `✅ Database siap (${total} data)`
+  }
+
+  READY = true
+}
 
     result.innerHTML = `Database siap (${total} data)`
     console.log("TOTAL DB:", total)
