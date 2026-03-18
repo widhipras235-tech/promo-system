@@ -2,6 +2,8 @@ let DB = []
 
 const result = document.getElementById("result")
 
+console.log("Loading database...")
+
 /* ===============================
 LOAD DATABASE SPLIT
 =============================== */
@@ -15,7 +17,17 @@ let all = []
 
 for(let i=1;i<=files;i++){
 
-let res = await fetch(`../db/promo_${i}.json`)
+let url = `../db/promo_${i}.json`
+
+console.log("Loading:",url)
+
+let res = await fetch(url)
+
+if(!res.ok){
+console.warn("File tidak ditemukan:",url)
+continue
+}
+
 let data = await res.json()
 
 all = all.concat(data)
@@ -33,6 +45,8 @@ console.error("Database gagal dimuat",e)
 result.innerHTML="Database gagal dimuat"
 
 }
+
+console.log("Load file",i)
 
 }
 
