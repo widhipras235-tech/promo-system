@@ -3,8 +3,10 @@ let articleIndex = {}
 let cache = {}
 let isReady = false
 
+const MAX_RESULT = 30
+
 /* =========================
-LOAD INDEX (WAJIB)
+LOAD INDEX
 ========================= */
 
 async function loadIndex() {
@@ -20,11 +22,10 @@ async function loadIndex() {
     console.log("ARTICLE:", Object.keys(articleIndex).length)
 
     isReady = true
-    document.getElementById("status").innerText = "✅ Siap digunakan"
-
+    document.getElementById("status").innerText = "Ketik SKU / nama produk"
   } catch (err) {
     console.log("❌ Gagal load index", err)
-    document.getElementById("status").innerText = "❌ Gagal load data"
+    document.getElementById("status").innerText = "Gagal load data"
   }
 }
 
@@ -55,7 +56,7 @@ function getFileName(path) {
 }
 
 /* =========================
-LOAD FILE (SMART CACHE)
+LOAD FILE (CACHE)
 ========================= */
 
 async function loadFile(fileIndex) {
@@ -69,30 +70,68 @@ async function loadFile(fileIndex) {
 }
 
 /* =========================
-SEARCH ENGINE (OPTIMIZED)
+SEARCH SUPER CEPAT
 ========================= */
 
 async function searchData(keyword) {
   keyword = keyword.toLowerCase()
 
+  let results = []
   let indexes = new Set()
 
-  // 🔥 SKU (partial match)
-  Object.keys(skuIndex).forEach(key => {
-    if (key.includes(keyword)) {
-      skuIndex[key].forEach(i => indexes.add(i))
+  // 🔥 1. EXACT MATCH (SUPER CEPAT)
+  if (skuIndex[keyword]) {
+    for (let i of skuIndex[keyword]) {
+      indexes.add(i)
+      if (indexes.size >= MAX_RESULT) break
     }
-  })
+  }
 
-  // 🔥 ARTICLE (partial match)
-  Object.keys(articleIndex).forEach(key => {
-    if (key.includes(keyword)) {
-      articleIndex[key].forEach(i => indexes.add(i))
+  if (articleIndex[keyword]) {
+    for (let i of articleIndex[keyword]) {
+      indexes.add(i)
+      if (indexes.size >= MAX_RESULT) break
     }
-  })
+  }
 
-  if (indexes.size === 0) return []
+  // 🔥 2. PARTIAL MATCH (DIBATASI)
+  if (indexes.size < MAX_RESULT) {
+    for (let key in skuIndex) {
+      if (key.includes(keyword)) {
+        for (let i of skuIndex[key]) {
+          indexes.add(i)
+          if (indexes.size >= MAX_RESULT) break
+        }
+      }
+      if (indexes.size >= MAX_RESULT) break
+    }
+  }
 
+  if (indexes.size < MAX_RESULT) {
+    for (let key in articleIndex) {
+      if (key.includes(keyword)) {
+        for (let i of articleIndex[key]) {
+          indexes.add(i)
+          if (indexes.size >= MAX_RESULT) break
+        }
+      }
+      if (indexes.size >= MAX_RESULT) break
+    }
+  }
+
+  // 🔥 3. FALLBACK (AMBIL 1 FILE SAJA)
+  if (indexes.size === 0) {
+    const data = await loadFile(1)
+
+    return data
+      .filter(item =>
+        (item.search && item.search.includes(keyword)) ||
+        (item.deskripsi && item.deskripsi.toLowerCase().includes(keyword))
+      )
+      .slice(0, MAX_RESULT)
+  }
+
+  // 🔥 4. MAP FILE
   let fileMap = {}
 
   indexes.forEach(i => {
@@ -102,22 +141,29 @@ async function searchData(keyword) {
     fileMap[fileIndex].push(i)
   })
 
-  let results = []
-
+  // 🔥 5. LOAD DATA SESUAI KEBUTUHAN
   for (let fileIndex in fileMap) {
     const data = await loadFile(fileIndex)
 
-    fileMap[fileIndex].forEach(i => {
+    for (let i of fileMap[fileIndex]) {
       const localIndex = i % 5000
-      if (data[localIndex]) results.push(data[localIndex])
-    })
+
+      if (data[localIndex]) {
+        results.push(data[localIndex])
+      }
+
+      // 🔥 STOP kalau sudah 30
+      if (results.length >= MAX_RESULT) {
+        return results
+      }
+    }
   }
 
   return results
 }
 
 /* =========================
-RENDER UI
+RENDER
 ========================= */
 
 function render(data) {
@@ -177,22 +223,30 @@ function render(data) {
 }
 
 /* =========================
-EVENT SEARCH
+EVENT (DEBOUNCE)
 ========================= */
 
-document.getElementById("search").addEventListener("input", async e => {
+let timer
+
+document.getElementById("search").addEventListener("input", e => {
+  clearTimeout(timer)
+
   const keyword = e.target.value.trim()
 
-  if (!isReady) {
-    console.log("⏳ Index belum siap")
-    return
-  }
+  if (!isReady) return
 
-  if (!keyword) {
-    document.getElementById("result").innerHTML = ""
-    return
-  }
+  timer = setTimeout(async () => {
+    if (!keyword) {
+      document.getElementById("result").innerHTML = ""
+      return
+    }
 
-  const result = await searchData(keyword)
-  render(result)
+    document.getElementById("status").innerText = "Mencari..."
+
+    const result = await searchData(keyword)
+
+    render(result)
+
+    document.getElementById("status").innerText = `Ditemukan ${result.length} data`
+  }, 300)
 })
