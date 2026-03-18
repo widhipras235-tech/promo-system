@@ -1,40 +1,25 @@
 let DB = []
+let SKU_INDEX = {}
+let ARTICLE_INDEX = {}
 let READY = false
 
 const result = document.getElementById("result")
 const searchInput = document.getElementById("search")
 
 /* =========================
-CONFIG PATH
+LOAD JSON HELPER
 ========================= */
 
-async function tryFetch(file) {
-  const paths = [
-    `../db/${file}`,   // ← ini penting untuk struktur kamu
-    `db/${file}`,
-    `./db/${file}`,
-    `/db/${file}`
-  ]
-
-  for (let p of paths) {
-    try {
-      console.log("Coba:", p)
-
-      let res = await fetch(p)
-
-      if (res.ok) {
-        console.log("✅ Berhasil:", p)
-        return await res.json()
-      }
-
-    } catch {}
-  }
-
+async function loadJSON(path) {
+  try {
+    const res = await fetch(path)
+    if (res.ok) return await res.json()
+  } catch {}
   return null
 }
 
 /* =========================
-LOAD DATABASE (FIX)
+LOAD DATABASE + INDEX
 ========================= */
 
 async function loadDatabase() {
@@ -44,30 +29,38 @@ async function loadDatabase() {
   let i = 1
   let gagal = 0
 
+  // 🔹 Load semua promo_*.json
   while (i <= 100) {
-    console.log("Load file:", `promo_${i}.json`)
-
-    const data = await tryFetch(`promo_${i}.json`)
+    let data = await loadJSON(`db/promo_${i}.json`) ||
+               await loadJSON(`./db/promo_${i}.json`) ||
+               await loadJSON(`../db/promo_${i}.json`)
 
     if (!data) {
       gagal++
-      console.log("❌ Gagal:", i)
     } else {
       DB = DB.concat(data)
       total += data.length
       gagal = 0
-      console.log("✅ Success:", data.length)
+      console.log(`✅ promo_${i} loaded (${data.length})`)
     }
 
-    if (gagal >= 3) {
-      console.log("STOP (file habis)")
-      break
-    }
-
+    if (gagal >= 3) break
     i++
   }
 
-  console.log("TOTAL:", total)
+  // 🔹 Load index
+  SKU_INDEX =
+    await loadJSON("db/sku_index.json") ||
+    await loadJSON("./db/sku_index.json") ||
+    await loadJSON("../db/sku_index.json") || {}
+
+  ARTICLE_INDEX =
+    await loadJSON("db/article_index.json") ||
+    await loadJSON("./db/article_index.json") ||
+    await loadJSON("../db/article_index.json") || {}
+
+  console.log("INDEX SKU:", Object.keys(SKU_INDEX).length)
+  console.log("INDEX ARTICLE:", Object.keys(ARTICLE_INDEX).length)
 
   if (total === 0) {
     result.innerHTML = "❌ Database tidak terbaca"
@@ -135,7 +128,7 @@ function render(data) {
 }
 
 /* =========================
-SEARCH
+SEARCH SUPER CEPAT (INDEX)
 ========================= */
 
 function searchData(keyword) {
@@ -146,12 +139,36 @@ function searchData(keyword) {
 
   keyword = keyword.toLowerCase().trim()
 
-  const results = DB.filter(item =>
-    (item.sku && item.sku.toString().toLowerCase().includes(keyword)) ||
-    (item.article && item.article.toString().toLowerCase().includes(keyword)) ||
-    (item.deskripsi && item.deskripsi.toLowerCase().includes(keyword)) ||
-    (item.brand && item.brand.toLowerCase().includes(keyword))
-  )
+  if (!keyword) {
+    result.innerHTML = "Masukkan kata kunci"
+    return
+  }
+
+  let results = []
+
+  // 🔥 PRIORITAS 1: SKU
+  if (SKU_INDEX[keyword]) {
+    results = SKU_INDEX[keyword].map(i => DB[i])
+    console.log("⚡ SKU HIT")
+  }
+
+  // 🔥 PRIORITAS 2: ARTICLE
+  else if (ARTICLE_INDEX[keyword]) {
+    results = ARTICLE_INDEX[keyword].map(i => DB[i])
+    console.log("⚡ ARTICLE HIT")
+  }
+
+  // 🔥 FALLBACK: SEARCH BIASA
+  else {
+    console.log("🐢 fallback search")
+
+    results = DB.filter(item =>
+      (item.sku && item.sku.toLowerCase().includes(keyword)) ||
+      (item.article && item.article.toLowerCase().includes(keyword)) ||
+      (item.deskripsi && item.deskripsi.toLowerCase().includes(keyword)) ||
+      (item.brand && item.brand.toLowerCase().includes(keyword))
+    )
+  }
 
   render(results.slice(0, 200))
 }
