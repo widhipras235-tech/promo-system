@@ -8,15 +8,28 @@ const searchInput = document.getElementById("search")
 CONFIG PATH
 ========================= */
 
-const BASE_PATHS = ["db/", "./db/", "/db/"]
-
 async function tryFetch(file) {
-  for (let base of BASE_PATHS) {
+  const paths = [
+    `../db/${file}`,   // ← ini penting untuk struktur kamu
+    `db/${file}`,
+    `./db/${file}`,
+    `/db/${file}`
+  ]
+
+  for (let p of paths) {
     try {
-      const res = await fetch(base + file)
-      if (res.ok) return await res.json()
-    } catch (e) {}
+      console.log("Coba:", p)
+
+      let res = await fetch(p)
+
+      if (res.ok) {
+        console.log("✅ Berhasil:", p)
+        return await res.json()
+      }
+
+    } catch {}
   }
+
   return null
 }
 
