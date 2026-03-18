@@ -1,74 +1,91 @@
-let DB=[]
-let SKU_INDEX={}
-let ARTICLE_INDEX={}
+/* =========================
+INIT
+========================= */
 
-const result=document.getElementById("result")
-const searchInput=document.getElementById("search")
+let DB = []
+let SKU_INDEX = {}
+let ARTICLE_INDEX = {}
+
+const result = document.getElementById("result")
+const searchInput = document.getElementById("search")
+
 
 /* =========================
-LOAD DATABASE + INDEX
+LOAD DATABASE (AUTO LOOP FILE)
 ========================= */
 
 async function loadDatabase(){
 
-result.innerHTML="Memuat database..."
+result.innerHTML = "Memuat database..."
 
 try{
 
-let i=1
-let all=[]
+let i = 1
+let all = []
 
 while(true){
 
 try{
-let res=await fetch(`../db/promo_${i}.json`)
+let res = await fetch(`../db/promo_${i}.json`)
+
 if(!res.ok) break
 
-let data=await res.json()
-all=all.concat(data)
+let data = await res.json()
+
+if(Array.isArray(data)){
+all = all.concat(data)
+}else{
+console.warn("Format bukan array di file:", i)
+}
+
+console.log("Loaded file:", i, "Jumlah:", data.length)
 
 i++
 
-}catch(e){
+}catch(err){
+console.warn("Stop load di file:", i)
 break
 }
 
 }
 
-DB=all
+DB = all
 
-/* BUILD INDEX (AMAN) */
-DB.forEach((item,i)=>{
+/* =========================
+BUILD INDEX
+========================= */
 
-let sku=String(item.sku||"").toLowerCase()
-let art=String(item.article||"").toLowerCase()
+DB.forEach((item, index)=>{
+
+let sku = String(item.sku || "").toLowerCase().trim()
+let art = String(item.article || "").toLowerCase().trim()
 
 if(sku){
-if(!SKU_INDEX[sku]) SKU_INDEX[sku]=[]
-SKU_INDEX[sku].push(i)
+if(!SKU_INDEX[sku]) SKU_INDEX[sku] = []
+SKU_INDEX[sku].push(index)
 }
 
 if(art){
-if(!ARTICLE_INDEX[art]) ARTICLE_INDEX[art]=[]
-ARTICLE_INDEX[art].push(i)
+if(!ARTICLE_INDEX[art]) ARTICLE_INDEX[art] = []
+ARTICLE_INDEX[art].push(index)
 }
 
 })
 
-console.log("TOTAL DATA:",DB.length)
+console.log("TOTAL DATA:", DB.length)
 
-result.innerHTML=""
+result.innerHTML = "<p>Database siap. Silakan cari.</p>"
 
 }catch(e){
 
-console.error(e)
-result.innerHTML="Database gagal dimuat"
+console.error("Gagal load database:", e)
+result.innerHTML = "Database gagal dimuat"
 
 }
 
 }
 
-window.onload=loadDatabase
+window.onload = loadDatabase
 
 
 /* =========================
@@ -79,11 +96,11 @@ function rupiah(n){
 
 if(!n) return ""
 
-let num=Number(String(n).replace(/[^\d]/g,""))
+let num = Number(String(n).replace(/[^\d]/g,""))
 
 if(!num) return n
 
-return "Rp "+num.toLocaleString("id-ID")
+return "Rp " + num.toLocaleString("id-ID")
 
 }
 
@@ -96,23 +113,24 @@ function parseDate(v){
 
 if(!v) return null
 
-let str=String(v).trim()
+let str = String(v).trim()
 
 if(str.includes("/")){
-let p=str.split("/")
-return new Date(p[2],p[1]-1,p[0])
+let p = str.split("/")
+return new Date(p[2], p[1]-1, p[0])
 }
 
 if(str.includes("-")){
-let p=str.split("-")
+let p = str.split("-")
 
-if(p[0].length==4)
-return new Date(p[0],p[1]-1,p[2])
-
-return new Date(p[2],p[1]-1,p[0])
+if(p[0].length == 4){
+return new Date(p[0], p[1]-1, p[2])
+}else{
+return new Date(p[2], p[1]-1, p[0])
+}
 }
 
-let d=new Date(str)
+let d = new Date(str)
 if(!isNaN(d)) return d
 
 return null
@@ -121,29 +139,29 @@ return null
 
 
 /* =========================
-STATUS
+STATUS PROMO
 ========================= */
 
 function getStatus(item){
 
 if(!item.berlaku) return ""
 
-let p=item.berlaku.split("-")
-if(p.length<2) return ""
+let p = item.berlaku.split("-")
+if(p.length < 2) return ""
 
-let start=parseDate(p[0])
-let end=parseDate(p[1])
+let start = parseDate(p[0])
+let end = parseDate(p[1])
 
-if(!start||!end) return ""
+if(!start || !end) return ""
 
-let today=new Date()
+let today = new Date()
 
 today.setHours(0,0,0,0)
 start.setHours(0,0,0,0)
 end.setHours(23,59,59,999)
 
-if(today<start) return "BELUM AKTIF"
-if(today>end) return "BERAKHIR"
+if(today < start) return "BELUM AKTIF"
+if(today > end) return "BERAKHIR"
 
 return "AKTIF"
 
@@ -151,37 +169,92 @@ return "AKTIF"
 
 
 /* =========================
-SEARCH V13 (INDEX + FALLBACK)
+SEARCH ENGINE (INDEX + FALLBACK)
 ========================= */
 
 function search(q){
 
-q=String(q).toLowerCase().trim()
+q = String(q).toLowerCase().trim()
 
 if(!q) return []
 
-/* 1. SKU EXACT */
+/* SKU EXACT */
 if(SKU_INDEX[q]){
-return SKU_INDEX[q].map(i=>DB[i])
+return SKU_INDEX[q].map(i => DB[i])
 }
 
-/* 2. ARTICLE EXACT */
+/* ARTICLE EXACT */
 if(ARTICLE_INDEX[q]){
-return ARTICLE_INDEX[q].map(i=>DB[i])
+return ARTICLE_INDEX[q].map(i => DB[i])
 }
 
-/* 3. FALLBACK KE DB */
-return DB.filter(item=>
+/* FALLBACK */
+return DB.filter(item =>
 
-String(item.sku||"").toLowerCase().includes(q) ||
-
-String(item.article||"").toLowerCase().includes(q) ||
-
-String(item.deskripsi||"").toLowerCase().includes(q) ||
-
-String(item.brand||"").toLowerCase().includes(q)
+String(item.sku || "").toLowerCase().includes(q) ||
+String(item.article || "").toLowerCase().includes(q) ||
+String(item.deskripsi || "").toLowerCase().includes(q) ||
+String(item.brand || "").toLowerCase().includes(q)
 
 )
+
+}
+
+
+/* =========================
+RENDER
+========================= */
+
+function render(data){
+
+if(!data || !data.length){
+result.innerHTML = "<p>Tidak ditemukan</p>"
+return
+}
+
+let html = ""
+
+data.forEach(item=>{
+
+let status = getStatus(item)
+
+html += `
+<div class="card">
+  
+  <div style="display:flex;justify-content:space-between">
+    <b>${item.deskripsi || "-"}</b>
+    <span style="
+      background:${status=="AKTIF"?"green":"gray"};
+      color:white;
+      padding:3px 8px;
+      border-radius:10px;
+      font-size:11px;
+    ">
+      ${status}
+    </span>
+  </div>
+
+  <div style="margin-top:5px">
+    ${rupiah(item.price || item.harga || "")}
+  </div>
+
+  <div style="color:green">
+    ${item.promo || ""}
+  </div>
+
+  <div style="font-size:12px;color:#666">
+    SKU: ${item.sku || "-"} | ART: ${item.article || "-"}
+  </div>
+
+  <div style="font-size:12px;color:#999">
+    Berlaku: ${item.berlaku || "-"}
+  </div>
+
+</div>
+`
+})
+
+result.innerHTML = html
 
 }
 
@@ -190,8 +263,19 @@ String(item.brand||"").toLowerCase().includes(q)
 EVENT SEARCH
 ========================= */
 
-searchInput.addEventListener("input",function(){
+searchInput.addEventListener("input", function(){
 
-let data=search(this.value)
+let val = this.value
 
-render(data
+if(!val){
+result.innerHTML = ""
+return
+}
+
+let data = search(val)
+
+console.log("Hasil:", data.length)
+
+render(data)
+
+})
