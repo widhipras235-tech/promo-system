@@ -20,11 +20,11 @@ async function loadIndex() {
   try {
     statusEl.innerText = "Loading index..."
 
-    const skuRes = await fetch("./db/sku_index.json")
+    const skuRes = await fetch("../db/sku_index.json")
     if (!skuRes.ok) throw "SKU index not found"
     skuIndex = await skuRes.json()
 
-    const articleRes = await fetch("./db/article_index.json")
+    const articleRes = await fetch("../db/article_index.json")
     if (!articleRes.ok) throw "Article index not found"
     articleIndex = await articleRes.json()
 
