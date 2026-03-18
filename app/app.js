@@ -9,7 +9,7 @@ async function loadData() {
   let index = 1
 
   while (true) {
-    const url = `./db/promo_${index}.json`
+    const url = `../db/promo_${index}.json`
     console.log("LOAD:", url)
 
     try {
@@ -21,7 +21,7 @@ async function loadData() {
       }
 
       const data = await res.json()
-      console.log("MASUK:", data.length)
+      console.log("DATA MASUK:", data.length)
 
       allData = allData.concat(data)
 
@@ -32,7 +32,10 @@ async function loadData() {
     }
   }
 
-  console.log("✅ TOTAL:", allData.length)
+  console.log("✅ TOTAL DATA:", allData.length)
+
+  // 🔥 AUTO TAMPILKAN SEMUA DATA (BIAR GA BLANK)
+  render(allData)
 }
 
 loadData()
