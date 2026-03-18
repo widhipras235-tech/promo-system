@@ -4,7 +4,7 @@ const result=document.getElementById("result")
 const searchInput=document.getElementById("search")
 
 /* =========================
-LOAD DATABASE AUTO
+LOAD DATABASE (AUTO SPLIT)
 ========================= */
 
 async function loadDatabase(){
@@ -52,7 +52,7 @@ window.onload=loadDatabase
 
 
 /* =========================
-FORMAT (MINIMAL)
+FORMAT RUPIAH
 ========================= */
 
 function rupiah(n){
@@ -69,7 +69,75 @@ return "Rp "+num.toLocaleString("id-ID")
 
 
 /* =========================
-SEARCH (FULL FLEXIBLE)
+PARSE DATE
+========================= */
+
+function parseDate(v){
+
+if(!v) return null
+
+let str=String(v).trim()
+
+if(str.includes("/")){
+
+let p=str.split("/")
+return new Date(p[2],p[1]-1,p[0])
+
+}
+
+if(str.includes("-")){
+
+let p=str.split("-")
+
+if(p[0].length==4)
+return new Date(p[0],p[1]-1,p[2])
+
+return new Date(p[2],p[1]-1,p[0])
+
+}
+
+let d=new Date(str)
+
+if(!isNaN(d)) return d
+
+return null
+
+}
+
+
+/* =========================
+STATUS PROMO
+========================= */
+
+function getStatus(item){
+
+if(!item.berlaku) return ""
+
+let p=item.berlaku.split("-")
+
+if(p.length<2) return ""
+
+let start=parseDate(p[0])
+let end=parseDate(p[1])
+
+if(!start||!end) return ""
+
+let today=new Date()
+
+today.setHours(0,0,0,0)
+start.setHours(0,0,0,0)
+end.setHours(23,59,59,999)
+
+if(today<start) return "BELUM AKTIF"
+if(today>end) return "BERAKHIR"
+
+return "AKTIF"
+
+}
+
+
+/* =========================
+SEARCH V12 (STABIL)
 ========================= */
 
 function search(q){
@@ -80,9 +148,13 @@ if(!q) return []
 
 return DB.filter(item=>
 
-Object.values(item).some(val =>
-String(val).toLowerCase().includes(q)
-)
+String(item.sku||"").toLowerCase().includes(q) ||
+
+String(item.article||"").toLowerCase().includes(q) ||
+
+String(item.deskripsi||"").toLowerCase().includes(q) ||
+
+String(item.brand||"").toLowerCase().includes(q)
 
 )
 
@@ -97,13 +169,13 @@ searchInput.addEventListener("input",function(){
 
 let data=search(this.value)
 
-render(data.slice(0,100))
+render(data.slice(0,50)) // limit 50 biar ringan
 
 })
 
 
 /* =========================
-RENDER RAW (APA ADANYA)
+RENDER UI V12
 ========================= */
 
 function render(data){
@@ -119,27 +191,33 @@ let html=""
 
 data.forEach(item=>{
 
-let rows=""
+let status=getStatus(item)
 
-/* tampilkan semua field tanpa filter */
-for(let key in item){
+/* STATUS COLOR */
+let statusClass="aktif"
+if(status==="BELUM AKTIF") statusClass="belum"
+if(status==="BERAKHIR") statusClass="berakhir"
 
-let val=item[key]
+/* HARGA */
+let hargaNormal=""
+let hargaPromo=""
 
-/* format harga jika terdeteksi angka */
-if(
-key.toLowerCase().includes("harga") ||
-key.toLowerCase().includes("price")
-){
-val=rupiah(val)
+/* jika ada promo → coret */
+if(item.harga_promo){
+
+hargaNormal=`<div class="harga-normal coret">${rupiah(item.harga_normal)}</div>`
+hargaPromo=`<div class="harga-promo">${rupiah(item.harga_promo)}</div>`
+
+}else{
+
+hargaPromo=`<div class="harga-promo">${rupiah(item.harga_normal)}</div>`
+
 }
 
-rows+=`
-<div class="row">
-<span class="label">${key}</span>
-<span class="value">${val||"-"}</span>
-</div>
-`
+/* DISKON */
+let diskonHTML=""
+if(item.diskon){
+diskonHTML=`<div class="diskon">Diskon ${item.diskon}</div>`
 }
 
 /* CARD */
@@ -147,7 +225,31 @@ html+=`
 
 <div class="card">
 
-${rows}
+<div class="header">
+
+<div class="title">
+${item.deskripsi||"-"}
+</div>
+
+<div class="status ${statusClass}">
+${status}
+</div>
+
+</div>
+
+<div class="meta">Brand: ${item.brand||"-"}</div>
+<div class="meta">SKU: ${item.sku||"-"}</div>
+
+${hargaNormal}
+${hargaPromo}
+
+${diskonHTML}
+
+<div class="meta">Promo: ${item.acara||"-"}</div>
+<div class="meta">Berlaku: ${item.berlaku||"-"}</div>
+
+<div class="meta small">File: ${item.file||"-"}</div>
+<div class="meta small">Sheet: ${item.sheet||"-"}</div>
 
 </div>
 
