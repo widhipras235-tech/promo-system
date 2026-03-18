@@ -1,231 +1,298 @@
-let DB = []
-let SKU_INDEX = {}
-let ARTICLE_INDEX = {}
+let DB=[]
 
-const result = document.getElementById("result")
-const searchInput = document.getElementById("search")
+const result=document.getElementById("result")
+const searchInput=document.getElementById("search")
+
 
 /* =========================
-LOAD DATABASE (AUTO SPLIT DETECT)
+LOAD DATABASE SPLIT
 ========================= */
 
-async function loadDatabase() {
+async function loadDatabase(){
 
-  result.innerHTML = "Memuat database..."
+result.innerHTML="Memuat database..."
 
-  try {
+try{
 
-    let i = 1
-    let all = []
+let promises=[]
 
-    while (true) {
+for(let i=1;i<=62;i++){
 
-      try {
-        let res = await fetch(`../db/promo_${i}.json`)
-        if (!res.ok) break
-
-        let data = await res.json()
-        all = all.concat(data)
-
-        i++
-      } catch (e) {
-        break
-      }
-
-    }
-
-    DB = all
-
-    SKU_INDEX = await fetch("../db/sku_index.json")
-      .then(r => r.json())
-      .catch(() => ({}))
-
-    ARTICLE_INDEX = await fetch("../db/article_index.json")
-      .then(r => r.json())
-      .catch(() => ({}))
-
-    console.log("TOTAL DATA:", DB.length)
-
-    result.innerHTML = ""
-
-  } catch (e) {
-    console.error(e)
-    result.innerHTML = "Database gagal dimuat"
-  }
+promises.push(
+fetch(`../db/promo_${i}.json`)
+.then(res=>res.json())
+.catch(()=>[])
+)
 
 }
 
-window.onload = loadDatabase
+let data=await Promise.all(promises)
+
+DB=data.flat()
+
+console.log("TOTAL DATA:",DB.length)
+
+result.innerHTML=""
+
+}catch(e){
+
+console.error(e)
+
+result.innerHTML="Database gagal dimuat"
+
+}
+
+}
+
+window.onload=loadDatabase
+
+
+
+/* =========================
+SEARCH
+========================= */
+
+searchInput.addEventListener("input",function(){
+
+let q=this.value.toLowerCase().trim()
+
+if(q.length<2){
+
+result.innerHTML=""
+return
+
+}
+
+let filtered=DB.filter(item=>{
+
+return(
+
+String(item.sku||"").toLowerCase().includes(q) ||
+String(item.artikel||"").toLowerCase().includes(q) ||
+String(item.deskripsi||"").toLowerCase().includes(q) ||
+String(item.brand||"").toLowerCase().includes(q)
+
+)
+
+})
+
+render(filtered.slice(0,50))
+
+})
+
+
 
 /* =========================
 FORMAT RUPIAH
 ========================= */
 
-function rupiah(n) {
-  if (!n) return ""
+function rupiah(n){
 
-  let num = Number(String(n).replace(/[^\d]/g, ""))
-  return "Rp " + num.toLocaleString("id-ID")
-}
+if(!n) return ""
 
-/* =========================
-DATE PARSER
-========================= */
+let num=Number(String(n).replace(/[^\d]/g,""))
 
-function parseDate(v) {
-
-  if (!v) return null
-
-  if (!isNaN(v)) {
-    let epoch = new Date(1899, 11, 30)
-    return new Date(epoch.getTime() + v * 86400000)
-  }
-
-  let str = String(v).trim()
-
-  if (str.includes("/")) {
-    let p = str.split("/")
-    return new Date(p[2], p[1] - 1, p[0])
-  }
-
-  if (str.includes("-")) {
-    let p = str.split("-")
-
-    if (p[0].length == 4)
-      return new Date(p[0], p[1] - 1, p[2])
-
-    return new Date(p[2], p[1] - 1, p[0])
-  }
-
-  let d = new Date(str)
-  if (!isNaN(d)) return d
-
-  return null
-}
-
-/* =========================
-STATUS ENGINE
-========================= */
-
-function getStatus(item) {
-
-  let start = item.mulai || item.start || item.tgl_mulai || (item.berlaku ? item.berlaku.split("-")[0] : null)
-  let end = item.akhir || item.end || item.tgl_akhir || (item.berlaku ? item.berlaku.split("-")[1] : null)
-
-  if (!start || !end) return ""
-
-  start = parseDate(start)
-  end = parseDate(end)
-
-  if (!start || !end) return ""
-
-  let today = new Date()
-
-  today.setHours(0, 0, 0, 0)
-  start.setHours(0, 0, 0, 0)
-  end.setHours(23, 59, 59, 999)
-
-  if (today < start) return "BELUM AKTIF"
-  if (today > end) return "BERAKHIR"
-
-  return "AKTIF"
-}
-
-/* =========================
-SEARCH ENGINE (FINAL FIX)
-========================= */
-
-function search(q){
-
-  q = String(q).toLowerCase().trim()
-  if(!q) return []
-
-  /* 1. SKU EXACT */
-  if(SKU_INDEX[q]){
-    return SKU_INDEX[q].map(i=>DB[i]).slice(0,200)
-  }
-
-  /* 2. ARTICLE EXACT */
-  if(ARTICLE_INDEX[q]){
-    return ARTICLE_INDEX[q].map(i=>DB[i]).slice(0,200)
-  }
-
-  /* 3. SKU PARTIAL */
-  let result = DB.filter(item =>
-    String(item.sku || "")
-      .replace(/\D/g,"")
-      .includes(q.replace(/\D/g,""))
-  )
-  if(result.length > 0) return result.slice(0,200)
-
-  /* 4. ARTICLE PARTIAL */
-  result = DB.filter(item =>
-    String(item.article || "").toLowerCase().includes(q)
-  )
-  if(result.length > 0) return result.slice(0,200)
-
-  /* 5. TEXT SEARCH */
-  result = DB.filter(item =>
-    String(item.deskripsi || "").toLowerCase().includes(q) ||
-    String(item.brand || "").toLowerCase().includes(q)
-  )
-
-  return result.slice(0,200)
+return "Rp "+num.toLocaleString("id-ID")
 
 }
 
+
+
 /* =========================
-SEARCH INPUT
+AUTO DATE PARSER (ALL EXCEL FORMAT)
 ========================= */
 
-searchInput.addEventListener("input", function () {
-  let q = this.value
-  let data = search(q)
+function parseDate(value){
 
-  render(data.slice(0, 100))
+if(!value) return null
+
+/* jika angka (Excel Serial Date) */
+
+if(!isNaN(value)){
+
+let excelEpoch = new Date(1899,11,30)
+let date = new Date(excelEpoch.getTime() + value * 86400000)
+
+return date
+
+}
+
+let str = String(value).trim()
+
+/* dd/mm/yyyy */
+
+if(str.includes("/")){
+
+let p = str.split("/")
+
+if(p.length===3){
+
+let d=parseInt(p[0])
+let m=parseInt(p[1])-1
+let y=parseInt(p[2])
+
+return new Date(y,m,d)
+
+}
+
+}
+
+/* yyyy-mm-dd */
+
+if(str.includes("-")){
+
+let p = str.split("-")
+
+if(p.length===3){
+
+/* yyyy-mm-dd */
+
+if(p[0].length===4){
+
+return new Date(p[0],p[1]-1,p[2])
+
+}
+
+/* dd-mm-yyyy */
+
+return new Date(p[2],p[1]-1,p[0])
+
+}
+
+}
+
+/* fallback javascript */
+
+let d = new Date(str)
+
+if(!isNaN(d)) return d
+
+return null
+
+}
+
+
+/* =========================
+STATUS PROMO
+========================= */
+
+function getStatus(item){
+
+let start =
+item.mulai ||
+item.start ||
+item.tgl_mulai ||
+null
+
+let end =
+item.akhir ||
+item.end ||
+item.tgl_akhir ||
+null
+
+
+/* jika ada kolom berlaku */
+
+if(item.berlaku){
+
+let parts = String(item.berlaku).split(" - ")
+
+if(parts.length===2){
+
+start = start || parts[0]
+end = end || parts[1]
+
+}
+
+}
+
+
+start = parseDate(start)
+end = parseDate(end)
+
+if(!start || !end) return ""
+
+
+let today = new Date()
+
+today.setHours(0,0,0,0)
+start.setHours(0,0,0,0)
+end.setHours(23,59,59,999)
+
+
+if(today < start) return "BELUM AKTIF"
+
+if(today > end) return "BERAKHIR"
+
+return "AKTIF"
+
+}
+
+/* =========================
+RENDER RESULT
+========================= */
+
+function render(data){
+
+if(data.length===0){
+
+result.innerHTML="Data tidak ditemukan"
+return
+
+}
+
+let html=""
+
+data.forEach(item=>{
+
+let status = getStatus(item)
+
+let statusClass="aktif"
+
+if(status==="BELUM AKTIF") statusClass="belum"
+if(status==="BERAKHIR") statusClass="berakhir"
+
+html+=`
+
+<div class="card">
+
+<div class="card-header">
+
+<div class="title">
+${item.deskripsi || "-"}
+</div>
+
+<div class="status ${statusClass}">
+${status}
+</div>
+
+</div>
+
+<div class="meta">Brand: ${item.brand||"-"}</div>
+<div class="meta">SKU: ${item.sku||"-"}</div>
+
+<div class="price-normal">
+${rupiah(item.harga_normal)}
+</div>
+
+<div class="price-promo">
+${item.harga_promo || "-"}
+</div>
+
+<div class="meta">Promo: ${item.promo || "-"}</div>
+
+<div class="meta">Berlaku: ${item.berlaku||"-"}</div>
+
+<div class="meta">Divisi: ${item.division||"-"}</div>
+
+<div class="meta">Sheet: ${item.sheet||"-"}</div>
+
+</div>
+
+`
+
 })
 
-/* =========================
-RENDER
-========================= */
+result.innerHTML=html
 
-function render(data) {
-
-  if (data.length === 0) {
-    result.innerHTML = "Data tidak ditemukan"
-    return
-  }
-
-  let html = ""
-
-  data.forEach(item => {
-
-    let status = getStatus(item)
-
-    let statusClass = "aktif"
-    if (status === "BELUM AKTIF") statusClass = "belum"
-    if (status === "BERAKHIR") statusClass = "berakhir"
-
-    html += `
-    <div class="card">
-      <div class="card-header">
-        <div class="title">${item.deskripsi || "-"}</div>
-        <div class="status ${statusClass}">${status || ""}</div>
-      </div>
-
-      <div class="meta">Brand: ${item.brand || "-"}</div>
-      <div class="meta">SKU: ${item.sku || "-"}</div>
-
-      <div class="price-normal">${rupiah(item.harga_normal)}</div>
-      <div class="price-promo">${item.harga_promo || "-"}</div>
-
-      <div class="meta">Promo: ${item.acara || "-"}</div>
-      <div class="meta">Berlaku: ${item.berlaku || "-"}</div>
-      <div class="meta">Divisi: ${item.division || "-"}</div>
-      <div class="meta">Sheet: ${item.sheet || "-"}</div>
-    </div>
-    `
-  })
-
-  result.innerHTML = html
 }
