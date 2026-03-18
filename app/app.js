@@ -1,44 +1,26 @@
-let allData = []
-let currentData = []
+let skuIndex = {}
+let articleIndex = {}
+let cache = {}
 
 /* =========================
-LOAD ALL JSON
+LOAD INDEX (RINGAN)
 ========================= */
 
-async function loadData() {
-  let index = 1
+async function loadIndex() {
+  try {
+    const skuRes = await fetch("./db/sku_index.json")
+    skuIndex = await skuRes.json()
 
-  while (true) {
-    const url = `./db/promo_${index}.json`
-    console.log("LOAD:", url)
+    const articleRes = await fetch("./db/article_index.json")
+    articleIndex = await articleRes.json()
 
-    try {
-      const res = await fetch(url)
-
-      if (!res.ok) {
-        console.log("STOP di:", url)
-        break
-      }
-
-      const data = await res.json()
-      console.log("DATA:", data.length)
-
-      allData = allData.concat(data)
-
-      index++
-    } catch (err) {
-      console.log("ERROR:", err)
-      break
-    }
+    console.log("✅ Index loaded")
+  } catch (err) {
+    console.log("❌ Gagal load index", err)
   }
-
-  console.log("✅ TOTAL:", allData.length)
-
-  // 🔥 tampilkan langsung
-  render(allData)
 }
 
-loadData()
+loadIndex()
 
 /* =========================
 UTILS
@@ -50,45 +32,80 @@ function formatRupiah(num) {
 }
 
 function formatDiskon(val) {
-  if (!val) return null
+  if (!val) return "-"
 
   if (!isNaN(val)) {
     let num = Number(val)
-
-    if (num <= 1) {
-      return Math.round(num * 100) + "%"
-    } else {
-      return num + "%"
-    }
+    return num <= 1 ? Math.round(num * 100) + "%" : num + "%"
   }
 
   return val
 }
 
-function formatTanggal(val) {
-  if (!val) return "-"
-  return val
+function getFileName(path) {
+  return path ? path.split(/[\\/]/).pop() : "-"
 }
 
-function getFileName(path) {
-  if (!path) return "-"
-  return path.split(/[\\/]/).pop()
+/* =========================
+LOAD FILE PER KEBUTUHAN
+========================= */
+
+async function loadFile(fileIndex) {
+  if (cache[fileIndex]) return cache[fileIndex]
+
+  const res = await fetch(`./db/promo_${fileIndex}.json`)
+  const data = await res.json()
+
+  cache[fileIndex] = data
+  return data
 }
 
 /* =========================
 SEARCH
 ========================= */
 
-function searchData(keyword) {
+async function searchData(keyword) {
   keyword = keyword.toLowerCase()
 
-  return allData.filter(item => {
-    return (
-      (item.sku && item.sku.toLowerCase().includes(keyword)) ||
-      (item.article && item.article.toLowerCase().includes(keyword)) ||
-      (item.search && item.search.includes(keyword))
-    )
+  let indexes = new Set()
+
+  // 🔥 dari SKU
+  if (skuIndex[keyword]) {
+    skuIndex[keyword].forEach(i => indexes.add(i))
+  }
+
+  // 🔥 dari Article
+  if (articleIndex[keyword]) {
+    articleIndex[keyword].forEach(i => indexes.add(i))
+  }
+
+  // ❗ kalau tidak ketemu exact → fallback (optional)
+  if (indexes.size === 0) {
+    return []
+  }
+
+  // 🔥 tentukan file mana saja
+  let fileMap = {}
+
+  indexes.forEach(i => {
+    const fileIndex = Math.floor(i / 5000) + 1
+
+    if (!fileMap[fileIndex]) fileMap[fileIndex] = []
+    fileMap[fileIndex].push(i)
   })
+
+  let results = []
+
+  for (let fileIndex in fileMap) {
+    const data = await loadFile(fileIndex)
+
+    fileMap[fileIndex].forEach(i => {
+      const localIndex = i % 5000
+      if (data[localIndex]) results.push(data[localIndex])
+    })
+  }
+
+  return results
 }
 
 /* =========================
@@ -105,11 +122,8 @@ function render(data) {
   }
 
   data.forEach(item => {
-    const hargaNormal = formatRupiah(item.harga_normal)
-    const hargaPromo = formatRupiah(item.harga_promo)
     const diskon = formatDiskon(item.diskon || item.raw?.diskon)
-
-    const isDiskon = diskon && diskon !== null
+    const isDiskon = diskon !== "-"
 
     const el = document.createElement("div")
     el.className = "card"
@@ -124,21 +138,21 @@ function render(data) {
         Harga Normal: 
         ${
           isDiskon
-            ? `<span style="text-decoration:line-through;color:gray">${hargaNormal}</span>`
-            : hargaNormal
+            ? `<span style="text-decoration:line-through;color:gray">${formatRupiah(item.harga_normal)}</span>`
+            : formatRupiah(item.harga_normal)
         }
       </div>
 
       <div style="color:red;font-weight:bold;font-size:18px">
-        Harga Promo: ${!isNaN(item.harga_promo) ? hargaPromo : (item.harga_promo || "-")}
+        Harga Promo: ${!isNaN(item.harga_promo) ? formatRupiah(item.harga_promo) : (item.harga_promo || "-")}
       </div>
 
       <div style="color:green;font-weight:bold">
-        Diskon: ${diskon || "-"}
+        Diskon: ${diskon}
       </div>
 
       <div>
-        Berlaku: ${formatTanggal(item.mulai)} - ${formatTanggal(item.akhir)}
+        Berlaku: ${item.mulai || "-"} - ${item.akhir || "-"}
       </div>
 
       <div><b>Acara:</b> ${item.acara || item.raw?.acara || "-"}</div>
@@ -154,14 +168,14 @@ function render(data) {
 EVENT
 ========================= */
 
-document.getElementById("search").addEventListener("input", e => {
-  const keyword = e.target.value
+document.getElementById("search").addEventListener("input", async e => {
+  const keyword = e.target.value.trim()
 
   if (!keyword) {
-    render([])
+    document.getElementById("result").innerHTML = ""
     return
   }
 
-  const result = searchData(keyword)
+  const result = await searchData(keyword)
   render(result)
 })
