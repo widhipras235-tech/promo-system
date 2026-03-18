@@ -2,8 +2,6 @@ let DB = []
 
 const result = document.getElementById("result")
 
-console.log("Loading database...")
-
 /* ===============================
 LOAD DATABASE SPLIT
 =============================== */
@@ -45,8 +43,6 @@ console.error("Database gagal dimuat",e)
 result.innerHTML="Database gagal dimuat"
 
 }
-
-console.log("Load file",i)
 
 }
 
