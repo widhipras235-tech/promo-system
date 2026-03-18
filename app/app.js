@@ -5,58 +5,79 @@ const result = document.getElementById("result")
 const searchInput = document.getElementById("search")
 
 /* =========================
-LOAD DATABASE (AUTO MULTI FILE)
+LOAD DATABASE (SUPER STABIL)
 ========================= */
 
 async function loadDatabase() {
   result.innerHTML = "Memuat database..."
 
-  let i = 1
   let total = 0
+  let i = 1
+  let gagal = 0
 
-  while (true) {
-    try {
-      console.log("Ambil file:", `db/promo_${i}.json`)
+  while (i <= 100) { // batas aman max 100 file
+    let loaded = false
 
-      const res = await fetch(`db/promo_${i}.json`)
+    const paths = [
+      `db/promo_${i}.json`,
+      `./db/promo_${i}.json`
+    ]
 
-      if (!res.ok) {
-        console.log("STOP di file:", i)
-        break
+    for (let p of paths) {
+      try {
+        console.log("Coba load:", p)
+
+        const res = await fetch(p)
+
+        if (!res.ok) continue
+
+        const data = await res.json()
+
+        if (Array.isArray(data) && data.length > 0) {
+          DB = DB.concat(data)
+          total += data.length
+
+          console.log(`✅ Loaded ${p} (${data.length})`)
+          loaded = true
+          break
+        }
+
+      } catch (err) {
+        console.log("Error:", p, err.message)
       }
+    }
 
-      const data = await res.json()
+    if (!loaded) {
+      gagal++
+      console.log(`❌ File ke-${i} tidak ditemukan`)
+    } else {
+      gagal = 0
+    }
 
-      console.log("DATA:", data.length)
-
-      DB = DB.concat(data)
-      total += data.length
-
-      i++
-    } catch (err) {
-      console.log("ERROR:", err)
+    // kalau gagal 3x berturut-turut → stop
+    if (gagal >= 3) {
+      console.log("STOP loading (file habis)")
       break
     }
+
+    i++
   }
 
-  console.log("TOTAL FINAL:", total)
+  console.log("TOTAL DATA:", total)
 
   if (total === 0) {
-    result.innerHTML = "❌ Database kosong / gagal load"
+    result.innerHTML = `
+      ❌ Database tidak terbaca<br><br>
+      ⚠️ Cek:
+      <br>- Folder db benar
+      <br>- Jalankan via server (bukan file://)
+      <br>- File JSON ada isinya
+    `
   } else {
     result.innerHTML = `✅ Database siap (${total} data)`
   }
 
   READY = true
-}
-
-    result.innerHTML = `Database siap (${total} data)`
-    console.log("TOTAL DB:", total)
-
-  } catch (err) {
-    result.innerHTML = "❌ Gagal load database"
-    console.error(err)
-  }
 }
 
 /* =========================
@@ -67,7 +88,6 @@ function formatRupiah(val) {
   if (!val) return "-"
   let num = Number(val.toString().replace(/[^\d]/g, ""))
   if (isNaN(num)) return val
-
   return "Rp " + num.toLocaleString("id-ID")
 }
 
@@ -77,12 +97,12 @@ function hitungDiskon(normal, promo) {
 
   if (!n || !p) return "-"
 
-  let disc = ((n - p) / n) * 100
-  return Math.round(disc) + "%"
+  let d = ((n - p) / n) * 100
+  return Math.round(d) + "%"
 }
 
 /* =========================
-RENDER DATA
+RENDER
 ========================= */
 
 function render(data) {
@@ -126,7 +146,7 @@ function render(data) {
 }
 
 /* =========================
-SEARCH ENGINE (FAST)
+SEARCH (OPTIMIZED)
 ========================= */
 
 function searchData(keyword) {
@@ -142,16 +162,14 @@ function searchData(keyword) {
     return
   }
 
-  const results = DB.filter(item => {
-    return (
-      (item.sku && item.sku.toString().toLowerCase().includes(keyword)) ||
-      (item.article && item.article.toString().toLowerCase().includes(keyword)) ||
-      (item.deskripsi && item.deskripsi.toLowerCase().includes(keyword)) ||
-      (item.brand && item.brand.toLowerCase().includes(keyword))
-    )
-  })
+  const results = DB.filter(item =>
+    (item.sku && item.sku.toString().toLowerCase().includes(keyword)) ||
+    (item.article && item.article.toString().toLowerCase().includes(keyword)) ||
+    (item.deskripsi && item.deskripsi.toLowerCase().includes(keyword)) ||
+    (item.brand && item.brand.toLowerCase().includes(keyword))
+  )
 
-  render(results.slice(0, 200)) // limit biar tidak berat
+  render(results.slice(0, 200))
 }
 
 /* =========================
