@@ -1,14 +1,11 @@
 let DB=[]
-let SKU_INDEX={}
-let ARTICLE_INDEX={}
 
 const result=document.getElementById("result")
 const searchInput=document.getElementById("search")
 
-
-/* ========================
-LOAD DATABASE
-======================== */
+/* =========================
+LOAD DATABASE AUTO
+========================= */
 
 async function loadDatabase(){
 
@@ -16,24 +13,27 @@ result.innerHTML="Memuat database..."
 
 try{
 
-let promises=[]
+let i=1
+let all=[]
 
-for(let i=1;i<=62;i++){
+while(true){
 
-promises.push(
-fetch(`../db/promo_${i}.json`)
-.then(r=>r.json())
-.catch(()=>[])
-)
+try{
+let res=await fetch(`../db/promo_${i}.json`)
+if(!res.ok) break
+
+let data=await res.json()
+all=all.concat(data)
+
+i++
+
+}catch(e){
+break
+}
 
 }
 
-let data=await Promise.all(promises)
-
-DB=data.flat()
-
-SKU_INDEX=await fetch("../db/sku_index.json").then(r=>r.json())
-ARTICLE_INDEX=await fetch("../db/article_index.json").then(r=>r.json())
+DB=all
 
 console.log("TOTAL DATA:",DB.length)
 
@@ -51,9 +51,9 @@ result.innerHTML="Database gagal dimuat"
 window.onload=loadDatabase
 
 
-/* ========================
+/* =========================
 FORMAT RUPIAH
-======================== */
+========================= */
 
 function rupiah(n){
 
@@ -61,69 +61,54 @@ if(!n) return ""
 
 let num=Number(String(n).replace(/[^\d]/g,""))
 
+if(!num) return n
+
 return "Rp "+num.toLocaleString("id-ID")
 
 }
 
 
-/* ========================
-DATE PARSER
-======================== */
+/* =========================
+STATUS
+========================= */
 
 function parseDate(v){
 
 if(!v) return null
 
-if(!isNaN(v)){
-
-let epoch=new Date(1899,11,30)
-return new Date(epoch.getTime()+v*86400000)
-
-}
-
-let str=String(v).trim()
-
-if(str.includes("/")){
-
-let p=str.split("/")
-return new Date(p[2],p[1]-1,p[0])
-
-}
-
-if(str.includes("-")){
-
-let p=str.split("-")
-
-if(p[0].length==4)
-return new Date(p[0],p[1]-1,p[2])
-
-return new Date(p[2],p[1]-1,p[0])
-
-}
-
-let d=new Date(str)
+let d=new Date(v)
 
 if(!isNaN(d)) return d
+
+if(String(v).includes("-")){
+
+let p=v.split("-")
+
+return new Date(p[2],p[1]-1,p[0])
+
+}
+
+if(String(v).includes("/")){
+
+let p=v.split("/")
+return new Date(p[2],p[1]-1,p[0])
+
+}
 
 return null
 
 }
 
-
-/* ========================
-STATUS ENGINE
-======================== */
-
 function getStatus(item){
 
-let start=item.mulai||item.start||item.tgl_mulai||(item.berlaku?item.berlaku.split("-")[0]:null)
+if(!item.berlaku) return ""
 
-let end=item.akhir||item.end||item.tgl_akhir||(item.berlaku?item.berlaku.split("-")[1]:null)
+let p=item.berlaku.split("-")
 
-if(!start||!end) return ""
+if(p.length<2) return ""
 
-start=parseDate(start)
-end=parseDate(end)
+let start=parseDate(p[0])
+let end=parseDate(p[1])
 
 if(!start||!end) return ""
 
@@ -141,37 +126,17 @@ return "AKTIF"
 }
 
 
-/* ========================
-FAST SEARCH ENGINE
-======================== */
+/* =========================
+SEARCH
+========================= */
 
 function search(q){
 
-q=q.toLowerCase().trim()
+q=String(q).toLowerCase().trim()
 
-if(q.length<2) return []
+if(!q) return []
 
-/* SKU EXACT */
-
-if(SKU_INDEX[q]){
-
-return SKU_INDEX[q].map(i=>DB[i])
-
-}
-
-/* ARTICLE EXACT */
-
-if(ARTICLE_INDEX[q]){
-
-return ARTICLE_INDEX[q].map(i=>DB[i])
-
-}
-
-/* FALLBACK SEARCH */
-
-return DB.filter(item=>{
-
-return(
+return DB.filter(item=>
 
 String(item.sku||"").toLowerCase().includes(q) ||
 
@@ -183,29 +148,25 @@ String(item.brand||"").toLowerCase().includes(q)
 
 )
 
-})
-
 }
 
 
-/* ========================
-SEARCH INPUT
-======================== */
+/* =========================
+EVENT SEARCH
+========================= */
 
 searchInput.addEventListener("input",function(){
 
-let q=this.value
+let data=search(this.value)
 
-let data=search(q)
-
-render(data.slice(0,50))
+render(data.slice(0,100))
 
 })
 
 
-/* ========================
-RENDER RESULT
-======================== */
+/* =========================
+RENDER UI SESUAI GAMBAR
+========================= */
 
 function render(data){
 
@@ -222,45 +183,76 @@ data.forEach(item=>{
 
 let status=getStatus(item)
 
-let statusClass="aktif"
+/* STATUS BADGE */
+let statusHTML=""
 
-if(status==="BELUM AKTIF") statusClass="belum"
-if(status==="BERAKHIR") statusClass="berakhir"
+if(status==="AKTIF"){
+statusHTML=`<span class="badge aktif">AKTIF</span>`
+}
+else if(status==="BELUM AKTIF"){
+statusHTML=`<span class="badge belum">BELUM AKTIF</span>`
+}
+else if(status==="BERAKHIR"){
+statusHTML=`<span class="badge berakhir">BERAKHIR</span>`
+}
 
+/* LOGIKA HARGA */
+let hargaNormal=""
+let hargaPromo=""
+let diskonHTML=""
+
+/* jika ada harga promo → tampilkan coret */
+if(item.harga_promo){
+
+hargaNormal=`<div class="harga-normal coret">${rupiah(item.harga_normal)}</div>`
+hargaPromo=`<div class="harga-promo">${rupiah(item.harga_promo)}</div>`
+
+}else{
+
+hargaPromo=`<div class="harga-promo">${rupiah(item.harga_normal)}</div>`
+
+}
+
+/* diskon hanya jika ada */
+if(item.diskon){
+diskonHTML=`<div class="diskon">Diskon ${item.diskon}</div>`
+}
+
+/* CARD */
 html+=`
 
 <div class="card">
 
-<div class="card-header">
+<div class="header">
 
 <div class="title">
 ${item.deskripsi||"-"}
 </div>
 
-<div class="status ${statusClass}">
-${status}
-</div>
+${statusHTML}
 
 </div>
 
-<div class="meta">Brand: ${item.brand||"-"}</div>
-<div class="meta">SKU: ${item.sku||"-"}</div>
+${hargaNormal}
+${hargaPromo}
 
-<div class="price-normal">
-${rupiah(item.harga_normal)}
+${diskonHTML}
+
+<div class="meta">
+Berlaku: ${item.berlaku||"-"}
 </div>
 
-<div class="price-promo">
-${item.harga_promo||"-"}
+<div class="meta">
+Promo: ${item.acara||"-"}
 </div>
 
-<div class="meta">Promo: ${item.acara||"-"}</div>
+<div class="meta small">
+📄 ${item.file||"-"}
+</div>
 
-<div class="meta">Berlaku: ${item.berlaku||"-"}</div>
-
-<div class="meta">Divisi: ${item.division||"-"}</div>
-
-<div class="meta">Sheet: ${item.sheet||"-"}</div>
+<div class="meta small">
+📑 ${item.sheet||"-"}
+</div>
 
 </div>
 
