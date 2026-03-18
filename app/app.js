@@ -1,12 +1,11 @@
 let skuIndex = {}
 let articleIndex = {}
 let cache = {}
+let isReady = false
 
 /* =========================
-LOAD INDEX (RINGAN)
+LOAD INDEX (WAJIB)
 ========================= */
-console.log("SKU INDEX:", Object.keys(skuIndex).length)
-console.log("ARTICLE INDEX:", Object.keys(articleIndex).length)
 
 async function loadIndex() {
   try {
@@ -17,8 +16,15 @@ async function loadIndex() {
     articleIndex = await articleRes.json()
 
     console.log("✅ Index loaded")
+    console.log("SKU:", Object.keys(skuIndex).length)
+    console.log("ARTICLE:", Object.keys(articleIndex).length)
+
+    isReady = true
+    document.getElementById("status").innerText = "✅ Siap digunakan"
+
   } catch (err) {
     console.log("❌ Gagal load index", err)
+    document.getElementById("status").innerText = "❌ Gagal load data"
   }
 }
 
@@ -49,7 +55,7 @@ function getFileName(path) {
 }
 
 /* =========================
-LOAD FILE PER KEBUTUHAN
+LOAD FILE (SMART CACHE)
 ========================= */
 
 async function loadFile(fileIndex) {
@@ -63,7 +69,7 @@ async function loadFile(fileIndex) {
 }
 
 /* =========================
-SEARCH
+SEARCH ENGINE (OPTIMIZED)
 ========================= */
 
 async function searchData(keyword) {
@@ -71,13 +77,14 @@ async function searchData(keyword) {
 
   let indexes = new Set()
 
-  // 🔥 cari sebagian (bukan exact)
+  // 🔥 SKU (partial match)
   Object.keys(skuIndex).forEach(key => {
     if (key.includes(keyword)) {
       skuIndex[key].forEach(i => indexes.add(i))
     }
   })
 
+  // 🔥 ARTICLE (partial match)
   Object.keys(articleIndex).forEach(key => {
     if (key.includes(keyword)) {
       articleIndex[key].forEach(i => indexes.add(i))
@@ -110,7 +117,7 @@ async function searchData(keyword) {
 }
 
 /* =========================
-RENDER
+RENDER UI
 ========================= */
 
 function render(data) {
@@ -145,7 +152,11 @@ function render(data) {
       </div>
 
       <div style="color:red;font-weight:bold;font-size:18px">
-        Harga Promo: ${!isNaN(item.harga_promo) ? formatRupiah(item.harga_promo) : (item.harga_promo || "-")}
+        Harga Promo: ${
+          !isNaN(item.harga_promo)
+            ? formatRupiah(item.harga_promo)
+            : (item.harga_promo || "-")
+        }
       </div>
 
       <div style="color:green;font-weight:bold">
@@ -166,11 +177,16 @@ function render(data) {
 }
 
 /* =========================
-EVENT
+EVENT SEARCH
 ========================= */
 
 document.getElementById("search").addEventListener("input", async e => {
   const keyword = e.target.value.trim()
+
+  if (!isReady) {
+    console.log("⏳ Index belum siap")
+    return
+  }
 
   if (!keyword) {
     document.getElementById("result").innerHTML = ""
