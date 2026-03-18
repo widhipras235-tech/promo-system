@@ -15,18 +15,26 @@ result.innerHTML = "Memuat index..."
 
 try{
 
-let skuRes = await fetch("/db/sku_index.json")
-let articleRes = await fetch("/db/article_index.json")
+let skuRes = await fetch("../db/sku_index.json")
+let articleRes = await fetch("../db/article_index.json")
+
+if(!skuRes.ok || !articleRes.ok){
+throw "Index tidak ditemukan"
+}
 
 SKU_INDEX = await skuRes.json()
 ARTICLE_INDEX = await articleRes.json()
 
 result.innerHTML = "Siap digunakan"
-console.log("Index loaded")
+
+console.log("Index loaded", {
+sku:Object.keys(SKU_INDEX).length,
+article:Object.keys(ARTICLE_INDEX).length
+})
 
 }catch(e){
 
-console.error(e)
+console.error("ERROR LOAD INDEX:",e)
 result.innerHTML = "Gagal load index"
 
 }
