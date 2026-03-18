@@ -9,20 +9,30 @@ async function loadData() {
   let index = 1
 
   while (true) {
+    const url = `./db/promo_${index}.json`
+    console.log("LOAD:", url)
+
     try {
-      const res = await fetch(`../db/promo_${index}.json`)
-      if (!res.ok) break
+      const res = await fetch(url)
+
+      if (!res.ok) {
+        console.log("STOP di:", url)
+        break
+      }
 
       const data = await res.json()
+      console.log("MASUK:", data.length)
+
       allData = allData.concat(data)
 
       index++
-    } catch {
+    } catch (err) {
+      console.log("ERROR:", err)
       break
     }
   }
 
-  console.log("✅ Total loaded:", allData.length)
+  console.log("✅ TOTAL:", allData.length)
 }
 
 loadData()
