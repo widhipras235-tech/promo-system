@@ -5,6 +5,8 @@ let cache = {}
 /* =========================
 LOAD INDEX (RINGAN)
 ========================= */
+console.log("SKU INDEX:", Object.keys(skuIndex).length)
+console.log("ARTICLE INDEX:", Object.keys(articleIndex).length)
 
 async function loadIndex() {
   try {
@@ -69,22 +71,21 @@ async function searchData(keyword) {
 
   let indexes = new Set()
 
-  // 🔥 dari SKU
-  if (skuIndex[keyword]) {
-    skuIndex[keyword].forEach(i => indexes.add(i))
-  }
+  // 🔥 cari sebagian (bukan exact)
+  Object.keys(skuIndex).forEach(key => {
+    if (key.includes(keyword)) {
+      skuIndex[key].forEach(i => indexes.add(i))
+    }
+  })
 
-  // 🔥 dari Article
-  if (articleIndex[keyword]) {
-    articleIndex[keyword].forEach(i => indexes.add(i))
-  }
+  Object.keys(articleIndex).forEach(key => {
+    if (key.includes(keyword)) {
+      articleIndex[key].forEach(i => indexes.add(i))
+    }
+  })
 
-  // ❗ kalau tidak ketemu exact → fallback (optional)
-  if (indexes.size === 0) {
-    return []
-  }
+  if (indexes.size === 0) return []
 
-  // 🔥 tentukan file mana saja
   let fileMap = {}
 
   indexes.forEach(i => {
