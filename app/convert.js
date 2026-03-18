@@ -101,23 +101,36 @@ excelFiles.forEach(filePath => {
         const cleaned = json
           .map(row => {
             let newRow = {}
+            let rawRow = {}
 
             Object.keys(row).forEach(key => {
               const nk = normalizeKey(key)
+              const value = row[key]
 
-              if (nk.includes("sku")) newRow.sku = String(row[key]).trim()
-              else if (nk.includes("article")) newRow.article = String(row[key]).trim()
-              else if (nk.includes("desc")) newRow.deskripsi = row[key]
-              else if (nk.includes("brand")) newRow.brand = row[key]
-              else if (nk.includes("normal")) newRow.harga_normal = row[key]
-              else if (nk.includes("promo")) newRow.harga_promo = row[key]
-              else if (nk.includes("mulai") || nk.includes("start")) newRow.mulai = row[key]
-              else if (nk.includes("akhir") || nk.includes("end")) newRow.akhir = row[key]
-              else if (nk.includes("divisi") || nk.includes("dept")) newRow.divisi = row[key]
+              // 🔹 SIMPAN SEMUA DATA ASLI
+              rawRow[nk] = value
+
+              // 🔹 FIELD PENTING (untuk search cepat)
+              if (nk.includes("sku")) newRow.sku = String(value).trim()
+              else if (nk.includes("article")) newRow.article = String(value).trim()
+              else if (nk.includes("desc")) newRow.deskripsi = value
+              else if (nk.includes("brand")) newRow.brand = value
+              else if (nk.includes("normal")) newRow.harga_normal = value
+              else if (nk.includes("promo")) newRow.harga_promo = value
+              else if (nk.includes("mulai") || nk.includes("start")) newRow.mulai = value
+              else if (nk.includes("akhir") || nk.includes("end")) newRow.akhir = value
+              else if (nk.includes("divisi") || nk.includes("dept")) newRow.divisi = value
             })
+
+            // 🔥 FULL TEXT SEARCH
+            const searchText = Object.values(rawRow)
+              .join(" ")
+              .toLowerCase()
 
             return {
               ...newRow,
+              raw: rawRow,       // semua data excel
+              search: searchText,
               sheet: sheetName,
               source: path.basename(filePath)
             }
@@ -125,7 +138,8 @@ excelFiles.forEach(filePath => {
           .filter(item =>
             item.sku ||
             item.article ||
-            item.deskripsi
+            item.deskripsi ||
+            Object.keys(item.raw).length > 0
           )
 
         console.log(`✔ Sheet: ${sheetName} → ${cleaned.length} data`)
