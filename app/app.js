@@ -6,6 +6,13 @@ const result = document.getElementById("result")
 
 
 /* ===============================
+BASE PATH AUTO (ANTI ERROR PATH)
+=============================== */
+
+const BASE_PATH = location.pathname.includes("/app/") ? "../db/" : "/db/"
+
+
+/* ===============================
 LOAD INDEX
 =============================== */
 
@@ -15,8 +22,8 @@ result.innerHTML = "Memuat index..."
 
 try{
 
-let skuRes = await fetch("../db/sku_index.json")
-let articleRes = await fetch("../db/article_index.json")
+let skuRes = await fetch(BASE_PATH + "sku_index.json")
+let articleRes = await fetch(BASE_PATH + "article_index.json")
 
 if(!skuRes.ok || !articleRes.ok){
 throw "Index tidak ditemukan"
@@ -25,16 +32,17 @@ throw "Index tidak ditemukan"
 SKU_INDEX = await skuRes.json()
 ARTICLE_INDEX = await articleRes.json()
 
+// NORMALISASI JADI UPPERCASE
+SKU_INDEX = normalizeIndex(SKU_INDEX)
+ARTICLE_INDEX = normalizeIndex(ARTICLE_INDEX)
+
 result.innerHTML = "Siap digunakan"
 
-console.log("Index loaded", {
-sku:Object.keys(SKU_INDEX).length,
-article:Object.keys(ARTICLE_INDEX).length
-})
+console.log("Index OK")
 
 }catch(e){
 
-console.error("ERROR LOAD INDEX:",e)
+console.error("Load index error:",e)
 result.innerHTML = "Gagal load index"
 
 }
@@ -46,16 +54,39 @@ window.addEventListener("load", loadIndex)
 
 
 /* ===============================
-AMBIL FILE SESUAI INDEX
+NORMALISASI INDEX
 =============================== */
 
-async function getDataFromFile(file){
+function normalizeIndex(obj){
+
+let newObj = {}
+
+for(let key in obj){
+
+let k = key.toString().trim().toUpperCase()
+let v = obj[key].replace("db/","").trim()
+
+newObj[k] = v
+
+}
+
+return newObj
+
+}
+
+
+
+/* ===============================
+LOAD FILE (CACHE)
+=============================== */
+
+async function getData(file){
 
 if(DB_CACHE[file]) return DB_CACHE[file]
 
 try{
 
-let res = await fetch(`/db/${file}`)
+let res = await fetch(BASE_PATH + file)
 
 if(!res.ok) return []
 
@@ -67,7 +98,7 @@ return data
 
 }catch(e){
 
-console.error("Gagal load file:",file)
+console.error("Load file gagal:",file)
 return []
 
 }
@@ -77,37 +108,24 @@ return []
 
 
 /* ===============================
-SEARCH ENGINE (FAST)
+SEARCH ENGINE FINAL
 =============================== */
 
 async function search(){
 
-let q = document
-.getElementById("search")
-.value
-.trim()
-.toUpperCase()
+let q = document.getElementById("search").value.trim().toUpperCase()
 
 if(!q) return
-
 
 result.innerHTML = "Mencari..."
 
 
-/* ==== CARI DI INDEX ==== */
+// ==== CARI DI INDEX ====
 
-let file = null
-
-if(SKU_INDEX[q]){
-file = SKU_INDEX[q]
-}
-
-else if(ARTICLE_INDEX[q]){
-file = ARTICLE_INDEX[q]
-}
+let file = SKU_INDEX[q] || ARTICLE_INDEX[q] || null
 
 
-/* ==== JIKA TIDAK ADA DI INDEX ==== */
+// ==== JIKA INDEX TIDAK KETEMU ====
 
 if(!file){
 
@@ -117,24 +135,39 @@ return
 }
 
 
-/* ==== LOAD FILE TERKAIT ==== */
+// ==== LOAD FILE ====
 
-let data = await getDataFromFile(file)
+let data = await getData(file)
 
 
-/* ==== CARI DI DALAM FILE ==== */
+// ==== CARI DATA ====
 
-let found = data.find(item =>{
+let found = data.find(item => {
+
+let sku = (item.sku || item.SKU || "").toString().trim().toUpperCase()
+let artikel = (item.artikel || item.ARTIKEL || "").toString().trim().toUpperCase()
+let desk = (item.deskripsi || item.DESKRIPSI || "").toString().toUpperCase()
+let brand = (item.brand || item.BRAND || "").toString().toUpperCase()
 
 return (
-
-(item.sku && item.sku.toString().toUpperCase() === q) ||
-(item.artikel && item.artikel.toString().toUpperCase() === q) ||
-(item.deskripsi && item.deskripsi.toUpperCase().includes(q))
-
+sku === q ||
+artikel === q ||
+desk.includes(q) ||
+brand.includes(q)
 )
 
 })
+
+
+// ==== FALLBACK SEARCH (ANTI GAGAL) ====
+
+if(!found){
+
+found = data.find(item => {
+return JSON.stringify(item).toUpperCase().includes(q)
+})
+
+}
 
 
 if(!found){
@@ -160,7 +193,6 @@ function rupiah(n){
 if(!n) return ""
 
 n = Number(n)
-
 if(isNaN(n)) return ""
 
 return "Rp " + n.toLocaleString("id-ID")
@@ -258,7 +290,8 @@ let hidePromo = false
 if(
 promoText.includes("B3D10") ||
 promoText.includes("B1G1") ||
-promoText.includes("B2G1")
+promoText.includes("B2G1") ||
+promoText.includes("B1G2")
 ){
 promoHTML = promoText
 hidePromo = true
@@ -322,15 +355,15 @@ result.innerHTML = `
 
 <div class="card">
 
-<h3>${item.deskripsi || ""}</h3>
+<h3>${item.deskripsi || item.DESKRIPSI || ""}</h3>
 
 <div class="${statusClass}">${status}</div>
 
 <br>
 
-<b>Brand :</b> ${item.brand || ""}<br>
-<b>SKU :</b> ${item.sku || ""}<br>
-<b>Artikel :</b> ${item.artikel || ""}<br>
+<b>Brand :</b> ${item.brand || item.BRAND || ""}<br>
+<b>SKU :</b> ${item.sku || item.SKU || ""}<br>
+<b>Artikel :</b> ${item.artikel || item.ARTIKEL || ""}<br>
 
 <br>
 
