@@ -1,136 +1,108 @@
-/* =========================
-INIT
-========================= */
+let DB=[]
+let SKU_INDEX={}
+let ARTICLE_INDEX={}
 
-let DB = []
-let SKU_INDEX = {}
-let ARTICLE_INDEX = {}
-
-const result = document.getElementById("result")
-const searchInput = document.getElementById("search")
+const result=document.getElementById("result")
+const searchInput=document.getElementById("search")
 
 
-/* =========================
-LOAD DATABASE (AUTO LOOP FILE)
-========================= */
+/* ========================
+LOAD DATABASE
+======================== */
 
 async function loadDatabase(){
 
-result.innerHTML = "Memuat database..."
+result.innerHTML="Memuat database..."
 
 try{
 
-let i = 1
-let all = []
+let promises=[]
 
-while(true){
+for(let i=1;i<=62;i++){
 
-try{
-let res = await fetch(`../db/promo_${i}.json`)
-
-if(!res.ok) break
-
-let data = await res.json()
-
-if(Array.isArray(data)){
-all = all.concat(data)
-}else{
-console.warn("Format bukan array di file:", i)
-}
-
-console.log("Loaded file:", i, "Jumlah:", data.length)
-
-i++
-
-}catch(err){
-console.warn("Stop load di file:", i)
-break
-}
+promises.push(
+fetch(`../db/promo_${i}.json`)
+.then(r=>r.json())
+.catch(()=>[])
+)
 
 }
 
-DB = all
+let data=await Promise.all(promises)
 
-/* =========================
-BUILD INDEX
-========================= */
+DB=data.flat()
 
-DB.forEach((item, index)=>{
+SKU_INDEX=await fetch("../db/sku_index.json").then(r=>r.json())
+ARTICLE_INDEX=await fetch("../db/article_index.json").then(r=>r.json())
 
-let sku = String(item.sku || "").toLowerCase().trim()
-let art = String(item.article || "").toLowerCase().trim()
+console.log("TOTAL DATA:",DB.length)
 
-if(sku){
-if(!SKU_INDEX[sku]) SKU_INDEX[sku] = []
-SKU_INDEX[sku].push(index)
-}
-
-if(art){
-if(!ARTICLE_INDEX[art]) ARTICLE_INDEX[art] = []
-ARTICLE_INDEX[art].push(index)
-}
-
-})
-
-console.log("TOTAL DATA:", DB.length)
-
-result.innerHTML = "<p>Database siap. Silakan cari.</p>"
+result.innerHTML=""
 
 }catch(e){
 
-console.error("Gagal load database:", e)
-result.innerHTML = "Database gagal dimuat"
+console.error(e)
+result.innerHTML="Database gagal dimuat"
 
 }
 
 }
 
-window.onload = loadDatabase
+window.onload=loadDatabase
 
 
-/* =========================
+/* ========================
 FORMAT RUPIAH
-========================= */
+======================== */
 
 function rupiah(n){
 
 if(!n) return ""
 
-let num = Number(String(n).replace(/[^\d]/g,""))
+let num=Number(String(n).replace(/[^\d]/g,""))
 
-if(!num) return n
-
-return "Rp " + num.toLocaleString("id-ID")
+return "Rp "+num.toLocaleString("id-ID")
 
 }
 
 
-/* =========================
-PARSE DATE
-========================= */
+/* ========================
+DATE PARSER
+======================== */
 
 function parseDate(v){
 
 if(!v) return null
 
-let str = String(v).trim()
+if(!isNaN(v)){
+
+let epoch=new Date(1899,11,30)
+return new Date(epoch.getTime()+v*86400000)
+
+}
+
+let str=String(v).trim()
 
 if(str.includes("/")){
-let p = str.split("/")
-return new Date(p[2], p[1]-1, p[0])
+
+let p=str.split("/")
+return new Date(p[2],p[1]-1,p[0])
+
 }
 
 if(str.includes("-")){
-let p = str.split("-")
 
-if(p[0].length == 4){
-return new Date(p[0], p[1]-1, p[2])
-}else{
-return new Date(p[2], p[1]-1, p[0])
-}
+let p=str.split("-")
+
+if(p[0].length==4)
+return new Date(p[0],p[1]-1,p[2])
+
+return new Date(p[2],p[1]-1,p[0])
+
 }
 
-let d = new Date(str)
+let d=new Date(str)
+
 if(!isNaN(d)) return d
 
 return null
@@ -138,144 +110,164 @@ return null
 }
 
 
-/* =========================
-STATUS PROMO
-========================= */
+/* ========================
+STATUS ENGINE
+======================== */
 
 function getStatus(item){
 
-if(!item.berlaku) return ""
+let start=item.mulai||item.start||item.tgl_mulai||(item.berlaku?item.berlaku.split("-")[0]:null)
 
-let p = item.berlaku.split("-")
-if(p.length < 2) return ""
+let end=item.akhir||item.end||item.tgl_akhir||(item.berlaku?item.berlaku.split("-")[1]:null)
 
-let start = parseDate(p[0])
-let end = parseDate(p[1])
+if(!start||!end) return ""
 
-if(!start || !end) return ""
+start=parseDate(start)
+end=parseDate(end)
 
-let today = new Date()
+if(!start||!end) return ""
+
+let today=new Date()
 
 today.setHours(0,0,0,0)
 start.setHours(0,0,0,0)
 end.setHours(23,59,59,999)
 
-if(today < start) return "BELUM AKTIF"
-if(today > end) return "BERAKHIR"
+if(today<start) return "BELUM AKTIF"
+if(today>end) return "BERAKHIR"
 
 return "AKTIF"
 
 }
 
 
-/* =========================
-SEARCH ENGINE (INDEX + FALLBACK)
-========================= */
+/* ========================
+FAST SEARCH ENGINE
+======================== */
 
 function search(q){
 
-q = String(q).toLowerCase().trim()
+q=q.toLowerCase().trim()
 
-if(!q) return []
+if(q.length<2) return []
 
 /* SKU EXACT */
+
 if(SKU_INDEX[q]){
-return SKU_INDEX[q].map(i => DB[i])
+
+return SKU_INDEX[q].map(i=>DB[i])
+
 }
 
 /* ARTICLE EXACT */
+
 if(ARTICLE_INDEX[q]){
-return ARTICLE_INDEX[q].map(i => DB[i])
+
+return ARTICLE_INDEX[q].map(i=>DB[i])
+
 }
 
-/* FALLBACK */
-return DB.filter(item =>
+/* FALLBACK SEARCH */
 
-String(item.sku || "").toLowerCase().includes(q) ||
-String(item.article || "").toLowerCase().includes(q) ||
-String(item.deskripsi || "").toLowerCase().includes(q) ||
-String(item.brand || "").toLowerCase().includes(q)
+return DB.filter(item=>{
+
+return(
+
+String(item.sku||"").toLowerCase().includes(q) ||
+
+String(item.article||"").toLowerCase().includes(q) ||
+
+String(item.deskripsi||"").toLowerCase().includes(q) ||
+
+String(item.brand||"").toLowerCase().includes(q)
 
 )
 
+})
+
 }
 
 
-/* =========================
-RENDER
-========================= */
+/* ========================
+SEARCH INPUT
+======================== */
+
+searchInput.addEventListener("input",function(){
+
+let q=this.value
+
+let data=search(q)
+
+render(data.slice(0,50))
+
+})
+
+
+/* ========================
+RENDER RESULT
+======================== */
 
 function render(data){
 
-if(!data || !data.length){
-result.innerHTML = "<p>Tidak ditemukan</p>"
+if(data.length===0){
+
+result.innerHTML="Data tidak ditemukan"
 return
+
 }
 
-let html = ""
+let html=""
 
 data.forEach(item=>{
 
-let status = getStatus(item)
+let status=getStatus(item)
 
-html += `
+let statusClass="aktif"
+
+if(status==="BELUM AKTIF") statusClass="belum"
+if(status==="BERAKHIR") statusClass="berakhir"
+
+html+=`
+
 <div class="card">
-  
-  <div style="display:flex;justify-content:space-between">
-    <b>${item.deskripsi || "-"}</b>
-    <span style="
-      background:${status=="AKTIF"?"green":"gray"};
-      color:white;
-      padding:3px 8px;
-      border-radius:10px;
-      font-size:11px;
-    ">
-      ${status}
-    </span>
-  </div>
 
-  <div style="margin-top:5px">
-    ${rupiah(item.price || item.harga || "")}
-  </div>
+<div class="card-header">
 
-  <div style="color:green">
-    ${item.promo || ""}
-  </div>
+<div class="title">
+${item.deskripsi||"-"}
+</div>
 
-  <div style="font-size:12px;color:#666">
-    SKU: ${item.sku || "-"} | ART: ${item.article || "-"}
-  </div>
-
-  <div style="font-size:12px;color:#999">
-    Berlaku: ${item.berlaku || "-"}
-  </div>
+<div class="status ${statusClass}">
+${status}
+</div>
 
 </div>
+
+<div class="meta">Brand: ${item.brand||"-"}</div>
+<div class="meta">SKU: ${item.sku||"-"}</div>
+
+<div class="price-normal">
+${rupiah(item.harga_normal)}
+</div>
+
+<div class="price-promo">
+${item.harga_promo||"-"}
+</div>
+
+<div class="meta">Promo: ${item.acara||"-"}</div>
+
+<div class="meta">Berlaku: ${item.berlaku||"-"}</div>
+
+<div class="meta">Divisi: ${item.division||"-"}</div>
+
+<div class="meta">Sheet: ${item.sheet||"-"}</div>
+
+</div>
+
 `
-})
-
-result.innerHTML = html
-
-}
-
-
-/* =========================
-EVENT SEARCH
-========================= */
-
-searchInput.addEventListener("input", function(){
-
-let val = this.value
-
-if(!val){
-result.innerHTML = ""
-return
-}
-
-let data = search(val)
-
-console.log("Hasil:", data.length)
-
-render(data)
 
 })
+
+result.innerHTML=html
+
+}
