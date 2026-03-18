@@ -52,7 +52,7 @@ window.onload=loadDatabase
 
 
 /* =========================
-FORMAT RUPIAH
+FORMAT (MINIMAL)
 ========================= */
 
 function rupiah(n){
@@ -69,65 +69,7 @@ return "Rp "+num.toLocaleString("id-ID")
 
 
 /* =========================
-STATUS
-========================= */
-
-function parseDate(v){
-
-if(!v) return null
-
-let d=new Date(v)
-
-if(!isNaN(d)) return d
-
-if(String(v).includes("-")){
-
-let p=v.split("-")
-
-return new Date(p[2],p[1]-1,p[0])
-
-}
-
-if(String(v).includes("/")){
-
-let p=v.split("/")
-return new Date(p[2],p[1]-1,p[0])
-
-}
-
-return null
-
-}
-
-function getStatus(item){
-
-if(!item.berlaku) return ""
-
-let p=item.berlaku.split("-")
-
-if(p.length<2) return ""
-
-let start=parseDate(p[0])
-let end=parseDate(p[1])
-
-if(!start||!end) return ""
-
-let today=new Date()
-
-today.setHours(0,0,0,0)
-start.setHours(0,0,0,0)
-end.setHours(23,59,59,999)
-
-if(today<start) return "BELUM AKTIF"
-if(today>end) return "BERAKHIR"
-
-return "AKTIF"
-
-}
-
-
-/* =========================
-SEARCH
+SEARCH (FULL FLEXIBLE)
 ========================= */
 
 function search(q){
@@ -138,13 +80,9 @@ if(!q) return []
 
 return DB.filter(item=>
 
-String(item.sku||"").toLowerCase().includes(q) ||
-
-String(item.article||"").toLowerCase().includes(q) ||
-
-String(item.deskripsi||"").toLowerCase().includes(q) ||
-
-String(item.brand||"").toLowerCase().includes(q)
+Object.values(item).some(val =>
+String(val).toLowerCase().includes(q)
+)
 
 )
 
@@ -165,7 +103,7 @@ render(data.slice(0,100))
 
 
 /* =========================
-RENDER UI SESUAI GAMBAR
+RENDER RAW (APA ADANYA)
 ========================= */
 
 function render(data){
@@ -181,41 +119,27 @@ let html=""
 
 data.forEach(item=>{
 
-let status=getStatus(item)
+let rows=""
 
-/* STATUS BADGE */
-let statusHTML=""
+/* tampilkan semua field tanpa filter */
+for(let key in item){
 
-if(status==="AKTIF"){
-statusHTML=`<span class="badge aktif">AKTIF</span>`
-}
-else if(status==="BELUM AKTIF"){
-statusHTML=`<span class="badge belum">BELUM AKTIF</span>`
-}
-else if(status==="BERAKHIR"){
-statusHTML=`<span class="badge berakhir">BERAKHIR</span>`
-}
+let val=item[key]
 
-/* LOGIKA HARGA */
-let hargaNormal=""
-let hargaPromo=""
-let diskonHTML=""
-
-/* jika ada harga promo → tampilkan coret */
-if(item.harga_promo){
-
-hargaNormal=`<div class="harga-normal coret">${rupiah(item.harga_normal)}</div>`
-hargaPromo=`<div class="harga-promo">${rupiah(item.harga_promo)}</div>`
-
-}else{
-
-hargaPromo=`<div class="harga-promo">${rupiah(item.harga_normal)}</div>`
-
+/* format harga jika terdeteksi angka */
+if(
+key.toLowerCase().includes("harga") ||
+key.toLowerCase().includes("price")
+){
+val=rupiah(val)
 }
 
-/* diskon hanya jika ada */
-if(item.diskon){
-diskonHTML=`<div class="diskon">Diskon ${item.diskon}</div>`
+rows+=`
+<div class="row">
+<span class="label">${key}</span>
+<span class="value">${val||"-"}</span>
+</div>
+`
 }
 
 /* CARD */
@@ -223,36 +147,7 @@ html+=`
 
 <div class="card">
 
-<div class="header">
-
-<div class="title">
-${item.deskripsi||"-"}
-</div>
-
-${statusHTML}
-
-</div>
-
-${hargaNormal}
-${hargaPromo}
-
-${diskonHTML}
-
-<div class="meta">
-Berlaku: ${item.berlaku||"-"}
-</div>
-
-<div class="meta">
-Promo: ${item.acara||"-"}
-</div>
-
-<div class="meta small">
-📄 ${item.file||"-"}
-</div>
-
-<div class="meta small">
-📑 ${item.sheet||"-"}
-</div>
+${rows}
 
 </div>
 
