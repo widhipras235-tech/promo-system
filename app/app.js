@@ -8,20 +8,26 @@ const searchInput = document.getElementById("search")
 LOAD DATABASE (SUPER STABIL)
 ========================= */
 
-async function loadDatabase() {
-  result.innerHTML = "Memuat database..."
+const data = await tryFetch(`promo_${i}.json`)
+if (!data) {
+  gagal++
+} else {
+  DB = DB.concat(data)
+  total += data.length
+  gagal = 0
+}
 
-  let total = 0
-  let i = 1
-  let gagal = 0
+    const BASE_PATHS = ["db/", "./db/", "/db/"]
 
-  while (i <= 100) { // batas aman max 100 file
-    let loaded = false
-
-    const paths = [
-      `db/promo_${i}.json`,
-      `./db/promo_${i}.json`
-    ]
+async function tryFetch(file) {
+  for (let base of BASE_PATHS) {
+    try {
+      let res = await fetch(base + file)
+      if (res.ok) return await res.json()
+    } catch {}
+  }
+  return null
+}
 
     for (let p of paths) {
       try {
