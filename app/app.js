@@ -1,10 +1,49 @@
 let DB = [];
 
 // LOAD DATABASE
-async function loadDB(){
-  const res = await fetch("index-db.json");
-  DB = await res.json();
+async function loadDatabase(){
+
+result.innerHTML="Memuat database..."
+
+try{
+
+let i=1
+let all=[]
+
+while(true){
+
+try{
+let res=await fetch(`../db/promo_${i}.json`)
+if(!res.ok) break
+
+let data=await res.json()
+all=all.concat(data)
+
+i++
+
+}catch(e){
+break
 }
+
+}
+
+DB=all
+
+console.log("TOTAL DATA:",DB.length)
+
+result.innerHTML=""
+
+}catch(e){
+
+console.error(e)
+result.innerHTML="Database gagal dimuat"
+
+}
+
+}
+
+window.onload=loadDatabase
+
 
 // FORMAT RUPIAH
 function formatRupiah(angka){
