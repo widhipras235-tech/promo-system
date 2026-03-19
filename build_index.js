@@ -9,12 +9,38 @@ let nameIndex = {}
 
 let globalIndex = 0
 
+let debugNoSKU = 0
+let debugNoArticle = 0
+
 /* =========================
 NORMALIZE
 ========================= */
 function normalize(val) {
   if (!val) return null
   return String(val).toLowerCase().trim()
+}
+
+/* =========================
+CLEAN KEY
+========================= */
+function cleanKey(key) {
+  return key.toLowerCase().replace(/[^a-z0-9]/g, "")
+}
+
+/* =========================
+FIND VALUE SUPER FLEXIBLE
+========================= */
+function findValue(obj, keywords) {
+  for (let key in obj) {
+    const clean = cleanKey(key)
+
+    for (let word of keywords) {
+      if (clean.includes(word)) {
+        return obj[key]
+      }
+    }
+  }
+  return null
 }
 
 /* =========================
@@ -25,17 +51,15 @@ function tokenize(text) {
 
   return text
     .toLowerCase()
-    // pisahin huruf & angka
     .replace(/([a-z])([0-9])/g, "$1 $2")
     .replace(/([0-9])([a-z])/g, "$1 $2")
-    // hapus simbol
     .replace(/[^a-z0-9 ]/g, " ")
     .split(/\s+/)
-    .filter(Boolean) // ambil semua (tidak dibatasi)
+    .filter(Boolean)
 }
 
 /* =========================
-AMBIL FILE
+GET FILE
 ========================= */
 const files = fs.readdirSync(DB_DIR)
   .filter(f => f.startsWith("promo_") && f.endsWith(".json"))
@@ -43,7 +67,7 @@ const files = fs.readdirSync(DB_DIR)
 console.log("📂 Total file:", files.length)
 
 /* =========================
-PROSES
+PROCESS
 ========================= */
 files.forEach(file => {
   const filePath = path.join(DB_DIR, file)
@@ -53,36 +77,42 @@ files.forEach(file => {
 
   data.forEach(item => {
 
-    // 🔥 HANDLE SEMUA VARIASI FIELD
     const sku = normalize(
-      item.sku || item.SKU || item.kode || item.code
+      findValue(item, ["sku", "barcode", "kode"])
     )
 
     const article = normalize(
-      item.article || item.Article || item.artikel
+      findValue(item, ["article", "artikel", "code"])
     )
 
     const name = normalize(
-      item.deskripsi ||
-      item.description ||
-      item.desc ||
-      item.nama ||
-      item.produk
+      findValue(item, ["desc", "nama", "produk", "description"])
     )
 
-    // SKU INDEX
+    // DEBUG
+    if (!sku) {
+      debugNoSKU++
+      if (debugNoSKU < 5) console.log("❌ SKU missing:", item)
+    }
+
+    if (!article) {
+      debugNoArticle++
+      if (debugNoArticle < 5) console.log("❌ ARTICLE missing:", item)
+    }
+
+    // INDEX SKU
     if (sku) {
       if (!skuIndex[sku]) skuIndex[sku] = []
       skuIndex[sku].push(globalIndex)
     }
 
-    // ARTICLE INDEX
+    // INDEX ARTICLE
     if (article) {
       if (!articleIndex[article]) articleIndex[article] = []
       articleIndex[article].push(globalIndex)
     }
 
-    // 🔥 NAME INDEX FULL TOKEN
+    // INDEX NAME
     if (name) {
       const words = tokenize(name)
 
@@ -103,8 +133,15 @@ fs.writeFileSync(path.join(DB_DIR, "sku_index.json"), JSON.stringify(skuIndex))
 fs.writeFileSync(path.join(DB_DIR, "article_index.json"), JSON.stringify(articleIndex))
 fs.writeFileSync(path.join(DB_DIR, "name_index.json"), JSON.stringify(nameIndex))
 
-console.log("✅ SELESAI TOTAL")
+/* =========================
+REPORT
+========================= */
+console.log("\n🎯 RESULT:")
 console.log("Total data:", globalIndex)
 console.log("SKU:", Object.keys(skuIndex).length)
 console.log("ARTICLE:", Object.keys(articleIndex).length)
 console.log("NAME:", Object.keys(nameIndex).length)
+
+console.log("\n🚨 DEBUG:")
+console.log("Tanpa SKU:", debugNoSKU)
+console.log("Tanpa ARTICLE:", debugNoArticle)
