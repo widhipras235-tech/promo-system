@@ -1,10 +1,10 @@
 const fs = require("fs")
 const path = require("path")
+const lunr = require("lunr")
 
 const DB_DIR = path.resolve("app/db")
 
-let allData = []
-let id = 0
+let documents = []
 
 function normalize(val) {
   return val ? String(val).toLowerCase().trim() : ""
@@ -25,11 +25,13 @@ function findValue(obj, keywords) {
 const files = fs.readdirSync(DB_DIR)
   .filter(f => f.startsWith("promo_"))
 
+let id = 0
+
 files.forEach(file => {
   const data = JSON.parse(fs.readFileSync(path.join(DB_DIR, file)))
 
   data.forEach(item => {
-    const doc = {
+    documents.push({
       id: id++,
       sku: normalize(findValue(item, ["sku"])),
       article: normalize(findValue(item, ["article"])),
@@ -42,15 +44,37 @@ files.forEach(file => {
       akhir: item.akhir || "",
       acara: item.acara || "",
       source: item.source || ""
-    }
-
-    allData.push(doc)
+    })
   })
 })
 
+console.log("📊 Total data:", documents.length)
+
+/* =========================
+BUILD LUNR INDEX
+========================= */
+const idx = lunr(function () {
+  this.ref("id")
+
+  this.field("sku")
+  this.field("article")
+  this.field("name")
+  this.field("brand")
+
+  documents.forEach(doc => this.add(doc))
+})
+
+/* =========================
+SAVE
+========================= */
 fs.writeFileSync(
-  path.join(DB_DIR, "search_data.json"),
-  JSON.stringify(allData)
+  path.join(DB_DIR, "search_index.json"),
+  JSON.stringify(idx)
 )
 
-console.log("✅ search_data.json siap:", allData.length)
+fs.writeFileSync(
+  path.join(DB_DIR, "search_store.json"),
+  JSON.stringify(documents)
+)
+
+console.log("✅ Index & store siap")
