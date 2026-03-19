@@ -3,6 +3,7 @@ const path = require("path")
 const lunr = require("lunr")
 
 const DB_DIR = path.resolve("app/db")
+const MAX_PER_FILE = 5000
 
 let documents = []
 
@@ -22,8 +23,7 @@ function findValue(obj, keywords) {
   return ""
 }
 
-const files = fs.readdirSync(DB_DIR)
-  .filter(f => f.startsWith("promo_"))
+const files = fs.readdirSync(DB_DIR).filter(f => f.startsWith("promo_"))
 
 let id = 0
 
@@ -50,9 +50,10 @@ files.forEach(file => {
 
 console.log("📊 Total data:", documents.length)
 
-/* =========================
-BUILD LUNR INDEX
-========================= */
+
+// =========================
+// BUILD LUNR INDEX
+// =========================
 const idx = lunr(function () {
   this.ref("id")
 
@@ -64,17 +65,30 @@ const idx = lunr(function () {
   documents.forEach(doc => this.add(doc))
 })
 
-/* =========================
-SAVE
-========================= */
+// =========================
+// SAVE INDEX
+// =========================
 fs.writeFileSync(
   path.join(DB_DIR, "search_index.json"),
   JSON.stringify(idx)
 )
 
-fs.writeFileSync(
-  path.join(DB_DIR, "search_store.json"),
-  JSON.stringify(documents)
-)
 
-console.log("✅ Index & store siap")
+// =========================
+// SPLIT STORE (WAJIB)
+// =========================
+let fileIndex = 1
+
+for (let i = 0; i < documents.length; i += MAX_PER_FILE) {
+  const chunk = documents.slice(i, i + MAX_PER_FILE)
+
+  fs.writeFileSync(
+    path.join(DB_DIR, `store_${fileIndex}.json`),
+    JSON.stringify(chunk)
+  )
+
+  console.log(`✅ store_${fileIndex}.json (${chunk.length})`)
+  fileIndex++
+}
+
+console.log("🎉 SELESAI (ULTRA FAST READY)")
