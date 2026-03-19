@@ -18,14 +18,20 @@ function normalize(val) {
 }
 
 /* =========================
-TOKENIZER (PENTING!)
+TOKENIZER SUPER KUAT
 ========================= */
 function tokenize(text) {
+  if (!text) return []
+
   return text
     .toLowerCase()
-    .replace(/[^a-z0-9 ]/g, "")
-    .split(" ")
-    .filter(w => w.length > 2) // buang kata pendek
+    // pisahin huruf & angka
+    .replace(/([a-z])([0-9])/g, "$1 $2")
+    .replace(/([0-9])([a-z])/g, "$1 $2")
+    // hapus simbol
+    .replace(/[^a-z0-9 ]/g, " ")
+    .split(/\s+/)
+    .filter(Boolean) // ambil semua (tidak dibatasi)
 }
 
 /* =========================
@@ -47,23 +53,36 @@ files.forEach(file => {
 
   data.forEach(item => {
 
-    const sku = normalize(item.sku)
-    const article = normalize(item.article)
-    const name = normalize(item.deskripsi)
+    // 🔥 HANDLE SEMUA VARIASI FIELD
+    const sku = normalize(
+      item.sku || item.SKU || item.kode || item.code
+    )
 
-    // SKU
+    const article = normalize(
+      item.article || item.Article || item.artikel
+    )
+
+    const name = normalize(
+      item.deskripsi ||
+      item.description ||
+      item.desc ||
+      item.nama ||
+      item.produk
+    )
+
+    // SKU INDEX
     if (sku) {
       if (!skuIndex[sku]) skuIndex[sku] = []
       skuIndex[sku].push(globalIndex)
     }
 
-    // ARTICLE
+    // ARTICLE INDEX
     if (article) {
       if (!articleIndex[article]) articleIndex[article] = []
       articleIndex[article].push(globalIndex)
     }
 
-    // 🔥 NAME INDEX (TOKEN)
+    // 🔥 NAME INDEX FULL TOKEN
     if (name) {
       const words = tokenize(name)
 
@@ -84,7 +103,7 @@ fs.writeFileSync(path.join(DB_DIR, "sku_index.json"), JSON.stringify(skuIndex))
 fs.writeFileSync(path.join(DB_DIR, "article_index.json"), JSON.stringify(articleIndex))
 fs.writeFileSync(path.join(DB_DIR, "name_index.json"), JSON.stringify(nameIndex))
 
-console.log("✅ SELESAI")
+console.log("✅ SELESAI TOTAL")
 console.log("Total data:", globalIndex)
 console.log("SKU:", Object.keys(skuIndex).length)
 console.log("ARTICLE:", Object.keys(articleIndex).length)
