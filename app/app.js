@@ -1,5 +1,6 @@
 let skuIndex = {}
 let articleIndex = {}
+let nameIndex = {}
 let cache = {}
 let isReady = false
 
@@ -13,7 +14,7 @@ const resultEl = document.getElementById("result")
 const statusEl = document.getElementById("status")
 
 /* =========================
-LOAD INDEX
+LOAD INDEX (SKU + ARTICLE + NAME)
 ========================= */
 async function loadIndex() {
   try {
@@ -21,25 +22,22 @@ async function loadIndex() {
 
     const skuRes = await fetch("./db/sku_index.json")
     const articleRes = await fetch("./db/article_index.json")
+    const nameRes = await fetch("./db/name_index.json")
 
-    if (skuRes.ok) {
-      skuIndex = await skuRes.json()
-    }
-
-    if (articleRes.ok) {
-      articleIndex = await articleRes.json()
-    }
+    if (skuRes.ok) skuIndex = await skuRes.json()
+    if (articleRes.ok) articleIndex = await articleRes.json()
+    if (nameRes.ok) nameIndex = await nameRes.json()
 
     console.log("✅ Index Loaded")
     console.log("SKU:", Object.keys(skuIndex).length)
     console.log("ARTICLE:", Object.keys(articleIndex).length)
+    console.log("NAME:", Object.keys(nameIndex).length)
 
     isReady = true
     statusEl.innerText = "Siap digunakan"
   } catch (err) {
-    console.log("❌ Index gagal:", err)
+    console.log("❌ Index error:", err)
 
-    // tetap lanjut walau index gagal
     isReady = true
     statusEl.innerText = "Mode fallback aktif"
   }
@@ -71,7 +69,7 @@ function getFileName(path) {
 }
 
 /* =========================
-LOAD FILE
+LOAD FILE (CACHE)
 ========================= */
 async function loadFile(fileIndex) {
   try {
@@ -91,7 +89,7 @@ async function loadFile(fileIndex) {
 }
 
 /* =========================
-SEARCH SUPER CEPAT + FALLBACK
+SEARCH ENGINE (SKU + ARTICLE + NAME)
 ========================= */
 async function searchData(keyword) {
   keyword = keyword.toLowerCase()
@@ -99,7 +97,9 @@ async function searchData(keyword) {
   let results = []
   let indexes = new Set()
 
-  // 🔥 1. EXACT MATCH
+  const words = keyword.split(" ")
+
+  // 🔥 1. SKU & ARTICLE EXACT
   if (skuIndex[keyword]) {
     skuIndex[keyword].forEach(i => {
       if (indexes.size < MAX_RESULT) indexes.add(i)
@@ -112,7 +112,16 @@ async function searchData(keyword) {
     })
   }
 
-  // 🔥 2. PARTIAL MATCH
+  // 🔥 2. NAME TOKEN MATCH (multi kata)
+  words.forEach(word => {
+    if (nameIndex[word]) {
+      nameIndex[word].forEach(i => {
+        if (indexes.size < MAX_RESULT) indexes.add(i)
+      })
+    }
+  })
+
+  // 🔥 3. PARTIAL SKU (fallback tambahan)
   if (indexes.size < MAX_RESULT) {
     for (let key in skuIndex) {
       if (key.includes(keyword)) {
@@ -125,7 +134,7 @@ async function searchData(keyword) {
     }
   }
 
-  // 🔥 3. JIKA INDEX KOSONG → FALLBACK (ANTI BLANK)
+  // 🔥 4. FALLBACK TOTAL (ANTI BLANK)
   if (indexes.size === 0) {
     const data = await loadFile(1)
 
@@ -138,7 +147,7 @@ async function searchData(keyword) {
       .slice(0, MAX_RESULT)
   }
 
-  // 🔥 4. LOAD FILE SESUAI INDEX
+  // 🔥 5. MAP FILE
   let fileMap = {}
 
   indexes.forEach(i => {
@@ -147,6 +156,7 @@ async function searchData(keyword) {
     fileMap[fileIndex].push(i)
   })
 
+  // 🔥 6. LOAD DATA SESUAI INDEX
   for (let fileIndex in fileMap) {
     const data = await loadFile(fileIndex)
 
