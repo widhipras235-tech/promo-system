@@ -204,10 +204,24 @@ async function searchData(keyword) {
 RENDER
 ========================= */
 function formatTanggal(val) {
-  if (!val) return "-"
+  if (!val || val === 0 || val === "0") return "-"
+
+  // handle Excel serial number (angka)
+  if (!isNaN(val)) {
+    const excelDate = Number(val)
+    if (excelDate < 1000) return "-" // anti 1970
+
+    const date = new Date((excelDate - 25569) * 86400 * 1000)
+
+    return date.toLocaleDateString("id-ID", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric"
+    })
+  }
 
   const d = new Date(val)
-  if (isNaN(d)) return val
+  if (isNaN(d)) return "-"
 
   return d.toLocaleDateString("id-ID", {
     day: "2-digit",
