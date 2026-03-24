@@ -6,8 +6,8 @@ let articleIndex = {}
 let cache = {}
 let isReady = false
 
-const MAX_RESULT = 30
-const TOTAL_FILE = 10 // sesuaikan
+const MAX_RESULT = 100
+const TOTAL_FILE = 300 // sesuaikan
 
 /* =========================
 ELEMENT
