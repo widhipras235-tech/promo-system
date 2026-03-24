@@ -1,11 +1,13 @@
 /* =========================
 STATE
 ========================= */
+let skuIndex = {}
+let articleIndex = {}
 let cache = {}
-let isReady = true
+let isReady = false
 
 const MAX_RESULT = 30
-const TOTAL_FILE = 100 // sesuaikan
+const TOTAL_FILE = 10
 
 /* =========================
 ELEMENT
@@ -15,60 +17,14 @@ const resultEl = document.getElementById("result")
 const statusEl = document.getElementById("status")
 
 /* =========================
-UTILS
+INIT
 ========================= */
 function normalize(val) {
-  return (val || "")
-    .toString()
-    .toLowerCase()
-    .replace(/[^a-z0-9]/g, "")
-}
-
-function formatRupiah(num) {
-  if (!num || isNaN(num)) return num
-  return "Rp " + Number(num).toLocaleString("id-ID")
-}
-
-function formatDiskon(val) {
-  if (!val) return "-"
-  if (!isNaN(val)) {
-    let num = Number(val)
-    return num <= 1 ? Math.round(num * 100) + "%" : num + "%"
-  }
-  return val
-}
-
-function formatTanggal(val) {
-  if (!val || val === 0) return "-"
-
-  if (!isNaN(val)) {
-    const d = new Date((val - 25569) * 86400 * 1000)
-    if (isNaN(d)) return "-"
-    return d.toLocaleDateString("id-ID", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric"
-    })
-  }
-
-  const d = new Date(val)
-  if (isNaN(d)) return "-"
-  return d.toLocaleDateString("id-ID", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric"
-  })
-}
-
-function highlight(text, keyword) {
-  if (!text) return "-"
-  const safe = keyword.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
-  const regex = new RegExp(`(${safe})`, "gi")
-  return text.toString().replace(regex, `<mark>$1</mark>`)
+  return (val || "").toString().toLowerCase().trim()
 }
 
 /* =========================
-PRIORITY SYSTEM
+PRIORITY + HIGHLIGHT
 ========================= */
 function getPriority(item, keyword) {
   const sku = normalize(item.sku)
@@ -84,23 +40,101 @@ function getPriority(item, keyword) {
   if (sku.includes(keyword)) return 5
   if (article.includes(keyword)) return 6
 
-  if (desc.includes(keyword)) return 10 // 🔥 deskripsi selalu di bawah
+  if (desc.includes(keyword)) return 10
 
   return 999
 }
 
-/* =========================
-LOAD FILE
-========================= */
-async function loadFile(i) {
-  if (cache[i]) return cache[i]
+function highlight(text, keyword) {
+  if (!text) return "-"
+  const safe = keyword.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+  const regex = new RegExp(`(${safe})`, "gi")
+  return text.toString().replace(regex, `<mark>$1</mark>`)
+}
 
+/* =========================
+LOAD INDEX
+========================= */
+async function loadIndex() {
   try {
-    const res = await fetch(`./db/promo_${i}.json`)
+    statusEl.innerText = "Loading index..."
+
+    const [skuRes, articleRes] = await Promise.all([
+      fetch("./db/sku_index.json"),
+      fetch("./db/article_index.json")
+    ])
+
+    if (skuRes.ok) skuIndex = await skuRes.json()
+    if (articleRes.ok) articleIndex = await articleRes.json()
+
+    isReady = true
+    statusEl.innerText = "Siap digunakan"
+  } catch (err) {
+    console.log("❌ Index gagal:", err)
+    isReady = true
+    statusEl.innerText = "Mode fallback aktif"
+  }
+}
+loadIndex()
+
+/* =========================
+UTILS
+========================= */
+function formatRupiah(num) {
+  if (!num || isNaN(num)) return num
+  return "Rp " + Number(num).toLocaleString("id-ID")
+}
+
+function formatDiskon(val) {
+  if (!val) return "-"
+  if (!isNaN(val)) {
+    let num = Number(val)
+    return num <= 1 ? Math.round(num * 100) + "%" : num + "%"
+  }
+  return val
+}
+
+function getFileName(path) {
+  return path ? path.split(/[\\/]/).pop() : "-"
+}
+
+function formatTanggal(val) {
+  if (!val || val === 0 || val === "0") return "-"
+
+  if (!isNaN(val)) {
+    const excelDate = Number(val)
+    if (excelDate < 1000) return "-"
+    const date = new Date((excelDate - 25569) * 86400 * 1000)
+    return date.toLocaleDateString("id-ID", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric"
+    })
+  }
+
+  const d = new Date(val)
+  if (isNaN(d)) return "-"
+
+  return d.toLocaleDateString("id-ID", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric"
+  })
+}
+
+/* =========================
+LOAD FILE (CACHE)
+========================= */
+async function loadFile(fileIndex) {
+  try {
+    if (cache[fileIndex]) return cache[fileIndex]
+
+    const res = await fetch(`./db/promo_${fileIndex}.json`)
     if (!res.ok) return []
 
     const data = await res.json()
-    cache[i] = data
+    cache[fileIndex] = data
+
     return data
   } catch {
     return []
@@ -108,12 +142,87 @@ async function loadFile(i) {
 }
 
 /* =========================
-SEARCH (DUAL LAYER)
+EXACT RESULT
 ========================= */
-async function searchData(keyword) {
+async function getExactResults(indexList, keyword) {
+  let results = []
   keyword = normalize(keyword)
-  let primary = []   // SKU & ARTICLE
-  let secondary = [] // DESKRIPSI
+
+  for (let i of indexList) {
+    const fileIndex = Math.floor(i / 5000) + 1
+    const data = await loadFile(fileIndex)
+
+    const item = data[i % 5000]
+    if (!item) continue
+
+    const sku = normalize(item.sku)
+    const article = normalize(item.article)
+
+    if (sku === keyword || article === keyword) {
+      results.push({
+        ...item,
+        _priority: getPriority(item, keyword)
+      })
+    }
+
+    if (results.length >= MAX_RESULT) break
+  }
+
+  return results.sort((a, b) => a._priority - b._priority)
+}
+
+/* =========================
+RESULT DARI INDEX
+========================= */
+async function getResultsFromIndexes(indexes, keyword) {
+  let results = []
+  keyword = normalize(keyword)
+
+  let fileMap = {}
+
+  indexes.forEach(i => {
+    const fileIndex = Math.floor(i / 5000) + 1
+    if (!fileMap[fileIndex]) fileMap[fileIndex] = []
+    fileMap[fileIndex].push(i)
+  })
+
+  for (let fileIndex in fileMap) {
+    const data = await loadFile(fileIndex)
+
+    for (let i of fileMap[fileIndex]) {
+      const item = data[i % 5000]
+      if (!item) continue
+
+      const sku = normalize(item.sku)
+      const article = normalize(item.article)
+      const desc = normalize(item.deskripsi)
+
+      if (
+        sku.includes(keyword) ||
+        article.includes(keyword) ||
+        desc.includes(keyword)
+      ) {
+        results.push({
+          ...item,
+          _priority: getPriority(item, keyword)
+        })
+      }
+
+      if (results.length >= MAX_RESULT) break
+    }
+  }
+
+  return results
+    .sort((a, b) => a._priority - b._priority)
+    .slice(0, MAX_RESULT)
+}
+
+/* =========================
+FULL SCAN (ANTI MISS)
+========================= */
+async function fullScanSearch(keyword) {
+  let results = []
+  keyword = normalize(keyword)
 
   for (let i = 1; i <= TOTAL_FILE; i++) {
     const data = await loadFile(i)
@@ -123,68 +232,88 @@ async function searchData(keyword) {
       const article = normalize(item.article)
       const desc = normalize(item.deskripsi)
 
-      // 🔥 PRIORITAS UTAMA
       if (
         sku.includes(keyword) ||
-        article.includes(keyword)
+        article.includes(keyword) ||
+        desc.includes(keyword)
       ) {
-        primary.push({
+        results.push({
           ...item,
           _priority: getPriority(item, keyword)
         })
       }
 
-      // 🔥 DESKRIPSI (MASUK LIST BAWAH)
-      else if (desc.includes(keyword)) {
-        secondary.push({
-          ...item,
-          _priority: getPriority(item, keyword)
-        })
-      }
-
-      // 🚀 STOP BIAR CEPAT
-      if (primary.length >= MAX_RESULT) break
+      if (results.length >= MAX_RESULT) break
     }
-
-    if (primary.length >= MAX_RESULT) break
   }
 
-  // 🔥 SORT PRIMARY
-  primary.sort((a, b) => a._priority - b._priority)
+  return results
+    .sort((a, b) => a._priority - b._priority)
+    .slice(0, MAX_RESULT)
+}
 
-  // 🔥 SORT SECONDARY
-  secondary.sort((a, b) => a._priority - b._priority)
+/* =========================
+SEARCH ENGINE
+========================= */
+async function searchData(keyword) {
+  keyword = normalize(keyword)
+  if (!keyword) return []
 
-  // 🔥 GABUNG (PRIMARY DULU)
-  const result = [...primary, ...secondary].slice(0, MAX_RESULT)
+  if (skuIndex[keyword]) {
+    return await getExactResults(skuIndex[keyword], keyword)
+  }
 
-  return result
+  if (articleIndex[keyword]) {
+    return await getExactResults(articleIndex[keyword], keyword)
+  }
+
+  let indexes = new Set()
+  let prefix = keyword.slice(0, 3)
+
+  for (let key in skuIndex) {
+    if (!key.startsWith(prefix)) continue
+
+    if (key.startsWith(keyword)) {
+      skuIndex[key].forEach(i => {
+        if (indexes.size < MAX_RESULT) indexes.add(i)
+      })
+    }
+
+    if (indexes.size >= MAX_RESULT) break
+  }
+
+  if (indexes.size > 0) {
+    return await getResultsFromIndexes(indexes, keyword)
+  }
+
+  return await fullScanSearch(keyword)
 }
 
 /* =========================
 RENDER
 ========================= */
-function render(data, keyword) {
+function render(data) {
   resultEl.innerHTML = ""
 
-  if (!data.length) {
+  if (!data || data.length === 0) {
     resultEl.innerHTML = "<p>Data tidak ditemukan</p>"
     return
   }
 
   data.forEach(item => {
     const diskon = formatDiskon(item.diskon || item.raw?.diskon)
-    const mulai = item.fromdate || item.raw?.fromdate
-    const akhir = item.todate || item.raw?.todate
+
+    const mulai = item.fromdate || item.raw?.fromdate || "-"
+    const akhir = item.todate || item.raw?.todate || "-"
 
     const el = document.createElement("div")
     el.className = "card"
 
     el.innerHTML = `
-      <div><b>${highlight(item.deskripsi, keyword)}</b></div>
+      <div><b>${highlight(item.deskripsi, searchInput.value)}</b></div>
       <div>Brand: ${item.brand || "-"}</div>
-      <div>SKU: ${highlight(item.sku, keyword)}</div>
-      <div>Article: ${highlight(item.article, keyword)}</div>
+      <div>SKU: ${highlight(item.sku, searchInput.value)}</div>
+      <div>Article: ${highlight(item.article, searchInput.value)}</div>
 
       <div>Harga Normal: ${formatRupiah(item.harga_normal)}</div>
 
@@ -205,7 +334,7 @@ function render(data, keyword) {
       </div>
 
       <div><b>Acara:</b> ${item.acara || item.raw?.acara || "-"}</div>
-      <div><b>Sumber:</b> ${item.source || "-"}</div>
+      <div><b>Sumber:</b> ${getFileName(item.source)}</div>
     `
 
     resultEl.appendChild(el)
@@ -219,7 +348,13 @@ let timer
 
 searchInput.addEventListener("input", e => {
   clearTimeout(timer)
+
   const keyword = e.target.value
+
+  if (!isReady) {
+    statusEl.innerText = "Loading..."
+    return
+  }
 
   timer = setTimeout(async () => {
     if (!keyword.trim()) {
@@ -232,8 +367,8 @@ searchInput.addEventListener("input", e => {
 
     const result = await searchData(keyword)
 
-    render(result, keyword)
+    render(result)
 
     statusEl.innerText = `Ditemukan ${result.length} data`
-  }, 150)
+  }, 200)
 })
