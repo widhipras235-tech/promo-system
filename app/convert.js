@@ -1,223 +1,191 @@
+const XLSX = require("xlsx")
 const fs = require("fs")
 const path = require("path")
-const xlsx = require("xlsx")
-
-const INPUT_DIR = path.resolve("excel")
-const OUTPUT_DIR = path.resolve("db")
-
-const MAX_PER_FILE = 5000
-
-if (!fs.existsSync(INPUT_DIR)) {
-  console.log("❌ Folder excel tidak ditemukan")
-  process.exit(0)
-}
-
-if (!fs.existsSync(OUTPUT_DIR)) {
-  fs.mkdirSync(OUTPUT_DIR)
-}
-
-let allData = []
 
 /* =========================
-GET ALL EXCEL FILES
+CONFIG
 ========================= */
+const FILE_EXCEL = "./excel/data.xlsx"
+const OUTPUT_FOLDER = "./db"
+const SPLIT_SIZE = 5000
 
-function getAllExcelFiles(dir) {
-  let results = []
+const DEBUG = true // 🔥 aktifkan debug
 
-  fs.readdirSync(dir).forEach(file => {
-    const filePath = path.join(dir, file)
-    const stat = fs.statSync(filePath)
-
-    if (stat.isDirectory()) {
-      results = results.concat(getAllExcelFiles(filePath))
-    } else if (file.endsWith(".xlsx")) {
-      results.push(filePath)
-    }
-  })
-
-  return results
+/* =========================
+NORMALIZE (WAJIB SAMA APP.JS)
+========================= */
+function normalize(val) {
+  return (val || "")
+    .toString()
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "")
 }
 
 /* =========================
-UTILS
+SAFE GET (ANTI BEDA KOLOM)
 ========================= */
-
-function normalizeKey(key) {
-  return String(key).toLowerCase().replace(/\s+/g, "")
-}
-
-function findHeaderRow(sheet) {
-  const rows = xlsx.utils.sheet_to_json(sheet, { header: 1 })
-
-  for (let i = 0; i < rows.length; i++) {
-    const row = rows[i].join(" ").toLowerCase()
-
-    if (
-      row.includes("sku") ||
-      row.includes("article") ||
-      row.includes("desc") ||
-      row.includes("description") ||
-      row.includes("produk") ||
-      row.includes("nama")
-    ) {
-      return i
+function getVal(row, keys) {
+  for (let key of keys) {
+    if (row[key] !== undefined && row[key] !== "") {
+      return row[key]
     }
   }
-
-  console.log("⚠️ Header tidak ketemu → pakai baris 0")
-  return 0
+  return ""
 }
 
 /* =========================
-PROSES FILE
+READ EXCEL
 ========================= */
+if (!fs.existsSync(FILE_EXCEL)) {
+  console.log("❌ File Excel tidak ditemukan:", FILE_EXCEL)
+  process.exit()
+}
 
-const excelFiles = getAllExcelFiles(INPUT_DIR)
+const workbook = XLSX.readFile(FILE_EXCEL)
 
-console.log("📂 TOTAL FILE:", excelFiles.length)
+if (DEBUG) {
+  console.log("📄 Sheet ditemukan:", workbook.SheetNames)
+}
 
-excelFiles.forEach(filePath => {
-  console.log("\n📄 FILE:", filePath)
+const sheet = workbook.Sheets[workbook.SheetNames[0]]
+const rawData = XLSX.utils.sheet_to_json(sheet, { defval: "" })
 
-  try {
-    const workbook = xlsx.readFile(filePath)
-
-    workbook.SheetNames.forEach(sheetName => {
-      try {
-        const sheet = workbook.Sheets[sheetName]
-        const headerRow = findHeaderRow(sheet)
-
-        const json = xlsx.utils.sheet_to_json(sheet, {
-          range: headerRow,
-          defval: ""
-        })
-
-        if (!json.length) {
-          console.log(`⚠️ Kosong: ${sheetName}`)
-          return
-        }
-
-        const cleaned = json
-          .map(row => {
-            let newRow = {}
-            let rawRow = {}
-
-            Object.keys(row).forEach(key => {
-              const nk = normalizeKey(key)
-              const value = row[key]
-
-              // 🔹 SIMPAN SEMUA DATA ASLI
-              rawRow[nk] = value
-
-              // 🔹 FIELD PENTING (untuk search cepat)
-              if (nk.includes("sku")) newRow.sku = String(value).trim()
-              else if (nk.includes("article")) newRow.article = String(value).trim()
-              else if (nk.includes("desc")) newRow.deskripsi = value
-              else if (nk.includes("brand")) newRow.brand = value
-              else if (nk.includes("normal")) newRow.harga_normal = value
-              else if (nk.includes("promo")) newRow.harga_promo = value
-              else if (nk.includes("mulai") || nk.includes("start")) newRow.mulai = value
-              else if (nk.includes("akhir") || nk.includes("end")) newRow.akhir = value
-              else if (nk.includes("divisi") || nk.includes("dept")) newRow.divisi = value
-            })
-
-            // 🔥 FULL TEXT SEARCH
-            const searchText = Object.values(rawRow)
-              .join(" ")
-              .toLowerCase()
-
-            return {
-              ...newRow,
-              raw: rawRow,       // semua data excel
-              search: searchText,
-              sheet: sheetName,
-              source: path.basename(filePath)
-            }
-          })
-          .filter(item =>
-            item.sku ||
-            item.article ||
-            item.deskripsi ||
-            Object.keys(item.raw).length > 0
-          )
-
-        console.log(`✔ Sheet: ${sheetName} → ${cleaned.length} data`)
-
-        allData = allData.concat(cleaned)
-
-      } catch (err) {
-        console.log(`❌ Sheet error: ${sheetName}`, err.message)
-      }
-    })
-
-  } catch (err) {
-    console.log(`❌ File error: ${filePath}`, err.message)
-  }
-})
-
-console.log("\n📊 TOTAL DATA:", allData.length)
+console.log("Total data:", rawData.length)
 
 /* =========================
-HAPUS FILE LAMA
+CEK STRUKTUR KOLOM
 ========================= */
-
-fs.readdirSync(OUTPUT_DIR).forEach(file => {
-  if (file.startsWith("promo_") || file.includes("_index")) {
-    fs.unlinkSync(path.join(OUTPUT_DIR, file))
-  }
-})
-
-/* =========================
-SPLIT JSON
-========================= */
-
-let fileIndex = 1
-
-for (let i = 0; i < allData.length; i += MAX_PER_FILE) {
-  const chunk = allData.slice(i, i + MAX_PER_FILE)
-
-  const fileName = `promo_${fileIndex}.json`
-  const filePath = path.join(OUTPUT_DIR, fileName)
-
-  fs.writeFileSync(filePath, JSON.stringify(chunk))
-
-  console.log(`✅ Saved: ${fileName} (${chunk.length})`)
-
-  fileIndex++
+if (DEBUG && rawData.length > 0) {
+  console.log("🧠 Sample kolom:", Object.keys(rawData[0]))
 }
 
 /* =========================
-BUILD INDEX
+MAP DATA + VALIDASI
 ========================= */
+let errorCount = 0
+let missingSku = 0
+let missingArticle = 0
 
+const data = rawData.map((row, i) => {
+  const item = {
+    sku: getVal(row, ["SKU", "sku", "Kode", "KODE"]),
+    article: getVal(row, ["ARTICLE", "article", "ART"]),
+    deskripsi: getVal(row, ["DESKRIPSI", "deskripsi", "NAMA"]),
+    brand: getVal(row, ["BRAND", "brand"]),
+    harga_normal: getVal(row, ["HARGA_NORMAL", "harga_normal"]),
+    harga_promo: getVal(row, ["HARGA_PROMO", "harga_promo"]),
+    diskon: getVal(row, ["DISKON", "diskon"]),
+    fromdate: getVal(row, ["FROMDATE", "fromdate"]),
+    todate: getVal(row, ["TODATE", "todate"]),
+    acara: getVal(row, ["ACARA", "acara"]),
+    source: path.basename(FILE_EXCEL),
+    _index: i
+  }
+
+  // 🔥 DEBUG VALIDASI
+  if (!item.sku) {
+    missingSku++
+    if (DEBUG && missingSku <= 5) {
+      console.log(`⚠️ SKU kosong di row ${i}`, row)
+    }
+  }
+
+  if (!item.article) {
+    missingArticle++
+  }
+
+  if (!item.deskripsi) {
+    errorCount++
+  }
+
+  return item
+})
+
+console.log("⚠️ SKU kosong:", missingSku)
+console.log("⚠️ Article kosong:", missingArticle)
+console.log("⚠️ Deskripsi kosong:", errorCount)
+
+/* =========================
+SPLIT FILE
+========================= */
+if (!fs.existsSync(OUTPUT_FOLDER)) {
+  fs.mkdirSync(OUTPUT_FOLDER)
+}
+
+let fileCount = 0
+
+for (let i = 0; i < data.length; i += SPLIT_SIZE) {
+  const chunk = data.slice(i, i + SPLIT_SIZE)
+
+  const fileName = `promo_${fileCount + 1}.json`
+
+  fs.writeFileSync(
+    path.join(OUTPUT_FOLDER, fileName),
+    JSON.stringify(chunk)
+  )
+
+  fileCount++
+}
+
+console.log("📦 Split selesai:", fileCount, "file")
+
+/* =========================
+BUILD INDEX + VALIDASI
+========================= */
 let skuIndex = {}
 let articleIndex = {}
 
-allData.forEach((item, i) => {
-  if (item.sku) {
-    const key = item.sku.toLowerCase()
-    if (!skuIndex[key]) skuIndex[key] = []
-    skuIndex[key].push(i)
+let duplicateSku = 0
+
+data.forEach((item, i) => {
+  const sku = normalize(item.sku)
+  const article = normalize(item.article)
+
+  if (sku) {
+    if (!skuIndex[sku]) skuIndex[sku] = []
+    else duplicateSku++
+
+    skuIndex[sku].push(i)
   }
 
-  if (item.article) {
-    const key = item.article.toLowerCase()
-    if (!articleIndex[key]) articleIndex[key] = []
-    articleIndex[key].push(i)
+  if (article) {
+    if (!articleIndex[article]) articleIndex[article] = []
+    articleIndex[article].push(i)
   }
 })
 
+console.log("🔁 SKU duplicate:", duplicateSku)
+
+/* =========================
+CEK INDEX ERROR
+========================= */
+if (DEBUG) {
+  let sampleKey = Object.keys(skuIndex)[0]
+  console.log("🔍 Sample SKU index:", sampleKey, "=>", skuIndex[sampleKey])
+}
+
+/* =========================
+SAVE INDEX
+========================= */
 fs.writeFileSync(
-  path.join(OUTPUT_DIR, "sku_index.json"),
+  path.join(OUTPUT_FOLDER, "sku_index.json"),
   JSON.stringify(skuIndex)
 )
 
 fs.writeFileSync(
-  path.join(OUTPUT_DIR, "article_index.json"),
+  path.join(OUTPUT_FOLDER, "article_index.json"),
   JSON.stringify(articleIndex)
 )
 
-console.log("✅ Index SKU & Article dibuat")
+console.log("📑 Index selesai dibuat")
 
-console.log("\n🎉 SELESAI TOTAL (DATA + INDEX SIAP)")
+/* =========================
+FINAL REPORT
+========================= */
+console.log("===================================")
+console.log("✅ CONVERT SELESAI")
+console.log("Total Data:", data.length)
+console.log("File JSON:", fileCount)
+console.log("SKU Kosong:", missingSku)
+console.log("Article Kosong:", missingArticle)
+console.log("===================================")
