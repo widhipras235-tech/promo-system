@@ -6,8 +6,8 @@ let articleIndex = {}
 let cache = {}
 let isReady = false
 
-const MAX_RESULT = 100
-const TOTAL_FILE = 80 // 🔥 sesuaikan jumlah file kamu
+const MAX_RESULT = 30
+const TOTAL_FILE = 10 // sesuaikan
 
 /* =========================
 ELEMENT
@@ -17,41 +17,12 @@ const resultEl = document.getElementById("result")
 const statusEl = document.getElementById("status")
 
 /* =========================
-INIT
+UTILS
 ========================= */
 function normalize(val) {
   return (val || "").toString().toLowerCase().trim()
 }
 
-/* =========================
-LOAD INDEX
-========================= */
-async function loadIndex() {
-  try {
-    statusEl.innerText = "Loading index..."
-
-    const [skuRes, articleRes] = await Promise.all([
-      fetch("./db/sku_index.json"),
-      fetch("./db/article_index.json")
-    ])
-
-    if (skuRes.ok) skuIndex = await skuRes.json()
-    if (articleRes.ok) articleIndex = await articleRes.json()
-
-    isReady = true
-    statusEl.innerText = "Siap digunakan"
-  } catch (err) {
-    console.log("❌ Index gagal:", err)
-    isReady = true
-    statusEl.innerText = "Mode fallback aktif"
-  }
-}
-
-loadIndex()
-
-/* =========================
-UTILS
-========================= */
 function formatRupiah(num) {
   if (!num || isNaN(num)) return num
   return "Rp " + Number(num).toLocaleString("id-ID")
@@ -95,27 +66,86 @@ function formatTanggal(val) {
 }
 
 /* =========================
-LOAD FILE (CACHE)
+HIGHLIGHT
+========================= */
+function highlight(text, keyword) {
+  if (!text) return "-"
+  const safeKeyword = keyword.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+  const regex = new RegExp(`(${safeKeyword})`, "gi")
+  return text.toString().replace(regex, `<mark>$1</mark>`)
+}
+
+/* =========================
+SCORING (SMART RANKING)
+========================= */
+function getScore(item, keyword) {
+  const sku = normalize(item.sku)
+  const article = normalize(item.article)
+  const desc = normalize(item.deskripsi)
+
+  // 🔥 PRIORITAS SKU ANGKA
+  if (/^\d+$/.test(keyword)) {
+    if (sku === keyword) return 120
+  }
+
+  if (sku === keyword) return 100
+  if (article === keyword) return 95
+
+  if (sku.startsWith(keyword)) return 90
+  if (article.startsWith(keyword)) return 85
+
+  if (sku.includes(keyword)) return 70
+  if (article.includes(keyword)) return 60
+
+  if (desc.includes(keyword)) return 40
+
+  return 0
+}
+
+/* =========================
+LOAD INDEX
+========================= */
+async function loadIndex() {
+  try {
+    statusEl.innerText = "Loading..."
+
+    const [skuRes, articleRes] = await Promise.all([
+      fetch("./db/sku_index.json"),
+      fetch("./db/article_index.json")
+    ])
+
+    if (skuRes.ok) skuIndex = await skuRes.json()
+    if (articleRes.ok) articleIndex = await articleRes.json()
+
+    isReady = true
+    statusEl.innerText = "Siap digunakan"
+  } catch {
+    isReady = true
+    statusEl.innerText = "Fallback mode"
+  }
+}
+loadIndex()
+
+/* =========================
+LOAD FILE
 ========================= */
 async function loadFile(fileIndex) {
-  try {
-    if (cache[fileIndex]) return cache[fileIndex]
+  if (cache[fileIndex]) return cache[fileIndex]
 
+  try {
     const res = await fetch(`./db/promo_${fileIndex}.json`)
     if (!res.ok) return []
 
     const data = await res.json()
     cache[fileIndex] = data
-
     return data
-  } catch (err) {
-    console.log("❌ Load file error:", fileIndex)
+  } catch {
     return []
   }
 }
 
 /* =========================
-EXACT RESULT
+EXACT SEARCH
 ========================= */
 async function getExactResults(indexList, keyword) {
   let results = []
@@ -124,7 +154,6 @@ async function getExactResults(indexList, keyword) {
   for (let i of indexList) {
     const fileIndex = Math.floor(i / 5000) + 1
     const data = await loadFile(fileIndex)
-
     const item = data[i % 5000]
     if (!item) continue
 
@@ -132,27 +161,18 @@ async function getExactResults(indexList, keyword) {
     const article = normalize(item.article)
 
     if (sku === keyword || article === keyword) {
-      results.push(item)
+      results.push({
+        ...item,
+        _score: getScore(item, keyword)
+      })
     }
-
-    if (results.length >= MAX_RESULT) break
   }
 
-  // 🔥 fallback kalau mapping error
-  if (results.length === 0) {
-    const fileIndex = Math.floor(indexList[0] / 5000) + 1
-    const data = await loadFile(fileIndex)
-
-    return data.filter(item =>
-      normalize(item.sku) === keyword
-    ).slice(0, MAX_RESULT)
-  }
-
-  return results
+  return results.sort((a, b) => b._score - a._score).slice(0, MAX_RESULT)
 }
 
 /* =========================
-RESULT DARI INDEX
+INDEX SEARCH
 ========================= */
 async function getResultsFromIndexes(indexes, keyword) {
   let results = []
@@ -182,18 +202,19 @@ async function getResultsFromIndexes(indexes, keyword) {
         article.includes(keyword) ||
         desc.includes(keyword)
       ) {
-        results.push(item)
+        results.push({
+          ...item,
+          _score: getScore(item, keyword)
+        })
       }
-
-      if (results.length >= MAX_RESULT) return results
     }
   }
 
-  return results
+  return results.sort((a, b) => b._score - a._score).slice(0, MAX_RESULT)
 }
 
 /* =========================
-FULL SCAN (ANTI MISS)
+FULL SCAN
 ========================= */
 async function fullScanSearch(keyword) {
   let results = []
@@ -212,34 +233,32 @@ async function fullScanSearch(keyword) {
         article.includes(keyword) ||
         desc.includes(keyword)
       ) {
-        results.push(item)
+        results.push({
+          ...item,
+          _score: getScore(item, keyword)
+        })
       }
-
-      if (results.length >= MAX_RESULT) return results
     }
   }
 
-  return results
+  return results.sort((a, b) => b._score - a._score).slice(0, MAX_RESULT)
 }
 
 /* =========================
-SEARCH ENGINE
+SEARCH
 ========================= */
 async function searchData(keyword) {
   keyword = normalize(keyword)
   if (!keyword) return []
 
-  // EXACT SKU
   if (skuIndex[keyword]) {
     return await getExactResults(skuIndex[keyword], keyword)
   }
 
-  // EXACT ARTICLE
   if (articleIndex[keyword]) {
     return await getExactResults(articleIndex[keyword], keyword)
   }
 
-  // PREFIX SEARCH
   let indexes = new Set()
   let prefix = keyword.slice(0, 3)
 
@@ -247,70 +266,52 @@ async function searchData(keyword) {
     if (!key.startsWith(prefix)) continue
 
     if (key.startsWith(keyword)) {
-      skuIndex[key].forEach(i => {
-        if (indexes.size < MAX_RESULT) indexes.add(i)
-      })
+      skuIndex[key].forEach(i => indexes.add(i))
     }
-
-    if (indexes.size >= MAX_RESULT) break
   }
 
   if (indexes.size > 0) {
     return await getResultsFromIndexes(indexes, keyword)
   }
 
-  // 🔥 fallback terakhir
   return await fullScanSearch(keyword)
 }
 
 /* =========================
 RENDER
 ========================= */
-function render(data) {
+function render(data, keyword) {
   resultEl.innerHTML = ""
 
-  if (!data || data.length === 0) {
+  if (!data.length) {
     resultEl.innerHTML = "<p>Data tidak ditemukan</p>"
     return
   }
 
   data.forEach(item => {
     const diskon = formatDiskon(item.diskon || item.raw?.diskon)
-    const isDiskon = diskon !== "-"
-
-    const mulai =
-      item.fromdate ||
-      item.raw?.fromdate ||
-      "-"
-
-    const akhir =
-      item.todate ||
-      item.raw?.todate ||
-      "-"
+    const mulai = item.fromdate || item.raw?.fromdate
+    const akhir = item.todate || item.raw?.todate
 
     const el = document.createElement("div")
     el.className = "card"
 
     el.innerHTML = `
-      <div><b>${item.deskripsi || "-"}</b></div>
-      <div>Brand: ${item.brand || "-"}</div>
-      <div>SKU: ${item.sku || "-"}</div>
-      <div>Article: ${item.article || "-"}</div>
+      <div><b>${highlight(item.deskripsi, keyword)}</b></div>
+      <div>Brand: ${highlight(item.brand, keyword)}</div>
+      <div>SKU: ${highlight(item.sku, keyword)}</div>
+      <div>Article: ${highlight(item.article, keyword)}</div>
 
       <div>
         Harga Normal:
-        ${
-          isDiskon
-            ? `<span style="text-decoration:line-through;color:gray">${formatRupiah(item.harga_normal)}</span>`
-            : formatRupiah(item.harga_normal)
-        }
+        ${formatRupiah(item.harga_normal)}
       </div>
 
       <div style="color:red;font-weight:bold;font-size:18px">
         Harga Promo: ${
           !isNaN(item.harga_promo)
             ? formatRupiah(item.harga_promo)
-            : (item.harga_promo || "-")
+            : item.harga_promo || "-"
         }
       </div>
 
@@ -322,7 +323,7 @@ function render(data) {
         Berlaku: ${formatTanggal(mulai)} - ${formatTanggal(akhir)}
       </div>
 
-      <div><b>Acara:</b> ${item.acara || item.raw?.acara || "-"}</div>
+      <div><b>Acara:</b> ${highlight(item.acara || item.raw?.acara, keyword)}</div>
       <div><b>Sumber:</b> ${getFileName(item.source)}</div>
     `
 
@@ -337,7 +338,6 @@ let timer
 
 searchInput.addEventListener("input", e => {
   clearTimeout(timer)
-
   const keyword = e.target.value
 
   if (!isReady) {
@@ -356,7 +356,7 @@ searchInput.addEventListener("input", e => {
 
     const result = await searchData(keyword)
 
-    render(result)
+    render(result, keyword)
 
     statusEl.innerText = `Ditemukan ${result.length} data`
   }, 200)
