@@ -230,18 +230,22 @@ function render(data) {
 
     // 🔥 FIX TANGGAL (ANTI KOSONG)
     const mulai =
-      item.mulai ||
-      item.raw?.mulai ||
-      item.raw?.tgl_mulai ||
-      item.raw?.start ||
-      "-"
+  item.fromdate ||
+  item.todate || // jaga2 kalau ketukar
+  item.mulai ||
+  item.raw?.fromdate ||
+  item.raw?.mulai ||
+  item.raw?.tgl_mulai ||
+  "-"
 
-    const akhir =
-      item.akhir ||
-      item.raw?.akhir ||
-      item.raw?.tgl_akhir ||
-      item.raw?.end ||
-      "-"
+const akhir =
+  item.todate ||
+  item.fromdate || // jaga2 kalau ketukar
+  item.akhir ||
+  item.raw?.todate ||
+  item.raw?.akhir ||
+  item.raw?.tgl_akhir ||
+  "-"
 
     const el = document.createElement("div")
     el.className = "card"
