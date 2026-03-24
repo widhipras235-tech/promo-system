@@ -4,7 +4,7 @@ const path = require("path")
 const crypto = require("crypto")
 
 /* =========================
-CONFIG
+CONFIG (SAMA)
 ========================= */
 const INPUT_FOLDER = "./excel"
 const OUTPUT_FOLDER = "./db"
@@ -13,16 +13,8 @@ const SPLIT_SIZE = 5000
 const DEBUG = true
 
 /* =========================
-NORMALIZE
+NORMALIZE (SAMA)
 ========================= */
-function normalizeKey(str) {
-  return (str || "")
-    .toString()
-    .toLowerCase()
-    .replace(/\s+/g, "")
-    .replace(/[^a-z0-9]/g, "")
-}
-
 function normalize(val) {
   return (val || "")
     .toString()
@@ -31,70 +23,44 @@ function normalize(val) {
 }
 
 /* =========================
-AI FIELD MAPPING (SAMA PERSIS)
+GETVAL (SAMA PERSIS)
 ========================= */
-const FIELD_PATTERNS = {
-  sku: ["sku", "kodebarang", "kode", "itemcode"],
-  article: ["article", "art", "artikel"],
-  deskripsi: ["description", "deskripsi", "nama", "namabarang", "productname"],
-  brand: ["brand", "merk"],
-  harga_normal: ["harganormal", "normalprice", "price", "regprice"],
-  harga_promo: ["hargapromo", "promoprice", "saleprice"],
-  diskon: ["diskon", "discount"],
-  fromdate: ["fromdate", "startdate", "tglmulai"],
-  todate: ["todate", "enddate", "tglakhir"],
-  acara: ["acara", "promo", "event"],
-  division: ["division", "divisi"],
-}
-
-function getValAI(row, fieldName) {
-  const map = {}
-  for (let k in row) map[normalizeKey(k)] = row[k]
-
-  const patterns = FIELD_PATTERNS[fieldName] || []
-
-  for (let p of patterns) {
-    const key = normalizeKey(p)
-    for (let k in map) {
-      if (k.includes(key)) return map[k]
+function getVal(row, keys) {
+  for (let key of keys) {
+    if (row[key] !== undefined && row[key] !== "") {
+      return row[key]
     }
   }
   return ""
 }
 
 /* =========================
-HASH FUNCTION
+HASH
 ========================= */
-function getFileHash(filePath) {
-  const buffer = fs.readFileSync(filePath)
-  return crypto.createHash("md5").update(buffer).digest("hex")
+function getHash(file) {
+  return crypto
+    .createHash("md5")
+    .update(fs.readFileSync(file))
+    .digest("hex")
 }
 
 /* =========================
-LOAD HASH LAMA
+SCAN FILE (FIX)
 ========================= */
-let oldHash = {}
-if (fs.existsSync(HASH_FILE)) {
-  oldHash = JSON.parse(fs.readFileSync(HASH_FILE))
-}
-
-/* =========================
-SCAN FILE
-========================= */
-function getAllExcelFiles(dir, list = []) {
+function getFiles(dir, list = []) {
   const files = fs.readdirSync(dir)
 
-  files.forEach(file => {
-    const full = path.join(dir, file)
+  files.forEach(f => {
+    const full = path.join(dir, f)
     const stat = fs.statSync(full)
 
     if (stat.isDirectory()) {
-      getAllExcelFiles(full, list)
+      getFiles(full, list)
     } else {
-      if (file.startsWith("~$")) return
+      if (f.startsWith("~$")) return
 
-      const ext = path.extname(file).toLowerCase()
-      if ([".xlsx",".xls",".xlsm",".csv"].includes(ext)) {
+      const ext = path.extname(f).toLowerCase()
+      if ([".xlsx", ".xls"].includes(ext)) {
         list.push(full)
       }
     }
@@ -103,26 +69,35 @@ function getAllExcelFiles(dir, list = []) {
   return list
 }
 
-const excelFiles = getAllExcelFiles(INPUT_FOLDER)
+/* =========================
+LOAD HASH
+========================= */
+let oldHash = {}
+if (fs.existsSync(HASH_FILE)) {
+  oldHash = JSON.parse(fs.readFileSync(HASH_FILE))
+}
+
+const files = getFiles(INPUT_FOLDER)
+
+console.log("📂 Total file:", files.length)
 
 /* =========================
-DETECT FILE BERUBAH
+CEK PERUBAHAN
 ========================= */
 let newHash = {}
 let changedFiles = []
 
-excelFiles.forEach(file => {
-  const name = path.basename(file)
-  const hash = getFileHash(file)
+files.forEach(f => {
+  const name = path.basename(f)
+  const hash = getHash(f)
 
   newHash[name] = hash
 
   if (oldHash[name] !== hash) {
-    changedFiles.push(file)
+    changedFiles.push(f)
   }
 })
 
-console.log("📂 Total file:", excelFiles.length)
 console.log("🔄 File berubah:", changedFiles.length)
 
 if (changedFiles.length === 0) {
@@ -136,52 +111,63 @@ LOAD DATA LAMA
 let DB = []
 const dbFiles = fs.readdirSync(OUTPUT_FOLDER).filter(f => f.startsWith("promo_"))
 
-dbFiles.forEach(file => {
-  DB = DB.concat(JSON.parse(fs.readFileSync(path.join(OUTPUT_FOLDER, file))))
+dbFiles.forEach(f => {
+  DB = DB.concat(JSON.parse(fs.readFileSync(path.join(OUTPUT_FOLDER, f))))
 })
 
 /* =========================
-HAPUS DATA FILE YANG DIUPDATE
+HAPUS DATA LAMA PER FILE
 ========================= */
 const changedNames = changedFiles.map(f => path.basename(f))
 
 DB = DB.filter(item => !changedNames.includes(item.source))
 
 /* =========================
-PROCESS FILE BARU / UPDATE
+PROCESS FILE (SAMA PERSIS)
 ========================= */
-let newData = []
+let rawData = []
 
-changedFiles.forEach(filePath => {
-  console.log("📄 Update:", filePath)
+changedFiles.forEach((filePath, idx) => {
+  try {
+    console.log(`📄 Update: ${filePath}`)
 
-  const workbook = XLSX.readFile(filePath)
+    const workbook = XLSX.readFile(filePath)
+    const sheetName = workbook.SheetNames[0] // ⚠️ SAMA
 
-  workbook.SheetNames.forEach(sheetName => {
     const sheet = workbook.Sheets[sheetName]
     const json = XLSX.utils.sheet_to_json(sheet, { defval: "" })
 
-    json.forEach((row, i) => {
-      const item = {
-        sku: getValAI(row, "sku"),
-        article: getValAI(row, "article"),
-        deskripsi: getValAI(row, "deskripsi"),
-        brand: getValAI(row, "brand"),
-        harga_normal: getValAI(row, "harga_normal"),
-        harga_promo: getValAI(row, "harga_promo"),
-        diskon: getValAI(row, "diskon"),
-        fromdate: getValAI(row, "fromdate"),
-        todate: getValAI(row, "todate"),
-        acara: getValAI(row, "acara"),
-        division: getValAI(row, "division"),
-        source: path.basename(filePath),
-        sheet: sheetName
-      }
+    const withSource = json.map(row => ({
+      ...row,
+      __source: path.basename(filePath)
+    }))
 
-      newData.push(item)
-    })
-  })
+    rawData = rawData.concat(withSource)
+
+  } catch (err) {
+    console.log("❌ Error:", filePath, err.message)
+  }
 })
+
+/* =========================
+MAP DATA (SAMA PERSIS)
+========================= */
+const startIndex = DB.length
+
+const newData = rawData.map((row, i) => ({
+  sku: getVal(row, ["SKU", "sku", "Kode", "KODE"]),
+  article: getVal(row, ["ARTICLE", "article", "ART"]),
+  deskripsi: getVal(row, ["DESKRIPSI", "deskripsi", "NAMA", "NAMA BARANG"]),
+  brand: getVal(row, ["BRAND", "brand"]),
+  harga_normal: getVal(row, ["HARGA_NORMAL", "harga_normal"]),
+  harga_promo: getVal(row, ["HARGA_PROMO", "harga_promo"]),
+  diskon: getVal(row, ["DISKON", "diskon"]),
+  fromdate: getVal(row, ["FROMDATE", "fromdate"]),
+  todate: getVal(row, ["TODATE", "todate"]),
+  acara: getVal(row, ["ACARA", "acara"]),
+  source: row.__source || "unknown",
+  _index: startIndex + i
+}))
 
 /* =========================
 MERGE
@@ -189,23 +175,23 @@ MERGE
 const finalData = DB.concat(newData)
 
 /* =========================
-SPLIT (SAMA PERSIS)
+SPLIT (RESET FILE)
 ========================= */
+const oldSplit = fs.readdirSync(OUTPUT_FOLDER).filter(f => f.startsWith("promo_"))
+oldSplit.forEach(f => fs.unlinkSync(path.join(OUTPUT_FOLDER, f)))
+
 let fileCount = 0
 
 for (let i = 0; i < finalData.length; i += SPLIT_SIZE) {
-  const chunk = finalData.slice(i, i + SPLIT_SIZE)
-
   fs.writeFileSync(
     path.join(OUTPUT_FOLDER, `promo_${fileCount + 1}.json`),
-    JSON.stringify(chunk)
+    JSON.stringify(finalData.slice(i, i + SPLIT_SIZE))
   )
-
   fileCount++
 }
 
 /* =========================
-INDEX (SAMA PERSIS)
+INDEX (SAMA)
 ========================= */
 let skuIndex = {}
 let articleIndex = {}
@@ -225,15 +211,8 @@ finalData.forEach((item, i) => {
   }
 })
 
-fs.writeFileSync(
-  path.join(OUTPUT_FOLDER, "sku_index.json"),
-  JSON.stringify(skuIndex)
-)
-
-fs.writeFileSync(
-  path.join(OUTPUT_FOLDER, "article_index.json"),
-  JSON.stringify(articleIndex)
-)
+fs.writeFileSync(path.join(OUTPUT_FOLDER, "sku_index.json"), JSON.stringify(skuIndex))
+fs.writeFileSync(path.join(OUTPUT_FOLDER, "article_index.json"), JSON.stringify(articleIndex))
 
 /* =========================
 SAVE HASH
@@ -241,10 +220,10 @@ SAVE HASH
 fs.writeFileSync(HASH_FILE, JSON.stringify(newHash))
 
 /* =========================
-FINAL REPORT
+FINAL
 ========================= */
 console.log("===================================")
-console.log("✅ SMART UPDATE SELESAI")
+console.log("✅ SMART UPDATE FIXED")
 console.log("Total Data:", finalData.length)
 console.log("File Update:", changedFiles.length)
 console.log("===================================")

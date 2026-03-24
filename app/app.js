@@ -372,3 +372,29 @@ searchInput.addEventListener("input", e => {
     statusEl.innerText = `Ditemukan ${result.length} data`
   }, 200)
 })
+
+/* =========================
+AUTO UPDATE (SMART RELOAD)
+========================= */
+let lastUpdate = null
+
+setInterval(async () => {
+  try {
+    const res = await fetch("./db/sku_index.json?t=" + Date.now())
+const res2 = await fetch("./db/article_index.json?t=" + Date.now())
+
+const text = await res.text()
+const text2 = await res2.text()
+
+const combined = text + text2
+
+    if (lastUpdate && lastUpdate !== text) {
+      console.log("🔄 Data berubah, reload...")
+      location.reload()
+    }
+
+    lastUpdate = text
+  } catch (err) {
+    console.log("❌ Gagal cek update")
+  }
+}, 300000) // 5 menit
