@@ -94,51 +94,59 @@ async function loadFile(fileIndex) {
 SEARCH SUPER CEPAT + FALLBACK
 ========================= */
 async function searchData(keyword) {
-  keyword = keyword.toLowerCase()
+  keyword = keyword.toLowerCase().trim()
 
   let results = []
   let indexes = new Set()
 
-  // 🔥 1. EXACT MATCH
+  /* =========================
+  1. EXACT MATCH (PRIORITAS UTAMA)
+  ========================= */
   if (skuIndex[keyword]) {
-    skuIndex[keyword].forEach(i => {
-      if (indexes.size < MAX_RESULT) indexes.add(i)
-    })
+    skuIndex[keyword].forEach(i => indexes.add(i))
   }
 
   if (articleIndex[keyword]) {
-    articleIndex[keyword].forEach(i => {
-      if (indexes.size < MAX_RESULT) indexes.add(i)
-    })
+    articleIndex[keyword].forEach(i => indexes.add(i))
   }
 
-  // 🔥 2. PARTIAL MATCH
-  if (indexes.size < MAX_RESULT) {
-    for (let key in skuIndex) {
-      if (key.includes(keyword)) {
-        for (let i of skuIndex[key]) {
-          indexes.add(i)
-          if (indexes.size >= MAX_RESULT) break
-        }
-      }
-      if (indexes.size >= MAX_RESULT) break
+  // 🔥 kalau exact ketemu → langsung ambil & return
+  if (indexes.size > 0) {
+    return await collectResults(indexes, keyword, true)
+  }
+
+  /* =========================
+  2. PARTIAL MATCH (LEBIH KETAT)
+  ========================= */
+  for (let key in skuIndex) {
+    if (key.startsWith(keyword)) { // 🔥 lebih akurat dari includes
+      skuIndex[key].forEach(i => {
+        if (indexes.size < MAX_RESULT) indexes.add(i)
+      })
     }
+    if (indexes.size >= MAX_RESULT) break
   }
 
-  // 🔥 3. JIKA INDEX KOSONG → FALLBACK (ANTI BLANK)
+  /* =========================
+  3. FALLBACK (SCAN DATA)
+  ========================= */
   if (indexes.size === 0) {
     const data = await loadFile(1)
 
     return data
       .filter(item =>
-        (item.sku || "").toLowerCase().includes(keyword) ||
-        (item.article || "").toLowerCase().includes(keyword) ||
-        (item.deskripsi || "").toLowerCase().includes(keyword)
+        item.sku?.toLowerCase() === keyword || // 🔥 exact SKU
+        item.article?.toLowerCase().includes(keyword) ||
+        item.deskripsi?.toLowerCase().includes(keyword)
       )
       .slice(0, MAX_RESULT)
   }
 
-  // 🔥 4. LOAD FILE SESUAI INDEX
+  return await collectResults(indexes, keyword, false)
+}
+
+async function collectResults(indexes, keyword, isExact) {
+  let results = []
   let fileMap = {}
 
   indexes.forEach(i => {
@@ -152,14 +160,29 @@ async function searchData(keyword) {
 
     for (let i of fileMap[fileIndex]) {
       const localIndex = i % 5000
+      const item = data[localIndex]
 
-      if (data[localIndex]) {
-        results.push(data[localIndex])
+      if (!item) continue
+
+      // 🔥 VALIDASI ULANG (PENTING)
+      if (isExact) {
+        if (
+          item.sku?.toLowerCase() === keyword ||
+          item.article?.toLowerCase() === keyword
+        ) {
+          results.push(item)
+        }
+      } else {
+        if (
+          item.sku?.toLowerCase().startsWith(keyword) ||
+          item.article?.toLowerCase().includes(keyword) ||
+          item.deskripsi?.toLowerCase().includes(keyword)
+        ) {
+          results.push(item)
+        }
       }
 
-      if (results.length >= MAX_RESULT) {
-        return results
-      }
+      if (results.length >= MAX_RESULT) return results
     }
   }
 
