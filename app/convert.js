@@ -5,11 +5,10 @@ const path = require("path")
 /* =========================
 CONFIG
 ========================= */
-const FILE_EXCEL = "./excel/data.xlsx"
+const INPUT_FOLDER = "./excel"
 const OUTPUT_FOLDER = "./db"
 const SPLIT_SIZE = 5000
-
-const DEBUG = true // 🔥 aktifkan debug
+const DEBUG = true
 
 /* =========================
 NORMALIZE (WAJIB SAMA APP.JS)
@@ -22,7 +21,27 @@ function normalize(val) {
 }
 
 /* =========================
-SAFE GET (ANTI BEDA KOLOM)
+SCAN FILE RECURSIVE
+========================= */
+function getAllExcelFiles(dir, fileList = []) {
+  const files = fs.readdirSync(dir)
+
+  files.forEach(file => {
+    const fullPath = path.join(dir, file)
+    const stat = fs.statSync(fullPath)
+
+    if (stat.isDirectory()) {
+      getAllExcelFiles(fullPath, fileList)
+    } else if (file.endsWith(".xlsx") || file.endsWith(".xls")) {
+      fileList.push(fullPath)
+    }
+  })
+
+  return fileList
+}
+
+/* =========================
+SAFE GET (HANDLE KOLOM BEDA)
 ========================= */
 function getVal(row, keys) {
   for (let key of keys) {
@@ -34,43 +53,71 @@ function getVal(row, keys) {
 }
 
 /* =========================
-READ EXCEL
+LOAD SEMUA FILE
 ========================= */
-if (!fs.existsSync(FILE_EXCEL)) {
-  console.log("❌ File Excel tidak ditemukan:", FILE_EXCEL)
+if (!fs.existsSync(INPUT_FOLDER)) {
+  console.log("❌ Folder excel tidak ditemukan:", INPUT_FOLDER)
   process.exit()
 }
 
-const workbook = XLSX.readFile(FILE_EXCEL)
+const files = getAllExcelFiles(INPUT_FOLDER)
 
-if (DEBUG) {
-  console.log("📄 Sheet ditemukan:", workbook.SheetNames)
+if (files.length === 0) {
+  console.log("❌ Tidak ada file Excel ditemukan")
+  process.exit()
 }
 
-const sheet = workbook.Sheets[workbook.SheetNames[0]]
-const rawData = XLSX.utils.sheet_to_json(sheet, { defval: "" })
+console.log("📂 Total file ditemukan:", files.length)
 
-console.log("Total data:", rawData.length)
+let rawData = []
 
-/* =========================
-CEK STRUKTUR KOLOM
-========================= */
-if (DEBUG && rawData.length > 0) {
-  console.log("🧠 Sample kolom:", Object.keys(rawData[0]))
-}
+files.forEach((filePath, idx) => {
+  try {
+    console.log(`📄 [${idx + 1}] Baca: ${filePath}`)
+
+    const workbook = XLSX.readFile(filePath)
+    const sheetName = workbook.SheetNames[0]
+
+    if (DEBUG) {
+      console.log("   ↳ Sheet:", sheetName)
+    }
+
+    const sheet = workbook.Sheets[sheetName]
+    const json = XLSX.utils.sheet_to_json(sheet, { defval: "" })
+
+    console.log(`   ↳ Data: ${json.length}`)
+
+    if (DEBUG && json.length > 0) {
+      console.log("   ↳ Kolom:", Object.keys(json[0]))
+    }
+
+    const withSource = json.map(row => ({
+      ...row,
+      __source: path.basename(filePath)
+    }))
+
+    rawData = rawData.concat(withSource)
+
+  } catch (err) {
+    console.log("❌ Gagal baca file:", filePath)
+    console.log("   ↳ Error:", err.message)
+  }
+})
+
+console.log("🔥 TOTAL DATA GABUNGAN:", rawData.length)
 
 /* =========================
 MAP DATA + VALIDASI
 ========================= */
-let errorCount = 0
 let missingSku = 0
 let missingArticle = 0
+let missingDesc = 0
 
 const data = rawData.map((row, i) => {
   const item = {
     sku: getVal(row, ["SKU", "sku", "Kode", "KODE"]),
     article: getVal(row, ["ARTICLE", "article", "ART"]),
-    deskripsi: getVal(row, ["DESKRIPSI", "deskripsi", "NAMA"]),
+    deskripsi: getVal(row, ["DESKRIPSI", "deskripsi", "NAMA", "NAMA BARANG"]),
     brand: getVal(row, ["BRAND", "brand"]),
     harga_normal: getVal(row, ["HARGA_NORMAL", "harga_normal"]),
     harga_promo: getVal(row, ["HARGA_PROMO", "harga_promo"]),
@@ -78,32 +125,27 @@ const data = rawData.map((row, i) => {
     fromdate: getVal(row, ["FROMDATE", "fromdate"]),
     todate: getVal(row, ["TODATE", "todate"]),
     acara: getVal(row, ["ACARA", "acara"]),
-    source: path.basename(FILE_EXCEL),
+    source: row.__source || "unknown",
     _index: i
   }
 
-  // 🔥 DEBUG VALIDASI
+  // DEBUG VALIDASI
   if (!item.sku) {
     missingSku++
     if (DEBUG && missingSku <= 5) {
-      console.log(`⚠️ SKU kosong di row ${i}`, row)
+      console.log(`⚠️ SKU kosong row ${i}`, row)
     }
   }
 
-  if (!item.article) {
-    missingArticle++
-  }
-
-  if (!item.deskripsi) {
-    errorCount++
-  }
+  if (!item.article) missingArticle++
+  if (!item.deskripsi) missingDesc++
 
   return item
 })
 
 console.log("⚠️ SKU kosong:", missingSku)
 console.log("⚠️ Article kosong:", missingArticle)
-console.log("⚠️ Deskripsi kosong:", errorCount)
+console.log("⚠️ Deskripsi kosong:", missingDesc)
 
 /* =========================
 SPLIT FILE
@@ -130,11 +172,10 @@ for (let i = 0; i < data.length; i += SPLIT_SIZE) {
 console.log("📦 Split selesai:", fileCount, "file")
 
 /* =========================
-BUILD INDEX + VALIDASI
+BUILD INDEX
 ========================= */
 let skuIndex = {}
 let articleIndex = {}
-
 let duplicateSku = 0
 
 data.forEach((item, i) => {
@@ -144,7 +185,6 @@ data.forEach((item, i) => {
   if (sku) {
     if (!skuIndex[sku]) skuIndex[sku] = []
     else duplicateSku++
-
     skuIndex[sku].push(i)
   }
 
@@ -157,10 +197,10 @@ data.forEach((item, i) => {
 console.log("🔁 SKU duplicate:", duplicateSku)
 
 /* =========================
-CEK INDEX ERROR
+VALIDASI INDEX
 ========================= */
 if (DEBUG) {
-  let sampleKey = Object.keys(skuIndex)[0]
+  const sampleKey = Object.keys(skuIndex)[0]
   console.log("🔍 Sample SKU index:", sampleKey, "=>", skuIndex[sampleKey])
 }
 
@@ -185,6 +225,7 @@ FINAL REPORT
 console.log("===================================")
 console.log("✅ CONVERT SELESAI")
 console.log("Total Data:", data.length)
+console.log("Total File Excel:", files.length)
 console.log("File JSON:", fileCount)
 console.log("SKU Kosong:", missingSku)
 console.log("Article Kosong:", missingArticle)
