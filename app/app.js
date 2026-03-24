@@ -246,7 +246,7 @@ function render(data) {
       </div>
 
       <div>
-        Berlaku: ${item.mulai || "-"} - ${item.akhir || "-"}
+        Berlaku: ${item.fromdate || "-"} - ${item.todate || "-"}
       </div>
 
       <div><b>Acara:</b> ${item.acara || item.raw?.acara || "-"}</div>
