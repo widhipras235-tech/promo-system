@@ -6,7 +6,7 @@ let articleIndex = {}
 let cache = {}
 let isReady = false
 
-const MAX_RESULT = 30
+const MAX_RESULT = 100
 const TOTAL_FILE = 80 // 🔥 sesuaikan jumlah file kamu
 
 /* =========================
