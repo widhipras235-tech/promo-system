@@ -1,24 +1,51 @@
-let data = []
+let skuIndex = {}
+let articleIndex = {}
+let cache = {}
+let isReady = false
 
 const MAX_RESULT = 30
 
+/* =========================
+ELEMENT
+========================= */
 const searchInput = document.getElementById("search")
 const resultEl = document.getElementById("result")
 const statusEl = document.getElementById("status")
 
 /* =========================
-LOAD DATA
+LOAD INDEX
 ========================= */
-async function init() {
-  statusEl.innerText = "Loading..."
+async function loadIndex() {
+  try {
+    statusEl.innerText = "Loading index..."
 
-  const res = await fetch("./db/data.json")
-  data = await res.json()
+    const skuRes = await fetch("./db/sku_index.json")
+    const articleRes = await fetch("./db/article_index.json")
 
-  statusEl.innerText = "Siap ⚡"
+    if (skuRes.ok) {
+      skuIndex = await skuRes.json()
+    }
+
+    if (articleRes.ok) {
+      articleIndex = await articleRes.json()
+    }
+
+    console.log("✅ Index Loaded")
+    console.log("SKU:", Object.keys(skuIndex).length)
+    console.log("ARTICLE:", Object.keys(articleIndex).length)
+
+    isReady = true
+    statusEl.innerText = "Siap digunakan"
+  } catch (err) {
+    console.log("❌ Index gagal:", err)
+
+    // tetap lanjut walau index gagal
+    isReady = true
+    statusEl.innerText = "Mode fallback aktif"
+  }
 }
 
-init()
+loadIndex()
 
 /* =========================
 UTILS
@@ -44,51 +71,121 @@ function getFileName(path) {
 }
 
 /* =========================
-SEARCH SUPER CEPAT
+LOAD FILE
 ========================= */
-function searchData(q) {
-  q = q.toLowerCase()
+async function loadFile(fileIndex) {
+  try {
+    if (cache[fileIndex]) return cache[fileIndex]
 
-  let result = []
+    const res = await fetch(`./db/promo_${fileIndex}.json`)
+    if (!res.ok) return []
 
-  for (let i = 0; i < data.length; i++) {
-    const item = data[i]
+    const data = await res.json()
+    cache[fileIndex] = data
 
-    if (
-      item.sku.includes(q) ||
-      item.article.includes(q) ||
-      item.name.includes(q) ||
-      item.brand.includes(q)
-    ) {
-      result.push(item)
-    }
+    return data
+  } catch (err) {
+    console.log("❌ Load file error:", fileIndex)
+    return []
+  }
+}
 
-    if (result.length >= MAX_RESULT) break
+/* =========================
+SEARCH SUPER CEPAT + FALLBACK
+========================= */
+async function searchData(keyword) {
+  keyword = keyword.toLowerCase()
+
+  let results = []
+  let indexes = new Set()
+
+  // 🔥 1. EXACT MATCH
+  if (skuIndex[keyword]) {
+    skuIndex[keyword].forEach(i => {
+      if (indexes.size < MAX_RESULT) indexes.add(i)
+    })
   }
 
-  return result
+  if (articleIndex[keyword]) {
+    articleIndex[keyword].forEach(i => {
+      if (indexes.size < MAX_RESULT) indexes.add(i)
+    })
+  }
+
+  // 🔥 2. PARTIAL MATCH
+  if (indexes.size < MAX_RESULT) {
+    for (let key in skuIndex) {
+      if (key.includes(keyword)) {
+        for (let i of skuIndex[key]) {
+          indexes.add(i)
+          if (indexes.size >= MAX_RESULT) break
+        }
+      }
+      if (indexes.size >= MAX_RESULT) break
+    }
+  }
+
+  // 🔥 3. JIKA INDEX KOSONG → FALLBACK (ANTI BLANK)
+  if (indexes.size === 0) {
+    const data = await loadFile(1)
+
+    return data
+      .filter(item =>
+        (item.sku || "").toLowerCase().includes(keyword) ||
+        (item.article || "").toLowerCase().includes(keyword) ||
+        (item.deskripsi || "").toLowerCase().includes(keyword)
+      )
+      .slice(0, MAX_RESULT)
+  }
+
+  // 🔥 4. LOAD FILE SESUAI INDEX
+  let fileMap = {}
+
+  indexes.forEach(i => {
+    const fileIndex = Math.floor(i / 5000) + 1
+    if (!fileMap[fileIndex]) fileMap[fileIndex] = []
+    fileMap[fileIndex].push(i)
+  })
+
+  for (let fileIndex in fileMap) {
+    const data = await loadFile(fileIndex)
+
+    for (let i of fileMap[fileIndex]) {
+      const localIndex = i % 5000
+
+      if (data[localIndex]) {
+        results.push(data[localIndex])
+      }
+
+      if (results.length >= MAX_RESULT) {
+        return results
+      }
+    }
+  }
+
+  return results
 }
 
 /* =========================
 RENDER
 ========================= */
-function render(list) {
+function render(data) {
   resultEl.innerHTML = ""
 
-  if (!list.length) {
+  if (!data || data.length === 0) {
     resultEl.innerHTML = "<p>Data tidak ditemukan</p>"
     return
   }
 
-  list.forEach(item => {
-    const diskon = formatDiskon(item.diskon)
+  data.forEach(item => {
+    const diskon = formatDiskon(item.diskon || item.raw?.diskon)
     const isDiskon = diskon !== "-"
 
     const el = document.createElement("div")
     el.className = "card"
 
     el.innerHTML = `
-      <div><b>${item.name || "-"}</b></div>
+      <div><b>${item.deskripsi || "-"}</b></div>
       <div>Brand: ${item.brand || "-"}</div>
       <div>SKU: ${item.sku || "-"}</div>
       <div>Article: ${item.article || "-"}</div>
@@ -118,7 +215,7 @@ function render(list) {
         Berlaku: ${item.mulai || "-"} - ${item.akhir || "-"}
       </div>
 
-      <div><b>Acara:</b> ${item.acara || "-"}</div>
+      <div><b>Acara:</b> ${item.acara || item.raw?.acara || "-"}</div>
 
       <div><b>Sumber:</b> ${getFileName(item.source)}</div>
     `
@@ -135,10 +232,15 @@ let timer
 searchInput.addEventListener("input", e => {
   clearTimeout(timer)
 
-  const q = e.target.value.trim()
+  const keyword = e.target.value.trim()
 
-  timer = setTimeout(() => {
-    if (!q) {
+  if (!isReady) {
+    statusEl.innerText = "Loading..."
+    return
+  }
+
+  timer = setTimeout(async () => {
+    if (!keyword) {
       resultEl.innerHTML = ""
       statusEl.innerText = "Ketik untuk mencari"
       return
@@ -146,9 +248,10 @@ searchInput.addEventListener("input", e => {
 
     statusEl.innerText = "Mencari..."
 
-    const result = searchData(q)
+    const result = await searchData(keyword)
+
     render(result)
 
     statusEl.innerText = `Ditemukan ${result.length} data`
-  }, 200)
+  }, 300)
 })
