@@ -1,5 +1,4 @@
-let idx
-let cache = {}
+let data = []
 
 const MAX_RESULT = 30
 
@@ -8,15 +7,13 @@ const resultEl = document.getElementById("result")
 const statusEl = document.getElementById("status")
 
 /* =========================
-INIT
+LOAD DATA
 ========================= */
 async function init() {
   statusEl.innerText = "Loading..."
 
-  const res = await fetch("./db/search_index.json")
-  const idxData = await res.json()
-
-  idx = lunr.Index.load(idxData)
+  const res = await fetch("./db/data.json")
+  data = await res.json()
 
   statusEl.innerText = "Siap ⚡"
 }
@@ -47,71 +44,43 @@ function getFileName(path) {
 }
 
 /* =========================
-LOAD STORE (LAZY)
+SEARCH SUPER CEPAT
 ========================= */
-async function loadStore(fileIndex) {
-  if (cache[fileIndex]) return cache[fileIndex]
+function searchData(q) {
+  q = q.toLowerCase()
 
-  const res = await fetch(`./db/store_${fileIndex}.json`)
-  const data = await res.json()
+  let result = []
 
-  cache[fileIndex] = data
-  return data
-}
+  for (let i = 0; i < data.length; i++) {
+    const item = data[i]
 
-/* =========================
-SEARCH
-========================= */
-async function searchData(q) {
-  if (!q) return []
-
-  let results = []
-  let res
-
-  try {
-    res = idx.search(q + "*")
-  } catch {
-    return []
-  }
-
-  res = res.slice(0, MAX_RESULT)
-
-  let fileMap = {}
-
-  res.forEach(r => {
-    const id = Number(r.ref)
-    const fileIndex = Math.floor(id / 5000) + 1
-
-    if (!fileMap[fileIndex]) fileMap[fileIndex] = []
-    fileMap[fileIndex].push(id)
-  })
-
-  for (let fileIndex in fileMap) {
-    const data = await loadStore(fileIndex)
-
-    for (let id of fileMap[fileIndex]) {
-      const localIndex = id % 5000
-      if (data[localIndex]) {
-        results.push(data[localIndex])
-      }
+    if (
+      item.sku.includes(q) ||
+      item.article.includes(q) ||
+      item.name.includes(q) ||
+      item.brand.includes(q)
+    ) {
+      result.push(item)
     }
+
+    if (result.length >= MAX_RESULT) break
   }
 
-  return results
+  return result
 }
 
 /* =========================
 RENDER
 ========================= */
-function render(data) {
+function render(list) {
   resultEl.innerHTML = ""
 
-  if (!data.length) {
+  if (!list.length) {
     resultEl.innerHTML = "<p>Data tidak ditemukan</p>"
     return
   }
 
-  data.forEach(item => {
+  list.forEach(item => {
     const diskon = formatDiskon(item.diskon)
     const isDiskon = diskon !== "-"
 
@@ -166,9 +135,9 @@ let timer
 searchInput.addEventListener("input", e => {
   clearTimeout(timer)
 
-  const q = e.target.value.trim().toLowerCase()
+  const q = e.target.value.trim()
 
-  timer = setTimeout(async () => {
+  timer = setTimeout(() => {
     if (!q) {
       resultEl.innerHTML = ""
       statusEl.innerText = "Ketik untuk mencari"
@@ -177,9 +146,9 @@ searchInput.addEventListener("input", e => {
 
     statusEl.innerText = "Mencari..."
 
-    const data = await searchData(q)
-    render(data)
+    const result = searchData(q)
+    render(result)
 
-    statusEl.innerText = `Ditemukan ${data.length} data`
-  }, 250)
+    statusEl.innerText = `Ditemukan ${result.length} data`
+  }, 200)
 })
