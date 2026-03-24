@@ -1,3 +1,6 @@
+/* =========================
+STATE
+========================= */
 let skuIndex = {}
 let articleIndex = {}
 let cache = {}
@@ -19,16 +22,13 @@ async function loadIndex() {
   try {
     statusEl.innerText = "Loading index..."
 
-    const skuRes = await fetch("./db/sku_index.json")
-    const articleRes = await fetch("./db/article_index.json")
+    const [skuRes, articleRes] = await Promise.all([
+      fetch("./db/sku_index.json"),
+      fetch("./db/article_index.json")
+    ])
 
-    if (skuRes.ok) {
-      skuIndex = await skuRes.json()
-    }
-
-    if (articleRes.ok) {
-      articleIndex = await articleRes.json()
-    }
+    if (skuRes.ok) skuIndex = await skuRes.json()
+    if (articleRes.ok) articleIndex = await articleRes.json()
 
     console.log("✅ Index Loaded")
     console.log("SKU:", Object.keys(skuIndex).length)
@@ -38,8 +38,6 @@ async function loadIndex() {
     statusEl.innerText = "Siap digunakan"
   } catch (err) {
     console.log("❌ Index gagal:", err)
-
-    // tetap lanjut walau index gagal
     isReady = true
     statusEl.innerText = "Mode fallback aktif"
   }
@@ -71,7 +69,7 @@ function getFileName(path) {
 }
 
 /* =========================
-LOAD FILE
+LOAD FILE (CACHE)
 ========================= */
 async function loadFile(fileIndex) {
   try {
@@ -91,61 +89,37 @@ async function loadFile(fileIndex) {
 }
 
 /* =========================
-SEARCH SUPER CEPAT + FALLBACK
+EXACT RESULT (SUPER CEPAT)
 ========================= */
-async function searchData(keyword) {
-  keyword = keyword.toLowerCase().trim()
-
+async function getExactResults(indexList, keyword) {
   let results = []
-  let indexes = new Set()
 
-  /* =========================
-  1. EXACT MATCH (PRIORITAS UTAMA)
-  ========================= */
-  if (skuIndex[keyword]) {
-    skuIndex[keyword].forEach(i => indexes.add(i))
-  }
+  for (let i of indexList) {
+    const fileIndex = Math.floor(i / 5000) + 1
+    const data = await loadFile(fileIndex)
 
-  if (articleIndex[keyword]) {
-    articleIndex[keyword].forEach(i => indexes.add(i))
-  }
+    const item = data[i % 5000]
 
-  // 🔥 kalau exact ketemu → langsung ambil & return
-  if (indexes.size > 0) {
-    return await collectResults(indexes, keyword, true)
-  }
-
-  /* =========================
-  2. PARTIAL MATCH (LEBIH KETAT)
-  ========================= */
-  for (let key in skuIndex) {
-    if (key.startsWith(keyword)) { // 🔥 lebih akurat dari includes
-      skuIndex[key].forEach(i => {
-        if (indexes.size < MAX_RESULT) indexes.add(i)
-      })
-    }
-    if (indexes.size >= MAX_RESULT) break
-  }
-
-  /* =========================
-  3. FALLBACK (SCAN DATA)
-  ========================= */
-  if (indexes.size === 0) {
-    const data = await loadFile(1)
-
-    return data
-      .filter(item =>
-        item.sku?.toLowerCase() === keyword || // 🔥 exact SKU
-        item.article?.toLowerCase().includes(keyword) ||
-        item.deskripsi?.toLowerCase().includes(keyword)
+    if (
+      item &&
+      (
+        item.sku?.toLowerCase() === keyword ||
+        item.article?.toLowerCase() === keyword
       )
-      .slice(0, MAX_RESULT)
+    ) {
+      results.push(item)
+    }
+
+    if (results.length >= MAX_RESULT) break
   }
 
-  return await collectResults(indexes, keyword, false)
+  return results
 }
 
-async function collectResults(indexes, keyword, isExact) {
+/* =========================
+RESULT DARI INDEX
+========================= */
+async function getResultsFromIndexes(indexes, keyword) {
   let results = []
   let fileMap = {}
 
@@ -159,27 +133,15 @@ async function collectResults(indexes, keyword, isExact) {
     const data = await loadFile(fileIndex)
 
     for (let i of fileMap[fileIndex]) {
-      const localIndex = i % 5000
-      const item = data[localIndex]
-
+      const item = data[i % 5000]
       if (!item) continue
 
-      // 🔥 VALIDASI ULANG (PENTING)
-      if (isExact) {
-        if (
-          item.sku?.toLowerCase() === keyword ||
-          item.article?.toLowerCase() === keyword
-        ) {
-          results.push(item)
-        }
-      } else {
-        if (
-          item.sku?.toLowerCase().startsWith(keyword) ||
-          item.article?.toLowerCase().includes(keyword) ||
-          item.deskripsi?.toLowerCase().includes(keyword)
-        ) {
-          results.push(item)
-        }
+      if (
+        item.sku?.toLowerCase().startsWith(keyword) ||
+        item.article?.toLowerCase().includes(keyword) ||
+        item.deskripsi?.toLowerCase().includes(keyword)
+      ) {
+        results.push(item)
       }
 
       if (results.length >= MAX_RESULT) return results
@@ -187,6 +149,55 @@ async function collectResults(indexes, keyword, isExact) {
   }
 
   return results
+}
+
+/* =========================
+SEARCH ULTRA CEPAT
+========================= */
+async function searchData(keyword) {
+  keyword = keyword.toLowerCase().trim()
+  if (!keyword) return []
+
+  /* 1. EXACT SKU */
+  if (skuIndex[keyword]) {
+    return await getExactResults(skuIndex[keyword], keyword)
+  }
+
+  /* 2. EXACT ARTICLE */
+  if (articleIndex[keyword]) {
+    return await getExactResults(articleIndex[keyword], keyword)
+  }
+
+  /* 3. PREFIX SEARCH CEPAT */
+  let indexes = new Set()
+  let prefix = keyword.slice(0, 3)
+
+  for (let key in skuIndex) {
+    if (!key.startsWith(prefix)) continue
+
+    if (key.startsWith(keyword)) {
+      skuIndex[key].forEach(i => {
+        if (indexes.size < MAX_RESULT) indexes.add(i)
+      })
+    }
+
+    if (indexes.size >= MAX_RESULT) break
+  }
+
+  if (indexes.size > 0) {
+    return await getResultsFromIndexes(indexes, keyword)
+  }
+
+  /* 4. FALLBACK (ANTI KOSONG) */
+  const data = await loadFile(1)
+
+  return data
+    .filter(item =>
+      item.sku?.toLowerCase() === keyword ||
+      item.article?.toLowerCase().includes(keyword) ||
+      item.deskripsi?.toLowerCase().includes(keyword)
+    )
+    .slice(0, MAX_RESULT)
 }
 
 /* =========================
@@ -248,7 +259,7 @@ function render(data) {
 }
 
 /* =========================
-EVENT (DEBOUNCE)
+EVENT (DEBOUNCE CEPAT)
 ========================= */
 let timer
 
@@ -276,5 +287,5 @@ searchInput.addEventListener("input", e => {
     render(result)
 
     statusEl.innerText = `Ditemukan ${result.length} data`
-  }, 300)
+  }, 200) // 🔥 lebih responsif
 })
