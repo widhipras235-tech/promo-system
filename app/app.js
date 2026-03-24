@@ -203,6 +203,19 @@ async function searchData(keyword) {
 /* =========================
 RENDER
 ========================= */
+function formatTanggal(val) {
+  if (!val) return "-"
+
+  const d = new Date(val)
+  if (isNaN(d)) return val
+
+  return d.toLocaleDateString("id-ID", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric"
+  })
+}
+
 function render(data) {
   resultEl.innerHTML = ""
 
@@ -214,6 +227,21 @@ function render(data) {
   data.forEach(item => {
     const diskon = formatDiskon(item.diskon || item.raw?.diskon)
     const isDiskon = diskon !== "-"
+
+    // 🔥 FIX TANGGAL (ANTI KOSONG)
+    const mulai =
+      item.mulai ||
+      item.raw?.mulai ||
+      item.raw?.tgl_mulai ||
+      item.raw?.start ||
+      "-"
+
+    const akhir =
+      item.akhir ||
+      item.raw?.akhir ||
+      item.raw?.tgl_akhir ||
+      item.raw?.end ||
+      "-"
 
     const el = document.createElement("div")
     el.className = "card"
@@ -246,7 +274,7 @@ function render(data) {
       </div>
 
       <div>
-        Berlaku: ${item.fromdate || "-"} - ${item.todate || "-"}
+        Berlaku: ${formatTanggal(mulai)} - ${formatTanggal(akhir)}
       </div>
 
       <div><b>Acara:</b> ${item.acara || item.raw?.acara || "-"}</div>
