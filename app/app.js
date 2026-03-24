@@ -7,7 +7,7 @@ let cache = {}
 let isReady = false
 
 const MAX_RESULT = 30
-const TOTAL_FILE = 10
+const TOTAL_FILE = 100
 
 /* =========================
 ELEMENT
