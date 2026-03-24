@@ -73,7 +73,7 @@ function getValAI(row, fieldName) {
 }
 
 /* =========================
-SCAN FILE
+SCAN FILE (SUPER DEBUG)
 ========================= */
 function getAllExcelFiles(dir, fileList = []) {
   const files = fs.readdirSync(dir)
@@ -84,8 +84,21 @@ function getAllExcelFiles(dir, fileList = []) {
 
     if (stat.isDirectory()) {
       getAllExcelFiles(fullPath, fileList)
-    } else if (file.endsWith(".xlsx") || file.endsWith(".xls")) {
-      fileList.push(fullPath)
+    } else {
+      const ext = path.extname(file).toLowerCase()
+
+      if (DEBUG) console.log("🔍 Scan:", file)
+
+      if (file.startsWith("~$")) {
+        if (DEBUG) console.log("⏭ Skip temp:", file)
+        return
+      }
+
+      if ([".xlsx", ".xls", ".xlsm", ".csv"].includes(ext)) {
+        fileList.push(fullPath)
+      } else {
+        if (DEBUG) console.log("⏭ Bukan excel:", file)
+      }
     }
   })
 
@@ -102,12 +115,12 @@ if (!fs.existsSync(INPUT_FOLDER)) {
 
 const files = getAllExcelFiles(INPUT_FOLDER)
 
+console.log("\n📊 TOTAL FILE TERDETEKSI:", files.length)
+
 if (files.length === 0) {
   console.log("❌ Tidak ada file Excel ditemukan")
   process.exit()
 }
-
-console.log("📂 Total file:", files.length)
 
 let rawData = []
 let sheetKosong = 0
@@ -119,36 +132,58 @@ files.forEach((filePath, idx) => {
   try {
     console.log(`\n📄 [${idx + 1}] ${filePath}`)
 
+    if (!fs.existsSync(filePath)) {
+      console.log("❌ File tidak ditemukan")
+      return
+    }
+
     const workbook = XLSX.readFile(filePath)
 
+    if (!workbook.SheetNames || workbook.SheetNames.length === 0) {
+      console.log("⚠️ Tidak ada sheet")
+      return
+    }
+
     workbook.SheetNames.forEach(sheetName => {
-      const sheet = workbook.Sheets[sheetName]
-      const json = XLSX.utils.sheet_to_json(sheet, { defval: "" })
+      try {
+        const sheet = workbook.Sheets[sheetName]
 
-      if (json.length === 0) {
-        sheetKosong++
-        if (DEBUG) console.log(`   ⚠️ Sheet kosong: ${sheetName}`)
-        return
+        if (!sheet) {
+          console.log(`⚠️ Sheet rusak: ${sheetName}`)
+          return
+        }
+
+        const json = XLSX.utils.sheet_to_json(sheet, { defval: "" })
+
+        if (json.length === 0) {
+          sheetKosong++
+          if (DEBUG) console.log(`⚠️ Sheet kosong: ${sheetName}`)
+          return
+        }
+
+        console.log(`   ↳ Sheet: ${sheetName} (${json.length} data)`)
+
+        if (DEBUG) {
+          console.log("   ↳ Kolom:", Object.keys(json[0]))
+          console.log("   ↳ Sample:", json[0])
+        }
+
+        const withSource = json.map(row => ({
+          ...row,
+          __source: path.basename(filePath),
+          __sheet: sheetName
+        }))
+
+        rawData = rawData.concat(withSource)
+
+      } catch (errSheet) {
+        console.log(`❌ Error sheet: ${sheetName}`, errSheet.message)
       }
-
-      console.log(`   ↳ Sheet: ${sheetName} (${json.length} data)`)
-
-      if (DEBUG) {
-        console.log("   ↳ Kolom:", Object.keys(json[0]))
-        console.log("   ↳ Sample row:", json[0])
-      }
-
-      const withSource = json.map(row => ({
-        ...row,
-        __source: path.basename(filePath),
-        __sheet: sheetName
-      }))
-
-      rawData = rawData.concat(withSource)
     })
 
   } catch (err) {
-    console.log("❌ Error:", filePath, err.message)
+    console.log("❌ Gagal baca file:", filePath)
+    console.log("   ↳ Error:", err.message)
   }
 })
 
@@ -228,7 +263,7 @@ for (let i = 0; i < data.length; i += SPLIT_SIZE) {
   fileCount++
 }
 
-console.log("\n📦 Split selesai:", fileCount, "file")
+console.log("\n📦 Split selesai:", fileCount)
 
 /* =========================
 INDEX
@@ -254,16 +289,6 @@ data.forEach((item, i) => {
 })
 
 console.log("🔁 SKU duplicate:", duplicateSku)
-
-/* =========================
-DEBUG INDEX
-========================= */
-if (DEBUG) {
-  const keys = Object.keys(skuIndex)
-  if (keys.length > 0) {
-    console.log("🔍 Sample SKU index:", keys[0], "=>", skuIndex[keys[0]])
-  }
-}
 
 /* =========================
 SAVE INDEX
