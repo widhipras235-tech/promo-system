@@ -3,16 +3,71 @@ const fs = require("fs")
 const path = require("path")
 const crypto = require("crypto")
 
+/* =========================
+CONFIG
+========================= */
 const INPUT_FOLDER = "./excel"
 const OUTPUT_FOLDER = "./db"
 const HASH_FILE = path.join(OUTPUT_FOLDER, "file_hash.json")
+const SPLIT_SIZE = 5000
+const DEBUG = true
 
 /* =========================
-HASH FILE
+NORMALIZE
+========================= */
+function normalizeKey(str) {
+  return (str || "")
+    .toString()
+    .toLowerCase()
+    .replace(/\s+/g, "")
+    .replace(/[^a-z0-9]/g, "")
+}
+
+function normalize(val) {
+  return (val || "")
+    .toString()
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "")
+}
+
+/* =========================
+AI FIELD MAPPING (SAMA PERSIS)
+========================= */
+const FIELD_PATTERNS = {
+  sku: ["sku", "kodebarang", "kode", "itemcode"],
+  article: ["article", "art", "artikel"],
+  deskripsi: ["description", "deskripsi", "nama", "namabarang", "productname"],
+  brand: ["brand", "merk"],
+  harga_normal: ["harganormal", "normalprice", "price", "regprice"],
+  harga_promo: ["hargapromo", "promoprice", "saleprice"],
+  diskon: ["diskon", "discount"],
+  fromdate: ["fromdate", "startdate", "tglmulai"],
+  todate: ["todate", "enddate", "tglakhir"],
+  acara: ["acara", "promo", "event"],
+  division: ["division", "divisi"],
+}
+
+function getValAI(row, fieldName) {
+  const map = {}
+  for (let k in row) map[normalizeKey(k)] = row[k]
+
+  const patterns = FIELD_PATTERNS[fieldName] || []
+
+  for (let p of patterns) {
+    const key = normalizeKey(p)
+    for (let k in map) {
+      if (k.includes(key)) return map[k]
+    }
+  }
+  return ""
+}
+
+/* =========================
+HASH FUNCTION
 ========================= */
 function getFileHash(filePath) {
-  const fileBuffer = fs.readFileSync(filePath)
-  return crypto.createHash("md5").update(fileBuffer).digest("hex")
+  const buffer = fs.readFileSync(filePath)
+  return crypto.createHash("md5").update(buffer).digest("hex")
 }
 
 /* =========================
@@ -51,7 +106,7 @@ function getAllExcelFiles(dir, list = []) {
 const excelFiles = getAllExcelFiles(INPUT_FOLDER)
 
 /* =========================
-FILTER FILE BERUBAH
+DETECT FILE BERUBAH
 ========================= */
 let newHash = {}
 let changedFiles = []
@@ -76,72 +131,54 @@ if (changedFiles.length === 0) {
 }
 
 /* =========================
-AI MAPPING
-========================= */
-function normalizeKey(str){
-  return (str||"").toLowerCase().replace(/\s+/g,"").replace(/[^a-z0-9]/g,"")
-}
-
-const FIELD = {
-  sku:["sku","kode"],
-  article:["article","art"],
-  deskripsi:["description","nama"],
-  harga_normal:["harganormal","price"],
-  harga_promo:["hargapromo","sale"],
-}
-
-function getVal(row, field){
-  const map={}
-  for(let k in row) map[normalizeKey(k)]=row[k]
-
-  for(let f of FIELD[field]||[]){
-    const key=normalizeKey(f)
-    for(let k in map){
-      if(k.includes(key)) return map[k]
-    }
-  }
-  return ""
-}
-
-/* =========================
 LOAD DATA LAMA
 ========================= */
-let DB=[]
-const filesDB=fs.readdirSync(OUTPUT_FOLDER).filter(f=>f.startsWith("promo_"))
+let DB = []
+const dbFiles = fs.readdirSync(OUTPUT_FOLDER).filter(f => f.startsWith("promo_"))
 
-filesDB.forEach(f=>{
-  DB=DB.concat(JSON.parse(fs.readFileSync(path.join(OUTPUT_FOLDER,f))))
+dbFiles.forEach(file => {
+  DB = DB.concat(JSON.parse(fs.readFileSync(path.join(OUTPUT_FOLDER, file))))
 })
 
 /* =========================
-HAPUS DATA FILE LAMA YANG DIUPDATE
+HAPUS DATA FILE YANG DIUPDATE
 ========================= */
-const changedNames = changedFiles.map(f=>path.basename(f))
+const changedNames = changedFiles.map(f => path.basename(f))
 
 DB = DB.filter(item => !changedNames.includes(item.source))
 
 /* =========================
-PROCESS FILE
+PROCESS FILE BARU / UPDATE
 ========================= */
-let newData=[]
+let newData = []
 
-changedFiles.forEach(file=>{
-  console.log("📄 Update:",file)
+changedFiles.forEach(filePath => {
+  console.log("📄 Update:", filePath)
 
-  const wb=XLSX.readFile(file)
+  const workbook = XLSX.readFile(filePath)
 
-  wb.SheetNames.forEach(s=>{
-    const json=XLSX.utils.sheet_to_json(wb.Sheets[s],{defval:""})
+  workbook.SheetNames.forEach(sheetName => {
+    const sheet = workbook.Sheets[sheetName]
+    const json = XLSX.utils.sheet_to_json(sheet, { defval: "" })
 
-    json.forEach(row=>{
-      newData.push({
-        sku:getVal(row,"sku"),
-        article:getVal(row,"article"),
-        deskripsi:getVal(row,"deskripsi"),
-        harga_normal:getVal(row,"harga_normal"),
-        harga_promo:getVal(row,"harga_promo"),
-        source:path.basename(file)
-      })
+    json.forEach((row, i) => {
+      const item = {
+        sku: getValAI(row, "sku"),
+        article: getValAI(row, "article"),
+        deskripsi: getValAI(row, "deskripsi"),
+        brand: getValAI(row, "brand"),
+        harga_normal: getValAI(row, "harga_normal"),
+        harga_promo: getValAI(row, "harga_promo"),
+        diskon: getValAI(row, "diskon"),
+        fromdate: getValAI(row, "fromdate"),
+        todate: getValAI(row, "todate"),
+        acara: getValAI(row, "acara"),
+        division: getValAI(row, "division"),
+        source: path.basename(filePath),
+        sheet: sheetName
+      }
+
+      newData.push(item)
     })
   })
 })
@@ -152,26 +189,62 @@ MERGE
 const finalData = DB.concat(newData)
 
 /* =========================
-SPLIT
+SPLIT (SAMA PERSIS)
 ========================= */
-const SPLIT=5000
-let count=0
+let fileCount = 0
 
-for(let i=0;i<finalData.length;i+=SPLIT){
+for (let i = 0; i < finalData.length; i += SPLIT_SIZE) {
+  const chunk = finalData.slice(i, i + SPLIT_SIZE)
+
   fs.writeFileSync(
-    path.join(OUTPUT_FOLDER,`promo_${count+1}.json`),
-    JSON.stringify(finalData.slice(i,i+SPLIT))
+    path.join(OUTPUT_FOLDER, `promo_${fileCount + 1}.json`),
+    JSON.stringify(chunk)
   )
-  count++
+
+  fileCount++
 }
+
+/* =========================
+INDEX (SAMA PERSIS)
+========================= */
+let skuIndex = {}
+let articleIndex = {}
+
+finalData.forEach((item, i) => {
+  const sku = normalize(item.sku)
+  const article = normalize(item.article)
+
+  if (sku) {
+    if (!skuIndex[sku]) skuIndex[sku] = []
+    skuIndex[sku].push(i)
+  }
+
+  if (article) {
+    if (!articleIndex[article]) articleIndex[article] = []
+    articleIndex[article].push(i)
+  }
+})
+
+fs.writeFileSync(
+  path.join(OUTPUT_FOLDER, "sku_index.json"),
+  JSON.stringify(skuIndex)
+)
+
+fs.writeFileSync(
+  path.join(OUTPUT_FOLDER, "article_index.json"),
+  JSON.stringify(articleIndex)
+)
 
 /* =========================
 SAVE HASH
 ========================= */
 fs.writeFileSync(HASH_FILE, JSON.stringify(newHash))
 
+/* =========================
+FINAL REPORT
+========================= */
 console.log("===================================")
-console.log("✅ SMART SYNC SELESAI")
-console.log("Data Total:",finalData.length)
-console.log("File diupdate:",changedFiles.length)
+console.log("✅ SMART UPDATE SELESAI")
+console.log("Total Data:", finalData.length)
+console.log("File Update:", changedFiles.length)
 console.log("===================================")
