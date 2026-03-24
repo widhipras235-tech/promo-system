@@ -7,6 +7,7 @@ let cache = {}
 let isReady = false
 
 const MAX_RESULT = 30
+const TOTAL_FILE = 80 // 🔥 sesuaikan jumlah file kamu
 
 /* =========================
 ELEMENT
@@ -14,6 +15,13 @@ ELEMENT
 const searchInput = document.getElementById("search")
 const resultEl = document.getElementById("result")
 const statusEl = document.getElementById("status")
+
+/* =========================
+INIT
+========================= */
+function normalize(val) {
+  return (val || "").toString().toLowerCase().trim()
+}
 
 /* =========================
 LOAD INDEX
@@ -29,10 +37,6 @@ async function loadIndex() {
 
     if (skuRes.ok) skuIndex = await skuRes.json()
     if (articleRes.ok) articleIndex = await articleRes.json()
-
-    console.log("✅ Index Loaded")
-    console.log("SKU:", Object.keys(skuIndex).length)
-    console.log("ARTICLE:", Object.keys(articleIndex).length)
 
     isReady = true
     statusEl.innerText = "Siap digunakan"
@@ -55,17 +59,39 @@ function formatRupiah(num) {
 
 function formatDiskon(val) {
   if (!val) return "-"
-
   if (!isNaN(val)) {
     let num = Number(val)
     return num <= 1 ? Math.round(num * 100) + "%" : num + "%"
   }
-
   return val
 }
 
 function getFileName(path) {
   return path ? path.split(/[\\/]/).pop() : "-"
+}
+
+function formatTanggal(val) {
+  if (!val || val === 0 || val === "0") return "-"
+
+  if (!isNaN(val)) {
+    const excelDate = Number(val)
+    if (excelDate < 1000) return "-"
+    const date = new Date((excelDate - 25569) * 86400 * 1000)
+    return date.toLocaleDateString("id-ID", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric"
+    })
+  }
+
+  const d = new Date(val)
+  if (isNaN(d)) return "-"
+
+  return d.toLocaleDateString("id-ID", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric"
+  })
 }
 
 /* =========================
@@ -89,28 +115,37 @@ async function loadFile(fileIndex) {
 }
 
 /* =========================
-EXACT RESULT (SUPER CEPAT)
+EXACT RESULT
 ========================= */
 async function getExactResults(indexList, keyword) {
   let results = []
+  keyword = normalize(keyword)
 
   for (let i of indexList) {
     const fileIndex = Math.floor(i / 5000) + 1
     const data = await loadFile(fileIndex)
 
     const item = data[i % 5000]
+    if (!item) continue
 
-    if (
-      item &&
-      (
-        item.sku?.toLowerCase() === keyword ||
-        item.article?.toLowerCase() === keyword
-      )
-    ) {
+    const sku = normalize(item.sku)
+    const article = normalize(item.article)
+
+    if (sku === keyword || article === keyword) {
       results.push(item)
     }
 
     if (results.length >= MAX_RESULT) break
+  }
+
+  // 🔥 fallback kalau mapping error
+  if (results.length === 0) {
+    const fileIndex = Math.floor(indexList[0] / 5000) + 1
+    const data = await loadFile(fileIndex)
+
+    return data.filter(item =>
+      normalize(item.sku) === keyword
+    ).slice(0, MAX_RESULT)
   }
 
   return results
@@ -121,6 +156,8 @@ RESULT DARI INDEX
 ========================= */
 async function getResultsFromIndexes(indexes, keyword) {
   let results = []
+  keyword = normalize(keyword)
+
   let fileMap = {}
 
   indexes.forEach(i => {
@@ -136,10 +173,14 @@ async function getResultsFromIndexes(indexes, keyword) {
       const item = data[i % 5000]
       if (!item) continue
 
+      const sku = normalize(item.sku)
+      const article = normalize(item.article)
+      const desc = normalize(item.deskripsi)
+
       if (
-        item.sku?.toLowerCase().startsWith(keyword) ||
-        item.article?.toLowerCase().includes(keyword) ||
-        item.deskripsi?.toLowerCase().includes(keyword)
+        sku.includes(keyword) ||
+        article.includes(keyword) ||
+        desc.includes(keyword)
       ) {
         results.push(item)
       }
@@ -152,23 +193,53 @@ async function getResultsFromIndexes(indexes, keyword) {
 }
 
 /* =========================
-SEARCH ULTRA CEPAT
+FULL SCAN (ANTI MISS)
+========================= */
+async function fullScanSearch(keyword) {
+  let results = []
+  keyword = normalize(keyword)
+
+  for (let i = 1; i <= TOTAL_FILE; i++) {
+    const data = await loadFile(i)
+
+    for (let item of data) {
+      const sku = normalize(item.sku)
+      const article = normalize(item.article)
+      const desc = normalize(item.deskripsi)
+
+      if (
+        sku.includes(keyword) ||
+        article.includes(keyword) ||
+        desc.includes(keyword)
+      ) {
+        results.push(item)
+      }
+
+      if (results.length >= MAX_RESULT) return results
+    }
+  }
+
+  return results
+}
+
+/* =========================
+SEARCH ENGINE
 ========================= */
 async function searchData(keyword) {
-  keyword = keyword.toLowerCase().trim()
+  keyword = normalize(keyword)
   if (!keyword) return []
 
-  /* 1. EXACT SKU */
+  // EXACT SKU
   if (skuIndex[keyword]) {
     return await getExactResults(skuIndex[keyword], keyword)
   }
 
-  /* 2. EXACT ARTICLE */
+  // EXACT ARTICLE
   if (articleIndex[keyword]) {
     return await getExactResults(articleIndex[keyword], keyword)
   }
 
-  /* 3. PREFIX SEARCH CEPAT */
+  // PREFIX SEARCH
   let indexes = new Set()
   let prefix = keyword.slice(0, 3)
 
@@ -188,48 +259,13 @@ async function searchData(keyword) {
     return await getResultsFromIndexes(indexes, keyword)
   }
 
-  /* 4. FALLBACK (ANTI KOSONG) */
-  const data = await loadFile(1)
-
-  return data
-    .filter(item =>
-      item.sku?.toLowerCase() === keyword ||
-      item.article?.toLowerCase().includes(keyword) ||
-      item.deskripsi?.toLowerCase().includes(keyword)
-    )
-    .slice(0, MAX_RESULT)
+  // 🔥 fallback terakhir
+  return await fullScanSearch(keyword)
 }
 
 /* =========================
 RENDER
 ========================= */
-function formatTanggal(val) {
-  if (!val || val === 0 || val === "0") return "-"
-
-  // handle Excel serial number (angka)
-  if (!isNaN(val)) {
-    const excelDate = Number(val)
-    if (excelDate < 1000) return "-" // anti 1970
-
-    const date = new Date((excelDate - 25569) * 86400 * 1000)
-
-    return date.toLocaleDateString("id-ID", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric"
-    })
-  }
-
-  const d = new Date(val)
-  if (isNaN(d)) return "-"
-
-  return d.toLocaleDateString("id-ID", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric"
-  })
-}
-
 function render(data) {
   resultEl.innerHTML = ""
 
@@ -242,24 +278,15 @@ function render(data) {
     const diskon = formatDiskon(item.diskon || item.raw?.diskon)
     const isDiskon = diskon !== "-"
 
-    // 🔥 FIX TANGGAL (ANTI KOSONG)
     const mulai =
-  item.fromdate ||
-  item.todate || // jaga2 kalau ketukar
-  item.mulai ||
-  item.raw?.fromdate ||
-  item.raw?.mulai ||
-  item.raw?.tgl_mulai ||
-  "-"
+      item.fromdate ||
+      item.raw?.fromdate ||
+      "-"
 
-const akhir =
-  item.todate ||
-  item.fromdate || // jaga2 kalau ketukar
-  item.akhir ||
-  item.raw?.todate ||
-  item.raw?.akhir ||
-  item.raw?.tgl_akhir ||
-  "-"
+    const akhir =
+      item.todate ||
+      item.raw?.todate ||
+      "-"
 
     const el = document.createElement("div")
     el.className = "card"
@@ -296,7 +323,6 @@ const akhir =
       </div>
 
       <div><b>Acara:</b> ${item.acara || item.raw?.acara || "-"}</div>
-
       <div><b>Sumber:</b> ${getFileName(item.source)}</div>
     `
 
@@ -305,14 +331,14 @@ const akhir =
 }
 
 /* =========================
-EVENT (DEBOUNCE CEPAT)
+EVENT
 ========================= */
 let timer
 
 searchInput.addEventListener("input", e => {
   clearTimeout(timer)
 
-  const keyword = e.target.value.trim()
+  const keyword = e.target.value
 
   if (!isReady) {
     statusEl.innerText = "Loading..."
@@ -320,7 +346,7 @@ searchInput.addEventListener("input", e => {
   }
 
   timer = setTimeout(async () => {
-    if (!keyword) {
+    if (!keyword.trim()) {
       resultEl.innerHTML = ""
       statusEl.innerText = "Ketik untuk mencari"
       return
@@ -333,5 +359,5 @@ searchInput.addEventListener("input", e => {
     render(result)
 
     statusEl.innerText = `Ditemukan ${result.length} data`
-  }, 200) // 🔥 lebih responsif
+  }, 200)
 })
