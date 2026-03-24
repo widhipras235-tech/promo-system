@@ -5,7 +5,7 @@ let cache = {}
 let isReady = true
 
 const MAX_RESULT = 30
-const TOTAL_FILE = 10 // sesuaikan jumlah file kamu
+const TOTAL_FILE = 300 // sesuaikan jumlah file kamu
 
 /* =========================
 ELEMENT
