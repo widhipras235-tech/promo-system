@@ -1,1 +1,4 @@
-..db/promo.json
+*
+!db/
+!db/**
+!.gitignore
