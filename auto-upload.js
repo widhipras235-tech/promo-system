@@ -5,7 +5,7 @@ const { execSync } = require("child_process")
 /* =========================
 CONFIG
 ========================= */
-const TARGET_FOLDER = path.join(__dirname. "db")
+const TARGET_FOLDER = "./app/db"
 const BATCH_TOTAL = 10
 const MAX_RETRY = 3
 const DEBUG = true
