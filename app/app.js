@@ -21,350 +21,211 @@ const resultEl = document.getElementById("result")
 const statusEl = document.getElementById("status")
 
 /* =========================
-HELPER FIELD (FIX EXCEL)
+UNIVERSAL FIELD GETTER
 ========================= */
-function getSku(item){
-  return item.sku || item.SKU || item.Sku || ""
-}
-
-function getArticle(item){
-  return item.article || item.Article || ""
+function getField(item, keys){
+  for(let key of keys){
+    if(item[key] !== undefined) return item[key]
+    if(item.raw && item.raw[key] !== undefined) return item.raw[key]
+  }
+  return null
 }
 
 /* =========================
-NORMALIZE (SAMA DENGAN CONVERT)
+HELPER FIELD
 ========================= */
-function normalize(val) {
-  const result = (val || "")
+function getSku(item){
+  return getField(item, ["sku","SKU","Sku"]) || ""
+}
+
+function getArticle(item){
+  return getField(item, ["article","Article"]) || ""
+}
+
+/* =========================
+NORMALIZE
+========================= */
+function normalize(val){
+  return (val || "")
     .toString()
     .toLowerCase()
-    .replace(/[^a-z0-9]/g, "")
-
-  if (DEBUG && val) {
-    console.log("🔤 NORMALIZE:", val, "=>", result)
-  }
-
-  return result
+    .replace(/[^a-z0-9]/g,"")
 }
 
 /* =========================
 PRIORITY
 ========================= */
-function getPriority(item, keyword) {
+function getPriority(item, keyword){
   const sku = normalize(getSku(item))
   const article = normalize(getArticle(item))
   const desc = normalize(item.deskripsi)
 
   if (sku === keyword) return 1
   if (article === keyword) return 2
-
   if (sku.startsWith(keyword)) return 3
   if (article.startsWith(keyword)) return 4
-
   if (sku.includes(keyword)) return 5
   if (article.includes(keyword)) return 6
-
   if (desc.includes(keyword)) return 10
 
   return 999
 }
 
 /* =========================
-HIGHLIGHT
+FORMAT
 ========================= */
-function highlight(text, keyword) {
-  if (!text) return "-"
-  const safe = keyword.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
-  const regex = new RegExp(`(${safe})`, "gi")
-  return text.toString().replace(regex, `<mark>$1</mark>`)
+function formatRupiah(num){
+  if(!num || isNaN(num)) return "-"
+  return "Rp " + Number(num).toLocaleString("id-ID")
+}
+
+function formatDiskon(val){
+  if(!val) return "-"
+  let num = Number(val)
+  return num <= 1 ? Math.round(num*100)+"%" : num+"%"
+}
+
+function formatTanggal(val){
+  if(!val) return "-"
+
+  if(!isNaN(val)){
+    const date = new Date((val-25569)*86400*1000)
+    return date.toLocaleDateString("id-ID")
+  }
+
+  const d = new Date(val)
+  if(isNaN(d)) return "-"
+  return d.toLocaleDateString("id-ID")
 }
 
 /* =========================
 LOAD INDEX
 ========================= */
-async function loadIndex() {
-  try {
-    statusEl.innerText = "Loading index..."
-
+async function loadIndex(){
+  try{
     const res = await fetch("./db/index.json")
-    if (!res.ok) throw new Error("Index gagal load")
+    const raw = await res.json()
 
-    const rawIndex = await res.json()
-
-    if (DEBUG) console.log("📦 Raw index length:", rawIndex.length)
-
-    rawIndex.forEach(([key, fileIndex, pos]) => {
-      if (!mainIndex[key]) mainIndex[key] = []
-      mainIndex[key].push({ fileIndex, pos })
+    raw.forEach(([key,f,p])=>{
+      if(!mainIndex[key]) mainIndex[key]=[]
+      mainIndex[key].push({fileIndex:f,pos:p})
     })
 
-    if (DEBUG) {
-      console.log("🧠 Index keys:", Object.keys(mainIndex).length)
-      console.log("🔍 Sample index:", Object.entries(mainIndex).slice(0, 5))
-    }
-
     isReady = true
-    statusEl.innerText = "Siap digunakan"
-  } catch (err) {
-    console.log("❌ Index gagal:", err)
+    statusEl.innerText="Siap"
+  }catch{
     isReady = true
-    statusEl.innerText = "Mode fallback aktif"
+    statusEl.innerText="Fallback mode"
   }
 }
 loadIndex()
 
 /* =========================
-UTILS
-========================= */
-function formatRupiah(num) {
-  if (!num || isNaN(num)) return num
-  return "Rp " + Number(num).toLocaleString("id-ID")
-}
-
-function formatDiskon(val) {
-  if (!val) return "-"
-  if (!isNaN(val)) {
-    let num = Number(val)
-    return num <= 1 ? Math.round(num * 100) + "%" : num + "%"
-  }
-  return val
-}
-
-function getFileName(path) {
-  return path ? path.split(/[\\/]/).pop() : "-"
-}
-
-function formatTanggal(val) {
-  if (!val || val === 0 || val === "0") return "-"
-
-  if (!isNaN(val)) {
-    const excelDate = Number(val)
-    if (excelDate < 1000) return "-"
-    const date = new Date((excelDate - 25569) * 86400 * 1000)
-    return date.toLocaleDateString("id-ID", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric"
-    })
-  }
-
-  const d = new Date(val)
-  if (isNaN(d)) return "-"
-
-  return d.toLocaleDateString("id-ID", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric"
-  })
-}
-
-/* =========================
 LOAD FILE
 ========================= */
-async function loadFile(fileIndex) {
-  try {
-    if (cache[fileIndex]) return cache[fileIndex]
+async function loadFile(i){
+  if(cache[i]) return cache[i]
 
-    if (DEBUG) console.log("📂 LOAD FILE:", fileIndex)
-
-    const res = await fetch(`./db/promo_${fileIndex}.json`)
-    if (!res.ok) return []
-
+  try{
+    const res = await fetch(`./db/promo_${i}.json`)
     const data = await res.json()
-
-    if (DEBUG) console.log("📄 FILE SIZE:", data.length)
-
-    cache[fileIndex] = data
+    cache[i]=data
     return data
-  } catch {
+  }catch{
     return []
   }
 }
 
 /* =========================
-EXACT RESULT
+SEARCH
 ========================= */
-async function getExactResults(indexList, keyword) {
-  let results = []
+async function searchData(keyword){
   keyword = normalize(keyword)
+  if(!keyword) return []
 
-  if (DEBUG) console.log("🎯 EXACT SEARCH:", keyword)
+  if(mainIndex[keyword]){
+    return getExact(mainIndex[keyword],keyword)
+  }
 
-  for (let ref of indexList) {
+  return fullScan(keyword)
+}
+
+async function getExact(list,keyword){
+  let res=[]
+
+  for(let ref of list){
     const data = await loadFile(ref.fileIndex)
     const item = data[ref.pos]
-
-    if (!item) continue
-
-    if (DEBUG) {
-      console.log("➡️ CEK ITEM:", item)
-    }
+    if(!item) continue
 
     const sku = normalize(getSku(item))
     const article = normalize(getArticle(item))
 
-    if (sku === keyword || article === keyword) {
-      results.push({
-        ...item,
-        _priority: getPriority(item, keyword)
-      })
+    if(sku===keyword || article===keyword){
+      res.push({...item,_priority:getPriority(item,keyword)})
     }
-
-    if (results.length >= MAX_RESULT) break
   }
 
-  return results.sort((a, b) => a._priority - b._priority)
+  return res.sort((a,b)=>a._priority-b._priority)
 }
 
-/* =========================
-FULL SCAN
-========================= */
-async function fullScanSearch(keyword) {
-  let results = []
-  keyword = normalize(keyword)
+async function fullScan(keyword){
+  let res=[]
 
-  if (DEBUG) console.log("🚨 FULL SCAN START")
-
-  for (let i = 1; i <= TOTAL_FILE; i++) {
+  for(let i=1;i<=TOTAL_FILE;i++){
     const data = await loadFile(i)
 
-    for (let item of data) {
+    for(let item of data){
       const sku = normalize(getSku(item))
       const article = normalize(getArticle(item))
       const desc = normalize(item.deskripsi)
 
-      if (
-        sku.includes(keyword) ||
-        article.includes(keyword) ||
-        desc.includes(keyword)
-      ) {
-        results.push({
-          ...item,
-          _priority: getPriority(item, keyword)
-        })
-      }
-
-      if (results.length >= MAX_RESULT) break
-    }
-  }
-
-  return results
-    .sort((a, b) => a._priority - b._priority)
-    .slice(0, MAX_RESULT)
-}
-
-/* =========================
-SEARCH ENGINE
-========================= */
-async function searchData(keyword) {
-  keyword = normalize(keyword)
-  if (!keyword) return []
-
-  if (DEBUG) console.log("🔎 SEARCH:", keyword)
-
-  // EXACT
-  if (mainIndex[keyword]) {
-    if (DEBUG) console.log("✅ EXACT MATCH:", mainIndex[keyword].length)
-    return await getExactResults(mainIndex[keyword], keyword)
-  } else {
-    if (DEBUG) console.log("❌ EXACT TIDAK ADA")
-  }
-
-  // PREFIX
-  let results = []
-  let prefix = keyword.slice(0, 3)
-
-  if (DEBUG) console.log("🔡 PREFIX:", prefix)
-
-  for (let key in mainIndex) {
-    if (!key.startsWith(prefix)) continue
-
-    if (key.startsWith(keyword)) {
-      if (DEBUG) console.log("⚡ PREFIX MATCH:", key)
-
-      const refs = mainIndex[key]
-
-      for (let ref of refs) {
-        const data = await loadFile(ref.fileIndex)
-        const item = data[ref.pos]
-
-        if (!item) continue
-
-        results.push({
-          ...item,
-          _priority: getPriority(item, keyword)
-        })
-
-        if (results.length >= MAX_RESULT) break
+      if(sku.includes(keyword) || article.includes(keyword) || desc.includes(keyword)){
+        res.push({...item,_priority:getPriority(item,keyword)})
       }
     }
-
-    if (results.length >= MAX_RESULT) break
   }
 
-  if (DEBUG) console.log("📊 PREFIX RESULT:", results.length)
-
-  if (results.length > 0) {
-    return results
-      .sort((a, b) => a._priority - b._priority)
-      .slice(0, MAX_RESULT)
-  }
-
-  if (DEBUG) console.log("🐢 MASUK FULL SCAN")
-
-  return await fullScanSearch(keyword)
+  return res.sort((a,b)=>a._priority-b._priority).slice(0,MAX_RESULT)
 }
 
 /* =========================
 RENDER
 ========================= */
-function render(data) {
-  resultEl.innerHTML = ""
+function render(data){
+  resultEl.innerHTML=""
 
-  if (DEBUG) console.log("🖥️ RENDER:", data.length)
-
-  if (!data || data.length === 0) {
-    resultEl.innerHTML = "<p>Data tidak ditemukan</p>"
+  if(!data.length){
+    resultEl.innerHTML="<p>Data tidak ditemukan</p>"
     return
   }
 
   const keyword = normalize(searchInput.value)
 
-  data.forEach(item => {
-    const diskon = formatDiskon(item.diskon || item.raw?.diskon)
+  data.forEach(item=>{
 
-    const mulai = item.fromdate || item.raw?.fromdate || "-"
-    const akhir = item.todate || item.raw?.todate || "-"
+    const hargaNormal = getField(item,["harga_normal","HARGA NORMAL"])
+    const hargaPromo = getField(item,["harga_promo","HARGA PROMO"])
+    const diskon = getField(item,["diskon","DISKON"])
+    const mulai = getField(item,["fromdate","FROM DATE"])
+    const akhir = getField(item,["todate","TO DATE"])
+    const acara = getField(item,["acara","ACARA"])
 
-    const el = document.createElement("div")
-    el.className = "card"
+    const el=document.createElement("div")
+    el.className="card"
 
-    el.innerHTML = `
-      <div><b>${highlight(item.deskripsi, keyword)}</b></div>
-      <div>Brand: ${item.brand || "-"}</div>
-      <div>SKU: ${highlight(getSku(item), keyword)}</div>
-      <div>Article: ${highlight(getArticle(item), keyword)}</div>
+    el.innerHTML=`
+      <div><b>${item.deskripsi||"-"}</b></div>
+      <div>Brand: ${item.brand||"-"}</div>
+      <div>SKU: ${getSku(item)}</div>
+      <div>Article: ${getArticle(item)}</div>
 
-      <div>Harga Normal: ${formatRupiah(item.harga_normal)}</div>
+      <div>Harga Normal: ${formatRupiah(hargaNormal)}</div>
+      <div>Harga Promo: ${formatRupiah(hargaPromo)}</div>
+      <div>Diskon: ${formatDiskon(diskon)}</div>
 
-      <div style="color:red;font-weight:bold">
-        Harga Promo: ${
-          !isNaN(item.harga_promo)
-            ? formatRupiah(item.harga_promo)
-            : item.harga_promo || "-"
-        }
-      </div>
-
-      <div style="color:green;font-weight:bold">
-        Diskon: ${diskon}
-      </div>
-
-      <div>
-        Berlaku: ${formatTanggal(mulai)} - ${formatTanggal(akhir)}
-      </div>
-
-      <div><b>Acara:</b> ${item.acara || item.raw?.acara || "-"}</div>
-      <div><b>Sumber:</b> ${getFileName(item.source)}</div>
+      <div>Berlaku: ${formatTanggal(mulai)} - ${formatTanggal(akhir)}</div>
+      <div>Acara: ${acara||"-"}</div>
     `
 
     resultEl.appendChild(el)
@@ -374,73 +235,14 @@ function render(data) {
 /* =========================
 EVENT
 ========================= */
-let timer
+searchInput.addEventListener("input",async e=>{
+  const val = e.target.value
 
-searchInput.addEventListener("input", e => {
-  clearTimeout(timer)
-
-  const keyword = e.target.value
-
-  if (!isReady) {
-    statusEl.innerText = "Loading..."
+  if(!val){
+    resultEl.innerHTML=""
     return
   }
 
-  timer = setTimeout(async () => {
-    if (!keyword.trim()) {
-      resultEl.innerHTML = ""
-      statusEl.innerText = "Ketik untuk mencari"
-      return
-    }
-
-    statusEl.innerText = "Mencari..."
-
-    const result = await searchData(keyword)
-
-    render(result)
-
-    statusEl.innerText = `Ditemukan ${result.length} data`
-  }, 200)
+  const res = await searchData(val)
+  render(res)
 })
-
-/* =========================
-AUTO UPDATE
-========================= */
-let lastUpdate = null
-
-setInterval(async () => {
-  try {
-    const res = await fetch("./db/index.json?t=" + Date.now())
-    const text = await res.text()
-
-    if (lastUpdate && lastUpdate !== text) {
-      console.log("🔄 Data berubah, reload...")
-      location.reload()
-    }
-
-    lastUpdate = text
-  } catch {
-    console.log("❌ Gagal cek update")
-  }
-}, 300000)
-
-/* =========================
-MANUAL DEBUG TOOL
-========================= */
-window.debugSearch = async function (val) {
-  const keyword = normalize(val)
-
-  console.log("=== DEBUG MANUAL SEARCH ===")
-  console.log("Input:", val)
-  console.log("Normalized:", keyword)
-  console.log("Index exist:", !!mainIndex[keyword])
-
-  if (mainIndex[keyword]) {
-    console.log("Index refs:", mainIndex[keyword].slice(0, 5))
-  }
-
-  const result = await searchData(val)
-  console.log("Result:", result)
-
-  return result
-}
