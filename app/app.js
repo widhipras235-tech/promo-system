@@ -1,4 +1,9 @@
 /* =========================
+DEBUG MODE
+========================= */
+const DEBUG = true
+
+/* =========================
 STATE
 ========================= */
 let mainIndex = {}
@@ -19,7 +24,16 @@ const statusEl = document.getElementById("status")
 INIT
 ========================= */
 function normalize(val) {
-  return (val || "").toString().toLowerCase().trim()
+  const result = (val || "")
+    .toString()
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "")
+
+  if (DEBUG && val) {
+    console.log("🔤 NORMALIZE:", val, "=>", result)
+  }
+
+  return result
 }
 
 /* =========================
@@ -52,7 +66,7 @@ function highlight(text, keyword) {
 }
 
 /* =========================
-LOAD INDEX (index.json)
+LOAD INDEX
 ========================= */
 async function loadIndex() {
   try {
@@ -63,13 +77,17 @@ async function loadIndex() {
 
     const rawIndex = await res.json()
 
+    if (DEBUG) console.log("📦 Raw index length:", rawIndex.length)
+
     rawIndex.forEach(([key, fileIndex, pos]) => {
       if (!mainIndex[key]) mainIndex[key] = []
-      mainIndex[key].push({
-        fileIndex,
-        pos
-      })
+      mainIndex[key].push({ fileIndex, pos })
     })
+
+    if (DEBUG) {
+      console.log("🧠 Index keys:", Object.keys(mainIndex).length)
+      console.log("🔍 Sample index:", Object.entries(mainIndex).slice(0, 5))
+    }
 
     isReady = true
     statusEl.innerText = "Siap digunakan"
@@ -127,18 +145,22 @@ function formatTanggal(val) {
 }
 
 /* =========================
-LOAD FILE (CACHE)
+LOAD FILE
 ========================= */
 async function loadFile(fileIndex) {
   try {
     if (cache[fileIndex]) return cache[fileIndex]
 
+    if (DEBUG) console.log("📂 LOAD FILE:", fileIndex)
+
     const res = await fetch(`./db/promo_${fileIndex}.json`)
     if (!res.ok) return []
 
     const data = await res.json()
-    cache[fileIndex] = data
 
+    if (DEBUG) console.log("📄 FILE SIZE:", data.length)
+
+    cache[fileIndex] = data
     return data
   } catch {
     return []
@@ -152,11 +174,20 @@ async function getExactResults(indexList, keyword) {
   let results = []
   keyword = normalize(keyword)
 
+  if (DEBUG) console.log("🎯 EXACT SEARCH:", keyword)
+
   for (let ref of indexList) {
     const data = await loadFile(ref.fileIndex)
     const item = data[ref.pos]
 
     if (!item) continue
+
+    if (DEBUG) {
+      console.log("➡️ CEK ITEM:", {
+        sku: item.sku,
+        article: item.article
+      })
+    }
 
     const sku = normalize(item.sku)
     const article = normalize(item.article)
@@ -175,11 +206,13 @@ async function getExactResults(indexList, keyword) {
 }
 
 /* =========================
-FULL SCAN (ANTI MISS)
+FULL SCAN
 ========================= */
 async function fullScanSearch(keyword) {
   let results = []
   keyword = normalize(keyword)
+
+  if (DEBUG) console.log("🚨 FULL SCAN START")
 
   for (let i = 1; i <= TOTAL_FILE; i++) {
     const data = await loadFile(i)
@@ -216,19 +249,28 @@ async function searchData(keyword) {
   keyword = normalize(keyword)
   if (!keyword) return []
 
-  // EXACT MATCH
+  if (DEBUG) console.log("🔎 SEARCH:", keyword)
+
+  // EXACT
   if (mainIndex[keyword]) {
+    if (DEBUG) console.log("✅ EXACT MATCH:", mainIndex[keyword].length)
     return await getExactResults(mainIndex[keyword], keyword)
+  } else {
+    if (DEBUG) console.log("❌ EXACT TIDAK ADA")
   }
 
-  // PREFIX SEARCH
+  // PREFIX
   let results = []
   let prefix = keyword.slice(0, 3)
+
+  if (DEBUG) console.log("🔡 PREFIX:", prefix)
 
   for (let key in mainIndex) {
     if (!key.startsWith(prefix)) continue
 
     if (key.startsWith(keyword)) {
+      if (DEBUG) console.log("⚡ PREFIX MATCH:", key)
+
       const refs = mainIndex[key]
 
       for (let ref of refs) {
@@ -249,13 +291,16 @@ async function searchData(keyword) {
     if (results.length >= MAX_RESULT) break
   }
 
+  if (DEBUG) console.log("📊 PREFIX RESULT:", results.length)
+
   if (results.length > 0) {
     return results
       .sort((a, b) => a._priority - b._priority)
       .slice(0, MAX_RESULT)
   }
 
-  // FALLBACK
+  if (DEBUG) console.log("🐢 MASUK FULL SCAN")
+
   return await fullScanSearch(keyword)
 }
 
@@ -265,10 +310,14 @@ RENDER
 function render(data) {
   resultEl.innerHTML = ""
 
+  if (DEBUG) console.log("🖥️ RENDER:", data.length)
+
   if (!data || data.length === 0) {
     resultEl.innerHTML = "<p>Data tidak ditemukan</p>"
     return
   }
+
+  const keyword = normalize(searchInput.value)
 
   data.forEach(item => {
     const diskon = formatDiskon(item.diskon || item.raw?.diskon)
@@ -280,10 +329,10 @@ function render(data) {
     el.className = "card"
 
     el.innerHTML = `
-      <div><b>${highlight(item.deskripsi, searchInput.value)}</b></div>
+      <div><b>${highlight(item.deskripsi, keyword)}</b></div>
       <div>Brand: ${item.brand || "-"}</div>
-      <div>SKU: ${highlight(item.sku, searchInput.value)}</div>
-      <div>Article: ${highlight(item.article, searchInput.value)}</div>
+      <div>SKU: ${highlight(item.sku, keyword)}</div>
+      <div>Article: ${highlight(item.article, keyword)}</div>
 
       <div>Harga Normal: ${formatRupiah(item.harga_normal)}</div>
 
@@ -344,22 +393,43 @@ searchInput.addEventListener("input", e => {
 })
 
 /* =========================
-AUTO UPDATE (FIXED)
+AUTO UPDATE
 ========================= */
 let lastUpdate = null
 
 setInterval(async () => {
   try {
-    const res1 = await fetch("./db/index.json?t=" + Date.now())
-    const text1 = await res1.text()
+    const res = await fetch("./db/index.json?t=" + Date.now())
+    const text = await res.text()
 
-    if (lastUpdate && lastUpdate !== text1) {
+    if (lastUpdate && lastUpdate !== text) {
       console.log("🔄 Data berubah, reload...")
       location.reload()
     }
 
-    lastUpdate = text1
-  } catch (err) {
+    lastUpdate = text
+  } catch {
     console.log("❌ Gagal cek update")
   }
 }, 300000)
+
+/* =========================
+MANUAL DEBUG TOOL
+========================= */
+window.debugSearch = async function (val) {
+  const keyword = normalize(val)
+
+  console.log("=== DEBUG MANUAL SEARCH ===")
+  console.log("Input:", val)
+  console.log("Normalized:", keyword)
+  console.log("Index exist:", !!mainIndex[keyword])
+
+  if (mainIndex[keyword]) {
+    console.log("Index refs:", mainIndex[keyword].slice(0, 5))
+  }
+
+  const result = await searchData(val)
+  console.log("Result:", result)
+
+  return result
+}
