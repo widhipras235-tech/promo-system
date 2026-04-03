@@ -21,7 +21,18 @@ const resultEl = document.getElementById("result")
 const statusEl = document.getElementById("status")
 
 /* =========================
-INIT
+HELPER FIELD (FIX EXCEL)
+========================= */
+function getSku(item){
+  return item.sku || item.SKU || item.Sku || ""
+}
+
+function getArticle(item){
+  return item.article || item.Article || ""
+}
+
+/* =========================
+NORMALIZE (SAMA DENGAN CONVERT)
 ========================= */
 function normalize(val) {
   const result = (val || "")
@@ -37,11 +48,11 @@ function normalize(val) {
 }
 
 /* =========================
-PRIORITY + HIGHLIGHT
+PRIORITY
 ========================= */
 function getPriority(item, keyword) {
-  const sku = normalize(item.sku)
-  const article = normalize(item.article)
+  const sku = normalize(getSku(item))
+  const article = normalize(getArticle(item))
   const desc = normalize(item.deskripsi)
 
   if (sku === keyword) return 1
@@ -58,6 +69,9 @@ function getPriority(item, keyword) {
   return 999
 }
 
+/* =========================
+HIGHLIGHT
+========================= */
 function highlight(text, keyword) {
   if (!text) return "-"
   const safe = keyword.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
@@ -183,14 +197,11 @@ async function getExactResults(indexList, keyword) {
     if (!item) continue
 
     if (DEBUG) {
-      console.log("➡️ CEK ITEM:", {
-        sku: item.sku,
-        article: item.article
-      })
+      console.log("➡️ CEK ITEM:", item)
     }
 
-    const sku = normalize(item.sku)
-    const article = normalize(item.article)
+    const sku = normalize(getSku(item))
+    const article = normalize(getArticle(item))
 
     if (sku === keyword || article === keyword) {
       results.push({
@@ -218,8 +229,8 @@ async function fullScanSearch(keyword) {
     const data = await loadFile(i)
 
     for (let item of data) {
-      const sku = normalize(item.sku)
-      const article = normalize(item.article)
+      const sku = normalize(getSku(item))
+      const article = normalize(getArticle(item))
       const desc = normalize(item.deskripsi)
 
       if (
@@ -331,8 +342,8 @@ function render(data) {
     el.innerHTML = `
       <div><b>${highlight(item.deskripsi, keyword)}</b></div>
       <div>Brand: ${item.brand || "-"}</div>
-      <div>SKU: ${highlight(item.sku, keyword)}</div>
-      <div>Article: ${highlight(item.article, keyword)}</div>
+      <div>SKU: ${highlight(getSku(item), keyword)}</div>
+      <div>Article: ${highlight(getArticle(item), keyword)}</div>
 
       <div>Harga Normal: ${formatRupiah(item.harga_normal)}</div>
 
