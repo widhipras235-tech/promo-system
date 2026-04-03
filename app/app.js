@@ -1,8 +1,7 @@
 /* =========================
 STATE
 ========================= */
-let skuIndex = {}
-let articleIndex = {}
+let mainIndex = {}
 let cache = {}
 let isReady = false
 
@@ -53,19 +52,24 @@ function highlight(text, keyword) {
 }
 
 /* =========================
-LOAD INDEX
+LOAD INDEX (index.json)
 ========================= */
 async function loadIndex() {
   try {
     statusEl.innerText = "Loading index..."
 
-    const [skuRes, articleRes] = await Promise.all([
-      fetch("./db/sku_index.json"),
-      fetch("./db/article_index.json")
-    ])
+    const res = await fetch("./db/index.json")
+    if (!res.ok) throw new Error("Index gagal load")
 
-    if (skuRes.ok) skuIndex = await skuRes.json()
-    if (articleRes.ok) articleIndex = await articleRes.json()
+    const rawIndex = await res.json()
+
+    rawIndex.forEach(([key, fileIndex, pos]) => {
+      if (!mainIndex[key]) mainIndex[key] = []
+      mainIndex[key].push({
+        fileIndex,
+        pos
+      })
+    })
 
     isReady = true
     statusEl.innerText = "Siap digunakan"
@@ -148,11 +152,10 @@ async function getExactResults(indexList, keyword) {
   let results = []
   keyword = normalize(keyword)
 
-  for (let i of indexList) {
-    const fileIndex = Math.floor(i / 5000) + 1
-    const data = await loadFile(fileIndex)
+  for (let ref of indexList) {
+    const data = await loadFile(ref.fileIndex)
+    const item = data[ref.pos]
 
-    const item = data[i % 5000]
     if (!item) continue
 
     const sku = normalize(item.sku)
@@ -169,52 +172,6 @@ async function getExactResults(indexList, keyword) {
   }
 
   return results.sort((a, b) => a._priority - b._priority)
-}
-
-/* =========================
-RESULT DARI INDEX
-========================= */
-async function getResultsFromIndexes(indexes, keyword) {
-  let results = []
-  keyword = normalize(keyword)
-
-  let fileMap = {}
-
-  indexes.forEach(i => {
-    const fileIndex = Math.floor(i / 5000) + 1
-    if (!fileMap[fileIndex]) fileMap[fileIndex] = []
-    fileMap[fileIndex].push(i)
-  })
-
-  for (let fileIndex in fileMap) {
-    const data = await loadFile(fileIndex)
-
-    for (let i of fileMap[fileIndex]) {
-      const item = data[i % 5000]
-      if (!item) continue
-
-      const sku = normalize(item.sku)
-      const article = normalize(item.article)
-      const desc = normalize(item.deskripsi)
-
-      if (
-        sku.includes(keyword) ||
-        article.includes(keyword) ||
-        desc.includes(keyword)
-      ) {
-        results.push({
-          ...item,
-          _priority: getPriority(item, keyword)
-        })
-      }
-
-      if (results.length >= MAX_RESULT) break
-    }
-  }
-
-  return results
-    .sort((a, b) => a._priority - b._priority)
-    .slice(0, MAX_RESULT)
 }
 
 /* =========================
@@ -259,33 +216,46 @@ async function searchData(keyword) {
   keyword = normalize(keyword)
   if (!keyword) return []
 
-  if (skuIndex[keyword]) {
-    return await getExactResults(skuIndex[keyword], keyword)
+  // EXACT MATCH
+  if (mainIndex[keyword]) {
+    return await getExactResults(mainIndex[keyword], keyword)
   }
 
-  if (articleIndex[keyword]) {
-    return await getExactResults(articleIndex[keyword], keyword)
-  }
-
-  let indexes = new Set()
+  // PREFIX SEARCH
+  let results = []
   let prefix = keyword.slice(0, 3)
 
-  for (let key in skuIndex) {
+  for (let key in mainIndex) {
     if (!key.startsWith(prefix)) continue
 
     if (key.startsWith(keyword)) {
-      skuIndex[key].forEach(i => {
-        if (indexes.size < MAX_RESULT) indexes.add(i)
-      })
+      const refs = mainIndex[key]
+
+      for (let ref of refs) {
+        const data = await loadFile(ref.fileIndex)
+        const item = data[ref.pos]
+
+        if (!item) continue
+
+        results.push({
+          ...item,
+          _priority: getPriority(item, keyword)
+        })
+
+        if (results.length >= MAX_RESULT) break
+      }
     }
 
-    if (indexes.size >= MAX_RESULT) break
+    if (results.length >= MAX_RESULT) break
   }
 
-  if (indexes.size > 0) {
-    return await getResultsFromIndexes(indexes, keyword)
+  if (results.length > 0) {
+    return results
+      .sort((a, b) => a._priority - b._priority)
+      .slice(0, MAX_RESULT)
   }
 
+  // FALLBACK
   return await fullScanSearch(keyword)
 }
 
@@ -374,27 +344,22 @@ searchInput.addEventListener("input", e => {
 })
 
 /* =========================
-AUTO UPDATE (SMART RELOAD)
+AUTO UPDATE (FIXED)
 ========================= */
 let lastUpdate = null
 
 setInterval(async () => {
   try {
-    const res = await fetch("./db/sku_index.json?t=" + Date.now())
-const res2 = await fetch("./db/article_index.json?t=" + Date.now())
+    const res1 = await fetch("./db/index.json?t=" + Date.now())
+    const text1 = await res1.text()
 
-const text = await res.text()
-const text2 = await res2.text()
-
-const combined = text + text2
-
-    if (lastUpdate && lastUpdate !== text) {
+    if (lastUpdate && lastUpdate !== text1) {
       console.log("🔄 Data berubah, reload...")
       location.reload()
     }
 
-    lastUpdate = text
+    lastUpdate = text1
   } catch (err) {
     console.log("❌ Gagal cek update")
   }
-}, 300000) // 5 menit
+}, 300000)
