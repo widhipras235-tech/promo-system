@@ -7,7 +7,23 @@ CONFIG
 ========================= */
 const TARGET_FOLDER = "./db"
 const BATCH_TOTAL = 10
+const MAX_RETRY = 3
 const DEBUG = true
+
+/* =========================
+UTIL
+========================= */
+function run(cmd, safe = false) {
+  try {
+    if (DEBUG) console.log("💻 CMD:", cmd)
+    execSync(cmd, { stdio: "inherit" })
+    return true
+  } catch (err) {
+    console.log("❌ ERROR:", cmd)
+    if (!safe) console.log(err.message)
+    return false
+  }
+}
 
 /* =========================
 GET FILES
@@ -15,34 +31,18 @@ GET FILES
 function getAllFiles(dir) {
   let results = []
 
-  const list = fs.readdirSync(dir)
-
-  list.forEach(file => {
-    const fullPath = path.join(dir, file)
-    const stat = fs.statSync(fullPath)
+  fs.readdirSync(dir).forEach(file => {
+    const full = path.join(dir, file)
+    const stat = fs.statSync(full)
 
     if (stat.isDirectory()) {
-      results = results.concat(getAllFiles(fullPath))
+      results = results.concat(getAllFiles(full))
     } else {
-      results.push(fullPath)
+      results.push(full)
     }
   })
 
   return results
-}
-
-/* =========================
-EXEC COMMAND (SAFE)
-========================= */
-function run(cmd) {
-  try {
-    if (DEBUG) console.log("💻 CMD:", cmd)
-    execSync(cmd, { stdio: "inherit" })
-  } catch (err) {
-    console.log("❌ ERROR CMD:", cmd)
-    console.log(err.message)
-    process.exit()
-  }
 }
 
 /* =========================
@@ -71,7 +71,33 @@ console.log("📊 Batch size:", batchSize)
 console.log("🚀 Total batch:", BATCH_TOTAL)
 
 /* =========================
-UPLOAD PER BATCH
+UPLOAD LOGIC (SMART)
+========================= */
+function pushWithRetry(batchNumber, retry = 0) {
+  console.log(`🚀 Push batch ${batchNumber} | Attempt ${retry + 1}`)
+
+  // coba push
+  const success = run("git push", true)
+
+  if (success) {
+    console.log(`✅ Push batch ${batchNumber} berhasil`)
+    return true
+  }
+
+  if (retry >= MAX_RETRY) {
+    console.log(`💥 Gagal setelah ${MAX_RETRY}x retry`)
+    process.exit()
+  }
+
+  console.log("🔄 Mencoba git pull --rebase...")
+  run("git pull origin main --rebase")
+
+  console.log("🔁 Retry push...")
+  return pushWithRetry(batchNumber, retry + 1)
+}
+
+/* =========================
+MAIN LOOP
 ========================= */
 let uploaded = 0
 
@@ -80,7 +106,7 @@ for (let i = 0; i < allFiles.length; i += batchSize) {
   const batchNumber = Math.floor(i / batchSize) + 1
 
   console.log("\n===================================")
-  console.log(`🚀 UPLOAD BATCH ${batchNumber}`)
+  console.log(`📦 BATCH ${batchNumber}`)
   console.log("===================================")
 
   batch.forEach(file => {
@@ -88,17 +114,24 @@ for (let i = 0; i < allFiles.length; i += batchSize) {
     run(`git add "${file}"`)
   })
 
-  const message = `upload batch ${batchNumber} (${batch.length} files)`
-  
-  run(`git commit -m "${message}"`)
-  run(`git push`)
+  // cek apakah ada perubahan
+  const hasChanges = run("git diff --cached --quiet", true)
+
+  if (hasChanges === false) {
+    const msg = `upload batch ${batchNumber} (${batch.length} files)`
+    run(`git commit -m "${msg}"`)
+  } else {
+    console.log("⚠️ Tidak ada perubahan, skip commit")
+    continue
+  }
+
+  // push dengan retry
+  pushWithRetry(batchNumber)
 
   uploaded += batch.length
-
-  console.log(`✅ Batch ${batchNumber} selesai`)
   console.log(`📊 Progress: ${uploaded}/${allFiles.length}`)
 }
 
 console.log("\n===================================")
-console.log("🎉 SEMUA UPLOAD SELESAI")
+console.log("🎉 SEMUA UPLOAD SELESAI TANPA DRAMA")
 console.log("===================================")
