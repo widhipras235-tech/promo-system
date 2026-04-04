@@ -30,7 +30,7 @@ let capturedImage = null
 let ocrData = null
 
 /* =========================  
-LENS LAYER (GOOGLE LENS STYLE)  
+LENS LAYER  
 ========================= */
 let lensLayer = document.createElement("div")
 lensLayer.id = "lensLayer"
@@ -42,7 +42,11 @@ START CAMERA
 btnCamera.addEventListener("click", async () => {
   try {
     stream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: "environment" }
+      video: {
+        facingMode: "environment",
+        width: { ideal: 640 },
+        height: { ideal: 480 }
+      }
     })
 
     video.srcObject = stream
@@ -64,10 +68,12 @@ CAPTURE IMAGE
 video.addEventListener("click", async () => {
   if (!stream) return
 
-  canvas.width = video.videoWidth
-  canvas.height = video.videoHeight
+  const scale = 0.5
 
-  ctx.drawImage(video, 0, 0)
+  canvas.width = video.videoWidth * scale
+  canvas.height = video.videoHeight * scale
+
+  ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
 
   capturedImage = canvas.toDataURL()
 
@@ -75,13 +81,14 @@ video.addEventListener("click", async () => {
 
   statusEl.innerText = "Menganalisa gambar..."
 
-  const result = await Tesseract.recognize(canvas, "eng")
+  setTimeout(async () => {
+    const result = await Tesseract.recognize(canvas, "eng")
+    ocrData = result.data
 
-  ocrData = result.data
+    drawBoxes()
 
-  drawBoxes()
-
-  statusEl.innerText = "Tap teks untuk memilih"
+    statusEl.innerText = "Tap teks untuk memilih"
+  }, 100)
 })
 
 function stopStreamOnly() {
@@ -100,7 +107,11 @@ function drawBoxes() {
   const scaleX = window.innerWidth / canvas.width
   const scaleY = window.innerHeight / canvas.height
 
-  ocrData.words.forEach(word => {
+  ocrData.words.slice(0, 80).forEach(word => {
+
+    if (!/[0-9A-Za-z]/.test(word.text)) return
+    if (word.text.length < 2) return
+
     const b = word.bbox
 
     const div = document.createElement("div")
