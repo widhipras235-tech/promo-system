@@ -10,7 +10,7 @@ const MAX_RESULT = 30
 const TOTAL_FILE = 100  
 
 /* =========================  
-ELEMENT  
+ELEMENT
 ========================= */  
 const searchInput = document.getElementById("search")  
 const resultEl = document.getElementById("result")  
