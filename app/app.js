@@ -15,14 +15,17 @@ ELEMENT
 const searchInput = document.getElementById("search")  
 const resultEl = document.getElementById("result")  
 const statusEl = document.getElementById("status")  
+
 const btnCamera = document.getElementById("btnCamera")
+const btnCapture = document.getElementById("btnCapture")
+const btnClose = document.getElementById("btnClose")
+
 const video = document.getElementById("camera")
 const canvas = document.getElementById("canvas")
 const ctx = canvas.getContext("2d")
 
 const scanFrame = document.getElementById("scanFrame")
 const scanText = document.getElementById("scanText")
-const btnClose = document.getElementById("btnClose")
 
 /* =========================  
 INIT  
@@ -34,15 +37,25 @@ function normalize(val) {
 let stream = null
 
 /* =========================  
-GESTURE STATE (USAP)
+FREEZE STATE
 ========================= */
-let isDrawing = false
+let isFrozen = false
+let isSelecting = false
+
+const freezeCanvas = document.createElement("canvas")
+const freezeCtx = freezeCanvas.getContext("2d")
+
+/* =========================  
+GESTURE STATE
+========================= */
 let startX = 0
 let startY = 0
 let endX = 0
 let endY = 0
 
-// overlay untuk kotak seleksi
+/* =========================  
+OVERLAY
+========================= */
 const overlay = document.createElement("canvas")
 const overlayCtx = overlay.getContext("2d")
 
@@ -65,15 +78,12 @@ btnCamera.addEventListener("click", async () => {
       audio: false
     })
 
-    window.stream = stream
-
     video.srcObject = stream
 
     video.onloadedmetadata = () => {
       video.play()
     }
 
-    // sync overlay size
     overlay.width = window.innerWidth
     overlay.height = window.innerHeight
 
@@ -84,33 +94,57 @@ btnCamera.addEventListener("click", async () => {
     scanText?.classList.add("active")
     btnClose?.classList.add("active")
 
-    statusEl.innerText = "Usap area SKU untuk scan"
+    statusEl.innerText = "Klik ambil gambar"
 
   } catch (err) {
-    console.error("ERROR CAMERA:", err)
+    console.error(err)
     alert("Kamera gagal: " + err.message)
   }
 })
 
 /* =========================  
-GESTURE TOUCH
+CAPTURE (FREEZE IMAGE)
 ========================= */
-video.addEventListener("touchstart", (e) => {
+btnCapture.addEventListener("click", () => {
   if (!stream) return
 
-  isDrawing = true
+  freezeCanvas.width = video.videoWidth
+  freezeCanvas.height = video.videoHeight
 
-  const touch = e.touches[0]
-  startX = touch.clientX
-  startY = touch.clientY
+  freezeCtx.drawImage(video, 0, 0)
+
+  isFrozen = true
+
+  video.style.display = "none"
+
+  freezeCanvas.style.position = "fixed"
+  freezeCanvas.style.inset = "0"
+  freezeCanvas.style.zIndex = "1001"
+
+  document.body.appendChild(freezeCanvas)
+
+  statusEl.innerText = "Usap untuk seleksi SKU"
 })
 
-video.addEventListener("touchmove", (e) => {
-  if (!isDrawing) return
+/* =========================  
+GESTURE DI GAMBAR (STABIL)
+========================= */
+freezeCanvas.addEventListener("touchstart", (e) => {
+  if (!isFrozen) return
 
-  const touch = e.touches[0]
-  endX = touch.clientX
-  endY = touch.clientY
+  isSelecting = true
+  const t = e.touches[0]
+
+  startX = t.clientX
+  startY = t.clientY
+})
+
+freezeCanvas.addEventListener("touchmove", (e) => {
+  if (!isSelecting) return
+
+  const t = e.touches[0]
+  endX = t.clientX
+  endY = t.clientY
 
   overlayCtx.clearRect(0, 0, overlay.width, overlay.height)
 
@@ -125,20 +159,14 @@ video.addEventListener("touchmove", (e) => {
   )
 })
 
-video.addEventListener("touchend", async () => {
-  if (!isDrawing) return
-  isDrawing = false
+freezeCanvas.addEventListener("touchend", async () => {
+  if (!isSelecting) return
+  isSelecting = false
 
   overlayCtx.clearRect(0, 0, overlay.width, overlay.height)
 
-  if (video.videoWidth === 0) {
-    alert("Kamera belum siap")
-    return
-  }
-
-  // scaling ke resolusi video asli
-  const scaleX = video.videoWidth / overlay.width
-  const scaleY = video.videoHeight / overlay.height
+  const scaleX = freezeCanvas.width / overlay.width
+  const scaleY = freezeCanvas.height / overlay.height
 
   const x = Math.min(startX, endX) * scaleX
   const y = Math.min(startY, endY) * scaleY
@@ -150,30 +178,25 @@ video.addEventListener("touchend", async () => {
     return
   }
 
-  canvas.width = video.videoWidth
-  canvas.height = video.videoHeight
-
-  ctx.filter = "grayscale(1) contrast(2)"
-  ctx.drawImage(video, 0, 0)
-  ctx.filter = "none"
-
   const tempCanvas = document.createElement("canvas")
   tempCanvas.width = w
   tempCanvas.height = h
 
   const tempCtx = tempCanvas.getContext("2d")
-  tempCtx.drawImage(canvas, x, y, w, h, 0, 0, w, h)
 
-  statusEl.innerText = "Membaca area..."
+  tempCtx.filter = "grayscale(1) contrast(2)"
+  tempCtx.drawImage(freezeCanvas, x, y, w, h, 0, 0, w, h)
+
+  statusEl.innerText = "Membaca SKU..."
 
   const result = await Tesseract.recognize(tempCanvas, "eng")
 
   let text = result.data.text || ""
 
-  // fokus ke angka (SKU retail)
+  console.log("OCR RAW:", text)
+
   text = text.replace(/[^0-9]/g, " ").trim()
 
-  console.log("OCR RAW:", result.data.text)
   console.log("OCR CLEAN:", text)
 
   let keyword = text
@@ -189,8 +212,6 @@ video.addEventListener("touchend", async () => {
   searchInput.dispatchEvent(new Event("input"))
 
   statusEl.innerText = "Scan selesai"
-
-  stopCamera()
 })
 
 /* =========================  
@@ -200,8 +221,16 @@ function stopCamera() {
   if (stream) {
     stream.getTracks().forEach(track => track.stop())
     stream = null
-    window.stream = null
   }
+
+  isFrozen = false
+  isSelecting = false
+
+  if (freezeCanvas.parentNode) {
+    freezeCanvas.parentNode.removeChild(freezeCanvas)
+  }
+
+  video.style.display = "block"
 
   video.classList.remove("active")
   document.body.classList.remove("camera-open")
