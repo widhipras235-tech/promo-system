@@ -15,6 +15,10 @@ ELEMENT
 const searchInput = document.getElementById("search")  
 const resultEl = document.getElementById("result")  
 const statusEl = document.getElementById("status")  
+const btnCamera = document.getElementById("btnCamera")
+const video = document.getElementById("camera")
+const canvas = document.getElementById("canvas")
+const ctx = canvas.getContext("2d")
 
 /* =========================  
 INIT  
@@ -22,6 +26,99 @@ INIT
 function normalize(val) {  
   return (val || "").toString().toLowerCase().trim()  
 }  
+
+let stream = null
+
+/* =========================  
+START CAMERA
+========================= */
+btnCamera.addEventListener("click", async () => {
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: "environment" }
+    })
+
+    video.srcObject = stream
+    video.style.display = "block"
+
+    statusEl.innerText = "Arahkan ke SKU / Artikel lalu tap layar"
+  } catch (err) {
+    alert("Kamera tidak bisa diakses")
+  }
+})
+
+/* =========================  
+SCAN (CLICK)
+========================= */
+video.addEventListener("click", async () => {
+  if (!stream) return
+
+  // Pastikan video ready
+  if (video.videoWidth === 0) {
+    alert("Kamera belum siap")
+    return
+  }
+
+  canvas.width = video.videoWidth
+  canvas.height = video.videoHeight
+
+  // Apply filter untuk OCR lebih akurat
+  ctx.filter = "grayscale(1) contrast(2)"
+  ctx.drawImage(video, 0, 0)
+
+  // Crop tengah
+  const w = canvas.width * 0.6
+  const h = canvas.height * 0.25
+  const x = (canvas.width - w) / 2
+  const y = (canvas.height - h) / 2
+
+  const tempCanvas = document.createElement("canvas")
+  tempCanvas.width = w
+  tempCanvas.height = h
+
+  const tempCtx = tempCanvas.getContext("2d")
+  tempCtx.drawImage(canvas, x, y, w, h, 0, 0, w, h)
+
+  statusEl.innerText = "Membaca teks..."
+
+  const result = await Tesseract.recognize(
+    tempCanvas,
+    "eng",
+    { logger: m => console.log(m) }
+  )
+
+  let text = result.data.text || ""
+
+  // 🔥 FILTER SUPER PENTING (biar cocok ke SKU)
+  text = text
+    .replace(/[^a-zA-Z0-9]/g, " ") // buang simbol
+    .replace(/\s+/g, " ") // rapikan spasi
+    .trim()
+
+  console.log("OCR:", text)
+
+  // Ambil kata paling relevan (biasanya SKU angka)
+  let keyword = text.split(" ")[0] || text
+
+  searchInput.value = keyword
+
+  // trigger search
+  searchInput.dispatchEvent(new Event("input"))
+
+  statusEl.innerText = "Scan selesai"
+
+  stopCamera()
+})
+
+/* =========================  
+STOP CAMERA
+========================= */
+function stopCamera() {
+  if (stream) {
+    stream.getTracks().forEach(track => track.stop())
+  }
+  video.style.display = "none"
+}
 
 /* =========================  
 STATUS PROMO  
