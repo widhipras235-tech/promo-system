@@ -37,7 +37,12 @@
 
 </main>
 
-<button class="scan-btn">📷</button>
+<button id="btnCamera">📷 Scan</button>
+
+<video id="camera" autoplay playsinline style="width:100%;display:none"></video>
+<canvas id="canvas" style="display:none"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
 
 <script src="app.js"></script>
 
