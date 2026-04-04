@@ -34,7 +34,7 @@ function normalize(val) {
 let stream = null
 
 /* =========================  
-GESTURE STATE
+GESTURE STATE (USAP)
 ========================= */
 let isDrawing = false
 let startX = 0
@@ -42,9 +42,7 @@ let startY = 0
 let endX = 0
 let endY = 0
 
-/* =========================  
-OVERLAY (AREA SELECTION)
-========================= */
+// overlay untuk kotak seleksi
 const overlay = document.createElement("canvas")
 const overlayCtx = overlay.getContext("2d")
 
@@ -67,12 +65,15 @@ btnCamera.addEventListener("click", async () => {
       audio: false
     })
 
+    window.stream = stream
+
     video.srcObject = stream
 
     video.onloadedmetadata = () => {
       video.play()
     }
 
+    // sync overlay size
     overlay.width = window.innerWidth
     overlay.height = window.innerHeight
 
@@ -86,7 +87,7 @@ btnCamera.addEventListener("click", async () => {
     statusEl.innerText = "Usap area SKU untuk scan"
 
   } catch (err) {
-    console.error(err)
+    console.error("ERROR CAMERA:", err)
     alert("Kamera gagal: " + err.message)
   }
 })
@@ -99,17 +100,17 @@ video.addEventListener("touchstart", (e) => {
 
   isDrawing = true
 
-  const t = e.touches[0]
-  startX = t.clientX
-  startY = t.clientY
+  const touch = e.touches[0]
+  startX = touch.clientX
+  startY = touch.clientY
 })
 
 video.addEventListener("touchmove", (e) => {
   if (!isDrawing) return
 
-  const t = e.touches[0]
-  endX = t.clientX
-  endY = t.clientY
+  const touch = e.touches[0]
+  endX = touch.clientX
+  endY = touch.clientY
 
   overlayCtx.clearRect(0, 0, overlay.width, overlay.height)
 
@@ -131,10 +132,11 @@ video.addEventListener("touchend", async () => {
   overlayCtx.clearRect(0, 0, overlay.width, overlay.height)
 
   if (video.videoWidth === 0) {
-    statusEl.innerText = "Kamera belum siap"
+    alert("Kamera belum siap")
     return
   }
 
+  // scaling ke resolusi video asli
   const scaleX = video.videoWidth / overlay.width
   const scaleY = video.videoHeight / overlay.height
 
@@ -143,8 +145,7 @@ video.addEventListener("touchend", async () => {
   const w = Math.abs(endX - startX) * scaleX
   const h = Math.abs(endY - startY) * scaleY
 
-  // minimal area
-  if (w < 60 || h < 30) {
+  if (w < 50 || h < 20) {
     statusEl.innerText = "Area terlalu kecil"
     return
   }
@@ -169,10 +170,11 @@ video.addEventListener("touchend", async () => {
 
   let text = result.data.text || ""
 
-  // fokus SKU angka
+  // fokus ke angka (SKU retail)
   text = text.replace(/[^0-9]/g, " ").trim()
 
-  console.log("OCR:", text)
+  console.log("OCR RAW:", result.data.text)
+  console.log("OCR CLEAN:", text)
 
   let keyword = text
     .split(" ")
@@ -198,6 +200,7 @@ function stopCamera() {
   if (stream) {
     stream.getTracks().forEach(track => track.stop())
     stream = null
+    window.stream = null
   }
 
   video.classList.remove("active")
