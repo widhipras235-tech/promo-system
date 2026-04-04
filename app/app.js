@@ -32,21 +32,7 @@ function normalize(val) {
 }  
 
 let stream = null
-
-/* =========================  
-FREEZE STATE  
-========================= */
-let frozen = false
-
-const freezeCanvas = document.createElement("canvas")
-const freezeCtx = freezeCanvas.getContext("2d")
-
-freezeCanvas.style.position = "fixed"
-freezeCanvas.style.inset = "0"
-freezeCanvas.style.zIndex = "1001"
-freezeCanvas.style.display = "none"
-
-document.body.appendChild(freezeCanvas)
+let captured = false
 
 /* =========================  
 GESTURE STATE (USAP)
@@ -80,16 +66,8 @@ btnCamera.addEventListener("click", async () => {
       audio: false
     })
 
-    window.stream = stream
-
     video.srcObject = stream
-
-    video.onloadedmetadata = () => {
-      video.play()
-    }
-
-    overlay.width = window.innerWidth
-    overlay.height = window.innerHeight
+    video.play()
 
     video.classList.add("active")
     document.body.classList.add("camera-open")
@@ -98,7 +76,7 @@ btnCamera.addEventListener("click", async () => {
     scanText?.classList.add("active")
     btnClose?.classList.add("active")
 
-    statusEl.innerText = "Usap area SKU untuk scan"
+    statusEl.innerText = "Tap untuk ambil gambar"
 
   } catch (err) {
     console.error("ERROR CAMERA:", err)
@@ -107,37 +85,54 @@ btnCamera.addEventListener("click", async () => {
 })
 
 /* =========================  
-GESTURE TOUCH
+CAPTURE FOTO
 ========================= */
-video.addEventListener("touchstart", (e) => {
-  if (!stream) return
+video.addEventListener("click", () => {
+  if (!stream || captured) return
 
-  const touch = e.touches[0]
-  startX = touch.clientX
-  startY = touch.clientY
+  canvas.width = video.videoWidth
+  canvas.height = video.videoHeight
 
-  // 🔥 FREEZE FRAME
-  if (!frozen) {
-    freezeCanvas.width = video.videoWidth
-    freezeCanvas.height = video.videoHeight
+  ctx.drawImage(video, 0, 0)
 
-    freezeCtx.drawImage(video, 0, 0)
+  stopStreamOnly()
 
-    freezeCanvas.style.display = "block"
-    video.style.display = "none"
+  video.style.display = "none"
+  canvas.style.display = "block"
 
-    frozen = true
-  }
+  captured = true
 
-  isDrawing = true
+  overlay.width = window.innerWidth
+  overlay.height = window.innerHeight
+
+  statusEl.innerText = "Usap area untuk scan"
 })
 
-video.addEventListener("touchmove", (e) => {
+function stopStreamOnly() {
+  if (stream) {
+    stream.getTracks().forEach(track => track.stop())
+    stream = null
+  }
+}
+
+/* =========================  
+SELEKSI DI GAMBAR (CANVAS)
+========================= */
+canvas.addEventListener("touchstart", (e) => {
+  if (!captured) return
+
+  isDrawing = true
+  const t = e.touches[0]
+  startX = t.clientX
+  startY = t.clientY
+})
+
+canvas.addEventListener("touchmove", (e) => {
   if (!isDrawing) return
 
-  const touch = e.touches[0]
-  endX = touch.clientX
-  endY = touch.clientY
+  const t = e.touches[0]
+  endX = t.clientX
+  endY = t.clientY
 
   overlayCtx.clearRect(0, 0, overlay.width, overlay.height)
 
@@ -152,19 +147,14 @@ video.addEventListener("touchmove", (e) => {
   )
 })
 
-video.addEventListener("touchend", async () => {
+canvas.addEventListener("touchend", async () => {
   if (!isDrawing) return
   isDrawing = false
 
   overlayCtx.clearRect(0, 0, overlay.width, overlay.height)
 
-  if (video.videoWidth === 0) {
-    alert("Kamera belum siap")
-    return
-  }
-
-  const scaleX = video.videoWidth / overlay.width
-  const scaleY = video.videoHeight / overlay.height
+  const scaleX = canvas.width / overlay.width
+  const scaleY = canvas.height / overlay.height
 
   const x = Math.min(startX, endX) * scaleX
   const y = Math.min(startY, endY) * scaleY
@@ -176,13 +166,6 @@ video.addEventListener("touchend", async () => {
     return
   }
 
-  canvas.width = video.videoWidth
-  canvas.height = video.videoHeight
-
-  ctx.filter = "grayscale(1) contrast(2)"
-  ctx.drawImage(freezeCanvas, 0, 0)
-  ctx.filter = "none"
-
   const tempCanvas = document.createElement("canvas")
   tempCanvas.width = w
   tempCanvas.height = h
@@ -190,54 +173,55 @@ video.addEventListener("touchend", async () => {
   const tempCtx = tempCanvas.getContext("2d")
   tempCtx.drawImage(canvas, x, y, w, h, 0, 0, w, h)
 
-  statusEl.innerText = "Membaca area..."
+  statusEl.innerText = "Membaca..."
 
-  const result = await Tesseract.recognize(tempCanvas, "eng")
+  try {
+    const result = await Tesseract.recognize(tempCanvas, "eng")
 
-  let text = result.data.text || ""
+    let text = result.data.text || ""
+    text = text.replace(/[^0-9]/g, " ").trim()
 
-  text = text.replace(/[^0-9]/g, " ").trim()
+    let keyword = text
+      .split(" ")
+      .sort((a, b) => b.length - a.length)[0]
 
-  let keyword = text
-    .split(" ")
-    .sort((a, b) => b.length - a.length)[0]
+    if (!keyword) {
+      statusEl.innerText = "SKU tidak terbaca"
+      return
+    }
 
-  if (!keyword) {
-    statusEl.innerText = "SKU tidak terbaca"
-    return
+    searchInput.value = keyword
+    searchInput.dispatchEvent(new Event("input"))
+
+    statusEl.innerText = "Scan selesai"
+
+    stopCamera()
+
+  } catch (err) {
+    console.error(err)
+    statusEl.innerText = "OCR gagal"
   }
-
-  searchInput.value = keyword
-  searchInput.dispatchEvent(new Event("input"))
-
-  statusEl.innerText = "Scan selesai"
-
-  stopCamera()
 })
 
 /* =========================  
 STOP CAMERA
 ========================= */
 function stopCamera() {
-  if (stream) {
-    stream.getTracks().forEach(track => track.stop())
-    stream = null
-    window.stream = null
-  }
+  stopStreamOnly()
 
   video.classList.remove("active")
   document.body.classList.remove("camera-open")
+
+  video.style.display = "block"
+  canvas.style.display = "none"
 
   scanFrame?.classList.remove("active")
   scanText?.classList.remove("active")
   btnClose?.classList.remove("active")
 
-  overlayCtx.clearRect(0, 0, overlay.width, overlay.height)
+  captured = false
 
-  // 🔥 RESET FREEZE
-  freezeCanvas.style.display = "none"
-  video.style.display = "block"
-  frozen = false
+  overlayCtx.clearRect(0, 0, overlay.width, overlay.height)
 }
 
 btnClose?.addEventListener("click", stopCamera)
