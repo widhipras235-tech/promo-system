@@ -33,21 +33,22 @@ let isOCRReady = false
 async function initOCR() {
   const t0 = performance.now()
 
-  worker = await Tesseract.createWorker()
+  worker = await Tesseract.createWorker({
+    logger: m => DEBUG && console.log(m)
+  })
 
   await worker.loadLanguage("eng")
   await worker.initialize("eng")
 
   await worker.setParameters({
     tessedit_char_whitelist: "0123456789",
-    tessedit_pageseg_mode: 7
+    tessedit_pageseg_mode: 7,
+    preserve_interword_spaces: 0
   })
 
   isOCRReady = true
-
   DEBUG && console.log("OCR READY:", (performance.now() - t0).toFixed(0), "ms")
 }
-
 initOCR()
 
 /* =========================  
@@ -84,7 +85,7 @@ document.body.appendChild(overlay)
 /* =========================  
 START CAMERA
 ========================= */
-btnCamera.addEventListener("click", async () => {
+btnCamera?.addEventListener("click", async () => {
   if (stream) return
 
   try {
@@ -99,6 +100,9 @@ btnCamera.addEventListener("click", async () => {
     overlay.width = window.innerWidth
     overlay.height = window.innerHeight
 
+    btnCapture.style.display = "block"
+    btnClose.style.display = "block"
+
     statusEl.innerText = "Klik ambil gambar"
 
   } catch (err) {
@@ -110,7 +114,7 @@ btnCamera.addEventListener("click", async () => {
 /* =========================  
 CAPTURE (FREEZE)
 ========================= */
-btnCapture.addEventListener("click", () => {
+btnCapture?.addEventListener("click", () => {
   if (!stream) return
 
   const t0 = performance.now()
@@ -167,14 +171,14 @@ freezeCanvas.addEventListener("touchend", async () => {
   if (!isSelecting) return
   isSelecting = false
 
-  const tStart = performance.now()
-
   overlayCtx.clearRect(0, 0, overlay.width, overlay.height)
 
   if (!isOCRReady) {
     statusEl.innerText = "OCR belum siap..."
     return
   }
+
+  const tStart = performance.now()
 
   const scaleX = freezeCanvas.width / overlay.width
   const scaleY = freezeCanvas.height / overlay.height
@@ -224,8 +228,6 @@ freezeCanvas.addEventListener("touchend", async () => {
 
   text = text.replace(/[^0-9]/g, " ").trim()
 
-  DEBUG && console.log("OCR CLEAN:", text)
-
   let keyword = text
     .split(" ")
     .sort((a, b) => b.length - a.length)[0]
@@ -249,7 +251,7 @@ freezeCanvas.addEventListener("touchend", async () => {
 })
 
 /* =========================  
-STOP CAMERA
+STOP CAMERA (FIXED)
 ========================= */
 function stopCamera() {
   if (stream) {
@@ -267,38 +269,11 @@ function stopCamera() {
   video.style.display = "block"
 
   overlayCtx.clearRect(0, 0, overlay.width, overlay.height)
+
+  btnCapture.style.display = "none"
+  btnClose.style.display = "none"
 
   statusEl.innerText = "Kamera ditutup"
-}
-
-btnClose?.addEventListener("click", stopCamera)
-
-/* =========================  
-STOP CAMERA
-========================= */
-function stopCamera() {
-  if (stream) {
-    stream.getTracks().forEach(track => track.stop())
-    stream = null
-  }
-
-  isFrozen = false
-  isSelecting = false
-
-  if (freezeCanvas.parentNode) {
-    freezeCanvas.parentNode.removeChild(freezeCanvas)
-  }
-
-  video.style.display = "block"
-
-  video.classList.remove("active")
-  document.body.classList.remove("camera-open")
-
-  scanFrame?.classList.remove("active")
-  scanText?.classList.remove("active")
-  btnClose?.classList.remove("active")
-
-  overlayCtx.clearRect(0, 0, overlay.width, overlay.height)
 }
 
 btnClose?.addEventListener("click", stopCamera)
