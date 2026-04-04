@@ -8,16 +8,13 @@
 
 <title>Promo Matahari</title>
 
+<link rel="stylesheet" href="style.css">
+
 <style>
-body { font-family: sans-serif; margin: 0; }
 
-header { padding: 10px; background: #ff2d2d; color: white; }
-.search-box { display: flex; gap: 5px; }
-input { flex: 1; padding: 8px; }
-
-#status { padding: 10px; }
-#result { padding: 10px; }
-
+/* =========================
+CAMERA OVERLAY
+========================= */
 .camera {
   position: fixed;
   inset: 0;
@@ -27,36 +24,60 @@ input { flex: 1; padding: 8px; }
   display: none;
   z-index: 999;
 }
-.camera.active { display: block; }
 
-#btnCamera, #btnCapture {
+.camera.active {
+  display: block;
+}
+
+/* BACKDROP */
+body.camera-open::before {
+  content: "";
   position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 998;
+}
+
+/* TEXT INFO */
+.scan-text {
+  position: fixed;
+  top: calc(50% + 100px);
   left: 50%;
   transform: translateX(-50%);
-  border: none;
-  border-radius: 50%;
   color: white;
-  z-index: 1001;
-}
-
-#btnCamera {
-  bottom: 20px;
-  width: 70px;
-  height: 70px;
-  background: #ff2d2d;
-  font-size: 28px;
-}
-
-#btnCapture {
-  bottom: 100px;
-  width: 60px;
-  height: 60px;
-  background: #00cc88;
-  font-size: 22px;
+  font-size: 14px;
+  z-index: 1000;
   display: none;
 }
 
-#btnClose {
+.scan-text.active {
+  display: block;
+}
+
+/* =========================
+BUTTON CAMERA
+========================= */
+#btnCamera {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: none;
+
+  background: #ff2d2d;
+  color: white;
+  font-size: 28px;
+
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  z-index: 1001;
+}
+
+/* CLOSE BUTTON */
+.btn-close {
   position: fixed;
   top: 20px;
   right: 20px;
@@ -64,33 +85,94 @@ input { flex: 1; padding: 8px; }
   background: rgba(0,0,0,0.5);
   color: white;
   border: none;
-  padding: 8px;
+  font-size: 18px;
+  padding: 8px 12px;
+  border-radius: 8px;
   display: none;
 }
+
+.btn-close.active {
+  display: block;
+}
+
 </style>
 
 </head>
 
 <body>
 
-<header>
-  <h2>Capeex</h2>
-  <div class="search-box">
-    <input id="search" placeholder="Cari SKU">
-  </div>
+<header class="header">
+
+<div class="logo">
+<h1>Capeex</h1>
+<p>Cek Promo • Scan SKU • Online</p>
+</div>
+
+<div class="search-box">
+
+<input id="search" placeholder="Cari SKU, artikel, deskripsi, brand">
+<button class="search-btn">🔍</button>
+
+</div>
+
 </header>
 
-<div id="status">Ready</div>
+<main>
+<div id="status">Loading...</div>
 <div id="result"></div>
+</main>
 
+<!-- BUTTON CAMERA -->
 <button id="btnCamera">📷</button>
-<button id="btnCapture">📸</button>
-<button id="btnClose">✕</button>
 
+<!-- CLOSE -->
+<button id="btnClose" class="btn-close">✕</button>
+
+<!-- CAMERA -->
 <video id="camera" autoplay playsinline class="camera"></video>
 
+<div id="scanText" class="scan-text">Usap Layar Untuk Seleksi</div>
+
+<canvas id="canvas" style="display:none"></canvas>
+
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
-<script src="app.js" defer></script>
+<script src="app.js"></script>
+
+<script>
+
+/* =========================
+UI CONTROL ONLY (TANPA MERUSAK app.js)
+========================= */
+
+const btnCamera = document.getElementById("btnCamera")
+const btnClose = document.getElementById("btnClose")
+const video = document.getElementById("camera")
+const scanFrame = document.getElementById("scanFrame")
+const scanText = document.getElementById("scanText")
+
+btnCamera.addEventListener("click", () => {
+  video.classList.add("active")
+  scanFrame.classList.add("active")
+  scanText.classList.add("active")
+  btnClose.classList.add("active")
+  document.body.classList.add("camera-open")
+})
+
+btnClose.addEventListener("click", () => {
+  video.classList.remove("active")
+  scanFrame.classList.remove("active")
+  scanText.classList.remove("active")
+  btnClose.classList.remove("active")
+  document.body.classList.remove("camera-open")
+
+  // stop kamera jika ada
+  if (window.stream) {
+    window.stream.getTracks().forEach(t => t.stop())
+    window.stream = null
+  }
+})
+
+</script>
 
 </body>
 </html>
