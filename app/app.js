@@ -1,20 +1,20 @@
-/* =========================
-STATE
-========================= */
-let skuIndex = {}
-let articleIndex = {}
-let cache = {}
-let isReady = false
+/* =========================  
+STATE  
+========================= */  
+let skuIndex = {}  
+let articleIndex = {}  
+let cache = {}  
+let isReady = false  
 
-const MAX_RESULT = 30
-const TOTAL_FILE = 100
+const MAX_RESULT = 30  
+const TOTAL_FILE = 100  
 
-/* =========================
-ELEMENT
-========================= */
-const searchInput = document.getElementById("search")
-const resultEl = document.getElementById("result")
-const statusEl = document.getElementById("status")
+/* =========================  
+ELEMENT  
+========================= */  
+const searchInput = document.getElementById("search")  
+const resultEl = document.getElementById("result")  
+const statusEl = document.getElementById("status")  
 const btnCamera = document.getElementById("btnCamera")
 const video = document.getElementById("camera")
 const canvas = document.getElementById("canvas")
@@ -24,159 +24,196 @@ const scanFrame = document.getElementById("scanFrame")
 const scanText = document.getElementById("scanText")
 const btnClose = document.getElementById("btnClose")
 
-/* =========================
-INIT
-========================= */
-function normalize(val) {
-return (val || "").toString().toLowerCase().trim()
-}
-
-/* =========================
-CAMERA FINAL STABLE
-========================= */
+/* =========================  
+INIT  
+========================= */  
+function normalize(val) {  
+  return (val || "").toString().toLowerCase().trim()  
+}  
 
 let stream = null
-let captured = false
 
-let isDown = false
+/* =========================  
+GESTURE STATE (USAP)
+========================= */
+let isDrawing = false
 let startX = 0
 let startY = 0
 let endX = 0
 let endY = 0
 
-btnCamera.onclick = async () => {
-try {
-stream = await navigator.mediaDevices.getUserMedia({
-video: { facingMode: "environment" }
+// overlay untuk kotak seleksi
+const overlay = document.createElement("canvas")
+const overlayCtx = overlay.getContext("2d")
+
+overlay.style.position = "fixed"
+overlay.style.inset = "0"
+overlay.style.zIndex = "1002"
+overlay.style.pointerEvents = "none"
+
+document.body.appendChild(overlay)
+
+/* =========================  
+START CAMERA
+========================= */
+btnCamera.addEventListener("click", async () => {
+  if (stream) return
+
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: "environment" },
+      audio: false
+    })
+
+    window.stream = stream
+
+    video.srcObject = stream
+
+    video.onloadedmetadata = () => {
+      video.play()
+    }
+
+    // sync overlay size
+    overlay.width = window.innerWidth
+    overlay.height = window.innerHeight
+
+    video.classList.add("active")
+    document.body.classList.add("camera-open")
+
+    scanFrame?.classList.add("active")
+    scanText?.classList.add("active")
+    btnClose?.classList.add("active")
+
+    statusEl.innerText = "Usap area SKU untuk scan"
+
+  } catch (err) {
+    console.error("ERROR CAMERA:", err)
+    alert("Kamera gagal: " + err.message)
+  }
 })
 
-video.srcObject = stream  
-video.play()  
+/* =========================  
+GESTURE TOUCH
+========================= */
+video.addEventListener("touchstart", (e) => {
+  if (!stream) return
 
-video.style.display = "block"  
-canvas.style.display = "none"  
+  isDrawing = true
 
-statusEl.innerText = "Tap layar untuk foto"
+  const touch = e.touches[0]
+  startX = touch.clientX
+  startY = touch.clientY
+})
 
-} catch (e) {
-alert("Kamera gagal: " + e.message)
+video.addEventListener("touchmove", (e) => {
+  if (!isDrawing) return
+
+  const touch = e.touches[0]
+  endX = touch.clientX
+  endY = touch.clientY
+
+  overlayCtx.clearRect(0, 0, overlay.width, overlay.height)
+
+  overlayCtx.strokeStyle = "#00ffcc"
+  overlayCtx.lineWidth = 2
+
+  overlayCtx.strokeRect(
+    startX,
+    startY,
+    endX - startX,
+    endY - startY
+  )
+})
+
+video.addEventListener("touchend", async () => {
+  if (!isDrawing) return
+  isDrawing = false
+
+  overlayCtx.clearRect(0, 0, overlay.width, overlay.height)
+
+  if (video.videoWidth === 0) {
+    alert("Kamera belum siap")
+    return
+  }
+
+  // scaling ke resolusi video asli
+  const scaleX = video.videoWidth / overlay.width
+  const scaleY = video.videoHeight / overlay.height
+
+  const x = Math.min(startX, endX) * scaleX
+  const y = Math.min(startY, endY) * scaleY
+  const w = Math.abs(endX - startX) * scaleX
+  const h = Math.abs(endY - startY) * scaleY
+
+  if (w < 50 || h < 20) {
+    statusEl.innerText = "Area terlalu kecil"
+    return
+  }
+
+  canvas.width = video.videoWidth
+  canvas.height = video.videoHeight
+
+  ctx.filter = "grayscale(1) contrast(2)"
+  ctx.drawImage(video, 0, 0)
+  ctx.filter = "none"
+
+  const tempCanvas = document.createElement("canvas")
+  tempCanvas.width = w
+  tempCanvas.height = h
+
+  const tempCtx = tempCanvas.getContext("2d")
+  tempCtx.drawImage(canvas, x, y, w, h, 0, 0, w, h)
+
+  statusEl.innerText = "Membaca area..."
+
+  const result = await Tesseract.recognize(tempCanvas, "eng")
+
+  let text = result.data.text || ""
+
+  // fokus ke angka (SKU retail)
+  text = text.replace(/[^0-9]/g, " ").trim()
+
+  console.log("OCR RAW:", result.data.text)
+  console.log("OCR CLEAN:", text)
+
+  let keyword = text
+    .split(" ")
+    .sort((a, b) => b.length - a.length)[0]
+
+  if (!keyword) {
+    statusEl.innerText = "SKU tidak terbaca"
+    return
+  }
+
+  searchInput.value = keyword
+  searchInput.dispatchEvent(new Event("input"))
+
+  statusEl.innerText = "Scan selesai"
+
+  stopCamera()
+})
+
+/* =========================  
+STOP CAMERA
+========================= */
+function stopCamera() {
+  if (stream) {
+    stream.getTracks().forEach(track => track.stop())
+    stream = null
+    window.stream = null
+  }
+
+  video.classList.remove("active")
+  document.body.classList.remove("camera-open")
+
+  scanFrame?.classList.remove("active")
+  scanText?.classList.remove("active")
+  btnClose?.classList.remove("active")
+
+  overlayCtx.clearRect(0, 0, overlay.width, overlay.height)
 }
-}
 
-video.onclick = () => {
-if (!stream) return
-
-canvas.width = video.videoWidth
-canvas.height = video.videoHeight
-
-ctx.drawImage(video, 0, 0)
-
-stream.getTracks().forEach(t => t.stop())
-stream = null
-
-video.style.display = "none"
-canvas.style.display = "block"
-
-captured = true
-
-statusEl.innerText = "Geser untuk pilih area"
-}
-
-canvas.onpointerdown = (e) => {
-if (!captured) return
-
-isDown = true
-startX = e.offsetX
-startY = e.offsetY
-}
-
-canvas.onpointermove = (e) => {
-if (!isDown) return
-
-endX = e.offsetX
-endY = e.offsetY
-
-redraw()
-}
-
-canvas.onpointerup = async () => {
-if (!isDown) return
-isDown = false
-
-const x = Math.min(startX, endX)
-const y = Math.min(startY, endY)
-const w = Math.abs(endX - startX)
-const h = Math.abs(endY - startY)
-
-if (w < 30 || h < 20) {
-statusEl.innerText = "Area terlalu kecil"
-return
-}
-
-const temp = document.createElement("canvas")
-temp.width = w
-temp.height = h
-
-temp.getContext("2d").drawImage(
-canvas,
-x, y, w, h,
-0, 0, w, h
-)
-
-statusEl.innerText = "Membaca..."
-
-try {
-const res = await Tesseract.recognize(temp, "eng")
-
-let text = res.data.text || ""  
-text = text.replace(/[^0-9]/g, " ").trim()  
-
-let keyword = text.split(" ").sort((a, b) => b.length - a.length)[0]  
-
-if (!keyword) {  
-  statusEl.innerText = "Tidak terbaca"  
-  return  
-}  
-
-searchInput.value = keyword  
-searchInput.dispatchEvent(new Event("input"))  
-
-statusEl.innerText = "Selesai"  
-
-resetCamera()
-
-} catch (err) {
-console.error(err)
-statusEl.innerText = "OCR gagal"
-}
-}
-
-function redraw() {
-ctx.drawImage(canvas, 0, 0)
-
-ctx.strokeStyle = "lime"
-ctx.lineWidth = 2
-ctx.strokeRect(
-startX,
-startY,
-endX - startX,
-endY - startY
-)
-}
-
-function resetCamera() {
-canvas.style.display = "none"
-video.style.display = "block"
-captured = false
-}
-
-btnClose?.onclick = () => {
-if (stream) {
-stream.getTracks().forEach(t => t.stop())
-stream = null
-}
-resetCamera()
-}
+btnClose?.addEventListener("click", stopCamera)
 
 /* =========================
 STATUS PROMO
