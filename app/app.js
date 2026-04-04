@@ -33,17 +33,34 @@ let stream = null
 START CAMERA
 ========================= */
 btnCamera.addEventListener("click", async () => {
+  if (stream) return // 🔥 cegah double kamera
+
   try {
     stream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: "environment" }
+      video: { facingMode: "environment" },
+      audio: false
     })
 
-    video.srcObject = stream
-    video.style.display = "block"
+    window.stream = stream // 🔥 penting untuk tombol close
 
-    statusEl.innerText = "Arahkan ke SKU / Artikel lalu tap layar"
+    video.srcObject = stream
+
+    video.onloadedmetadata = () => {
+      video.play()
+    }
+
+    video.classList.add("active")
+    document.body.classList.add("camera-open")
+
+    scanFrame?.classList.add("active")
+    scanText?.classList.add("active")
+    btnClose?.classList.add("active")
+
+    statusEl.innerText = "Kamera aktif, tap untuk scan"
+
   } catch (err) {
-    alert("Kamera tidak bisa diakses")
+    console.error("ERROR CAMERA:", err)
+    alert("Kamera gagal: " + err.message)
   }
 })
 
@@ -53,7 +70,6 @@ SCAN (CLICK)
 video.addEventListener("click", async () => {
   if (!stream) return
 
-  // Pastikan video ready
   if (video.videoWidth === 0) {
     alert("Kamera belum siap")
     return
@@ -62,11 +78,12 @@ video.addEventListener("click", async () => {
   canvas.width = video.videoWidth
   canvas.height = video.videoHeight
 
-  // Apply filter untuk OCR lebih akurat
+  // 🔥 filter OCR
   ctx.filter = "grayscale(1) contrast(2)"
   ctx.drawImage(video, 0, 0)
+  ctx.filter = "none" // 🔥 reset filter
 
-  // Crop tengah
+  // crop tengah (area scan)
   const w = canvas.width * 0.6
   const h = canvas.height * 0.25
   const x = (canvas.width - w) / 2
@@ -83,26 +100,28 @@ video.addEventListener("click", async () => {
 
   const result = await Tesseract.recognize(
     tempCanvas,
-    "eng",
-    { logger: m => console.log(m) }
+    "eng"
   )
 
   let text = result.data.text || ""
 
-  // 🔥 FILTER SUPER PENTING (biar cocok ke SKU)
-  text = text
-    .replace(/[^a-zA-Z0-9]/g, " ") // buang simbol
-    .replace(/\s+/g, " ") // rapikan spasi
-    .trim()
+  // 🔥 mode SKU angka (lebih akurat untuk retail)
+  text = text.replace(/[^0-9]/g, " ").trim()
 
-  console.log("OCR:", text)
+  console.log("OCR RAW:", result.data.text)
+  console.log("OCR CLEAN:", text)
 
-  // Ambil kata paling relevan (biasanya SKU angka)
-  let keyword = text.split(" ")[0] || text
+  // 🔥 ambil keyword terbaik (terpanjang)
+  let keyword = text
+    .split(" ")
+    .sort((a, b) => b.length - a.length)[0]
+
+  if (!keyword) {
+    statusEl.innerText = "SKU tidak terbaca"
+    return
+  }
 
   searchInput.value = keyword
-
-  // trigger search
   searchInput.dispatchEvent(new Event("input"))
 
   statusEl.innerText = "Scan selesai"
@@ -116,9 +135,20 @@ STOP CAMERA
 function stopCamera() {
   if (stream) {
     stream.getTracks().forEach(track => track.stop())
+    stream = null
+    window.stream = null
   }
-  video.style.display = "none"
+
+  video.classList.remove("active")
+  document.body.classList.remove("camera-open")
+
+  scanFrame?.classList.remove("active")
+  scanText?.classList.remove("active")
+  btnClose?.classList.remove("active")
 }
+
+// 🔥 tombol close dari UI
+btnClose?.addEventListener("click", stopCamera)
 
 /* =========================  
 STATUS PROMO  
