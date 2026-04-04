@@ -30,17 +30,11 @@ let capturedImage = null
 let ocrData = null
 
 /* =========================  
-OVERLAY  
+LENS LAYER (GOOGLE LENS STYLE)  
 ========================= */
-const overlay = document.createElement("canvas")
-const overlayCtx = overlay.getContext("2d")
-
-overlay.style.position = "fixed"
-overlay.style.inset = "0"
-overlay.style.zIndex = "1002"
-overlay.style.pointerEvents = "none"
-
-document.body.appendChild(overlay)
+let lensLayer = document.createElement("div")
+lensLayer.id = "lensLayer"
+document.body.appendChild(lensLayer)
 
 /* =========================  
 START CAMERA  
@@ -53,9 +47,6 @@ btnCamera.addEventListener("click", async () => {
 
     video.srcObject = stream
     video.play()
-
-    overlay.width = window.innerWidth
-    overlay.height = window.innerHeight
 
     video.classList.add("active")
     document.body.classList.add("camera-open")
@@ -88,7 +79,9 @@ video.addEventListener("click", async () => {
 
   ocrData = result.data
 
-  statusEl.innerText = "Usap area yang ingin dipilih"
+  drawBoxes()
+
+  statusEl.innerText = "Tap teks untuk memilih"
 })
 
 function stopStreamOnly() {
@@ -96,6 +89,55 @@ function stopStreamOnly() {
     stream.getTracks().forEach(t => t.stop())
     stream = null
   }
+}
+
+/* =========================  
+DRAW OCR BOXES  
+========================= */
+function drawBoxes() {
+  lensLayer.innerHTML = ""
+
+  const scaleX = window.innerWidth / canvas.width
+  const scaleY = window.innerHeight / canvas.height
+
+  ocrData.words.forEach(word => {
+    const b = word.bbox
+
+    const div = document.createElement("div")
+    div.className = "lens-box"
+
+    div.style.left = b.x0 * scaleX + "px"
+    div.style.top = b.y0 * scaleY + "px"
+    div.style.width = (b.x1 - b.x0) * scaleX + "px"
+    div.style.height = (b.y1 - b.y0) * scaleY + "px"
+
+    div.onclick = () => {
+      selectText(word.text)
+    }
+
+    lensLayer.appendChild(div)
+  })
+}
+
+/* =========================  
+SELECT TEXT  
+========================= */
+function selectText(text) {
+  text = text.replace(/[^0-9]/g, " ").trim()
+
+  let keyword = text
+    .split(" ")
+    .sort((a, b) => b.length - a.length)[0]
+
+  if (!keyword) {
+    statusEl.innerText = "Teks tidak valid"
+    return
+  }
+
+  searchInput.value = keyword
+  searchInput.dispatchEvent(new Event("input"))
+
+  statusEl.innerText = "Dipilih: " + keyword
 }
 
 /* =========================  
@@ -122,24 +164,16 @@ video.addEventListener("touchmove", (e) => {
   const t = e.touches[0]
   endX = t.clientX
   endY = t.clientY
-
-  overlayCtx.clearRect(0, 0, overlay.width, overlay.height)
-
-  overlayCtx.strokeStyle = "#00ffcc"
-  overlayCtx.lineWidth = 2
-  overlayCtx.strokeRect(startX, startY, endX - startX, endY - startY)
 })
 
 video.addEventListener("touchend", () => {
   if (!isDrawing) return
   isDrawing = false
 
-  overlayCtx.clearRect(0, 0, overlay.width, overlay.height)
-
   if (!ocrData) return
 
-  const scaleX = canvas.width / overlay.width
-  const scaleY = canvas.height / overlay.height
+  const scaleX = canvas.width / window.innerWidth
+  const scaleY = canvas.height / window.innerHeight
 
   const x1 = Math.min(startX, endX) * scaleX
   const y1 = Math.min(startY, endY) * scaleY
@@ -152,30 +186,16 @@ video.addEventListener("touchend", () => {
     const b = word.bbox
 
     if (
-      b.x0 > x1 &&
-      b.y0 > y1 &&
-      b.x1 < x2 &&
-      b.y1 < y2
+      b.x1 > x1 &&
+      b.x0 < x2 &&
+      b.y1 > y1 &&
+      b.y0 < y2
     ) {
       selectedText += " " + word.text
     }
   })
 
-  selectedText = selectedText.replace(/[^0-9]/g, " ").trim()
-
-  let keyword = selectedText
-    .split(" ")
-    .sort((a, b) => b.length - a.length)[0]
-
-  if (!keyword) {
-    statusEl.innerText = "Tidak ada teks terdeteksi"
-    return
-  }
-
-  searchInput.value = keyword
-  searchInput.dispatchEvent(new Event("input"))
-
-  statusEl.innerText = "Scan selesai"
+  selectText(selectedText)
 })
 
 /* =========================  
@@ -187,8 +207,7 @@ function stopCamera() {
   video.classList.remove("active")
   document.body.classList.remove("camera-open")
 
-  overlayCtx.clearRect(0, 0, overlay.width, overlay.height)
-
+  lensLayer.innerHTML = ""
   ocrData = null
 }
 
