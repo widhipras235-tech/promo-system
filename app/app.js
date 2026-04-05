@@ -221,22 +221,24 @@ btnClose?.addEventListener("click", stopCamera)
 /* =========================  
 STATUS PROMO  
 ========================= */  
+function excelToDate(val) {
+  if (!isNaN(val)) {
+    return new Date((Number(val) - 25569) * 86400 * 1000)
+  }
+  return new Date(val)
+}
+
 function getStatusPromo(mulai, akhir) {
   const now = new Date()
 
-  const start = new Date(
-    !isNaN(mulai)
-      ? (Number(mulai) - 25569) * 86400 * 1000
-      : mulai
-  )
-
-  const end = new Date(
-    !isNaN(akhir)
-      ? (Number(akhir) - 25569) * 86400 * 1000
-      : akhir
-  )
+  let start = excelToDate(mulai)
+  let end = excelToDate(akhir)
 
   if (isNaN(start) || isNaN(end)) return "Tidak diketahui"
+
+  // 🔥 FIX UTAMA: SET JAM
+  start.setHours(0, 0, 0, 0)
+  end.setHours(23, 59, 59, 999)
 
   if (now < start) return "Belum aktif"
   if (now > end) return "Berakhir"
