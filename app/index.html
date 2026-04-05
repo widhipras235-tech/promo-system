@@ -180,41 +180,5 @@ BUTTON CAMERA
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
 <script src="app.js"></script>
 
-<script>
-
-/* =========================
-UI CONTROL ONLY (TANPA MERUSAK app.js)
-========================= */
-
-const btnCamera = document.getElementById("btnCamera")
-const btnClose = document.getElementById("btnClose")
-const video = document.getElementById("camera")
-const scanFrame = document.getElementById("scanFrame")
-const scanText = document.getElementById("scanText")
-
-btnCamera.addEventListener("click", () => {
-  video.classList.add("active")
-  scanFrame.classList.add("active")
-  scanText.classList.add("active")
-  btnClose.classList.add("active")
-  document.body.classList.add("camera-open")
-})
-
-btnClose.addEventListener("click", () => {
-  video.classList.remove("active")
-  scanFrame.classList.remove("active")
-  scanText.classList.remove("active")
-  btnClose.classList.remove("active")
-  document.body.classList.remove("camera-open")
-
-  // stop kamera jika ada
-  if (window.stream) {
-    window.stream.getTracks().forEach(t => t.stop())
-    window.stream = null
-  }
-})
-
-</script>
-
 </body>
 </html>
