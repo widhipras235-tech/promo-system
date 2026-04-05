@@ -28,8 +28,11 @@ const btnClose = document.getElementById("btnClose")
 INIT  
 ========================= */  
 function normalize(val) {  
-  return (val || "").toString().toLowerCase().trim()  
-}  
+  return (val || "")
+    .toString()
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "")
+}
 
 let stream = null
 
@@ -474,37 +477,62 @@ async function fullScanSearch(keyword) {
     const data = await loadFile(i)  
 
     for (let item of data) {  
-      const mulai = item.fromdate || item.raw?.fromdate  
-      const akhir = item.todate || item.raw?.todate  
-      const status = getStatusPromo(mulai, akhir)
+      const sku = normalize(item.sku)
+      const article = normalize(item.article)
+      const desc = normalize(item.deskripsi)
 
-      results.push({  
-        ...item,  
-        _priority: getPriority(item, keyword),
-        _status: status,
-        _statusPriority: getStatusPriority(status)
-      })  
+      // 🔥 FILTER DULU (INI KUNCI)
+      if (
+        sku.includes(keyword) ||
+        article.includes(keyword) ||
+        desc.includes(keyword)
+      ) {
+        const mulai = item.fromdate || item.raw?.fromdate  
+        const akhir = item.todate || item.raw?.todate  
+        const status = getStatusPromo(mulai, akhir)
+
+        results.push({  
+          ...item,  
+          _priority: getPriority(item, keyword),
+          _status: status,
+          _statusPriority: getStatusPriority(status)
+        })  
+      }
 
       if (results.length >= MAX_RESULT) break  
     }  
   }  
 
   return finalSort(results, keyword).slice(0, MAX_RESULT)
-}  
+}
 
 /* =========================  
 SEARCH ENGINE  
 ========================= */  
 async function searchData(keyword) {  
-  keyword = normalize(keyword)  
-  if (!keyword) return []  
+  let keywords = keyword
+    .toLowerCase()
+    .split(" ")
+    .map(k => normalize(k))
+    .filter(k => k)
 
-  if (skuIndex[keyword]) return await getExactResults(skuIndex[keyword], keyword)  
-  if (articleIndex[keyword]) return await getExactResults(articleIndex[keyword], keyword)  
+  if (!keywords.length) return []
+
+  keyword = keywords[0]
+
+  // ✅ EXACT MATCH DULU
+  if (skuIndex[keyword]) {
+    return await getExactResults(skuIndex[keyword], keyword)
+  }
+
+  if (articleIndex[keyword]) {
+    return await getExactResults(articleIndex[keyword], keyword)
+  }
 
   let indexes = new Set()  
   let prefix = keyword.slice(0, 3)  
 
+  // ✅ CARI DARI SKU INDEX
   for (let key in skuIndex) {  
     if (!key.startsWith(prefix)) continue  
 
@@ -517,10 +545,25 @@ async function searchData(keyword) {
     if (indexes.size >= MAX_RESULT) break  
   }  
 
+  // ✅ CARI DARI ARTICLE INDEX (SUDAH DI POSISI BENAR)
+  for (let key in articleIndex) {  
+    if (!key.startsWith(prefix)) continue  
+
+    if (key.startsWith(keyword)) {  
+      articleIndex[key].forEach(i => {  
+        if (indexes.size < MAX_RESULT) indexes.add(i)  
+      })  
+    }  
+
+    if (indexes.size >= MAX_RESULT) break  
+  }
+
+  // ✅ JIKA ADA HASIL DARI INDEX
   if (indexes.size > 0) {
     return await getResultsFromIndexes(indexes, keyword)
   }
 
+  // ✅ FALLBACK KE FULL SCAN
   return await fullScanSearch(keyword)
 }
 
