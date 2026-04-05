@@ -38,6 +38,49 @@ body.camera-open::before {
   z-index: 998;
 }
 
+/* =========================
+SCAN FRAME (KOTAK)
+========================= */
+.scan-frame {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  width: 80%;
+  max-width: 320px;
+  height: 140px;
+
+  border: 2px solid #00ffcc;
+  border-radius: 12px;
+
+  box-shadow: 0 0 20px rgba(0,255,200,0.5);
+
+  z-index: 1000;
+  display: none;
+}
+
+.scan-frame.active {
+  display: block;
+}
+
+/* ANIMASI GARIS SCAN */
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #00ffcc;
+
+  animation: scanMove 2s linear infinite;
+}
+
+@keyframes scanMove {
+  0% { top: 0; }
+  100% { top: 100%; }
+}
+
 /* TEXT INFO */
 .scan-text {
   position: fixed;
@@ -124,7 +167,6 @@ BUTTON CAMERA
 
 <!-- BUTTON CAMERA -->
 <button id="btnCamera">📷</button>
-<button id="btnCapture">📸</button>
 
 <!-- CLOSE -->
 <button id="btnClose" class="btn-close">✕</button>
@@ -132,13 +174,53 @@ BUTTON CAMERA
 <!-- CAMERA -->
 <video id="camera" autoplay playsinline class="camera"></video>
 
-<div id="scanText" class="scan-text">Usap Layar Untuk Seleksi</div>
+<!-- SCAN FRAME -->
+<div id="scanFrame" class="scan-frame">
+  <div class="scan-line"></div>
+</div>
+
+<div id="scanText" class="scan-text">Arahkan ke SKU / Barcode</div>
 
 <canvas id="canvas" style="display:none"></canvas>
 
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
-<script src="app.js" defer></script>
+<script src="app.js"></script>
 
+<script>
+
+/* =========================
+UI CONTROL ONLY (TANPA MERUSAK app.js)
+========================= */
+
+const btnCamera = document.getElementById("btnCamera")
+const btnClose = document.getElementById("btnClose")
+const video = document.getElementById("camera")
+const scanFrame = document.getElementById("scanFrame")
+const scanText = document.getElementById("scanText")
+
+btnCamera.addEventListener("click", () => {
+  video.classList.add("active")
+  scanFrame.classList.add("active")
+  scanText.classList.add("active")
+  btnClose.classList.add("active")
+  document.body.classList.add("camera-open")
+})
+
+btnClose.addEventListener("click", () => {
+  video.classList.remove("active")
+  scanFrame.classList.remove("active")
+  scanText.classList.remove("active")
+  btnClose.classList.remove("active")
+  document.body.classList.remove("camera-open")
+
+  // stop kamera jika ada
+  if (window.stream) {
+    window.stream.getTracks().forEach(t => t.stop())
+    window.stream = null
+  }
+})
+
+</script>
 
 </body>
 </html>
