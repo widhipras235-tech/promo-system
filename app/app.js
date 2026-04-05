@@ -9,69 +9,40 @@ let isReady = false
 const MAX_RESULT = 30  
 const TOTAL_FILE = 100  
 
-const DEBUG = true
-
 /* =========================  
 ELEMENT  
 ========================= */  
 const searchInput = document.getElementById("search")  
 const resultEl = document.getElementById("result")  
 const statusEl = document.getElementById("status")  
-
 const btnCamera = document.getElementById("btnCamera")
-const btnCapture = document.getElementById("btnCapture")
+const video = document.getElementById("camera")
+const canvas = document.getElementById("canvas")
+const ctx = canvas.getContext("2d")
+
+const scanFrame = document.getElementById("scanFrame")
+const scanText = document.getElementById("scanText")
 const btnClose = document.getElementById("btnClose")
 
-const video = document.getElementById("camera")
-
 /* =========================  
-OCR (ULTRA FAST)
-========================= */
-let worker = null
-let isOCRReady = false
+INIT  
+========================= */  
+function normalize(val) {  
+  return (val || "").toString().toLowerCase().trim()  
+}  
 
-async function initOCR() {
-  const t0 = performance.now()
-
-  worker = await Tesseract.createWorker({
-    logger: m => DEBUG && console.log(m)
-  })
-
-  await worker.loadLanguage("eng")
-  await worker.initialize("eng")
-
-  await worker.setParameters({
-    tessedit_char_whitelist: "0123456789",
-    tessedit_pageseg_mode: 7,
-    preserve_interword_spaces: 0
-  })
-
-  isOCRReady = true
-  DEBUG && console.log("OCR READY:", (performance.now() - t0).toFixed(0), "ms")
-}
-initOCR()
-
-/* =========================  
-FREEZE STATE
-========================= */
 let stream = null
-let isFrozen = false
-let isSelecting = false
-
-const freezeCanvas = document.createElement("canvas")
-const freezeCtx = freezeCanvas.getContext("2d")
 
 /* =========================  
-GESTURE STATE
+GESTURE STATE (USAP)
 ========================= */
+let isDrawing = false
 let startX = 0
 let startY = 0
 let endX = 0
 let endY = 0
 
-/* =========================  
-OVERLAY
-========================= */
+// overlay untuk kotak seleksi
 const overlay = document.createElement("canvas")
 const overlayCtx = overlay.getContext("2d")
 
@@ -85,7 +56,7 @@ document.body.appendChild(overlay)
 /* =========================  
 START CAMERA
 ========================= */
-btnCamera?.addEventListener("click", async () => {
+btnCamera.addEventListener("click", async () => {
   if (stream) return
 
   try {
@@ -94,145 +65,120 @@ btnCamera?.addEventListener("click", async () => {
       audio: false
     })
 
-    video.srcObject = stream
-    video.play()
+    window.stream = stream
 
+    video.srcObject = stream
+
+    video.onloadedmetadata = () => {
+      video.play()
+    }
+
+    // sync overlay size
     overlay.width = window.innerWidth
     overlay.height = window.innerHeight
 
-    btnCapture.style.display = "block"
-    btnClose.style.display = "block"
+    video.classList.add("active")
+    document.body.classList.add("camera-open")
 
-    statusEl.innerText = "Klik ambil gambar"
+    scanFrame?.classList.add("active")
+    scanText?.classList.add("active")
+    btnClose?.classList.add("active")
+
+    statusEl.innerText = "Usap area SKU untuk scan"
 
   } catch (err) {
-    console.error(err)
+    console.error("ERROR CAMERA:", err)
     alert("Kamera gagal: " + err.message)
   }
 })
 
 /* =========================  
-CAPTURE (FREEZE)
+GESTURE TOUCH
 ========================= */
-btnCapture?.addEventListener("click", () => {
+video.addEventListener("touchstart", (e) => {
   if (!stream) return
 
-  const t0 = performance.now()
+  isDrawing = true
 
-  freezeCanvas.width = video.videoWidth
-  freezeCanvas.height = video.videoHeight
-
-  freezeCtx.drawImage(video, 0, 0)
-
-  isFrozen = true
-
-  video.style.display = "none"
-
-  freezeCanvas.style.position = "fixed"
-  freezeCanvas.style.inset = "0"
-  freezeCanvas.style.zIndex = "1001"
-
-  document.body.appendChild(freezeCanvas)
-
-  DEBUG && console.log("CAPTURE TIME:", (performance.now() - t0).toFixed(0), "ms")
-
-  statusEl.innerText = "Seleksi SKU"
+  const touch = e.touches[0]
+  startX = touch.clientX
+  startY = touch.clientY
 })
 
-/* =========================  
-GESTURE SELECT
-========================= */
-freezeCanvas.addEventListener("touchstart", (e) => {
-  if (!isFrozen) return
+video.addEventListener("touchmove", (e) => {
+  if (!isDrawing) return
 
-  isSelecting = true
-  const t = e.touches[0]
-
-  startX = t.clientX
-  startY = t.clientY
-})
-
-freezeCanvas.addEventListener("touchmove", (e) => {
-  if (!isSelecting) return
-
-  const t = e.touches[0]
-  endX = t.clientX
-  endY = t.clientY
+  const touch = e.touches[0]
+  endX = touch.clientX
+  endY = touch.clientY
 
   overlayCtx.clearRect(0, 0, overlay.width, overlay.height)
 
   overlayCtx.strokeStyle = "#00ffcc"
   overlayCtx.lineWidth = 2
 
-  overlayCtx.strokeRect(startX, startY, endX - startX, endY - startY)
+  overlayCtx.strokeRect(
+    startX,
+    startY,
+    endX - startX,
+    endY - startY
+  )
 })
 
-freezeCanvas.addEventListener("touchend", async () => {
-  if (!isSelecting) return
-  isSelecting = false
+video.addEventListener("touchend", async () => {
+  if (!isDrawing) return
+  isDrawing = false
 
   overlayCtx.clearRect(0, 0, overlay.width, overlay.height)
 
-  if (!isOCRReady) {
-    statusEl.innerText = "OCR belum siap..."
+  if (video.videoWidth === 0) {
+    alert("Kamera belum siap")
     return
   }
 
-  const tStart = performance.now()
-
-  const scaleX = freezeCanvas.width / overlay.width
-  const scaleY = freezeCanvas.height / overlay.height
+  // scaling ke resolusi video asli
+  const scaleX = video.videoWidth / overlay.width
+  const scaleY = video.videoHeight / overlay.height
 
   const x = Math.min(startX, endX) * scaleX
   const y = Math.min(startY, endY) * scaleY
   const w = Math.abs(endX - startX) * scaleX
   const h = Math.abs(endY - startY) * scaleY
 
-  if (w < 80 || h < 30) {
+  if (w < 50 || h < 20) {
     statusEl.innerText = "Area terlalu kecil"
     return
   }
 
-  /* =========================  
-  RESIZE (ULTRA SPEED)
-  ========================= */
-  const MAX_WIDTH = 600
-  const ratio = Math.min(1, MAX_WIDTH / w)
+  canvas.width = video.videoWidth
+  canvas.height = video.videoHeight
+
+  ctx.filter = "grayscale(1) contrast(2)"
+  ctx.drawImage(video, 0, 0)
+  ctx.filter = "none"
 
   const tempCanvas = document.createElement("canvas")
-  tempCanvas.width = w * ratio
-  tempCanvas.height = h * ratio
+  tempCanvas.width = w
+  tempCanvas.height = h
 
   const tempCtx = tempCanvas.getContext("2d")
+  tempCtx.drawImage(canvas, x, y, w, h, 0, 0, w, h)
 
-  tempCtx.filter = "grayscale(1) contrast(2)"
-  tempCtx.drawImage(
-    freezeCanvas,
-    x, y, w, h,
-    0, 0,
-    tempCanvas.width,
-    tempCanvas.height
-  )
+  statusEl.innerText = "Membaca area..."
 
-  DEBUG && console.log("CROP SIZE:", w, h, "=>", tempCanvas.width, tempCanvas.height)
-
-  statusEl.innerText = "Scanning..."
-
-  const tOCR = performance.now()
-
-  const result = await worker.recognize(tempCanvas)
+  const result = await Tesseract.recognize(tempCanvas, "eng")
 
   let text = result.data.text || ""
 
-  DEBUG && console.log("OCR RAW:", text)
-
+  // fokus ke angka (SKU retail)
   text = text.replace(/[^0-9]/g, " ").trim()
+
+  console.log("OCR RAW:", result.data.text)
+  console.log("OCR CLEAN:", text)
 
   let keyword = text
     .split(" ")
     .sort((a, b) => b.length - a.length)[0]
-
-  DEBUG && console.log("FINAL SKU:", keyword)
 
   if (!keyword) {
     statusEl.innerText = "SKU tidak terbaca"
@@ -242,38 +188,29 @@ freezeCanvas.addEventListener("touchend", async () => {
   searchInput.value = keyword
   searchInput.dispatchEvent(new Event("input"))
 
-  const tEnd = performance.now()
-
-  DEBUG && console.log("OCR TIME:", (tEnd - tOCR).toFixed(0), "ms")
-  DEBUG && console.log("TOTAL TIME:", (tEnd - tStart).toFixed(0), "ms")
-
   statusEl.innerText = "Scan selesai"
+
+  stopCamera()
 })
 
 /* =========================  
-STOP CAMERA (FIXED)
+STOP CAMERA
 ========================= */
 function stopCamera() {
   if (stream) {
     stream.getTracks().forEach(track => track.stop())
     stream = null
+    window.stream = null
   }
 
-  isFrozen = false
-  isSelecting = false
+  video.classList.remove("active")
+  document.body.classList.remove("camera-open")
 
-  if (freezeCanvas.parentNode) {
-    freezeCanvas.parentNode.removeChild(freezeCanvas)
-  }
-
-  video.style.display = "block"
+  scanFrame?.classList.remove("active")
+  scanText?.classList.remove("active")
+  btnClose?.classList.remove("active")
 
   overlayCtx.clearRect(0, 0, overlay.width, overlay.height)
-
-  btnCapture.style.display = "none"
-  btnClose.style.display = "none"
-
-  statusEl.innerText = "Kamera ditutup"
 }
 
 btnClose?.addEventListener("click", stopCamera)
