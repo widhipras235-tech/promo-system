@@ -25,16 +25,22 @@ const scanText = document.getElementById("scanText")
 const btnClose = document.getElementById("btnClose")
 
 /* =========================  
+NORMALIZE (FIX UTAMA)
+========================= */
+function normalize(val) {  
+  return (val || "")
+    .toString()
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "")
+}
+
+/* =========================  
 INIT  
 ========================= */  
-function normalize(val) {  
-  return (val || "").toString().toLowerCase().trim()  
-}  
-
 let stream = null
 
 /* =========================  
-GESTURE STATE (USAP)
+GESTURE STATE
 ========================= */
 let isDrawing = false
 let startX = 0
@@ -42,7 +48,6 @@ let startY = 0
 let endX = 0
 let endY = 0
 
-// overlay untuk kotak seleksi
 const overlay = document.createElement("canvas")
 const overlayCtx = overlay.getContext("2d")
 
@@ -65,15 +70,10 @@ btnCamera.addEventListener("click", async () => {
       audio: false
     })
 
-    window.stream = stream
-
     video.srcObject = stream
 
-    video.onloadedmetadata = () => {
-      video.play()
-    }
+    video.onloadedmetadata = () => video.play()
 
-    // sync overlay size
     overlay.width = window.innerWidth
     overlay.height = window.innerHeight
 
@@ -87,7 +87,6 @@ btnCamera.addEventListener("click", async () => {
     statusEl.innerText = "Usap area SKU untuk scan"
 
   } catch (err) {
-    console.error("ERROR CAMERA:", err)
     alert("Kamera gagal: " + err.message)
   }
 })
@@ -97,32 +96,25 @@ GESTURE TOUCH
 ========================= */
 video.addEventListener("touchstart", (e) => {
   if (!stream) return
-
   isDrawing = true
 
-  const touch = e.touches[0]
-  startX = touch.clientX
-  startY = touch.clientY
+  const t = e.touches[0]
+  startX = t.clientX
+  startY = t.clientY
 })
 
 video.addEventListener("touchmove", (e) => {
   if (!isDrawing) return
 
-  const touch = e.touches[0]
-  endX = touch.clientX
-  endY = touch.clientY
+  const t = e.touches[0]
+  endX = t.clientX
+  endY = t.clientY
 
   overlayCtx.clearRect(0, 0, overlay.width, overlay.height)
-
   overlayCtx.strokeStyle = "#00ffcc"
   overlayCtx.lineWidth = 2
 
-  overlayCtx.strokeRect(
-    startX,
-    startY,
-    endX - startX,
-    endY - startY
-  )
+  overlayCtx.strokeRect(startX, startY, endX - startX, endY - startY)
 })
 
 video.addEventListener("touchend", async () => {
@@ -131,12 +123,8 @@ video.addEventListener("touchend", async () => {
 
   overlayCtx.clearRect(0, 0, overlay.width, overlay.height)
 
-  if (video.videoWidth === 0) {
-    alert("Kamera belum siap")
-    return
-  }
+  if (video.videoWidth === 0) return
 
-  // scaling ke resolusi video asli
   const scaleX = video.videoWidth / overlay.width
   const scaleY = video.videoHeight / overlay.height
 
@@ -161,24 +149,17 @@ video.addEventListener("touchend", async () => {
   tempCanvas.width = w
   tempCanvas.height = h
 
-  const tempCtx = tempCanvas.getContext("2d")
-  tempCtx.drawImage(canvas, x, y, w, h, 0, 0, w, h)
+  tempCanvas.getContext("2d")
+    .drawImage(canvas, x, y, w, h, 0, 0, w, h)
 
-  statusEl.innerText = "Membaca area..."
+  statusEl.innerText = "Membaca..."
 
   const result = await Tesseract.recognize(tempCanvas, "eng")
 
   let text = result.data.text || ""
-
-  // fokus ke angka (SKU retail)
   text = text.replace(/[^0-9]/g, " ").trim()
 
-  console.log("OCR RAW:", result.data.text)
-  console.log("OCR CLEAN:", text)
-
-  let keyword = text
-    .split(" ")
-    .sort((a, b) => b.length - a.length)[0]
+  let keyword = text.split(" ").sort((a,b)=>b.length-a.length)[0]
 
   if (!keyword) {
     statusEl.innerText = "SKU tidak terbaca"
@@ -188,19 +169,13 @@ video.addEventListener("touchend", async () => {
   searchInput.value = keyword
   searchInput.dispatchEvent(new Event("input"))
 
-  statusEl.innerText = "Scan selesai"
-
   stopCamera()
 })
 
-/* =========================  
-STOP CAMERA
-========================= */
 function stopCamera() {
   if (stream) {
-    stream.getTracks().forEach(track => track.stop())
+    stream.getTracks().forEach(t => t.stop())
     stream = null
-    window.stream = null
   }
 
   video.classList.remove("active")
@@ -221,45 +196,21 @@ STATUS PROMO
 function getStatusPromo(mulai, akhir) {
   const now = new Date()
 
-  const start = new Date(
-    !isNaN(mulai)
-      ? (Number(mulai) - 25569) * 86400 * 1000
-      : mulai
-  )
-
-  const end = new Date(
-    !isNaN(akhir)
-      ? (Number(akhir) - 25569) * 86400 * 1000
-      : akhir
-  )
+  const start = new Date(!isNaN(mulai) ? (mulai-25569)*86400*1000 : mulai)
+  const end = new Date(!isNaN(akhir) ? (akhir-25569)*86400*1000 : akhir)
 
   if (isNaN(start) || isNaN(end)) return "Tidak diketahui"
-
   if (now < start) return "Belum aktif"
   if (now > end) return "Berakhir"
   return "Aktif"
 }
 
-function getStatusPriority(status) {
-  switch (status) {
-    case "Aktif": return 1
-    case "Belum aktif": return 2
-    case "Berakhir": return 3
-    default: return 99
-  }
-}
-
-function getStatusColor(status) {
-  switch (status) {
-    case "Aktif": return "green"
-    case "Belum aktif": return "orange"
-    case "Berakhir": return "red"
-    default: return "gray"
-  }
+function getStatusPriority(s){
+  return s==="Aktif"?1:s==="Belum aktif"?2:s==="Berakhir"?3:99
 }
 
 /* =========================  
-PRIORITY + HIGHLIGHT  
+PRIORITY  
 ========================= */  
 function getPriority(item, keyword) {  
   const sku = normalize(item.sku)  
@@ -275,375 +226,205 @@ function getPriority(item, keyword) {
   if (desc.includes(keyword)) return 10  
 
   return 999  
-}  
-
-function highlight(text, keyword) {  
-  if (!text) return "-"  
-  const safe = keyword.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")  
-  const regex = new RegExp(`(${safe})`, "gi")  
-  return text.toString().replace(regex, `<mark>$1</mark>`)  
-}  
+}
 
 /* =========================  
 LOAD INDEX  
 ========================= */  
 async function loadIndex() {  
   try {  
-    statusEl.innerText = "Loading index..."  
+    const [s,a]=await Promise.all([
+      fetch("./db/sku_index.json"),
+      fetch("./db/article_index.json")
+    ])
 
-    const [skuRes, articleRes] = await Promise.all([  
-      fetch("./db/sku_index.json"),  
-      fetch("./db/article_index.json")  
-    ])  
+    if(s.ok) skuIndex=await s.json()
+    if(a.ok) articleIndex=await a.json()
 
-    if (skuRes.ok) skuIndex = await skuRes.json()  
-    if (articleRes.ok) articleIndex = await articleRes.json()  
-
-    isReady = true  
-    statusEl.innerText = "Siap digunakan"  
-  } catch (err) {  
-    console.log("❌ Index gagal:", err)  
-    isReady = true  
-    statusEl.innerText = "Mode fallback aktif"  
-  }  
-}  
-loadIndex()  
+    isReady=true
+    statusEl.innerText="Siap"
+  } catch {
+    isReady=true
+    statusEl.innerText="Fallback"
+  }
+}
+loadIndex()
 
 /* =========================  
-UTILS  
+LOAD FILE  
 ========================= */  
-function formatRupiah(num) {  
-  if (!num || isNaN(num)) return num  
-  return "Rp " + Number(num).toLocaleString("id-ID")  
-}  
+async function loadFile(i){
+  if(cache[i]) return cache[i]
 
-function formatDiskon(val) {  
-  if (!val) return "-"  
-  if (!isNaN(val)) {  
-    let num = Number(val)  
-    return num <= 1 ? Math.round(num * 100) + "%" : num + "%"  
-  }  
-  return val  
-}  
+  const res=await fetch(`./db/promo_${i}.json`)
+  if(!res.ok) return []
 
-function getFileName(path) {  
-  return path ? path.split(/[\\/]/).pop() : "-"  
-}  
-
-function formatTanggal(val) {  
-  if (!val || val === 0 || val === "0") return "-"  
-
-  if (!isNaN(val)) {  
-    const excelDate = Number(val)  
-    if (excelDate < 1000) return "-"  
-    const date = new Date((excelDate - 25569) * 86400 * 1000)  
-    return date.toLocaleDateString("id-ID", {  
-      day: "2-digit",  
-      month: "short",  
-      year: "numeric"  
-    })  
-  }  
-
-  const d = new Date(val)  
-  if (isNaN(d)) return "-"  
-
-  return d.toLocaleDateString("id-ID", {  
-    day: "2-digit",  
-    month: "short",  
-    year: "numeric"  
-  })  
-}  
-
-/* =========================  
-LOAD FILE (CACHE)  
-========================= */  
-async function loadFile(fileIndex) {  
-  try {  
-    if (cache[fileIndex]) return cache[fileIndex]  
-
-    const res = await fetch(`./db/promo_${fileIndex}.json`)  
-    if (!res.ok) return []  
-
-    const data = await res.json()  
-    cache[fileIndex] = data  
-
-    return data  
-  } catch {  
-    return []  
-  }  
-}  
-
-/* =========================  
-SORT FINAL  
-========================= */  
-function finalSort(results, keyword) {
-  return results.sort((a, b) => {
-    // Status dulu
-    if (a._statusPriority !== b._statusPriority) {
-      return a._statusPriority - b._statusPriority
-    }
-    // Baru relevansi search
-    return a._priority - b._priority
-  })
+  const d=await res.json()
+  cache[i]=d
+  return d
 }
 
 /* =========================  
-EXACT RESULT  
+SEARCH ENGINE FINAL  
 ========================= */  
-async function getExactResults(indexList, keyword) {  
-  let results = []  
-  keyword = normalize(keyword)  
+async function searchData(keyword){
 
-  for (let i of indexList) {  
-    const fileIndex = Math.floor(i / 5000) + 1  
-    const data = await loadFile(fileIndex)  
+  let keywords = keyword
+    .toLowerCase()
+    .split(" ")
+    .map(k=>normalize(k))
+    .filter(k=>k)
 
-    const item = data[i % 5000]  
-    if (!item) continue  
+  if (!keywords.length) return []
 
-    const sku = normalize(item.sku)  
-    const article = normalize(item.article)  
+  const main = keywords[0]
 
-    if (sku === keyword || article === keyword) {  
-      const mulai = item.fromdate || item.raw?.fromdate  
-      const akhir = item.todate || item.raw?.todate  
-      const status = getStatusPromo(mulai, akhir)
+  // EXACT
+  if(skuIndex[main]) return await getExact(skuIndex[main],main)
+  if(articleIndex[main]) return await getExact(articleIndex[main],main)
 
-      results.push({  
-        ...item,  
-        _priority: getPriority(item, keyword),
-        _status: status,
-        _statusPriority: getStatusPriority(status)
-      })  
-    }  
+  // PREFIX (SKU + ARTICLE)
+  let indexes=new Set()
+  let prefix=main.slice(0,3)
 
-    if (results.length >= MAX_RESULT) break  
-  }  
-
-  return finalSort(results, keyword)
-}  
-
-/* =========================  
-RESULT DARI INDEX  
-========================= */  
-async function getResultsFromIndexes(indexes, keyword) {  
-  let results = []  
-  keyword = normalize(keyword)  
-
-  let fileMap = {}  
-
-  indexes.forEach(i => {  
-    const fileIndex = Math.floor(i / 5000) + 1  
-    if (!fileMap[fileIndex]) fileMap[fileIndex] = []  
-    fileMap[fileIndex].push(i)  
-  })  
-
-  for (let fileIndex in fileMap) {  
-    const data = await loadFile(fileIndex)  
-
-    for (let i of fileMap[fileIndex]) {  
-      const item = data[i % 5000]  
-      if (!item) continue  
-
-      const mulai = item.fromdate || item.raw?.fromdate  
-      const akhir = item.todate || item.raw?.todate  
-      const status = getStatusPromo(mulai, akhir)
-
-      results.push({  
-        ...item,  
-        _priority: getPriority(item, keyword),
-        _status: status,
-        _statusPriority: getStatusPriority(status)
-      })  
-
-      if (results.length >= MAX_RESULT) break  
-    }  
-  }  
-
-  return finalSort(results, keyword).slice(0, MAX_RESULT)
-}  
-
-/* =========================  
-FULL SCAN  
-========================= */  
-async function fullScanSearch(keyword) {  
-  let results = []  
-  keyword = normalize(keyword)  
-
-  for (let i = 1; i <= TOTAL_FILE; i++) {  
-    const data = await loadFile(i)  
-
-    for (let item of data) {  
-      const mulai = item.fromdate || item.raw?.fromdate  
-      const akhir = item.todate || item.raw?.todate  
-      const status = getStatusPromo(mulai, akhir)
-
-      results.push({  
-        ...item,  
-        _priority: getPriority(item, keyword),
-        _status: status,
-        _statusPriority: getStatusPriority(status)
-      })  
-
-      if (results.length >= MAX_RESULT) break  
-    }  
-  }  
-
-  return finalSort(results, keyword).slice(0, MAX_RESULT)
-}  
-
-/* =========================  
-SEARCH ENGINE  
-========================= */  
-async function searchData(keyword) {  
-  keyword = normalize(keyword)  
-  if (!keyword) return []  
-
-  if (skuIndex[keyword]) return await getExactResults(skuIndex[keyword], keyword)  
-  if (articleIndex[keyword]) return await getExactResults(articleIndex[keyword], keyword)  
-
-  let indexes = new Set()  
-  let prefix = keyword.slice(0, 3)  
-
-  for (let key in skuIndex) {  
-    if (!key.startsWith(prefix)) continue  
-
-    if (key.startsWith(keyword)) {  
-      skuIndex[key].forEach(i => {  
-        if (indexes.size < MAX_RESULT) indexes.add(i)  
-      })  
-    }  
-
-    if (indexes.size >= MAX_RESULT) break  
-  }  
-
-  if (indexes.size > 0) {
-    return await getResultsFromIndexes(indexes, keyword)
+  for(let k in skuIndex){
+    if(k.startsWith(prefix) && k.startsWith(main)){
+      skuIndex[k].forEach(i=>indexes.add(i))
+    }
   }
 
-  return await fullScanSearch(keyword)
+  for(let k in articleIndex){
+    if(k.startsWith(prefix) && k.startsWith(main)){
+      articleIndex[k].forEach(i=>indexes.add(i))
+    }
+  }
+
+  if(indexes.size>0) return await getFromIndex(indexes,main)
+
+  // FULL SCAN FILTERED
+  return await fullScan(keywords)
+}
+
+/* =========================  
+EXACT  
+========================= */
+async function getExact(list,keyword){
+  let r=[]
+  for(let i of list){
+    const f=Math.floor(i/5000)+1
+    const d=await loadFile(f)
+    const item=d[i%5000]
+    if(!item) continue
+
+    r.push({
+      ...item,
+      _priority:getPriority(item,keyword),
+      _status:getStatusPromo(item.fromdate,item.todate),
+      _statusPriority:getStatusPriority(getStatusPromo(item.fromdate,item.todate))
+    })
+  }
+  return r.sort((a,b)=>a._priority-b._priority).slice(0,MAX_RESULT)
+}
+
+/* =========================  
+INDEX RESULT  
+========================= */
+async function getFromIndex(indexes,keyword){
+  let r=[]
+  for(let i of indexes){
+    const f=Math.floor(i/5000)+1
+    const d=await loadFile(f)
+    const item=d[i%5000]
+    if(!item) continue
+
+    r.push({
+      ...item,
+      _priority:getPriority(item,keyword),
+      _status:getStatusPromo(item.fromdate,item.todate),
+      _statusPriority:getStatusPriority(getStatusPromo(item.fromdate,item.todate))
+    })
+  }
+  return r.sort((a,b)=>a._priority-b._priority).slice(0,MAX_RESULT)
+}
+
+/* =========================  
+FULL SCAN FILTERED  
+========================= */
+async function fullScan(keywords){
+  let r=[]
+
+  for(let i=1;i<=TOTAL_FILE;i++){
+    const data=await loadFile(i)
+
+    for(let item of data){
+      const sku=normalize(item.sku)
+      const art=normalize(item.article)
+      const desc=normalize(item.deskripsi)
+
+      const match = keywords.every(k =>
+        sku.includes(k) ||
+        art.includes(k) ||
+        desc.includes(k)
+      )
+
+      if(match){
+        r.push({
+          ...item,
+          _priority:getPriority(item,keywords[0]),
+          _status:getStatusPromo(item.fromdate,item.todate),
+          _statusPriority:getStatusPriority(getStatusPromo(item.fromdate,item.todate))
+        })
+      }
+
+      if(r.length>=MAX_RESULT) break
+    }
+  }
+
+  return r.sort((a,b)=>a._priority-b._priority).slice(0,MAX_RESULT)
 }
 
 /* =========================  
 RENDER  
 ========================= */  
-function render(data) {  
-  resultEl.innerHTML = ""  
+function render(data){
+  resultEl.innerHTML=""
 
-  if (!data || data.length === 0) {  
-    resultEl.innerHTML = "<p>Data tidak ditemukan</p>"  
-    return  
-  }  
+  if(!data.length){
+    resultEl.innerHTML="<p>Data tidak ditemukan</p>"
+    return
+  }
 
-  data.forEach(item => {  
-    const diskon = formatDiskon(item.diskon || item.raw?.diskon)  
+  data.forEach(i=>{
+    const el=document.createElement("div")
+    el.className="card"
 
-    const mulai = item.fromdate || item.raw?.fromdate || "-"  
-    const akhir = item.todate || item.raw?.todate || "-"  
-
-    const status = item._status || "Tidak diketahui"
-    const statusColor = getStatusColor(status)
-
-    const el = document.createElement("div")  
-    el.className = "card"  
-
-    el.innerHTML = `  
-      <div style="display:flex;justify-content:space-between;align-items:start">
-        <div><b>${highlight(item.deskripsi, searchInput.value)}</b></div>
-        <div style="
-          background:${statusColor};
-          color:white;
-          padding:4px 8px;
-          border-radius:6px;
-          font-size:12px;
-          font-weight:bold;
-        ">
-          ${status}
-        </div>
-      </div>
-
-      <div>Brand: ${item.brand || "-"}</div>  
-      <div>SKU: ${highlight(item.sku, searchInput.value)}</div>  
-      <div>Article: ${highlight(item.article, searchInput.value)}</div>  
-
-      <div>Harga Normal: ${formatRupiah(item.harga_normal)}</div>  
-
-      <div style="color:red;font-weight:bold">  
-        Harga Promo: ${  
-          !isNaN(item.harga_promo)  
-            ? formatRupiah(item.harga_promo)  
-            : item.harga_promo || "-"  
-        }  
-      </div>  
-
-      <div style="color:green;font-weight:bold">  
-        Diskon: ${diskon}  
-      </div>  
-
-      <div>  
-        Berlaku: ${formatTanggal(mulai)} - ${formatTanggal(akhir)}  
-      </div>  
-
-      <div><b>Acara:</b> ${item.acara || item.raw?.acara || "-"}</div>  
-      <div><b>Sumber:</b> ${getFileName(item.source)}</div>  
-    `  
-
-    resultEl.appendChild(el)  
-  })  
-}  
+    el.innerHTML=`
+    <b>${i.deskripsi||"-"}</b>
+    <div>SKU: ${i.sku||"-"}</div>
+    <div>Article: ${i.article||"-"}</div>
+    <div>Promo: ${i.harga_promo||"-"}</div>
+    <div>Status: ${i._status}</div>
+    `
+    resultEl.appendChild(el)
+  })
+}
 
 /* =========================  
 EVENT  
 ========================= */  
-let timer  
+let timer
+searchInput.addEventListener("input",e=>{
+  clearTimeout(timer)
 
-searchInput.addEventListener("input", e => {  
-  clearTimeout(timer)  
+  if(!isReady) return
 
-  const keyword = e.target.value  
+  timer=setTimeout(async()=>{
+    const k=e.target.value
+    if(!k) return
 
-  if (!isReady) {  
-    statusEl.innerText = "Loading..."  
-    return  
-  }  
-
-  timer = setTimeout(async () => {  
-    if (!keyword.trim()) {  
-      resultEl.innerHTML = ""  
-      statusEl.innerText = "Ketik untuk mencari"  
-      return  
-    }  
-
-    statusEl.innerText = "Mencari..."  
-
-    const result = await searchData(keyword)  
-
-    render(result)  
-
-    statusEl.innerText = `Ditemukan ${result.length} data`  
-  }, 200)  
-})  
-
-/* =========================  
-AUTO UPDATE  
-========================= */  
-let lastUpdate = null  
-
-setInterval(async () => {  
-  try {  
-    const res = await fetch("./db/sku_index.json?t=" + Date.now())  
-    const res2 = await fetch("./db/article_index.json?t=" + Date.now())  
-
-    const text = await res.text()  
-    const text2 = await res2.text()  
-
-    if (lastUpdate && lastUpdate !== (text + text2)) {  
-      console.log("🔄 Data berubah, reload...")  
-      location.reload()  
-    }  
-
-    lastUpdate = text + text2  
-  } catch (err) {  
-    console.log("❌ Gagal cek update")  
-  }  
-}, 300000)
+    statusEl.innerText="Mencari..."
+    const res=await searchData(k)
+    render(res)
+    statusEl.innerText=`${res.length} ditemukan`
+  },200)
+})
