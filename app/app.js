@@ -367,16 +367,19 @@ async function loadFile(fileIndex) {
     if (cache[fileIndex]) return cache[fileIndex]  
 
     const res = await fetch(`./db/promo_${fileIndex}.json`)  
-    if (!res.ok) return []  
+
+    if (!res.ok) {
+      return null // ⛔ penting (bukan [])
+    }
 
     const data = await res.json()  
     cache[fileIndex] = data  
 
     return data  
   } catch {  
-    return []  
+    return null  
   }  
-}  
+}
 
 /* =========================  
 SORT FINAL  
@@ -475,15 +478,19 @@ async function fullScanSearch(keyword) {
   let results = []  
   keyword = normalize(keyword)  
 
-  for (let i = 1; i <= TOTAL_FILE; i++) {  
-    const data = await loadFile(i)  
+  let i = 1
+
+  while (true) {
+    const data = await loadFile(i)
+
+    // ⛔ STOP kalau file kosong / tidak ada
+    if (!data || data.length === 0) break  
 
     for (let item of data) {  
       const sku = normalize(item.sku)
       const article = normalize(item.article)
       const desc = normalize(item.deskripsi)
 
-      // 🔥 FILTER DULU (INI KUNCI)
       if (
         sku.includes(keyword) ||
         article.includes(keyword) ||
@@ -502,8 +509,12 @@ async function fullScanSearch(keyword) {
       }
 
       if (results.length >= MAX_RESULT) break  
-    }  
-  }  
+    }
+
+    if (results.length >= MAX_RESULT) break  
+
+    i++
+  }
 
   return finalSort(results, keyword).slice(0, MAX_RESULT)
 }
