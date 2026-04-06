@@ -15,11 +15,12 @@ ELEMENT
 const searchInput = document.getElementById("search")  
 const resultEl = document.getElementById("result")  
 const statusEl = document.getElementById("status")  
-const btnCamera = document.getElementById("btnCamera")
 const video = document.getElementById("camera")
 const canvas = document.getElementById("canvas")
 const ctx = canvas.getContext("2d")
 
+const btnCamera = document.getElementById("btnCamera")
+const btnVoice = document.getElementById("btnVoice")
 const scanFrame = document.getElementById("scanFrame")
 const scanText = document.getElementById("scanText")
 const btnClose = document.getElementById("btnClose")
@@ -77,8 +78,10 @@ btnCamera.addEventListener("click", async () => {
     }
 
     // sync overlay size
+    window.addEventListener("resize", () => {
     overlay.width = window.innerWidth
     overlay.height = window.innerHeight
+    })
 
     video.classList.add("active")
     document.body.classList.add("camera-open")
@@ -169,7 +172,9 @@ video.addEventListener("touchend", async () => {
 
   statusEl.innerText = "Membaca area..."
 
-  const result = await Tesseract.recognize(tempCanvas, "eng")
+  const result = await Tesseract.recognize(tempCanvas, "eng", {
+  tessedit_char_whitelist: "0123456789"
+})
 
   let text = result.data.text || ""
 
@@ -217,6 +222,58 @@ function stopCamera() {
 }
 
 btnClose?.addEventListener("click", stopCamera)
+statusEl.innerText = "Siap digunakan"
+
+
+/* =========================  
+VOICE
+========================= */
+let recognition
+let isListening = false
+
+if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+  recognition = new SpeechRecognition()
+
+  recognition.lang = 'id-ID'
+  recognition.onstart = () => {
+    isListening = true
+    btnVoice.classList.add("recording")
+  }
+
+  recognition.onend = () => {
+    isListening = false
+    btnVoice.classList.remove("recording")
+  }
+
+  recognition.onresult = (event) => {
+    const text = event.results[0][0].transcript
+    searchInput.value = text
+    doSearch(text)
+  }
+
+}
+
+btnVoice.addEventListener("click", () => {
+
+  // Android / Chrome
+  if (recognition) {
+
+    if (isListening) {
+      recognition.stop()
+    } else {
+      recognition.start()
+    }
+
+  } else {
+
+    // iOS fallback
+    searchInput.focus()
+
+  }
+
+})
 
 /* =========================  
 STATUS PROMO  
@@ -314,30 +371,6 @@ async function loadIndex() {
 }  
 loadIndex()  
 
-
-let DB = []
-
-async function loadAllData() {
-  let i = 1
-
-  while (true) {
-    try {
-      let res = await fetch(`./db/promo_${i}.json`) // 🔥 pakai ./ bukan ../
-
-      if (!res.ok) break
-
-      let data = await res.json()
-      DB.push(...data)
-
-      i++
-    } catch {
-      break
-    }
-  }
-
-  console.log("✅ Total data loaded:", DB.length)
-}
-
 loadAllData()
 /* =========================  
 UTILS  
@@ -429,7 +462,8 @@ async function getExactResults(indexList, keyword) {
 
   for (let i of indexList) {  
     const fileIndex = Math.floor(i / 5000) + 1  
-    const data = await loadFile(fileIndex)  
+    const data = await loadFile(fileIndex)
+    if (!data) continue
 
     const item = data[i % 5000]  
     if (!item) continue  
@@ -472,7 +506,8 @@ async function getResultsFromIndexes(indexes, keyword) {
   })  
 
   for (let fileIndex in fileMap) {  
-    const data = await loadFile(fileIndex)  
+    const data = await loadFile(fileIndex)
+    if (!data) continue
 
     for (let i of fileMap[fileIndex]) {  
       const item = data[i % 5000]  
@@ -674,36 +709,33 @@ function render(data) {
 }  
 
 /* =========================  
-EVENT  
+SEARCH INPUT 
 ========================= */  
-let timer  
+let timer
 
-searchInput.addEventListener("input", e => {  
-  clearTimeout(timer)  
+// 🔍 event utama
+searchInput.addEventListener("input", () => {
+  const keyword = normalize(searchInput.value.trim())
+  if (!keyword) {
+    resultEl.innerHTML = ""
+    return
+  }
 
-  const keyword = e.target.value  
+  clearTimeout(window.searchDebounce)
+  window.searchDebounce = setTimeout(() => {
+    performSearch(keyword)
+  }, 300)
+})
 
-  if (!isReady) {  
-    statusEl.innerText = "Loading..."  
-    return  
-  }  
 
-  timer = setTimeout(async () => {  
-    if (!keyword.trim()) {  
-      resultEl.innerHTML = ""  
-      statusEl.innerText = "Ketik untuk mencari"  
-      return  
-    }  
+// ✅ FIX iOS (WAJIB)
+searchInput.addEventListener("change", () => {
+  searchInput.dispatchEvent(new Event("input"))
+})
 
-    statusEl.innerText = "Mencari..."  
-
-    const result = await searchData(keyword)  
-
-    render(result)  
-
-    statusEl.innerText = `Ditemukan ${result.length} data`  
-  }, 200)  
-})  
+searchInput.addEventListener("blur", () => {
+  searchInput.dispatchEvent(new Event("input"))
+})
 
 /* =========================  
 AUTO UPDATE  
