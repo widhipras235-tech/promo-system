@@ -371,7 +371,6 @@ async function loadIndex() {
 }  
 loadIndex()  
 
-loadAllData()
 /* =========================  
 UTILS  
 ========================= */  
