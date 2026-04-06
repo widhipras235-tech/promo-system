@@ -98,25 +98,45 @@ SCAN FRAME (KOTAK)
 }
 
 /* =========================
-BUTTON CAMERA
+SCAN BAR (FIX)
 ========================= */
-#btnCamera {
+#scanBar {
   position: fixed;
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  border: none;
 
-  background: #ff2d2d;
-  color: white;
-  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  width: 160px;
+  height: 60px;
+
+  background: #ff3b30;
+  border-radius: 40px;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+
   z-index: 1001;
+  padding: 0 10px;
+}
+
+.scan-icon {
+  flex: 1;
+  height: 100%;
+  border: none;
+  background: transparent;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.divider {
+  width: 1px;
+  height: 60%;
+  background: rgba(255,255,255,0.5);
 }
 
 /* CLOSE BUTTON */
@@ -136,6 +156,19 @@ BUTTON CAMERA
 
 .btn-close.active {
   display: block;
+}
+
+/* ICON IMAGE */
+.icon-img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  pointer-events: none;
+  filter: brightness(0) invert(1);
+}
+
+#scanBar {
+  backdrop-filter: blur(10px);
 }
 
 </style>
@@ -166,7 +199,19 @@ BUTTON CAMERA
 </main>
 
 <!-- BUTTON CAMERA -->
-<button id="btnCamera">📷</button>
+<div id="scanBar">
+
+  <button id="btnCamera" class="scan-icon">
+    <img src="assets/camera.png" class="icon-img">
+  </button>
+
+  <div class="divider"></div>
+
+  <button id="btnVoice" class="scan-icon">
+    <img src="assets/mic.png" class="icon-img">
+  </button>
+
+</div>
 
 <!-- CLOSE -->
 <button id="btnClose" class="btn-close">✕</button>
