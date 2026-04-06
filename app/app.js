@@ -23,6 +23,7 @@ const ctx = canvas.getContext("2d")
 const scanFrame = document.getElementById("scanFrame")
 const scanText = document.getElementById("scanText")
 const btnClose = document.getElementById("btnClose")
+const btnVoice = document.getElementById("btnVoice")
 
 /* =========================  
 INIT  
@@ -32,6 +33,102 @@ function normalize(val) {
 }  
 
 let stream = null
+
+/* =========================  
+VOICE PRO ENGINE  
+========================= */
+let recognition = null
+let isListening = false
+
+function wordsToNumber(text) {
+  const map = {
+    nol: "0",
+    kosong: "0",
+    satu: "1",
+    dua: "2",
+    tiga: "3",
+    empat: "4",
+    lima: "5",
+    enam: "6",
+    tujuh: "7",
+    delapan: "8",
+    sembilan: "9"
+  }
+
+  return text
+    .toLowerCase()
+    .split(" ")
+    .map(w => map[w] ?? w)
+    .join("")
+}
+
+function extractBestKeyword(text) {
+  text = text.toLowerCase()
+
+  // ambil angka panjang (SKU biasanya >4 digit)
+  const numberMatch = text.match(/\d{4,}/g)
+  if (numberMatch) {
+    return numberMatch.sort((a, b) => b.length - a.length)[0]
+  }
+
+  // fallback → pakai teks biasa
+  return text
+}
+
+if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+
+  recognition = new SpeechRecognition()
+  recognition.lang = "id-ID"
+  recognition.continuous = false
+  recognition.interimResults = true
+  recognition.maxAlternatives = 1
+
+  recognition.onstart = () => {
+  isListening = true
+  statusEl.innerText = "🎤 Listening..."
+  btnVoice.style.opacity = "0.5"
+
+  if (navigator.vibrate) navigator.vibrate(50)
+}
+
+  recognition.onresult = (event) => {
+    let transcript = ""
+
+    for (let i = 0; i < event.results.length; i++) {
+      transcript += event.results[i][0].transcript + " "
+    }
+
+    console.log("RAW VOICE:", transcript)
+
+    // ubah kata jadi angka
+    let processed = wordsToNumber(transcript)
+
+    // ambil keyword terbaik
+    let keyword = extractBestKeyword(processed)
+
+    console.log("PROCESSED:", processed)
+    console.log("KEYWORD:", keyword)
+
+    searchInput.value = keyword
+    searchInput.dispatchEvent(new Event("input"))
+  }
+
+  recognition.onerror = (event) => {
+    console.log("Voice error:", event.error)
+    statusEl.innerText = "❌ Voice error: " + event.error
+    btnVoice.style.opacity = "1"
+  }
+
+  recognition.onend = () => {
+    isListening = false
+    statusEl.innerText = "Voice selesai"
+    btnVoice.style.opacity = "1"
+  }
+
+} else {
+  console.log("❌ Voice tidak support di browser ini")
+}
 
 /* =========================  
 GESTURE STATE (USAP)
@@ -89,6 +186,19 @@ btnCamera.addEventListener("click", async () => {
   } catch (err) {
     console.error("ERROR CAMERA:", err)
     alert("Kamera gagal: " + err.message)
+  }
+})
+
+btnVoice?.addEventListener("click", () => {
+  if (!recognition) {
+    alert("Browser tidak mendukung voice")
+    return
+  }
+
+  if (isListening) {
+    recognition.stop()
+  } else {
+    recognition.start()
   }
 })
 
