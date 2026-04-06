@@ -15,12 +15,11 @@ ELEMENT
 const searchInput = document.getElementById("search")  
 const resultEl = document.getElementById("result")  
 const statusEl = document.getElementById("status")  
+const btnCamera = document.getElementById("btnCamera")
 const video = document.getElementById("camera")
 const canvas = document.getElementById("canvas")
 const ctx = canvas.getContext("2d")
 
-const btnCamera = document.getElementById("btnCamera")
-const btnVoice = document.getElementById("btnVoice")
 const scanFrame = document.getElementById("scanFrame")
 const scanText = document.getElementById("scanText")
 const btnClose = document.getElementById("btnClose")
@@ -29,11 +28,8 @@ const btnClose = document.getElementById("btnClose")
 INIT  
 ========================= */  
 function normalize(val) {  
-  return (val || "")
-    .toString()
-    .toLowerCase()
-    .replace(/[^a-z0-9]/g, "")
-}
+  return (val || "").toString().toLowerCase().trim()  
+}  
 
 let stream = null
 
@@ -78,10 +74,8 @@ btnCamera.addEventListener("click", async () => {
     }
 
     // sync overlay size
-    window.addEventListener("resize", () => {
     overlay.width = window.innerWidth
     overlay.height = window.innerHeight
-    })
 
     video.classList.add("active")
     document.body.classList.add("camera-open")
@@ -172,9 +166,7 @@ video.addEventListener("touchend", async () => {
 
   statusEl.innerText = "Membaca area..."
 
-  const result = await Tesseract.recognize(tempCanvas, "eng", {
-  tessedit_char_whitelist: "0123456789"
-})
+  const result = await Tesseract.recognize(tempCanvas, "eng")
 
   let text = result.data.text || ""
 
@@ -222,80 +214,26 @@ function stopCamera() {
 }
 
 btnClose?.addEventListener("click", stopCamera)
-statusEl.innerText = "Siap digunakan"
-
-
-/* =========================  
-VOICE
-========================= */
-let recognition
-let isListening = false
-
-if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
-  recognition = new SpeechRecognition()
-
-  recognition.lang = 'id-ID'
-  recognition.onstart = () => {
-    isListening = true
-    btnVoice.classList.add("recording")
-  }
-
-  recognition.onend = () => {
-    isListening = false
-    btnVoice.classList.remove("recording")
-  }
-
-  recognition.onresult = (event) => {
-    const text = event.results[0][0].transcript
-    searchInput.value = text
-    doSearch(text)
-  }
-
-}
-
-btnVoice.addEventListener("click", () => {
-
-  // Android / Chrome
-  if (recognition) {
-
-    if (isListening) {
-      recognition.stop()
-    } else {
-      recognition.start()
-    }
-
-  } else {
-
-    // iOS fallback
-    searchInput.focus()
-
-  }
-
-})
 
 /* =========================  
 STATUS PROMO  
 ========================= */  
-function excelToDate(val) {
-  if (!isNaN(val)) {
-    return new Date((Number(val) - 25569) * 86400 * 1000)
-  }
-  return new Date(val)
-}
-
 function getStatusPromo(mulai, akhir) {
   const now = new Date()
 
-  let start = excelToDate(mulai)
-  let end = excelToDate(akhir)
+  const start = new Date(
+    !isNaN(mulai)
+      ? (Number(mulai) - 25569) * 86400 * 1000
+      : mulai
+  )
+
+  const end = new Date(
+    !isNaN(akhir)
+      ? (Number(akhir) - 25569) * 86400 * 1000
+      : akhir
+  )
 
   if (isNaN(start) || isNaN(end)) return "Tidak diketahui"
-
-  // 🔥 FIX UTAMA: SET JAM
-  start.setHours(0, 0, 0, 0)
-  end.setHours(23, 59, 59, 999)
 
   if (now < start) return "Belum aktif"
   if (now > end) return "Berakhir"
@@ -424,19 +362,16 @@ async function loadFile(fileIndex) {
     if (cache[fileIndex]) return cache[fileIndex]  
 
     const res = await fetch(`./db/promo_${fileIndex}.json`)  
-
-    if (!res.ok) {
-      return null // ⛔ penting (bukan [])
-    }
+    if (!res.ok) return []  
 
     const data = await res.json()  
     cache[fileIndex] = data  
 
     return data  
   } catch {  
-    return null  
+    return []  
   }  
-}
+}  
 
 /* =========================  
 SORT FINAL  
@@ -461,8 +396,7 @@ async function getExactResults(indexList, keyword) {
 
   for (let i of indexList) {  
     const fileIndex = Math.floor(i / 5000) + 1  
-    const data = await loadFile(fileIndex)
-    if (!data) continue
+    const data = await loadFile(fileIndex)  
 
     const item = data[i % 5000]  
     if (!item) continue  
@@ -505,8 +439,7 @@ async function getResultsFromIndexes(indexes, keyword) {
   })  
 
   for (let fileIndex in fileMap) {  
-    const data = await loadFile(fileIndex)
-    if (!data) continue
+    const data = await loadFile(fileIndex)  
 
     for (let i of fileMap[fileIndex]) {  
       const item = data[i % 5000]  
@@ -537,74 +470,41 @@ async function fullScanSearch(keyword) {
   let results = []  
   keyword = normalize(keyword)  
 
-  let i = 1
-
-  while (true) {
-    const data = await loadFile(i)
-
-    // ⛔ STOP kalau file kosong / tidak ada
-    if (!data || data.length === 0) break  
+  for (let i = 1; i <= TOTAL_FILE; i++) {  
+    const data = await loadFile(i)  
 
     for (let item of data) {  
-      const sku = normalize(item.sku)
-      const article = normalize(item.article)
-      const desc = normalize(item.deskripsi)
+      const mulai = item.fromdate || item.raw?.fromdate  
+      const akhir = item.todate || item.raw?.todate  
+      const status = getStatusPromo(mulai, akhir)
 
-      if (
-        sku.includes(keyword) ||
-        article.includes(keyword) ||
-        desc.includes(keyword)
-      ) {
-        const mulai = item.fromdate || item.raw?.fromdate  
-        const akhir = item.todate || item.raw?.todate  
-        const status = getStatusPromo(mulai, akhir)
-
-        results.push({  
-          ...item,  
-          _priority: getPriority(item, keyword),
-          _status: status,
-          _statusPriority: getStatusPriority(status)
-        })  
-      }
+      results.push({  
+        ...item,  
+        _priority: getPriority(item, keyword),
+        _status: status,
+        _statusPriority: getStatusPriority(status)
+      })  
 
       if (results.length >= MAX_RESULT) break  
-    }
-
-    if (results.length >= MAX_RESULT) break  
-
-    i++
-  }
+    }  
+  }  
 
   return finalSort(results, keyword).slice(0, MAX_RESULT)
-}
+}  
 
 /* =========================  
 SEARCH ENGINE  
 ========================= */  
 async function searchData(keyword) {  
-  let keywords = keyword
-    .toLowerCase()
-    .split(" ")
-    .map(k => normalize(k))
-    .filter(k => k)
+  keyword = normalize(keyword)  
+  if (!keyword) return []  
 
-  if (!keywords.length) return []
-
-  keyword = keywords[0]
-
-  // ✅ EXACT MATCH DULU
-  if (skuIndex[keyword]) {
-    return await getExactResults(skuIndex[keyword], keyword)
-  }
-
-  if (articleIndex[keyword]) {
-    return await getExactResults(articleIndex[keyword], keyword)
-  }
+  if (skuIndex[keyword]) return await getExactResults(skuIndex[keyword], keyword)  
+  if (articleIndex[keyword]) return await getExactResults(articleIndex[keyword], keyword)  
 
   let indexes = new Set()  
   let prefix = keyword.slice(0, 3)  
 
-  // ✅ CARI DARI SKU INDEX
   for (let key in skuIndex) {  
     if (!key.startsWith(prefix)) continue  
 
@@ -617,25 +517,10 @@ async function searchData(keyword) {
     if (indexes.size >= MAX_RESULT) break  
   }  
 
-  // ✅ CARI DARI ARTICLE INDEX (SUDAH DI POSISI BENAR)
-  for (let key in articleIndex) {  
-    if (!key.startsWith(prefix)) continue  
-
-    if (key.startsWith(keyword)) {  
-      articleIndex[key].forEach(i => {  
-        if (indexes.size < MAX_RESULT) indexes.add(i)  
-      })  
-    }  
-
-    if (indexes.size >= MAX_RESULT) break  
-  }
-
-  // ✅ JIKA ADA HASIL DARI INDEX
   if (indexes.size > 0) {
     return await getResultsFromIndexes(indexes, keyword)
   }
 
-  // ✅ FALLBACK KE FULL SCAN
   return await fullScanSearch(keyword)
 }
 
@@ -708,33 +593,36 @@ function render(data) {
 }  
 
 /* =========================  
-SEARCH INPUT 
+EVENT  
 ========================= */  
-let timer
+let timer  
 
-// 🔍 event utama
-searchInput.addEventListener("input", () => {
-  const keyword = normalize(searchInput.value.trim())
-  if (!keyword) {
-    resultEl.innerHTML = ""
-    return
-  }
+searchInput.addEventListener("input", e => {  
+  clearTimeout(timer)  
 
-  clearTimeout(window.searchDebounce)
-  window.searchDebounce = setTimeout(() => {
-    performSearch(keyword)
-  }, 300)
-})
+  const keyword = e.target.value  
 
+  if (!isReady) {  
+    statusEl.innerText = "Loading..."  
+    return  
+  }  
 
-// ✅ FIX iOS (WAJIB)
-searchInput.addEventListener("change", () => {
-  searchInput.dispatchEvent(new Event("input"))
-})
+  timer = setTimeout(async () => {  
+    if (!keyword.trim()) {  
+      resultEl.innerHTML = ""  
+      statusEl.innerText = "Ketik untuk mencari"  
+      return  
+    }  
 
-searchInput.addEventListener("blur", () => {
-  searchInput.dispatchEvent(new Event("input"))
-})
+    statusEl.innerText = "Mencari..."  
+
+    const result = await searchData(keyword)  
+
+    render(result)  
+
+    statusEl.innerText = `Ditemukan ${result.length} data`  
+  }, 200)  
+})  
 
 /* =========================  
 AUTO UPDATE  
