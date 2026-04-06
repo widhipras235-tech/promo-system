@@ -29,8 +29,11 @@ const btnVoice = document.getElementById("btnVoice")
 INIT  
 ========================= */  
 function normalize(val) {  
-  return (val || "").toString().toLowerCase().trim()  
-}  
+  return (val || "")
+    .toString()
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "")
+}
 
 let stream = null
 
@@ -85,12 +88,12 @@ if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
   recognition.maxAlternatives = 1
 
   recognition.onstart = () => {
-  isListening = true
-  statusEl.innerText = "🎤 Listening..."
-  btnVoice.style.opacity = "0.5"
+    isListening = true
+    statusEl.innerText = "🎤 Listening..."
+    btnVoice.style.opacity = "0.5"
+  }
 
-  if (navigator.vibrate) navigator.vibrate(50)
-}
+if (navigator.vibrate) navigator.vibrate(50)
 
   recognition.onresult = (event) => {
     let transcript = ""
@@ -328,22 +331,24 @@ btnClose?.addEventListener("click", stopCamera)
 /* =========================  
 STATUS PROMO  
 ========================= */  
+function excelToDate(val) {
+  if (!isNaN(val)) {
+    return new Date((Number(val) - 25569) * 86400 * 1000)
+  }
+  return new Date(val)
+}
+
 function getStatusPromo(mulai, akhir) {
   const now = new Date()
 
-  const start = new Date(
-    !isNaN(mulai)
-      ? (Number(mulai) - 25569) * 86400 * 1000
-      : mulai
-  )
-
-  const end = new Date(
-    !isNaN(akhir)
-      ? (Number(akhir) - 25569) * 86400 * 1000
-      : akhir
-  )
+  let start = excelToDate(mulai)
+  let end = excelToDate(akhir)
 
   if (isNaN(start) || isNaN(end)) return "Tidak diketahui"
+
+  // 🔥 FIX UTAMA: SET JAM
+  start.setHours(0, 0, 0, 0)
+  end.setHours(23, 59, 59, 999)
 
   if (now < start) return "Belum aktif"
   if (now > end) return "Berakhir"
@@ -419,6 +424,31 @@ async function loadIndex() {
 }  
 loadIndex()  
 
+
+let DB = []
+
+async function loadAllData() {
+  let i = 1
+
+  while (true) {
+    try {
+      let res = await fetch(`./db/promo_${i}.json`) // 🔥 pakai ./ bukan ../
+
+      if (!res.ok) break
+
+      let data = await res.json()
+      DB.push(...data)
+
+      i++
+    } catch {
+      break
+    }
+  }
+
+  console.log("✅ Total data loaded:", DB.length)
+}
+
+loadAllData()
 /* =========================  
 UTILS  
 ========================= */  
@@ -472,16 +502,19 @@ async function loadFile(fileIndex) {
     if (cache[fileIndex]) return cache[fileIndex]  
 
     const res = await fetch(`./db/promo_${fileIndex}.json`)  
-    if (!res.ok) return []  
+
+    if (!res.ok) {
+      return null // ⛔ penting (bukan [])
+    }
 
     const data = await res.json()  
     cache[fileIndex] = data  
 
     return data  
   } catch {  
-    return []  
+    return null  
   }  
-}  
+}
 
 /* =========================  
 SORT FINAL  
@@ -580,41 +613,74 @@ async function fullScanSearch(keyword) {
   let results = []  
   keyword = normalize(keyword)  
 
-  for (let i = 1; i <= TOTAL_FILE; i++) {  
-    const data = await loadFile(i)  
+  let i = 1
+
+  while (true) {
+    const data = await loadFile(i)
+
+    // ⛔ STOP kalau file kosong / tidak ada
+    if (!data || data.length === 0) break  
 
     for (let item of data) {  
-      const mulai = item.fromdate || item.raw?.fromdate  
-      const akhir = item.todate || item.raw?.todate  
-      const status = getStatusPromo(mulai, akhir)
+      const sku = normalize(item.sku)
+      const article = normalize(item.article)
+      const desc = normalize(item.deskripsi)
 
-      results.push({  
-        ...item,  
-        _priority: getPriority(item, keyword),
-        _status: status,
-        _statusPriority: getStatusPriority(status)
-      })  
+      if (
+        sku.includes(keyword) ||
+        article.includes(keyword) ||
+        desc.includes(keyword)
+      ) {
+        const mulai = item.fromdate || item.raw?.fromdate  
+        const akhir = item.todate || item.raw?.todate  
+        const status = getStatusPromo(mulai, akhir)
+
+        results.push({  
+          ...item,  
+          _priority: getPriority(item, keyword),
+          _status: status,
+          _statusPriority: getStatusPriority(status)
+        })  
+      }
 
       if (results.length >= MAX_RESULT) break  
-    }  
-  }  
+    }
+
+    if (results.length >= MAX_RESULT) break  
+
+    i++
+  }
 
   return finalSort(results, keyword).slice(0, MAX_RESULT)
-}  
+}
 
 /* =========================  
 SEARCH ENGINE  
 ========================= */  
 async function searchData(keyword) {  
-  keyword = normalize(keyword)  
-  if (!keyword) return []  
+  let keywords = keyword
+    .toLowerCase()
+    .split(" ")
+    .map(k => normalize(k))
+    .filter(k => k)
 
-  if (skuIndex[keyword]) return await getExactResults(skuIndex[keyword], keyword)  
-  if (articleIndex[keyword]) return await getExactResults(articleIndex[keyword], keyword)  
+  if (!keywords.length) return []
+
+  keyword = keywords[0]
+
+  // ✅ EXACT MATCH DULU
+  if (skuIndex[keyword]) {
+    return await getExactResults(skuIndex[keyword], keyword)
+  }
+
+  if (articleIndex[keyword]) {
+    return await getExactResults(articleIndex[keyword], keyword)
+  }
 
   let indexes = new Set()  
   let prefix = keyword.slice(0, 3)  
 
+  // ✅ CARI DARI SKU INDEX
   for (let key in skuIndex) {  
     if (!key.startsWith(prefix)) continue  
 
@@ -627,10 +693,25 @@ async function searchData(keyword) {
     if (indexes.size >= MAX_RESULT) break  
   }  
 
+  // ✅ CARI DARI ARTICLE INDEX (SUDAH DI POSISI BENAR)
+  for (let key in articleIndex) {  
+    if (!key.startsWith(prefix)) continue  
+
+    if (key.startsWith(keyword)) {  
+      articleIndex[key].forEach(i => {  
+        if (indexes.size < MAX_RESULT) indexes.add(i)  
+      })  
+    }  
+
+    if (indexes.size >= MAX_RESULT) break  
+  }
+
+  // ✅ JIKA ADA HASIL DARI INDEX
   if (indexes.size > 0) {
     return await getResultsFromIndexes(indexes, keyword)
   }
 
+  // ✅ FALLBACK KE FULL SCAN
   return await fullScanSearch(keyword)
 }
 
