@@ -314,6 +314,31 @@ async function loadIndex() {
 }  
 loadIndex()  
 
+
+let DB = []
+
+async function loadAllData() {
+  let i = 1
+
+  while (true) {
+    try {
+      let res = await fetch(`./db/promo_${i}.json`) // 🔥 pakai ./ bukan ../
+
+      if (!res.ok) break
+
+      let data = await res.json()
+      DB.push(...data)
+
+      i++
+    } catch {
+      break
+    }
+  }
+
+  console.log("✅ Total data loaded:", DB.length)
+}
+
+loadAllData()
 /* =========================  
 UTILS  
 ========================= */  
