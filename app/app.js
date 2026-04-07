@@ -5,6 +5,7 @@ let skuIndex = {}
 let articleIndex = {}  
 let cache = {}  
 let isReady = false  
+let lastScanSound = 0
 
 const MAX_RESULT = 30  
 const TOTAL_FILE = 100  
@@ -36,6 +37,18 @@ function normalize(val) {
 }
 
 let stream = null
+
+/* =========================  
+SOUND EFFECT  
+========================= */
+const sfxOpen = new Audio("assets/sfx_open.wav")
+const sfxScan = new Audio("assets/sfx_scan.mp3")
+const sfxSuccess = new Audio("assets/sfx_success.wav")
+
+function playSound(audio) {
+  audio.currentTime = 0
+  audio.play().catch(() => {})
+}
 
 /* =========================  
 VOICE PRO ENGINE  
@@ -189,7 +202,7 @@ function aiFilterSKU(text) {
 }
 
 /* =========================  
-START CAMERA
+START CAMERA DAN VOICE
 ========================= */
 btnCamera.addEventListener("click", async () => {
   if (stream) return
@@ -214,6 +227,9 @@ btnCamera.addEventListener("click", async () => {
 
     video.classList.add("active")
     document.body.classList.add("camera-open")
+
+    playSound(sfxOpen)
+    if (navigator.vibrate) navigator.vibrate([30, 20, 30])
 
     scanFrame?.classList.add("active")
     scanText?.classList.add("active")
@@ -249,8 +265,18 @@ video.addEventListener("touchstart", (e) => {
   isDrawing = true
 
   const touch = e.touches[0]
+
+  // 🔥 WAJIB ADA
   startX = touch.clientX
   startY = touch.clientY
+
+  const now = Date.now()
+
+  if (now - lastScanSound > 300) {
+    playSound(sfxScan)
+    if (navigator.vibrate) navigator.vibrate(20)
+    lastScanSound = now
+  }
 })
 
 video.addEventListener("touchmove", (e) => {
@@ -283,6 +309,8 @@ video.addEventListener("touchend", async () => {
     alert("Kamera belum siap")
     return
   }
+
+statusEl.innerText = "🔍 Mengambil gambar..."
 
   // scaling ke resolusi video asli
   const scaleX = video.videoWidth / overlay.width
@@ -335,6 +363,10 @@ let keyword = aiFilterSKU(text)
   searchInput.dispatchEvent(new Event("input"))
 
   statusEl.innerText = "Scan selesai"
+
+// 🔥 sukses effect
+playSound(sfxSuccess)
+if (navigator.vibrate) navigator.vibrate([50, 30, 80])
 
   stopCamera()
 })
