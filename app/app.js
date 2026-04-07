@@ -913,3 +913,46 @@ setInterval(async () => {
     console.log("❌ Gagal cek update")  
   }  
 }, 300000)
+
+/* =========================
+AUTO HIDE SCAN BAR (SCROLL)
+========================= */
+
+const scanBar = document.getElementById("scanBar")
+
+let lastScrollY = window.scrollY
+let tickingScroll = false
+
+function handleScrollUI() {
+  const currentScrollY = window.scrollY
+
+  // ❗ kalau kamera aktif → jangan hide
+  if (stream) {
+    scanBar.classList.remove("hide")
+    return
+  }
+
+  // scroll ke bawah → hide
+  if (currentScrollY > lastScrollY + 10) {
+    scanBar.classList.add("hide")
+  }
+  // scroll ke atas → show
+  else if (currentScrollY < lastScrollY - 10) {
+    scanBar.classList.remove("hide")
+  }
+
+  // ❗ kalau di paling atas → selalu tampil
+  if (currentScrollY < 50) {
+    scanBar.classList.remove("hide")
+  }
+
+  lastScrollY = currentScrollY
+  tickingScroll = false
+}
+
+window.addEventListener("scroll", () => {
+  if (!tickingScroll) {
+    requestAnimationFrame(handleScrollUI)
+    tickingScroll = true
+  }
+})
