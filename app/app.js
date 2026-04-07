@@ -158,15 +158,8 @@ let endX = 0
 let endY = 0
 
 // overlay untuk kotak seleksi
-const overlay = document.createElement("canvas")
+const overlay = document.getElementById("overlay")
 const overlayCtx = overlay.getContext("2d")
-
-overlay.style.position = "fixed"
-overlay.style.inset = "0"
-overlay.style.zIndex = "1002"
-overlay.style.pointerEvents = "none"
-
-document.body.appendChild(overlay)
 
 /* =========================  
 AI FILTER
