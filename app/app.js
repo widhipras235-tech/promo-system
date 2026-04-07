@@ -267,17 +267,8 @@ video.addEventListener("touchstart", (e) => {
 
   const touch = e.touches[0]
 
-  // 🔥 WAJIB ADA
   startX = touch.clientX
   startY = touch.clientY
-
-  const now = Date.now()
-
-  if (now - lastScanSound > 300) {
-    playSound(sfxScan)
-    if (navigator.vibrate) navigator.vibrate(20)
-    lastScanSound = now
-  }
 })
 
 video.addEventListener("touchmove", (e) => {
@@ -308,6 +299,15 @@ video.addEventListener("touchend", async () => {
 
   flash.classList.add("active")
   setTimeout(() => flash.classList.remove("active"), 300)
+
+  const now = Date.now()
+
+  if (now - lastScanSound > 300) {
+    playSound(sfxScan)
+    if (navigator.vibrate) navigator.vibrate(20)
+    lastScanSound = now
+  }
+
  if (video.videoWidth === 0) {
     alert("Kamera belum siap")
     return
