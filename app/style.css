@@ -223,35 +223,3 @@ color:white;
 box-shadow:0 6px 12px rgba(0,0,0,0.2);
 
 }
-
-.input-wrapper {
-  position: relative;
-  width: 100%;
-}
-
-#search {
-  width: 100%;
-  padding-right: 40px; /* space untuk tombol X */
-}
-
-.btn-clear {
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  
-  background: #ccc;
-  border: none;
-  border-radius: 50%;
-  
-  width: 24px;
-  height: 24px;
-  font-size: 14px;
-  cursor: pointer;
-
-  display: none; /* default hidden */
-}
-
-.btn-clear.show {
-  display: block;
-}
