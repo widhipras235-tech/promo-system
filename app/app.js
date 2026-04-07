@@ -26,6 +26,7 @@ const scanText = document.getElementById("scanText")
 const btnClose = document.getElementById("btnClose")
 const btnVoice = document.getElementById("btnVoice")
 const flash = document.getElementById("flash")
+const btnClear = document.getElementById("btnClear")
 
 /* =========================  
 INIT  
@@ -861,6 +862,13 @@ searchInput.addEventListener("input", e => {
 
   const keyword = e.target.value  
 
+  // ✅ CLEAR BUTTON LOGIC
+  if (keyword.length > 0) {
+    btnClear.classList.add("show")
+  } else {
+    btnClear.classList.remove("show")
+  }
+
   if (!isReady) {  
     statusEl.innerText = "Loading..."  
     return  
@@ -882,6 +890,16 @@ searchInput.addEventListener("input", e => {
     statusEl.innerText = `Ditemukan ${result.length} data`  
   }, 200)  
 })  
+
+// ✅ CLEAR BUTTON CLICK
+btnClear?.addEventListener("click", () => {
+  searchInput.value = ""
+  searchInput.focus()
+  btnClear.classList.remove("show")
+
+  resultEl.innerHTML = ""
+  statusEl.innerText = "Siap digunakan"
+})
 
 /* =========================  
 AUTO UPDATE  
