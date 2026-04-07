@@ -108,7 +108,7 @@ if (navigator.vibrate) navigator.vibrate(50)
     let processed = wordsToNumber(transcript)
 
     // ambil keyword terbaik
-    let keyword = extractBestKeyword(processed)
+    let keyword = aiFilterSKU(processed)
 
     console.log("PROCESSED:", processed)
     console.log("KEYWORD:", keyword)
@@ -152,6 +152,41 @@ overlay.style.zIndex = "1002"
 overlay.style.pointerEvents = "none"
 
 document.body.appendChild(overlay)
+
+/* =========================  
+AI FILTER
+========================= */
+function aiFilterSKU(text) {
+  text = text.toLowerCase()
+
+  // ambil semua angka
+  const candidates = text.match(/\d+/g)
+  if (!candidates) return text
+
+  let best = ""
+  let bestScore = -999
+
+  candidates.forEach(num => {
+    let score = 0
+
+    const len = num.length
+
+    // scoring
+    if (len >= 8) score += 5
+    else if (len >= 5) score += 3
+    else if (len < 4) score -= 5
+
+    // hindari angka kecil (diskon dll)
+    if (Number(num) <= 100) score -= 3
+
+    if (score > bestScore) {
+      bestScore = score
+      best = num
+    }
+  })
+
+  return best || text
+}
 
 /* =========================  
 START CAMERA
@@ -289,9 +324,7 @@ video.addEventListener("touchend", async () => {
   console.log("OCR RAW:", result.data.text)
   console.log("OCR CLEAN:", text)
 
-  let keyword = text
-    .split(" ")
-    .sort((a, b) => b.length - a.length)[0]
+let keyword = aiFilterSKU(text)
 
   if (!keyword) {
     statusEl.innerText = "SKU tidak terbaca"
