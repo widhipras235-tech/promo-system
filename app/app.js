@@ -96,7 +96,7 @@ if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
 
   recognition = new SpeechRecognition()
-  recognition.lang = "id-ID" || "en-US"
+  recognition.lang = "id-ID"
   recognition.continuous = false
   recognition.interimResults = true
   recognition.maxAlternatives = 1
