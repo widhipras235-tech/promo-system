@@ -26,7 +26,6 @@ const scanText = document.getElementById("scanText")
 const btnClose = document.getElementById("btnClose")
 const btnVoice = document.getElementById("btnVoice")
 const flash = document.getElementById("flash")
-const btnClear = document.getElementById("btnClear")
 
 /* =========================  
 INIT  
@@ -158,8 +157,15 @@ let endX = 0
 let endY = 0
 
 // overlay untuk kotak seleksi
-const overlay = document.getElementById("overlay")
+const overlay = document.createElement("canvas")
 const overlayCtx = overlay.getContext("2d")
+
+overlay.style.position = "fixed"
+overlay.style.inset = "0"
+overlay.style.zIndex = "1002"
+overlay.style.pointerEvents = "none"
+
+document.body.appendChild(overlay)
 
 /* =========================  
 AI FILTER
@@ -302,7 +308,8 @@ video.addEventListener("touchend", async () => {
     lastScanSound = now
   }
 
- if (video.videoWidth === 0) {
+
+ if (video.videoWidth === 0) {
     alert("Kamera belum siap")
     return
   }
@@ -855,13 +862,6 @@ searchInput.addEventListener("input", e => {
 
   const keyword = e.target.value  
 
-  // ✅ CLEAR BUTTON LOGIC
-  if (keyword.length > 0) {
-    btnClear.classList.add("show")
-  } else {
-    btnClear.classList.remove("show")
-  }
-
   if (!isReady) {  
     statusEl.innerText = "Loading..."  
     return  
@@ -883,16 +883,6 @@ searchInput.addEventListener("input", e => {
     statusEl.innerText = `Ditemukan ${result.length} data`  
   }, 200)  
 })  
-
-// ✅ CLEAR BUTTON CLICK
-btnClear?.addEventListener("click", () => {
-  searchInput.value = ""
-  searchInput.focus()
-  btnClear.classList.remove("show")
-
-  resultEl.innerHTML = ""
-  statusEl.innerText = "Siap digunakan"
-})
 
 /* =========================  
 AUTO UPDATE  
