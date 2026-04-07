@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-
-<meta charset="UTF-8">
+<!DOCTYPE html><html lang="id">
+<head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#ff2d2d">
-
-<title>Promo Checkker</title>
-
-<link rel="stylesheet" href="style.css">
-
-<style>
+<meta name="theme-color" content="#ff2d2d"><title>Promo Checkker</title><link rel="stylesheet" href="style.css"><style>
 
 /* =========================
 FLASH EFFECT
@@ -48,17 +39,6 @@ CAMERA + OVERLAY
 
 .camera.active {
   display: block;
-}
-
-/* overlay khusus */
-#overlay {
-  z-index: 1000;
-  pointer-events: none;
-}
-
-/* video di bawah overlay */
-#camera {
-  z-index: 999;
 }
 
 /* backdrop */
@@ -142,6 +122,9 @@ SCAN BAR
   filter: brightness(0) invert(1);
 }
 
+/* =========================
+SEARCH CLEAR BUTTON
+========================= */
 .input-wrapper {
   position: relative;
   width: 100%;
@@ -149,7 +132,7 @@ SCAN BAR
 
 #search {
   width: 100%;
-  padding-right: 40px; /* space untuk tombol X */
+  padding-right: 40px;
 }
 
 .btn-clear {
@@ -167,78 +150,38 @@ SCAN BAR
   font-size: 14px;
   cursor: pointer;
 
-  display: none; /* default hidden */
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.2s;
 }
 
 .btn-clear.show {
-  display: block;
+  opacity: 1;
+  pointer-events: auto;
 }
-</style>
 
-</head>
-
-<body>
-
-<header class="header">
-
-  <div class="logo">
+</style></head><body><header class="header">  <div class="logo">
     <h1>CapeeX</h1>
     <p>Cek Promo • Scan SKU • Online</p>
-  </div>
-
-  <div class="search-box">
-
-  <div class="input-wrapper">
-    <input id="search" placeholder="Cari SKU, artikel, deskripsi, brand">
-    <button id="btnClear" class="btn-clear">✕</button>
-  </div>
-
-  <button class="search-btn">🔍</button>
-
+  </div>  <div class="search-box"><div class="input-wrapper">
+  <input id="search" type="search" placeholder="Cari SKU, artikel, deskripsi, brand">
+  <button id="btnClear" class="btn-clear">✕</button>
 </div>
 
-</header>
+<button class="search-btn">🔍</button>
 
-<main>
+  </div></header><main>
   <div id="status">Loading...</div>
   <div id="result"></div>
-</main>
-
-<!-- SCAN BAR -->
-<div id="scanBar">
-
-  <button id="btnCamera" class="scan-icon">
+</main><!-- SCAN BAR --><div id="scanBar">  <button id="btnCamera" class="scan-icon">
     <img src="assets/camera.png" class="icon-img">
-  </button>
-
-  <div class="divider"></div>
-
-  <button id="btnVoice" class="scan-icon">
+  </button>  <div class="divider"></div>  <button id="btnVoice" class="scan-icon">
     <img src="assets/mic.png" class="icon-img">
-  </button>
+  </button></div><!-- FLASH --><div id="flash" class="flash"></div><!-- CLOSE BUTTON --><button id="btnClose" class="btn-close">✕</button>
 
-</div>
+<!-- CAMERA --><video id="camera" autoplay playsinline class="camera"></video>
 
-<!-- FLASH -->
-<div id="flash" class="flash"></div>
+<!-- CANVAS OCR --><canvas id="canvas" style="display:none"></canvas>
 
-<!-- CLOSE BUTTON -->
-<button id="btnClose" class="btn-close">✕</button>
-
-<!-- CAMERA -->
-<video id="camera" autoplay playsinline class="camera"></video>
-
-<!-- OVERLAY (WAJIB untuk drag scan) -->
-<canvas id="overlay" class="camera"></canvas>
-
-<!-- CANVAS OCR -->
-<canvas id="canvas" style="display:none"></canvas>
-
-<!-- LIB OCR -->
-<script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
-
-<!-- APP -->
-<script src="app.js"></script>
-
-</body>
+<!-- OCR LIB --><script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script><!-- APP --><script src="app.js"></script></body>
 </html>
