@@ -102,12 +102,12 @@ if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
   recognition.maxAlternatives = 1
 
   recognition.onstart = () => {
-    isListening = true
-    statusEl.innerText = "🎤 Listening..."
-    btnVoice.style.opacity = "0.5"
-  }
+  isListening = true
+  statusEl.innerText = "🎤 Listening..."
+  btnVoice.style.opacity = "0.5"
 
-if (navigator.vibrate) navigator.vibrate(50)
+  if (navigator.vibrate) navigator.vibrate(50)
+}
 
   recognition.onresult = (event) => {
     let transcript = ""
