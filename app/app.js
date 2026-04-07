@@ -306,7 +306,9 @@ video.addEventListener("touchend", async () => {
 
   overlayCtx.clearRect(0, 0, overlay.width, overlay.height)
 
-  if (video.videoWidth === 0) {
+  flash.classList.add("active")
+  setTimeout(() => flash.classList.remove("active"), 300)
+ if (video.videoWidth === 0) {
     alert("Kamera belum siap")
     return
   }
