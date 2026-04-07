@@ -77,7 +77,7 @@ SCAN BAR
   position: fixed;
   bottom: 20px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(0);
 
   display: flex;
   align-items: center;
@@ -94,7 +94,7 @@ SCAN BAR
   z-index: 1001;
   padding: 0 10px;
 
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
 }
 
 .scan-icon {
@@ -140,6 +140,21 @@ SCAN BAR
   object-fit: contain;
   pointer-events: none;
   filter: brightness(0) invert(1);
+}
+
+/* =========================
+AUTO HIDE ANIMATION
+========================= */
+
+#scanBar {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* kondisi hidden */
+#scanBar.hide {
+  transform: translateX(-50%) translateY(120px);
+  opacity: 0;
+  pointer-events: none;
 }
 
 </style>
