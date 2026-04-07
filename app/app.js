@@ -19,7 +19,6 @@ const statusEl = document.getElementById("status")
 const btnCamera = document.getElementById("btnCamera")
 const video = document.getElementById("camera")
 const canvas = document.getElementById("canvas")
-overlay.id = "overlay"
 const ctx = canvas.getContext("2d")
 
 const scanFrame = document.getElementById("scanFrame")
