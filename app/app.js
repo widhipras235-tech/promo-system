@@ -244,24 +244,22 @@ btnCamera.addEventListener("click", async () => {
   }
 })
 
-btnVoice?.addEventListener("click", async () => {
+btnVoice?.addEventListener("click", () => {
   if (!recognition) {
     alert("Browser tidak support voice")
     return
   }
 
+  if (isListening) {
+    recognition.stop()
+    return
+  }
+
   try {
-    // 🔥 trigger permission mic (WAJIB di Android)
-    await navigator.mediaDevices.getUserMedia({ audio: true })
-
-    if (isListening) {
-      recognition.stop()
-    } else {
-      recognition.start()
-    }
-
+    recognition.start()
   } catch (err) {
-    alert("Microphone tidak diizinkan")
+    console.log("Start error:", err)
+    statusEl.innerText = "❌ Gagal start voice"
   }
 })
 
