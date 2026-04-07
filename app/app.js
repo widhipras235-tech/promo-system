@@ -25,6 +25,7 @@ const scanFrame = document.getElementById("scanFrame")
 const scanText = document.getElementById("scanText")
 const btnClose = document.getElementById("btnClose")
 const btnVoice = document.getElementById("btnVoice")
+const flash = document.getElementById("flash")
 
 /* =========================  
 INIT  
