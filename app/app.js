@@ -111,6 +111,7 @@ if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
   isListening = true
   statusEl.innerText = "🎤 Listening..."
   btnVoice.style.opacity = "0.5"
+  playSound(soundStart) //🔊 start
 
   if (navigator.vibrate) navigator.vibrate(50)
 }
@@ -147,6 +148,7 @@ if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
     isListening = false
     statusEl.innerText = "Voice selesai"
     btnVoice.style.opacity = "1"
+    playSound(soundStop) //🔊 stop
   }
 
 } else {
