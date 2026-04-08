@@ -129,9 +129,7 @@ if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
   statusEl.innerText = "🎤 Listening..."
   btnVoice.style.opacity = "0.5"
 
-  // 🔊 DOUBLE BEEP (kayak Google)
-  playBeep(1000, 80)
-  setTimeout(() => playBeep(1400, 80), 80)
+  playBeep(1000, 120) // 🔊 beep mulai
 
   if (navigator.vibrate) navigator.vibrate(50)
 }
