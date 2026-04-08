@@ -6,6 +6,7 @@ let articleIndex = {}
 let cache = {}  
 let isReady = false  
 let lastScanSound = 0
+let audioCtx = null
 
 const MAX_RESULT = 30  
 const TOTAL_FILE = 100  
@@ -51,24 +52,33 @@ function playSound(audio) {
   audio.play().catch(() => {})
 }
 
-function playBeep(freq = 800, duration = 100) {
+function playBeep(freq = 900, duration = 120) {
   try {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)()
-    const oscillator = ctx.createOscillator()
-    const gain = ctx.createGain()
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)()
+    }
+
+    if (audioCtx.state === "suspended") {
+      audioCtx.resume()
+    }
+
+    const oscillator = audioCtx.createOscillator()
+    const gain = audioCtx.createGain()
 
     oscillator.connect(gain)
-    gain.connect(ctx.destination)
+    gain.connect(audioCtx.destination)
 
     oscillator.frequency.value = freq
     oscillator.type = "sine"
 
-    oscillator.start()
+    // 🔥 fade biar tidak pecah
+    gain.gain.setValueAtTime(0, audioCtx.currentTime)
+    gain.gain.linearRampToValueAtTime(0.15, audioCtx.currentTime + 0.01)
+    gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + duration / 1000)
 
-    setTimeout(() => {
-      oscillator.stop()
-      ctx.close()
-    }, duration)
+    oscillator.start()
+    oscillator.stop(audioCtx.currentTime + duration / 1000)
+
   } catch (e) {
     console.log("Beep error:", e)
   }
