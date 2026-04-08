@@ -6,8 +6,6 @@ let articleIndex = {}
 let cache = {}  
 let isReady = false  
 let lastScanSound = 0
-let voiceLock = false
-let lastVoiceTime = 0
 
 const MAX_RESULT = 30  
 const TOTAL_FILE = 100  
@@ -47,31 +45,10 @@ SOUND EFFECT
 const sfxOpen = new Audio("assets/sfx_open.wav")
 const sfxScan = new Audio("assets/sfx_scan.mp3")
 const sfxSuccess = new Audio("assets/sfx_success.wav")
-const sfxVoiceStart = new Audio("assets/sfx_voice_start.wav")
-const sfxVoiceEnd = new Audio("assets/sfx_voice_end.mp3")
-
-sfxVoiceStart.volume = 0.4
-sfxVoiceEnd.volume = 0.5
-sfxSuccess.volume = 0.6
-
-const isAndroid = /Android/i.test(navigator.userAgent)
-
-if (isAndroid) {
-  sfxVoiceStart.volume = 0.3
-  sfxVoiceEnd.volume = 0.4
-}
 
 function playSound(audio) {
-  try {
-    audio.pause()
-    audio.currentTime = 0
-
-    const playPromise = audio.play()
-
-    if (playPromise !== undefined) {
-      playPromise.catch(() => {})
-    }
-  } catch {}
+  audio.currentTime = 0
+  audio.play().catch(() => {})
 }
 
 /* =========================  
@@ -125,44 +102,34 @@ if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
   recognition.maxAlternatives = 1
 
   recognition.onstart = () => {
-  const now = Date.now()
-
-  // ⛔ cegah double trigger cepat
-  if (now - lastVoiceTime < 500) return
-  lastVoiceTime = now
-
-  if (voiceLock) return
-  voiceLock = true
-
   isListening = true
   statusEl.innerText = "🎤 Listening..."
   btnVoice.style.opacity = "0.5"
-
-  setTimeout(() => {
-  playSound(sfxVoiceStart)
-}, 50)
 
   if (navigator.vibrate) navigator.vibrate(50)
 }
 
   recognition.onresult = (event) => {
-  let transcript = ""
+    let transcript = ""
 
-  for (let i = 0; i < event.results.length; i++) {
-    if (!event.results[i].isFinal) continue
-    transcript += event.results[i][0].transcript + " "
+    for (let i = 0; i < event.results.length; i++) {
+      transcript += event.results[i][0].transcript + " "
+    }
+
+    console.log("RAW VOICE:", transcript)
+
+    // ubah kata jadi angka
+    let processed = wordsToNumber(transcript)
+
+    // ambil keyword terbaik
+    let keyword = aiFilterSKU(processed)
+
+    console.log("PROCESSED:", processed)
+    console.log("KEYWORD:", keyword)
+
+    searchInput.value = keyword
+    searchInput.dispatchEvent(new Event("input"))
   }
-
-  if (!transcript) return
-
-  console.log("FINAL VOICE:", transcript)
-
-  let processed = wordsToNumber(transcript)
-  let keyword = aiFilterSKU(processed)
-
-  searchInput.value = keyword
-  searchInput.dispatchEvent(new Event("input"))
-}
 
   recognition.onerror = (event) => {
     console.log("Voice error:", event.error)
@@ -171,20 +138,12 @@ if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
   }
 
   recognition.onend = () => {
-  if (!voiceLock) return
+    isListening = false
+    statusEl.innerText = "Voice selesai"
+    btnVoice.style.opacity = "1"
+  }
 
-  isListening = false
-  voiceLock = false
-
-  statusEl.innerText = "Voice selesai"
-  btnVoice.style.opacity = "1"
-
-  // kasih jeda biar tidak tabrakan dengan system sound
-  setTimeout(() => {
-    playSound(sfxVoiceEnd)
-  }, 120)
-}
- else {
+} else {
   console.log("❌ Voice tidak support di browser ini")
 }
 
@@ -291,8 +250,7 @@ btnVoice?.addEventListener("click", () => {
     return
   }
 
-  // 🔥 FIX: cegah start dobel
-  if (isListening || voiceLock) {
+  if (isListening) {
     recognition.stop()
     return
   }
