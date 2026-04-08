@@ -51,6 +51,29 @@ function playSound(audio) {
   audio.play().catch(() => {})
 }
 
+function playBeep(freq = 800, duration = 100) {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)()
+    const oscillator = ctx.createOscillator()
+    const gain = ctx.createGain()
+
+    oscillator.connect(gain)
+    gain.connect(ctx.destination)
+
+    oscillator.frequency.value = freq
+    oscillator.type = "sine"
+
+    oscillator.start()
+
+    setTimeout(() => {
+      oscillator.stop()
+      ctx.close()
+    }, duration)
+  } catch (e) {
+    console.log("Beep error:", e)
+  }
+}
+
 /* =========================  
 VOICE PRO ENGINE  
 ========================= */
@@ -106,6 +129,10 @@ if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
   statusEl.innerText = "🎤 Listening..."
   btnVoice.style.opacity = "0.5"
 
+  // 🔊 DOUBLE BEEP (kayak Google)
+  playBeep(1000, 80)
+  setTimeout(() => playBeep(1400, 80), 80)
+
   if (navigator.vibrate) navigator.vibrate(50)
 }
 
@@ -132,16 +159,20 @@ if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
   }
 
   recognition.onerror = (event) => {
-    console.log("Voice error:", event.error)
-    statusEl.innerText = "❌ Voice error: " + event.error
-    btnVoice.style.opacity = "1"
-  }
+  console.log("Voice error:", event.error)
+  statusEl.innerText = "❌ Voice error: " + event.error
+  btnVoice.style.opacity = "1"
+
+  playBeep(300, 300) // 🔊 beep error (lebih rendah)
+}
 
   recognition.onend = () => {
-    isListening = false
-    statusEl.innerText = "Voice selesai"
-    btnVoice.style.opacity = "1"
-  }
+  isListening = false
+  statusEl.innerText = "Voice selesai"
+  btnVoice.style.opacity = "1"
+
+  playBeep(600, 150) // 🔊 beep selesai
+}
 
 } else {
   console.log("❌ Voice tidak support di browser ini")
