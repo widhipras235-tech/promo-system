@@ -45,6 +45,12 @@ SOUND EFFECT
 const sfxOpen = new Audio("assets/sfx_open.wav")
 const sfxScan = new Audio("assets/sfx_scan.mp3")
 const sfxSuccess = new Audio("assets/sfx_success.wav")
+const sfxVoiceStart = new Audio("assets/sfx_voice_start.wav")
+const sfxVoiceEnd = new Audio("assets/sfx_voice_end.mp3")
+
+sfxVoiceStart.volume = 0.4
+sfxVoiceEnd.volume = 0.5
+sfxSuccess.volume = 0.6
 
 function playSound(audio) {
   audio.currentTime = 0
@@ -106,6 +112,8 @@ if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
   statusEl.innerText = "🎤 Listening..."
   btnVoice.style.opacity = "0.5"
 
+  playSound(sfxVoiceStart) // 🔊 start
+
   if (navigator.vibrate) navigator.vibrate(50)
 }
 
@@ -141,6 +149,8 @@ if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
     isListening = false
     statusEl.innerText = "Voice selesai"
     btnVoice.style.opacity = "1"
+
+    playSound(sfxVoiceEnd) // 🔊 end
   }
 
 } else {
