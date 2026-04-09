@@ -609,6 +609,25 @@ function formatTanggal(val) {
 }  
 
 /* =========================  
+SHARP PRICE
+========================= */  
+function formatPromoText(value) {
+  if (!value) return value
+
+  const text = value.toString().toLowerCase()
+
+  // 🔥 pola promo "buy/beli 3 disc 10%" dll
+  const isSharp =
+    /buy\s*\d+/i.test(text) ||
+    /beli\s*\d+/i.test(text) ||
+    /b\d+d\d+/i.test(text)
+
+  if (isSharp) return "SHARP PRICE"
+
+  return value
+}
+
+/* =========================  
 LOAD FILE (CACHE)  
 ========================= */  
 async function loadFile(fileIndex) {  
@@ -841,7 +860,11 @@ function render(data) {
   }  
 
   data.forEach(item => {  
-    const diskon = formatDiskon(item.diskon || item.raw?.diskon)  
+     
+    let rawDiskon = item.diskon || item.raw?.diskon
+rawDiskon = formatPromoText(rawDiskon)
+
+const diskon = formatDiskon(rawDiskon)
 
     const mulai = item.fromdate || item.raw?.fromdate || "-"  
     const akhir = item.todate || item.raw?.todate || "-"  
@@ -873,13 +896,16 @@ function render(data) {
 
       <div>Harga Normal: ${formatRupiah(item.harga_normal)}</div>  
 
-      <div style="color:red;font-weight:bold">  
-        Harga Promo: ${  
-          !isNaN(item.harga_promo)  
-            ? formatRupiah(item.harga_promo)  
-            : item.harga_promo || "-"  
-        }  
-      </div>  
+    <div style="color:red;font-weight:bold">  
+  Harga Promo: ${(() => {
+    let promoText = item.harga_promo
+    promoText = formatPromoText(promoText)
+
+    return !isNaN(promoText)
+      ? formatRupiah(promoText)
+      : promoText || "-"
+  })()}
+</div>
 
       <div style="color:green;font-weight:bold">  
         Diskon: ${diskon}  
