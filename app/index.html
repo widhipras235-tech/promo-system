@@ -157,6 +157,35 @@ AUTO HIDE ANIMATION
   pointer-events: none;
 }
 
+#scanText {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+
+  z-index: 1002;
+  pointer-events: none;
+
+  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#scanText.active {
+  opacity: 1;
+}
+
+#scanText {
+  backdrop-filter: blur(4px);
+  padding: 6px 12px;
+  border-radius: 10px;
+}
+
 </style>
 
 </head>
@@ -208,6 +237,8 @@ AUTO HIDE ANIMATION
 
 <!-- OVERLAY (WAJIB untuk drag scan) -->
 <canvas id="overlay" class="camera"></canvas>
+
+<div id="scanText">Usa Layar Arahkan ke SKU</div>
 
 <!-- CANVAS OCR -->
 <canvas id="canvas" style="display:none"></canvas>
