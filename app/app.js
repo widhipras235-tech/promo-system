@@ -8,7 +8,7 @@ let isReady = false
 let lastScanSound = 0
 let audioCtx = null
 
-const MAX_RESULT = 100 
+const MAX_RESULT = 100
 const TOTAL_FILE = 100  
 
 /* =========================  
@@ -196,15 +196,8 @@ let endX = 0
 let endY = 0
 
 // overlay untuk kotak seleksi
-const overlay = document.createElement("canvas")
+const overlay = document.getElementById("overlay")
 const overlayCtx = overlay.getContext("2d")
-
-overlay.style.position = "fixed"
-overlay.style.inset = "0"
-overlay.style.zIndex = "1002"
-overlay.style.pointerEvents = "none"
-
-document.body.appendChild(overlay)
 
 /* =========================  
 AI FILTER
@@ -258,15 +251,15 @@ btnCamera.addEventListener("click", async () => {
     video.srcObject = stream
 
     video.onloadedmetadata = () => {
-      video.play()
-    }
+  video.play()
 
-    // sync overlay size
-    overlay.width = window.innerWidth
-    overlay.height = window.innerHeight
+  overlay.width = window.innerWidth
+  overlay.height = window.innerHeight
+  }
 
     video.classList.add("active")
     document.body.classList.add("camera-open")
+    overlay.classList.add("active")
 
     playSound(sfxOpen)
     if (navigator.vibrate) navigator.vibrate([30, 20, 30])
@@ -310,18 +303,21 @@ video.addEventListener("touchstart", (e) => {
 
   isDrawing = true
 
+  const rect = video.getBoundingClientRect()
   const touch = e.touches[0]
 
-  startX = touch.clientX
-  startY = touch.clientY
+  startX = touch.clientX - rect.left
+  startY = touch.clientY - rect.top
 })
 
 video.addEventListener("touchmove", (e) => {
   if (!isDrawing) return
 
+  const rect = video.getBoundingClientRect()
   const touch = e.touches[0]
-  endX = touch.clientX
-  endY = touch.clientY
+
+  endX = touch.clientX - rect.left
+  endY = touch.clientY - rect.top
 
   overlayCtx.clearRect(0, 0, overlay.width, overlay.height)
 
@@ -432,6 +428,7 @@ function stopCamera() {
 
   video.classList.remove("active")
   document.body.classList.remove("camera-open")
+  overlay.classList.remove("active")
 
   scanFrame?.classList.remove("active")
   scanText?.classList.remove("active")
@@ -607,25 +604,6 @@ function formatTanggal(val) {
     year: "numeric"  
   })  
 }  
-
-/* =========================  
-SHARP PRICE
-========================= */  
-function formatPromoText(value) {
-  if (!value) return value
-
-  const text = value.toString().toLowerCase()
-
-  // 🔥 pola promo "buy/beli 3 disc 10%" dll
-  const isSharp =
-    /buy\s*\d+/i.test(text) ||
-    /beli\s*\d+/i.test(text) ||
-    /b\d+d\d+/i.test(text)
-
-  if (isSharp) return "SHARP PRICE"
-
-  return value
-}
 
 /* =========================  
 LOAD FILE (CACHE)  
@@ -860,11 +838,7 @@ function render(data) {
   }  
 
   data.forEach(item => {  
-     
-    let rawDiskon = item.diskon || item.raw?.diskon
-rawDiskon = formatPromoText(rawDiskon)
-
-const diskon = formatDiskon(rawDiskon)
+    const diskon = formatDiskon(item.diskon || item.raw?.diskon)  
 
     const mulai = item.fromdate || item.raw?.fromdate || "-"  
     const akhir = item.todate || item.raw?.todate || "-"  
@@ -896,16 +870,13 @@ const diskon = formatDiskon(rawDiskon)
 
       <div>Harga Normal: ${formatRupiah(item.harga_normal)}</div>  
 
-    <div style="color:red;font-weight:bold">  
-  Harga Promo: ${(() => {
-    let promoText = item.harga_promo
-    promoText = formatPromoText(promoText)
-
-    return !isNaN(promoText)
-      ? formatRupiah(promoText)
-      : promoText || "-"
-  })()}
-</div>
+      <div style="color:red;font-weight:bold">  
+        Harga Promo: ${  
+          !isNaN(item.harga_promo)  
+            ? formatRupiah(item.harga_promo)  
+            : item.harga_promo || "-"  
+        }  
+      </div>  
 
       <div style="color:green;font-weight:bold">  
         Diskon: ${diskon}  
@@ -1019,5 +990,37 @@ window.addEventListener("scroll", () => {
   if (!tickingScroll) {
     requestAnimationFrame(handleScrollUI)
     tickingScroll = true
+  }
+})
+
+/* =========================
+AUTO HIDE HEADER (SCROLL)
+========================= */
+
+const header = document.getElementById("header")
+const headerTop = document.querySelector(".header-top")
+
+let ticking = false
+
+function handleScroll() {
+  const current = window.scrollY
+  const topHeight = headerTop.offsetHeight
+
+  // 🔥 HANYA di paling atas → full header
+  if (current < 10) {
+    header.style.transform = "translateY(0)"
+  } 
+  // selain itu → selalu collapse
+  else {
+    header.style.transform = `translateY(-${topHeight + 10}px)`
+  }
+
+  ticking = false
+}
+
+window.addEventListener("scroll", () => {
+  if (!ticking) {
+    requestAnimationFrame(handleScroll)
+    ticking = true
   }
 })
