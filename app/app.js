@@ -838,7 +838,16 @@ function render(data) {
   }  
 
   data.forEach(item => {  
-    const diskon = formatDiskon(item.diskon || item.raw?.diskon)  
+    let diskonValue = item.diskon || item.raw?.diskon
+
+// 🔥 FIX: jika SHARP PRICE → diskon jadi "-"
+if (
+  (item.harga_promo === "SHARP PRICE" || item.harga_promo == item.harga_normal)
+) {
+  diskonValue = "-"
+}
+
+const diskon = formatDiskon(diskonValue) 
 
     const mulai = item.fromdate || item.raw?.fromdate || "-"  
     const akhir = item.todate || item.raw?.todate || "-"  
