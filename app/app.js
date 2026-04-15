@@ -840,14 +840,14 @@ function render(data) {
   data.forEach(item => {  
     let diskonValue = item.diskon || item.raw?.diskon
 
-// 🔥 FIX: jika SHARP PRICE → diskon jadi "-"
 if (
-  (item.harga_promo === "SHARP PRICE" || item.harga_promo == item.harga_normal)
+  item.harga_promo &&
+  item.harga_promo.toString().toUpperCase().includes("SHARP")
 ) {
   diskonValue = "-"
 }
 
-const diskon = formatDiskon(diskonValue) 
+const diskon = formatDiskon(diskonValue)
 
     const mulai = item.fromdate || item.raw?.fromdate || "-"  
     const akhir = item.todate || item.raw?.todate || "-"  
