@@ -535,6 +535,32 @@ async function loadIndex() {
 }  
 loadIndex()  
 
+let rewardMap = {}
+
+async function loadRewardMap() {
+  try {
+    const res = await fetch("./db/sku10_map.json")
+    if (res.ok) {
+      rewardMap = await res.json()
+      console.log("🎁 Reward map loaded:", Object.keys(rewardMap).length)
+    }
+  } catch (e) {
+    console.log("❌ Gagal load reward map", e)
+  }
+}
+
+loadRewardMap()
+
+function isRewardItem(item) {
+  const sku = normalize(item.sku)
+  const article = normalize(item.article)
+
+  return (
+    rewardMap[sku] ||
+    rewardMap[article]
+  )
+}
+
 
 let DB = []
 
@@ -849,6 +875,27 @@ if (
 
 const diskon = formatDiskon(diskonValue)
 
+const isReward = isRewardItem(item)
+
+if (isReward) {
+  console.log("🎁 REWARD MATCH:", item.sku, item.article)
+}
+
+const rewardBadge = isReward
+  ? `<span style="
+      display:inline-block;
+      background:linear-gradient(45deg,#ffcc00,#ff8800);
+      color:#000;
+      padding:4px 8px;
+      border-radius:8px;
+      font-size:11px;
+      margin-top:4px;
+      font-weight:bold;
+    ">
+      🎁 +10% Matahari Reward
+    </span>`
+  : ""
+
     const mulai = item.fromdate || item.raw?.fromdate || "-"  
     const akhir = item.todate || item.raw?.todate || "-"  
 
@@ -860,8 +907,11 @@ const diskon = formatDiskon(diskonValue)
 
     el.innerHTML = `  
       <div style="display:flex;justify-content:space-between;align-items:start">
-        <div><b>${highlight(item.deskripsi, searchInput.value)}</b></div>
-        <div style="
+      <div>
+  <b>${highlight(item.deskripsi, searchInput.value)}</b>
+  <div style="margin-top:2px">
+    ${rewardBadge}</div></div>
+          <div style="
           background:${statusColor};
           color:white;
           padding:4px 8px;
@@ -887,9 +937,9 @@ const diskon = formatDiskon(diskonValue)
         }  
       </div>  
 
-      <div style="color:green;font-weight:bold">  
-        Diskon: ${diskon}  
-      </div>  
+    <div style="color:green;font-weight:bold">  
+    Diskon: ${diskon}
+    </div>
 
       <div>  
         Berlaku: ${formatTanggal(mulai)} - ${formatTanggal(akhir)}  
