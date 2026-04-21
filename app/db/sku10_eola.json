@@ -1,0 +1,410 @@
+[
+  {
+    "id": 1,
+    "sku": "15162026",
+    "article": "",
+    "source": "EOLA"
+  },
+  {
+    "id": 2,
+    "sku": "61668622",
+    "article": "",
+    "source": "EOLA"
+  },
+  {
+    "id": 3,
+    "sku": "61668631",
+    "article": "",
+    "source": "EOLA"
+  },
+  {
+    "id": 4,
+    "sku": "61668640",
+    "article": "",
+    "source": "EOLA"
+  },
+  {
+    "id": 5,
+    "sku": "62927064",
+    "article": "ENA550",
+    "source": "EOLA"
+  },
+  {
+    "id": 6,
+    "sku": "62927073",
+    "article": "ENA550",
+    "source": "EOLA"
+  },
+  {
+    "id": 7,
+    "sku": "62927082",
+    "article": "EL7549",
+    "source": "EOLA"
+  },
+  {
+    "id": 8,
+    "sku": "62927091",
+    "article": "EL7549",
+    "source": "EOLA"
+  },
+  {
+    "id": 9,
+    "sku": "62927108",
+    "article": "EL17541",
+    "source": "EOLA"
+  },
+  {
+    "id": 10,
+    "sku": "62927117",
+    "article": "EL17541",
+    "source": "EOLA"
+  },
+  {
+    "id": 11,
+    "sku": "62927126",
+    "article": "EL17541",
+    "source": "EOLA"
+  },
+  {
+    "id": 12,
+    "sku": "62927135",
+    "article": "EL17541",
+    "source": "EOLA"
+  },
+  {
+    "id": 13,
+    "sku": "62927144",
+    "article": "EL17541",
+    "source": "EOLA"
+  },
+  {
+    "id": 14,
+    "sku": "62927153",
+    "article": "EL17541",
+    "source": "EOLA"
+  },
+  {
+    "id": 15,
+    "sku": "62927162",
+    "article": "EL17541",
+    "source": "EOLA"
+  },
+  {
+    "id": 16,
+    "sku": "62961526",
+    "article": "ETSA1",
+    "source": "EOLA"
+  },
+  {
+    "id": 17,
+    "sku": "62961535",
+    "article": "ELC1-S",
+    "source": "EOLA"
+  },
+  {
+    "id": 18,
+    "sku": "62961544",
+    "article": "ELC1-M",
+    "source": "EOLA"
+  },
+  {
+    "id": 19,
+    "sku": "62961553",
+    "article": "ELC1-L",
+    "source": "EOLA"
+  },
+  {
+    "id": 20,
+    "sku": "62961562",
+    "article": "ELC2-S",
+    "source": "EOLA"
+  },
+  {
+    "id": 21,
+    "sku": "62961571",
+    "article": "ELC2-M",
+    "source": "EOLA"
+  },
+  {
+    "id": 22,
+    "sku": "62961580",
+    "article": "ELC2-L",
+    "source": "EOLA"
+  },
+  {
+    "id": 23,
+    "sku": "62973979",
+    "article": "EJY11",
+    "source": "EOLA"
+  },
+  {
+    "id": 24,
+    "sku": "62973988",
+    "article": "EJY11",
+    "source": "EOLA"
+  },
+  {
+    "id": 25,
+    "sku": "62973997",
+    "article": "EJY11",
+    "source": "EOLA"
+  },
+  {
+    "id": 26,
+    "sku": "62974003",
+    "article": "E231029",
+    "source": "EOLA"
+  },
+  {
+    "id": 27,
+    "sku": "62974012",
+    "article": "E231029",
+    "source": "EOLA"
+  },
+  {
+    "id": 28,
+    "sku": "62974021",
+    "article": "E231029",
+    "source": "EOLA"
+  },
+  {
+    "id": 29,
+    "sku": "62974030",
+    "article": "EP06",
+    "source": "EOLA"
+  },
+  {
+    "id": 30,
+    "sku": "62974049",
+    "article": "EP06",
+    "source": "EOLA"
+  },
+  {
+    "id": 31,
+    "sku": "62974058",
+    "article": "EP06",
+    "source": "EOLA"
+  },
+  {
+    "id": 32,
+    "sku": "62974067",
+    "article": "EGZ07",
+    "source": "EOLA"
+  },
+  {
+    "id": 33,
+    "sku": "62974076",
+    "article": "MD25HY306",
+    "source": "EOLA"
+  },
+  {
+    "id": 34,
+    "sku": "62974085",
+    "article": "MD25HY306",
+    "source": "EOLA"
+  },
+  {
+    "id": 35,
+    "sku": "62974094",
+    "article": "MD25HY306",
+    "source": "EOLA"
+  },
+  {
+    "id": 36,
+    "sku": "62974101",
+    "article": "MU25HY305",
+    "source": "EOLA"
+  },
+  {
+    "id": 37,
+    "sku": "62974110",
+    "article": "MU25HY305",
+    "source": "EOLA"
+  },
+  {
+    "id": 38,
+    "sku": "62974129",
+    "article": "MU25HY305",
+    "source": "EOLA"
+  },
+  {
+    "id": 39,
+    "sku": "62975495",
+    "article": "EJY11-24",
+    "source": "EOLA"
+  },
+  {
+    "id": 40,
+    "sku": "62975502",
+    "article": "EJY11-24",
+    "source": "EOLA"
+  },
+  {
+    "id": 41,
+    "sku": "62975511",
+    "article": "EJY11-24",
+    "source": "EOLA"
+  },
+  {
+    "id": 42,
+    "sku": "62975520",
+    "article": "EJY11-28",
+    "source": "EOLA"
+  },
+  {
+    "id": 43,
+    "sku": "62975539",
+    "article": "EJY11-28",
+    "source": "EOLA"
+  },
+  {
+    "id": 44,
+    "sku": "62975548",
+    "article": "EJY11-28",
+    "source": "EOLA"
+  },
+  {
+    "id": 45,
+    "sku": "62975557",
+    "article": "E231029-24",
+    "source": "EOLA"
+  },
+  {
+    "id": 46,
+    "sku": "62975566",
+    "article": "E231029-24",
+    "source": "EOLA"
+  },
+  {
+    "id": 47,
+    "sku": "62975575",
+    "article": "E231029-24",
+    "source": "EOLA"
+  },
+  {
+    "id": 48,
+    "sku": "62975584",
+    "article": "E231029-28",
+    "source": "EOLA"
+  },
+  {
+    "id": 49,
+    "sku": "62975593",
+    "article": "E231029-28",
+    "source": "EOLA"
+  },
+  {
+    "id": 50,
+    "sku": "23102928",
+    "article": "E231029-28",
+    "source": "EOLA"
+  },
+  {
+    "id": 51,
+    "sku": "62975619",
+    "article": "EP06-24",
+    "source": "EOLA"
+  },
+  {
+    "id": 52,
+    "sku": "62975628",
+    "article": "EP06-24",
+    "source": "EOLA"
+  },
+  {
+    "id": 53,
+    "sku": "62975637",
+    "article": "EP06-24",
+    "source": "EOLA"
+  },
+  {
+    "id": 54,
+    "sku": "62975646",
+    "article": "EP06-28",
+    "source": "EOLA"
+  },
+  {
+    "id": 55,
+    "sku": "62975655",
+    "article": "EP06-28",
+    "source": "EOLA"
+  },
+  {
+    "id": 56,
+    "sku": "62975664",
+    "article": "EP06-28",
+    "source": "EOLA"
+  },
+  {
+    "id": 57,
+    "sku": "62975673",
+    "article": "MD25HY306-24",
+    "source": "EOLA"
+  },
+  {
+    "id": 58,
+    "sku": "62975682",
+    "article": "MD25HY306-24",
+    "source": "EOLA"
+  },
+  {
+    "id": 59,
+    "sku": "62975691",
+    "article": "MD25HY306-24",
+    "source": "EOLA"
+  },
+  {
+    "id": 60,
+    "sku": "62975708",
+    "article": "MD25HY306-28",
+    "source": "EOLA"
+  },
+  {
+    "id": 61,
+    "sku": "62975717",
+    "article": "MD25HY306-28",
+    "source": "EOLA"
+  },
+  {
+    "id": 62,
+    "sku": "62975726",
+    "article": "MD25HY306-28",
+    "source": "EOLA"
+  },
+  {
+    "id": 63,
+    "sku": "62975735",
+    "article": "MU25HY305-24",
+    "source": "EOLA"
+  },
+  {
+    "id": 64,
+    "sku": "62975744",
+    "article": "MU25HY305-24",
+    "source": "EOLA"
+  },
+  {
+    "id": 65,
+    "sku": "62975753",
+    "article": "MU25HY305-24",
+    "source": "EOLA"
+  },
+  {
+    "id": 66,
+    "sku": "62975762",
+    "article": "MU25HY305-28",
+    "source": "EOLA"
+  },
+  {
+    "id": 67,
+    "sku": "62975771",
+    "article": "MU25HY305-28",
+    "source": "EOLA"
+  },
+  {
+    "id": 68,
+    "sku": "62975780",
+    "article": "MU25HY305-28",
+    "source": "EOLA"
+  }
+]

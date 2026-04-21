@@ -1,0 +1,1478 @@
+[
+  {
+    "id": 1,
+    "sku": "15162026",
+    "article": "",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 2,
+    "sku": "024612636",
+    "article": "A0246126.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 3,
+    "sku": "024612637",
+    "article": "A0246126.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 4,
+    "sku": "024612638",
+    "article": "A0246126.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 5,
+    "sku": "024612639",
+    "article": "A0246126.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 6,
+    "sku": "024612640",
+    "article": "A0246126.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 7,
+    "sku": "044609436",
+    "article": "A0446094.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 8,
+    "sku": "044609437",
+    "article": "A0446094.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 9,
+    "sku": "044609438",
+    "article": "A0446094.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 10,
+    "sku": "044609439",
+    "article": "A0446094.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 11,
+    "sku": "044609440",
+    "article": "A0446094.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 12,
+    "sku": "074611436",
+    "article": "A0746114.GOLD.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 13,
+    "sku": "074611437",
+    "article": "A0746114.GOLD.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 14,
+    "sku": "074611438",
+    "article": "A0746114.GOLD.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 15,
+    "sku": "074611439",
+    "article": "A0746114.GOLD.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 16,
+    "sku": "074611440",
+    "article": "A0746114.GOLD.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 17,
+    "sku": "074611536",
+    "article": "A0746115.GOLD.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 18,
+    "sku": "074611537",
+    "article": "A0746115.GOLD.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 19,
+    "sku": "074611538",
+    "article": "A0746115.GOLD.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 20,
+    "sku": "074611539",
+    "article": "A0746115.GOLD.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 21,
+    "sku": "074611540",
+    "article": "A0746115.GOLD.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 22,
+    "sku": "074611636",
+    "article": "A0746116.BEIGE.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 23,
+    "sku": "074611637",
+    "article": "A0746116.BEIGE.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 24,
+    "sku": "074611638",
+    "article": "A0746116.BEIGE.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 25,
+    "sku": "074611639",
+    "article": "A0746116.BEIGE.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 26,
+    "sku": "074611640",
+    "article": "A0746116.BEIGE.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 27,
+    "sku": "085605336",
+    "article": "A0856053.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 28,
+    "sku": "085605337",
+    "article": "A0856053.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 29,
+    "sku": "085605338",
+    "article": "A0856053.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 30,
+    "sku": "085605339",
+    "article": "A0856053.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 31,
+    "sku": "085605340",
+    "article": "A0856053.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 32,
+    "sku": "024508436",
+    "article": "L0245084.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 33,
+    "sku": "024508437",
+    "article": "L0245084.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 34,
+    "sku": "024508438",
+    "article": "L0245084.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 35,
+    "sku": "024508439",
+    "article": "L0245084.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 36,
+    "sku": "024508440",
+    "article": "L0245084.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 37,
+    "sku": "024508536",
+    "article": "L0245085.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 38,
+    "sku": "024508537",
+    "article": "L0245085.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 39,
+    "sku": "024508538",
+    "article": "L0245085.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 40,
+    "sku": "024508539",
+    "article": "L0245085.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 41,
+    "sku": "024508540",
+    "article": "L0245085.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 42,
+    "sku": "024612436",
+    "article": "A0246124.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 43,
+    "sku": "024612437",
+    "article": "A0246124.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 44,
+    "sku": "024612438",
+    "article": "A0246124.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 45,
+    "sku": "024612439",
+    "article": "A0246124.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 46,
+    "sku": "024612440",
+    "article": "A0246124.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 47,
+    "sku": "085605036",
+    "article": "A0856050.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 48,
+    "sku": "085605037",
+    "article": "A0856050.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 49,
+    "sku": "085605038",
+    "article": "A0856050.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 50,
+    "sku": "085605039",
+    "article": "A0856050.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 51,
+    "sku": "085605040",
+    "article": "A0856050.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 52,
+    "sku": "085605136",
+    "article": "A0856051.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 53,
+    "sku": "085605137",
+    "article": "A0856051.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 54,
+    "sku": "085605138",
+    "article": "A0856051.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 55,
+    "sku": "085605139",
+    "article": "A0856051.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 56,
+    "sku": "085605140",
+    "article": "A0856051.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 57,
+    "sku": "154610736",
+    "article": "A1546107.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 58,
+    "sku": "154610737",
+    "article": "A1546107.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 59,
+    "sku": "154610738",
+    "article": "A1546107.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 60,
+    "sku": "154610739",
+    "article": "A1546107.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 61,
+    "sku": "154610740",
+    "article": "A1546107.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 62,
+    "sku": "154610836",
+    "article": "A1546108.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 63,
+    "sku": "154610837",
+    "article": "A1546108.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 64,
+    "sku": "154610838",
+    "article": "A1546108.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 65,
+    "sku": "154610839",
+    "article": "A1546108.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 66,
+    "sku": "154610840",
+    "article": "A1546108.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 67,
+    "sku": "023502036",
+    "article": "K0235020.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 68,
+    "sku": "023502037",
+    "article": "K0235020.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 69,
+    "sku": "023502038",
+    "article": "K0235020.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 70,
+    "sku": "023502039",
+    "article": "K0235020.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 71,
+    "sku": "023502040",
+    "article": "K0235020.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 72,
+    "sku": "023502136",
+    "article": "K0235021.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 73,
+    "sku": "023502137",
+    "article": "K0235021.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 74,
+    "sku": "023502138",
+    "article": "K0235021.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 75,
+    "sku": "023502139",
+    "article": "K0235021.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 76,
+    "sku": "023502140",
+    "article": "K0235021.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 77,
+    "sku": "023602936",
+    "article": "A0236029.BLACK.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 78,
+    "sku": "023602937",
+    "article": "A0236029.BLACK.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 79,
+    "sku": "023602938",
+    "article": "A0236029.BLACK.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 80,
+    "sku": "023602939",
+    "article": "A0236029.BLACK.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 81,
+    "sku": "023602940",
+    "article": "A0236029.BLACK.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 82,
+    "sku": "024612536",
+    "article": "A0246125.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 83,
+    "sku": "024612537",
+    "article": "A0246125.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 84,
+    "sku": "024612538",
+    "article": "A0246125.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 85,
+    "sku": "024612539",
+    "article": "A0246125.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 86,
+    "sku": "024612540",
+    "article": "A0246125.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 87,
+    "sku": "024509336",
+    "article": "L0245093.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 88,
+    "sku": "024509337",
+    "article": "L0245093.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 89,
+    "sku": "024509338",
+    "article": "L0245093.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 90,
+    "sku": "024509339",
+    "article": "L0245093.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 91,
+    "sku": "024509340",
+    "article": "L0245093.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 92,
+    "sku": "055604336",
+    "article": "A0556043.BEIGE.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 93,
+    "sku": "055604337",
+    "article": "A0556043.BEIGE.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 94,
+    "sku": "055604338",
+    "article": "A0556043.BEIGE.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 95,
+    "sku": "055604339",
+    "article": "A0556043.BEIGE.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 96,
+    "sku": "055604340",
+    "article": "A0556043.BEIGE.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 97,
+    "sku": "055604436",
+    "article": "A0556044.BEIGE.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 98,
+    "sku": "055604437",
+    "article": "A0556044.BEIGE.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 99,
+    "sku": "055604438",
+    "article": "A0556044.BEIGE.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 100,
+    "sku": "055604439",
+    "article": "A0556044.BEIGE.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 101,
+    "sku": "055604440",
+    "article": "A0556044.BEIGE.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 102,
+    "sku": "055604536",
+    "article": "A0556045.BEIGE.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 103,
+    "sku": "055604537",
+    "article": "A0556045.BEIGE.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 104,
+    "sku": "055604538",
+    "article": "A0556045.BEIGE.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 105,
+    "sku": "055604539",
+    "article": "A0556045.BEIGE.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 106,
+    "sku": "055604540",
+    "article": "A0556045.BEIGE.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 107,
+    "sku": "055604636",
+    "article": "A0556046.BEIGE.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 108,
+    "sku": "055604637",
+    "article": "A0556046.BEIGE.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 109,
+    "sku": "055604638",
+    "article": "A0556046.BEIGE.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 110,
+    "sku": "055604639",
+    "article": "A0556046.BEIGE.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 111,
+    "sku": "055604640",
+    "article": "A0556046.BEIGE.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 112,
+    "sku": "085605536",
+    "article": "A0856055.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 113,
+    "sku": "085605537",
+    "article": "A0856055.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 114,
+    "sku": "085605538",
+    "article": "A0856055.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 115,
+    "sku": "085605539",
+    "article": "A0856055.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 116,
+    "sku": "085605540",
+    "article": "A0856055.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 117,
+    "sku": "024508936",
+    "article": "L0245089.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 118,
+    "sku": "024508937",
+    "article": "L0245089.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 119,
+    "sku": "024508938",
+    "article": "L0245089.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 120,
+    "sku": "024508939",
+    "article": "L0245089.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 121,
+    "sku": "024508940",
+    "article": "L0245089.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 122,
+    "sku": "072608936",
+    "article": "A0726089.BEIGE.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 123,
+    "sku": "072608937",
+    "article": "A0726089.BEIGE.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 124,
+    "sku": "072608938",
+    "article": "A0726089.BEIGE.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 125,
+    "sku": "072608939",
+    "article": "A0726089.BEIGE.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 126,
+    "sku": "072608940",
+    "article": "A0726089.BEIGE.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 127,
+    "sku": "074611136",
+    "article": "A0746111.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 128,
+    "sku": "074611137",
+    "article": "A0746111.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 129,
+    "sku": "074611138",
+    "article": "A0746111.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 130,
+    "sku": "074611139",
+    "article": "A0746111.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 131,
+    "sku": "074611140",
+    "article": "A0746111.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 132,
+    "sku": "074611336",
+    "article": "A0746113.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 133,
+    "sku": "074611337",
+    "article": "A0746113.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 134,
+    "sku": "074611338",
+    "article": "A0746113.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 135,
+    "sku": "074611339",
+    "article": "A0746113.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 136,
+    "sku": "074611340",
+    "article": "A0746113.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 137,
+    "sku": "084610436",
+    "article": "A0846104.BLACK.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 138,
+    "sku": "084610437",
+    "article": "A0846104.BLACK.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 139,
+    "sku": "084610438",
+    "article": "A0846104.BLACK.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 140,
+    "sku": "084610439",
+    "article": "A0846104.BLACK.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 141,
+    "sku": "084610440",
+    "article": "A0846104.BLACK.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 142,
+    "sku": "085604936",
+    "article": "A0856049.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 143,
+    "sku": "085604937",
+    "article": "A0856049.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 144,
+    "sku": "085604938",
+    "article": "A0856049.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 145,
+    "sku": "085604939",
+    "article": "A0856049.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 146,
+    "sku": "085604940",
+    "article": "A0856049.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 147,
+    "sku": "184611936",
+    "article": "A1846119.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 148,
+    "sku": "184611937",
+    "article": "A1846119.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 149,
+    "sku": "184611938",
+    "article": "A1846119.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 150,
+    "sku": "184611939",
+    "article": "A1846119.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 151,
+    "sku": "184611940",
+    "article": "A1846119.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 152,
+    "sku": "184612036",
+    "article": "A1846120.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 153,
+    "sku": "184612037",
+    "article": "A1846120.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 154,
+    "sku": "184612038",
+    "article": "A1846120.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 155,
+    "sku": "184612039",
+    "article": "A1846120.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 156,
+    "sku": "184612040",
+    "article": "A1846120.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 157,
+    "sku": "074611236",
+    "article": "A0746112.CHAMP.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 158,
+    "sku": "074611237",
+    "article": "A0746112.CHAMP.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 159,
+    "sku": "074611238",
+    "article": "A0746112.CHAMP.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 160,
+    "sku": "074611239",
+    "article": "A0746112.CHAMP.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 161,
+    "sku": "074611240",
+    "article": "A0746112.CHAMP.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 162,
+    "sku": "084610536",
+    "article": "A0846105.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 163,
+    "sku": "084610537",
+    "article": "A0846105.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 164,
+    "sku": "084610538",
+    "article": "A0846105.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 165,
+    "sku": "084610539",
+    "article": "A0846105.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 166,
+    "sku": "084610540",
+    "article": "A0846105.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 167,
+    "sku": "085604836",
+    "article": "A0856048.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 168,
+    "sku": "085604837",
+    "article": "A0856048.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 169,
+    "sku": "085604838",
+    "article": "A0856048.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 170,
+    "sku": "085604839",
+    "article": "A0856048.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 171,
+    "sku": "085604840",
+    "article": "A0856048.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 172,
+    "sku": "085605436",
+    "article": "A0856054.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 173,
+    "sku": "085605437",
+    "article": "A0856054.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 174,
+    "sku": "085605438",
+    "article": "A0856054.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 175,
+    "sku": "085605439",
+    "article": "A0856054.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 176,
+    "sku": "085605440",
+    "article": "A0856054.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 177,
+    "sku": "154610936",
+    "article": "A1546109.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 178,
+    "sku": "154610937",
+    "article": "A1546109.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 179,
+    "sku": "154610938",
+    "article": "A1546109.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 180,
+    "sku": "154610939",
+    "article": "A1546109.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 181,
+    "sku": "154610940",
+    "article": "A1546109.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 182,
+    "sku": "154611036",
+    "article": "A1546110.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 183,
+    "sku": "154611037",
+    "article": "A1546110.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 184,
+    "sku": "154611038",
+    "article": "A1546110.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 185,
+    "sku": "154611039",
+    "article": "A1546110.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 186,
+    "sku": "154611040",
+    "article": "A1546110.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 187,
+    "sku": "184612136",
+    "article": "A1846121.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 188,
+    "sku": "184612137",
+    "article": "A1846121.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 189,
+    "sku": "184612138",
+    "article": "A1846121.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 190,
+    "sku": "184612139",
+    "article": "A1846121.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 191,
+    "sku": "184612140",
+    "article": "A1846121.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 192,
+    "sku": "024505336",
+    "article": "K0245053.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 193,
+    "sku": "024505337",
+    "article": "K0245053.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 194,
+    "sku": "024505338",
+    "article": "K0245053.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 195,
+    "sku": "024505339",
+    "article": "K0245053.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 196,
+    "sku": "024505340",
+    "article": "K0245053.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 197,
+    "sku": "042607936",
+    "article": "A0426079.BEIGE.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 198,
+    "sku": "042607937",
+    "article": "A0426079.BEIGE.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 199,
+    "sku": "042607938",
+    "article": "A0426079.BEIGE.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 200,
+    "sku": "042607939",
+    "article": "A0426079.BEIGE.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 201,
+    "sku": "042607940",
+    "article": "A0426079.BEIGE.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 202,
+    "sku": "042608036",
+    "article": "A0426080.KHAKI.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 203,
+    "sku": "042608037",
+    "article": "A0426080.KHAKI.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 204,
+    "sku": "042608038",
+    "article": "A0426080.KHAKI.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 205,
+    "sku": "042608039",
+    "article": "A0426080.KHAKI.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 206,
+    "sku": "042608040",
+    "article": "A0426080.KHAKI.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 207,
+    "sku": "042608136",
+    "article": "A0426081.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 208,
+    "sku": "042608137",
+    "article": "A0426081.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 209,
+    "sku": "042608138",
+    "article": "A0426081.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 210,
+    "sku": "042608139",
+    "article": "A0426081.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 211,
+    "sku": "042608140",
+    "article": "A0426081.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 212,
+    "sku": "042608236",
+    "article": "A0426082.BLACK.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 213,
+    "sku": "042608237",
+    "article": "A0426082.BLACK.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 214,
+    "sku": "042608238",
+    "article": "A0426082.BLACK.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 215,
+    "sku": "042608239",
+    "article": "A0426082.BLACK.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 216,
+    "sku": "042608240",
+    "article": "A0426082.BLACK.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 217,
+    "sku": "044609536",
+    "article": "A0446095.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 218,
+    "sku": "044609537",
+    "article": "A0446095.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 219,
+    "sku": "044609538",
+    "article": "A0446095.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 220,
+    "sku": "044609539",
+    "article": "A0446095.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 221,
+    "sku": "044609540",
+    "article": "A0446095.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 222,
+    "sku": "085604736",
+    "article": "A0856047.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 223,
+    "sku": "085604737",
+    "article": "A0856047.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 224,
+    "sku": "085604738",
+    "article": "A0856047.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 225,
+    "sku": "085604739",
+    "article": "A0856047.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 226,
+    "sku": "085604740",
+    "article": "A0856047.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 227,
+    "sku": "085605236",
+    "article": "A0856052.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 228,
+    "sku": "085605237",
+    "article": "A0856052.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 229,
+    "sku": "085605238",
+    "article": "A0856052.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 230,
+    "sku": "085605239",
+    "article": "A0856052.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 231,
+    "sku": "085605240",
+    "article": "A0856052.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 232,
+    "sku": "184611736",
+    "article": "A1846117.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 233,
+    "sku": "184611737",
+    "article": "A1846117.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 234,
+    "sku": "184611738",
+    "article": "A1846117.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 235,
+    "sku": "184611739",
+    "article": "A1846117.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 236,
+    "sku": "184611740",
+    "article": "A1846117.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 237,
+    "sku": "042607736",
+    "article": "A0426077.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 238,
+    "sku": "042607737",
+    "article": "A0426077.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 239,
+    "sku": "042607738",
+    "article": "A0426077.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 240,
+    "sku": "042607739",
+    "article": "A0426077.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 241,
+    "sku": "042607740",
+    "article": "A0426077.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 242,
+    "sku": "042607836",
+    "article": "A0426078.APRICOT.36",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 243,
+    "sku": "042607837",
+    "article": "A0426078.APRICOT.37",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 244,
+    "sku": "042607838",
+    "article": "A0426078.APRICOT.38",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 245,
+    "sku": "042607839",
+    "article": "A0426078.APRICOT.39",
+    "source": "GENNY LADIES SHOES"
+  },
+  {
+    "id": 246,
+    "sku": "042607840",
+    "article": "A0426078.APRICOT.40",
+    "source": "GENNY LADIES SHOES"
+  }
+]

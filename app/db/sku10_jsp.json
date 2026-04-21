@@ -1,0 +1,326 @@
+[
+  {
+    "id": 1,
+    "sku": "15162026",
+    "article": "",
+    "source": "JSP"
+  },
+  {
+    "id": 2,
+    "sku": "61463638",
+    "article": "J252MCVK-05TR",
+    "source": "JSP"
+  },
+  {
+    "id": 3,
+    "sku": "61464066",
+    "article": "J252MCVK-05TR",
+    "source": "JSP"
+  },
+  {
+    "id": 4,
+    "sku": "61464191",
+    "article": "J252MCVK-05TR",
+    "source": "JSP"
+  },
+  {
+    "id": 5,
+    "sku": "61464799",
+    "article": "J252MCVK-05TR",
+    "source": "JSP"
+  },
+  {
+    "id": 6,
+    "sku": "61463861",
+    "article": "J252MCVK-05TR",
+    "source": "JSP"
+  },
+  {
+    "id": 7,
+    "sku": "61464539",
+    "article": "J252MCVK-05TR",
+    "source": "JSP"
+  },
+  {
+    "id": 8,
+    "sku": "61621092",
+    "article": "J252CODK-08TR",
+    "source": "JSP"
+  },
+  {
+    "id": 9,
+    "sku": "61621430",
+    "article": "J252CODK-08TR",
+    "source": "JSP"
+  },
+  {
+    "id": 10,
+    "sku": "61621565",
+    "article": "J252CODK-08TR",
+    "source": "JSP"
+  },
+  {
+    "id": 11,
+    "sku": "61621047",
+    "article": "J252CODK-08TR",
+    "source": "JSP"
+  },
+  {
+    "id": 12,
+    "sku": "61621136",
+    "article": "J252CODK-08TR",
+    "source": "JSP"
+  },
+  {
+    "id": 13,
+    "sku": "68220637",
+    "article": "J252CCRK-12TR",
+    "source": "JSP"
+  },
+  {
+    "id": 14,
+    "sku": "68222911",
+    "article": "J252CCRK-12TR",
+    "source": "JSP"
+  },
+  {
+    "id": 15,
+    "sku": "68222073",
+    "article": "J252CCRK-12TR",
+    "source": "JSP"
+  },
+  {
+    "id": 16,
+    "sku": "68222484",
+    "article": "J252CCRK-12TR",
+    "source": "JSP"
+  },
+  {
+    "id": 17,
+    "sku": "68223090",
+    "article": "J252CCRK-12TR",
+    "source": "JSP"
+  },
+  {
+    "id": 18,
+    "sku": "68221412",
+    "article": "J252CCRK-12TR",
+    "source": "JSP"
+  },
+  {
+    "id": 19,
+    "sku": "68616639",
+    "article": "J252RRTK-09TR",
+    "source": "JSP"
+  },
+  {
+    "id": 20,
+    "sku": "68617058",
+    "article": "J252RRTK-09TR",
+    "source": "JSP"
+  },
+  {
+    "id": 21,
+    "sku": "68616942",
+    "article": "J252RRTK-09TR",
+    "source": "JSP"
+  },
+  {
+    "id": 22,
+    "sku": "68616960",
+    "article": "J252RRTK-09TR",
+    "source": "JSP"
+  },
+  {
+    "id": 23,
+    "sku": "68616951",
+    "article": "J252RRTK-09TR",
+    "source": "JSP"
+  },
+  {
+    "id": 24,
+    "sku": "68616620",
+    "article": "J252RRTK-09TR",
+    "source": "JSP"
+  },
+  {
+    "id": 25,
+    "sku": "69512123",
+    "article": "J261RHTK-07TR",
+    "source": "JSP"
+  },
+  {
+    "id": 26,
+    "sku": "69512212",
+    "article": "J261RHTK-07TR",
+    "source": "JSP"
+  },
+  {
+    "id": 27,
+    "sku": "69511544",
+    "article": "J261RHTK-07TR",
+    "source": "JSP"
+  },
+  {
+    "id": 28,
+    "sku": "69512187",
+    "article": "J261RHTK-07TR",
+    "source": "JSP"
+  },
+  {
+    "id": 29,
+    "sku": "69511204",
+    "article": "J261RHTK-07TR",
+    "source": "JSP"
+  },
+  {
+    "id": 30,
+    "sku": "69511179",
+    "article": "J261RHTK-07TR",
+    "source": "JSP"
+  },
+  {
+    "id": 31,
+    "sku": "69737328",
+    "article": "J261EBEK-08TR",
+    "source": "JSP"
+  },
+  {
+    "id": 32,
+    "sku": "69737079",
+    "article": "J261EBEK-08TR",
+    "source": "JSP"
+  },
+  {
+    "id": 33,
+    "sku": "69737453",
+    "article": "J261EBEK-08TR",
+    "source": "JSP"
+  },
+  {
+    "id": 34,
+    "sku": "69737382",
+    "article": "J261EBEK-08TR",
+    "source": "JSP"
+  },
+  {
+    "id": 35,
+    "sku": "69737435",
+    "article": "J261EBEK-08TR",
+    "source": "JSP"
+  },
+  {
+    "id": 36,
+    "sku": "69737159",
+    "article": "J261EBEK-08TR",
+    "source": "JSP"
+  },
+  {
+    "id": 37,
+    "sku": "69904861",
+    "article": "J261INVK-06TR",
+    "source": "JSP"
+  },
+  {
+    "id": 38,
+    "sku": "69904165",
+    "article": "J261INVK-06TR",
+    "source": "JSP"
+  },
+  {
+    "id": 39,
+    "sku": "69904290",
+    "article": "J261INVK-06TR",
+    "source": "JSP"
+  },
+  {
+    "id": 40,
+    "sku": "69904192",
+    "article": "J261INVK-06TR",
+    "source": "JSP"
+  },
+  {
+    "id": 41,
+    "sku": "69904352",
+    "article": "J261INVK-06TR",
+    "source": "JSP"
+  },
+  {
+    "id": 42,
+    "sku": "69904754",
+    "article": "J261INVK-06TR",
+    "source": "JSP"
+  },
+  {
+    "id": 43,
+    "sku": "71097382",
+    "article": "J261NITK-06TR",
+    "source": "JSP"
+  },
+  {
+    "id": 44,
+    "sku": "71097631",
+    "article": "J261NITK-06TR",
+    "source": "JSP"
+  },
+  {
+    "id": 45,
+    "sku": "71097720",
+    "article": "J261NITK-06TR",
+    "source": "JSP"
+  },
+  {
+    "id": 46,
+    "sku": "71097828",
+    "article": "J261NITK-06TR",
+    "source": "JSP"
+  },
+  {
+    "id": 47,
+    "sku": "71097668",
+    "article": "J261NITK-06TR",
+    "source": "JSP"
+  },
+  {
+    "id": 48,
+    "sku": "71097917",
+    "article": "J261NITK-06TR",
+    "source": "JSP"
+  },
+  {
+    "id": 49,
+    "sku": "71097882",
+    "article": "J261NITK-09TR",
+    "source": "JSP"
+  },
+  {
+    "id": 50,
+    "sku": "71097373",
+    "article": "J261NITK-09TR",
+    "source": "JSP"
+  },
+  {
+    "id": 51,
+    "sku": "71097908",
+    "article": "J261NITK-09TR",
+    "source": "JSP"
+  },
+  {
+    "id": 52,
+    "sku": "71097855",
+    "article": "J261NITK-09TR",
+    "source": "JSP"
+  },
+  {
+    "id": 53,
+    "sku": "71097579",
+    "article": "J261NITK-09TR",
+    "source": "JSP"
+  },
+  {
+    "id": 54,
+    "sku": "71097453",
+    "article": "J261NITK-09TR",
+    "source": "JSP"
+  }
+]
