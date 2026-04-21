@@ -1,0 +1,554 @@
+[
+  {
+    "id": 1,
+    "sku": "15162026",
+    "article": "",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 2,
+    "sku": "63004344",
+    "article": "54000M.18",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 3,
+    "sku": "63004522",
+    "article": "54000M.18",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 4,
+    "sku": "63004273",
+    "article": "54000M.18",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 5,
+    "sku": "63004291",
+    "article": "54000M.18",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 6,
+    "sku": "63004639",
+    "article": "54000M.20",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 7,
+    "sku": "63004648",
+    "article": "54000M.20",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 8,
+    "sku": "63004228",
+    "article": "54000M.20",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 9,
+    "sku": "63004308",
+    "article": "54000M.20",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 10,
+    "sku": "55459244",
+    "article": "54001M.25",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 11,
+    "sku": "55458843",
+    "article": "54001M.25",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 12,
+    "sku": "55458870",
+    "article": "54001M.25",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 13,
+    "sku": "55458898",
+    "article": "54001M.25",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 14,
+    "sku": "55458432",
+    "article": "54001M.28",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 15,
+    "sku": "55459342",
+    "article": "54001M.28",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 16,
+    "sku": "55459324",
+    "article": "54001M.28",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 17,
+    "sku": "55459137",
+    "article": "54001M.28",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 18,
+    "sku": "63004399",
+    "article": "57000M.25",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 19,
+    "sku": "63004317",
+    "article": "57000M.25",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 20,
+    "sku": "63004504",
+    "article": "57000M.25",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 21,
+    "sku": "63004380",
+    "article": "57000M.25",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 22,
+    "sku": "5700028",
+    "article": "57000M.28",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 23,
+    "sku": "63004451",
+    "article": "57000M.28",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 24,
+    "sku": "63004620",
+    "article": "57000M.28",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 25,
+    "sku": "63004371",
+    "article": "57000M.28",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 26,
+    "sku": "63004246",
+    "article": "73603M.18",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 27,
+    "sku": "63004282",
+    "article": "73603M.18",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 28,
+    "sku": "63004540",
+    "article": "73603M.18",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 29,
+    "sku": "63004264",
+    "article": "73603M.18",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 30,
+    "sku": "63004602",
+    "article": "73603M.20",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 31,
+    "sku": "63004497",
+    "article": "73603M.20",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 32,
+    "sku": "63004433",
+    "article": "73603M.20",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 33,
+    "sku": "63004479",
+    "article": "73603M.20",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 34,
+    "sku": "63004531",
+    "article": "73611M.12",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 35,
+    "sku": "63004568",
+    "article": "73611M.12",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 36,
+    "sku": "63004406",
+    "article": "73611M.12",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 37,
+    "sku": "63004353",
+    "article": "73611M.12",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 38,
+    "sku": "63004442",
+    "article": "73611M.16",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 39,
+    "sku": "63004513",
+    "article": "73611M.16",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 40,
+    "sku": "63004219",
+    "article": "73611M.16",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 41,
+    "sku": "63004237",
+    "article": "73611M.16",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 42,
+    "sku": "63004595",
+    "article": "73611M.18",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 43,
+    "sku": "63004415",
+    "article": "73611M.18",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 44,
+    "sku": "63004362",
+    "article": "73611M.18",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 45,
+    "sku": "63004460",
+    "article": "73611M.18",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 46,
+    "sku": "17583716",
+    "article": "PLHDM.04",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 47,
+    "sku": "17583805",
+    "article": "PLHDM.04",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 48,
+    "sku": "17583841",
+    "article": "PLHDM.04",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 49,
+    "sku": "17583734",
+    "article": "PLHDM.04",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 50,
+    "sku": "17583798",
+    "article": "PLHDM.12",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 51,
+    "sku": "17583814",
+    "article": "PLHDM.12",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 52,
+    "sku": "17583770",
+    "article": "PLHDM.12",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 53,
+    "sku": "17583752",
+    "article": "PLHDM.12",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 54,
+    "sku": "17583761",
+    "article": "PLHDM.24",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 55,
+    "sku": "17583743",
+    "article": "PLHDM.24",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 56,
+    "sku": "17583832",
+    "article": "PLHDM.24",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 57,
+    "sku": "17583789",
+    "article": "PLHDM.24",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 58,
+    "sku": "17583707",
+    "article": "PLHDM.52",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 59,
+    "sku": "17583850",
+    "article": "PLHDM.52",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 60,
+    "sku": "17583823",
+    "article": "PLHDM.52",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 61,
+    "sku": "17583725",
+    "article": "PLHDM.52",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 62,
+    "sku": "18819380",
+    "article": "MCJ.09",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 63,
+    "sku": "18819362",
+    "article": "MCJ.09",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 64,
+    "sku": "18819371",
+    "article": "MCJ.09",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 65,
+    "sku": "18819406",
+    "article": "MCJ.09",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 66,
+    "sku": "18819335",
+    "article": "MCJ.23",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 67,
+    "sku": "18819326",
+    "article": "MCJ.23",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 68,
+    "sku": "18819424",
+    "article": "MCJ.23",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 69,
+    "sku": "18819399",
+    "article": "MCJ.23",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 70,
+    "sku": "45947093",
+    "article": "MCJ.04",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 71,
+    "sku": "45947057",
+    "article": "MCJ.04",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 72,
+    "sku": "45947075",
+    "article": "MCJ.04",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 73,
+    "sku": "52250821",
+    "article": "MCJ.39",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 74,
+    "sku": "52250607",
+    "article": "MCJ.39",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 75,
+    "sku": "52251946",
+    "article": "MCJ.39",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 76,
+    "sku": "52249253",
+    "article": "MCJ.39",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 77,
+    "sku": "54667735",
+    "article": "52000M.28",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 78,
+    "sku": "54667691",
+    "article": "52000M.28",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 79,
+    "sku": "54668476",
+    "article": "52000M.28",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 80,
+    "sku": "54669162",
+    "article": "52000M.28",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 81,
+    "sku": "54668636",
+    "article": "52000M.28",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 82,
+    "sku": "54668145",
+    "article": "52000M.28",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 83,
+    "sku": "54667806",
+    "article": "52000M.28",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 84,
+    "sku": "54667726",
+    "article": "52000M.28",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 85,
+    "sku": "54669117",
+    "article": "52000M.87",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 86,
+    "sku": "54668261",
+    "article": "52000M.87",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 87,
+    "sku": "54667744",
+    "article": "52000M.87",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 88,
+    "sku": "54668565",
+    "article": "52000M.87",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 89,
+    "sku": "54667904",
+    "article": "52000M.87",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 90,
+    "sku": "54667771",
+    "article": "52000M.87",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 91,
+    "sku": "54668734",
+    "article": "52000M.87",
+    "source": "MEN & CLO"
+  },
+  {
+    "id": 92,
+    "sku": "54668921",
+    "article": "52000M.87",
+    "source": "MEN & CLO"
+  }
+]

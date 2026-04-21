@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "sku": "15162026",
+    "article": "",
+    "source": "MAKEOVER"
+  },
+  {
+    "id": 2,
+    "sku": "27444204",
+    "article": "MAKE OVER Hyperblack Superstay Liner 1 g",
+    "source": "MAKEOVER"
+  },
+  {
+    "id": 3,
+    "sku": "32077897",
+    "article": "MAKE OVER Brow Styler Eye Definer Mocha 0.13 g",
+    "source": "MAKEOVER"
+  },
+  {
+    "id": 4,
+    "sku": "32077977",
+    "article": "MAKE OVER Brow Styler Eye Definer Americano 0.13 g",
+    "source": "MAKEOVER"
+  },
+  {
+    "id": 5,
+    "sku": "32078636",
+    "article": "MAKE OVER Brow Styler Eye Definer Caffè Latte 0.13 g",
+    "source": "MAKEOVER"
+  }
+]
