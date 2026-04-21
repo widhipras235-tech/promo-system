@@ -1,0 +1,1970 @@
+[
+  {
+    "id": 1,
+    "sku": "15162026",
+    "article": "",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 2,
+    "sku": "503722961",
+    "article": "O5037.2.29.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 3,
+    "sku": "503742961",
+    "article": "O5037.4.29.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 4,
+    "sku": "503762961",
+    "article": "O5037.6.29.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 5,
+    "sku": "503782961",
+    "article": "O5037.8.29.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 6,
+    "sku": "5037102961",
+    "article": "O5037.10.29.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 7,
+    "sku": "5037122961",
+    "article": "O5037.12.29.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 8,
+    "sku": "5037142961",
+    "article": "O5037.14.29.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 9,
+    "sku": "5037162961",
+    "article": "O5037.16.29.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 10,
+    "sku": "503824561",
+    "article": "O5038.2.45.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 11,
+    "sku": "503844561",
+    "article": "O5038.4.45.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 12,
+    "sku": "503864561",
+    "article": "O5038.6.45.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 13,
+    "sku": "503884561",
+    "article": "O5038.8.45.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 14,
+    "sku": "5038104561",
+    "article": "O5038.10.45.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 15,
+    "sku": "5038124561",
+    "article": "O5038.12.45.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 16,
+    "sku": "5038144561",
+    "article": "O5038.14.45.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 17,
+    "sku": "5038164561",
+    "article": "O5038.16.45.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 18,
+    "sku": "505320261",
+    "article": "O5053.2.02.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 19,
+    "sku": "505340261",
+    "article": "O5053.4.02.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 20,
+    "sku": "505360261",
+    "article": "O5053.6.02.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 21,
+    "sku": "505380261",
+    "article": "O5053.8.02.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 22,
+    "sku": "5053100261",
+    "article": "O5053.10.02.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 23,
+    "sku": "5053120261",
+    "article": "O5053.12.02.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 24,
+    "sku": "5053140261",
+    "article": "O5053.14.02.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 25,
+    "sku": "5053160261",
+    "article": "O5053.16.02.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 26,
+    "sku": "135620161",
+    "article": "G1356.2.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 27,
+    "sku": "135640161",
+    "article": "G1356.4.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 28,
+    "sku": "135660161",
+    "article": "G1356.6.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 29,
+    "sku": "135680161",
+    "article": "G1356.8.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 30,
+    "sku": "1356100161",
+    "article": "G1356.10.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 31,
+    "sku": "1356120161",
+    "article": "G1356.12.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 32,
+    "sku": "505224661",
+    "article": "O5052.2.46.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 33,
+    "sku": "505244661",
+    "article": "O5052.4.46.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 34,
+    "sku": "505264661",
+    "article": "O5052.6.46.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 35,
+    "sku": "505284661",
+    "article": "O5052.8.46.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 36,
+    "sku": "5052104661",
+    "article": "O5052.10.46.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 37,
+    "sku": "5052124661",
+    "article": "O5052.12.46.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 38,
+    "sku": "5052144661",
+    "article": "O5052.14.46.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 39,
+    "sku": "5052164661",
+    "article": "O5052.16.46.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 40,
+    "sku": "133624861",
+    "article": "G1336.2.48.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 41,
+    "sku": "133644861",
+    "article": "G1336.4.48.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 42,
+    "sku": "133664861",
+    "article": "G1336.6.48.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 43,
+    "sku": "133684861",
+    "article": "G1336.8.48.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 44,
+    "sku": "1336104861",
+    "article": "G1336.10.48.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 45,
+    "sku": "1336124861",
+    "article": "G1336.12.48.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 46,
+    "sku": "133922461",
+    "article": "G1339.2.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 47,
+    "sku": "133942461",
+    "article": "G1339.4.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 48,
+    "sku": "133962461",
+    "article": "G1339.6.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 49,
+    "sku": "133982461",
+    "article": "G1339.8.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 50,
+    "sku": "1339102461",
+    "article": "G1339.10.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 51,
+    "sku": "1339122461",
+    "article": "G1339.12.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 52,
+    "sku": "134620461",
+    "article": "G1346.2.04.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 53,
+    "sku": "134640461",
+    "article": "G1346.4.04.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 54,
+    "sku": "134660461",
+    "article": "G1346.6.04.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 55,
+    "sku": "134680461",
+    "article": "G1346.8.04.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 56,
+    "sku": "1346100461",
+    "article": "G1346.10.04.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 57,
+    "sku": "1346120461",
+    "article": "G1346.12.04.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 58,
+    "sku": "137140661",
+    "article": "G1371.4.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 59,
+    "sku": "137160661",
+    "article": "G1371.6.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 60,
+    "sku": "137180661",
+    "article": "G1371.8.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 61,
+    "sku": "1371100661",
+    "article": "G1371.10.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 62,
+    "sku": "1371120661",
+    "article": "G1371.12.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 63,
+    "sku": "1371140661",
+    "article": "G1371.14.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 64,
+    "sku": "135423161",
+    "article": "G1354.2.31.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 65,
+    "sku": "135443161",
+    "article": "G1354.4.31.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 66,
+    "sku": "135463161",
+    "article": "G1354.6.31.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 67,
+    "sku": "135483161",
+    "article": "G1354.8.31.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 68,
+    "sku": "1354103161",
+    "article": "G1354.10.31.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 69,
+    "sku": "1354123161",
+    "article": "G1354.12.31.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 70,
+    "sku": "1354143161",
+    "article": "G1354.14.31.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 71,
+    "sku": "515020161",
+    "article": "GM5150.2.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 72,
+    "sku": "515040161",
+    "article": "GM5150.4.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 73,
+    "sku": "515060161",
+    "article": "GM5150.6.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 74,
+    "sku": "515080161",
+    "article": "GM5150.8.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 75,
+    "sku": "5150100161",
+    "article": "GM5150.10.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 76,
+    "sku": "5150120161",
+    "article": "GM5150.12.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 77,
+    "sku": "135140561",
+    "article": "G1351.4.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 78,
+    "sku": "135160561",
+    "article": "G1351.6.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 79,
+    "sku": "135180561",
+    "article": "G1351.8.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 80,
+    "sku": "1351100561",
+    "article": "G1351.10.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 81,
+    "sku": "1351120561",
+    "article": "G1351.12.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 82,
+    "sku": "1351140561",
+    "article": "G1351.14.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 83,
+    "sku": "135142461",
+    "article": "G1351.4.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 84,
+    "sku": "135162461",
+    "article": "G1351.6.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 85,
+    "sku": "135182461",
+    "article": "G1351.8.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 86,
+    "sku": "1351102461",
+    "article": "G1351.10.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 87,
+    "sku": "1351122461",
+    "article": "G1351.12.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 88,
+    "sku": "1351142461",
+    "article": "G1351.14.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 89,
+    "sku": "134920161",
+    "article": "G1349.2.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 90,
+    "sku": "134940161",
+    "article": "G1349.4.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 91,
+    "sku": "134960161",
+    "article": "G1349.6.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 92,
+    "sku": "134980161",
+    "article": "G1349.8.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 93,
+    "sku": "1349100161",
+    "article": "G1349.10.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 94,
+    "sku": "1349120161",
+    "article": "G1349.12.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 95,
+    "sku": "1349140161",
+    "article": "G1349.14.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 96,
+    "sku": "1349160161",
+    "article": "G1349.16.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 97,
+    "sku": "134722461",
+    "article": "G1347.2.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 98,
+    "sku": "134742461",
+    "article": "G1347.4.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 99,
+    "sku": "134762461",
+    "article": "G1347.6.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 100,
+    "sku": "134782461",
+    "article": "G1347.8.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 101,
+    "sku": "1347102461",
+    "article": "G1347.10.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 102,
+    "sku": "1347122461",
+    "article": "G1347.12.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 103,
+    "sku": "1347142461",
+    "article": "G1347.14.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 104,
+    "sku": "1347162461",
+    "article": "G1347.16.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 105,
+    "sku": "135220161",
+    "article": "GM1352.2.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 106,
+    "sku": "135240161",
+    "article": "GM1352.4.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 107,
+    "sku": "135260161",
+    "article": "GM1352.6.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 108,
+    "sku": "135280161",
+    "article": "GM1352.8.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 109,
+    "sku": "1352100161",
+    "article": "GM1352.10.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 110,
+    "sku": "1352120161",
+    "article": "GM1352.12.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 111,
+    "sku": "140844361",
+    "article": "G1408.4.43.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 112,
+    "sku": "140864361",
+    "article": "G1408.6.43.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 113,
+    "sku": "140884361",
+    "article": "G1408.8.43.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 114,
+    "sku": "1408104361",
+    "article": "G1408.10.43.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 115,
+    "sku": "1408124361",
+    "article": "G1408.12.43.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 116,
+    "sku": "1408144361",
+    "article": "G1408.14.43.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 117,
+    "sku": "136044561",
+    "article": "G1360.4.45.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 118,
+    "sku": "136064561",
+    "article": "G1360.6.45.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 119,
+    "sku": "136084561",
+    "article": "G1360.8.45.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 120,
+    "sku": "1360104561",
+    "article": "G1360.10.45.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 121,
+    "sku": "1360124561",
+    "article": "G1360.12.45.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 122,
+    "sku": "1360144561",
+    "article": "G1360.14.45.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 123,
+    "sku": "136442461",
+    "article": "G1364.4.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 124,
+    "sku": "136462461",
+    "article": "G1364.6.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 125,
+    "sku": "136482461",
+    "article": "G1364.8.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 126,
+    "sku": "1364102461",
+    "article": "G1364.10.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 127,
+    "sku": "1364122461",
+    "article": "G1364.12.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 128,
+    "sku": "1364142461",
+    "article": "G1364.14.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 129,
+    "sku": "136740161",
+    "article": "G1367.4.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 130,
+    "sku": "136760161",
+    "article": "G1367.6.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 131,
+    "sku": "136780161",
+    "article": "G1367.8.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 132,
+    "sku": "1367100161",
+    "article": "G1367.10.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 133,
+    "sku": "1367120161",
+    "article": "G1367.12.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 134,
+    "sku": "1367140161",
+    "article": "G1367.14.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 135,
+    "sku": "512820561",
+    "article": "G5128.2.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 136,
+    "sku": "512840561",
+    "article": "G5128.4.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 137,
+    "sku": "512860561",
+    "article": "G5128.6.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 138,
+    "sku": "512880561",
+    "article": "G5128.8.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 139,
+    "sku": "5128100561",
+    "article": "G5128.10.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 140,
+    "sku": "5128120561",
+    "article": "G5128.12.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 141,
+    "sku": "5128140561",
+    "article": "G5128.14.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 142,
+    "sku": "5128160561",
+    "article": "G5128.16.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 143,
+    "sku": "136124761",
+    "article": "GM1361.2.47.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 144,
+    "sku": "136144761",
+    "article": "GM1361.4.47.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 145,
+    "sku": "136164761",
+    "article": "GM1361.6.47.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 146,
+    "sku": "136184761",
+    "article": "GM1361.8.47.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 147,
+    "sku": "1361104761",
+    "article": "GM1361.10.47.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 148,
+    "sku": "136112461",
+    "article": "GM1361.12.4.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 149,
+    "sku": "427810561",
+    "article": "GM1361.12.4.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 150,
+    "sku": "427820561",
+    "article": "GM1361.12.4.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 151,
+    "sku": "427830561",
+    "article": "GM1361.12.4.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 152,
+    "sku": "427840561",
+    "article": "GM1361.12.4.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 153,
+    "sku": "51610461",
+    "article": "B5161.S.04.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 154,
+    "sku": "137640661",
+    "article": "G1376.4.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 155,
+    "sku": "137660661",
+    "article": "G1376.6.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 156,
+    "sku": "137680661",
+    "article": "G1376.8.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 157,
+    "sku": "1376100661",
+    "article": "G1376.10.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 158,
+    "sku": "1376120661",
+    "article": "G1376.12.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 159,
+    "sku": "1376140661",
+    "article": "G1376.14.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 160,
+    "sku": "136842961",
+    "article": "G1368.4.29.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 161,
+    "sku": "136862961",
+    "article": "G1368.6.29.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 162,
+    "sku": "136882961",
+    "article": "G1368.8.29.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 163,
+    "sku": "1368102961",
+    "article": "G1368.10.29.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 164,
+    "sku": "1368122961",
+    "article": "G1368.12.29.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 165,
+    "sku": "1368142961",
+    "article": "G1368.14.29.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 166,
+    "sku": "137224761",
+    "article": "G1372.2.47.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 167,
+    "sku": "137244761",
+    "article": "G1372.4.47.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 168,
+    "sku": "137264761",
+    "article": "G1372.6.47.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 169,
+    "sku": "137284761",
+    "article": "G1372.8.47.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 170,
+    "sku": "1372104761",
+    "article": "G1372.10.47.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 171,
+    "sku": "1372124761",
+    "article": "G1372.12.47.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 172,
+    "sku": "141242861",
+    "article": "G1412.4.28.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 173,
+    "sku": "141262861",
+    "article": "G1412.6.28.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 174,
+    "sku": "141282861",
+    "article": "G1412.8.28.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 175,
+    "sku": "1412102861",
+    "article": "G1412.10.28.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 176,
+    "sku": "1412122861",
+    "article": "G1412.12.28.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 177,
+    "sku": "1412142861",
+    "article": "G1412.14.28.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 178,
+    "sku": "533942461",
+    "article": "G5339.4.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 179,
+    "sku": "533962461",
+    "article": "G5339.6.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 180,
+    "sku": "533982461",
+    "article": "G5339.8.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 181,
+    "sku": "5339102461",
+    "article": "G5339.10.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 182,
+    "sku": "5339122461",
+    "article": "G5339.12.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 183,
+    "sku": "5339142461",
+    "article": "G5339.14.24.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 184,
+    "sku": "538240661",
+    "article": "K5382.4.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 185,
+    "sku": "538260661",
+    "article": "K5382.6.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 186,
+    "sku": "538280661",
+    "article": "K5382.8.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 187,
+    "sku": "5382100661",
+    "article": "K5382.10.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 188,
+    "sku": "5382120661",
+    "article": "K5382.12.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 189,
+    "sku": "5382140661",
+    "article": "K5382.14.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 190,
+    "sku": "138344961",
+    "article": "G1383.4.49.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 191,
+    "sku": "138364961",
+    "article": "G1383.6.49.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 192,
+    "sku": "138384961",
+    "article": "G1383.8.49.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 193,
+    "sku": "1383104961",
+    "article": "G1383.10.49.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 194,
+    "sku": "1383124961",
+    "article": "G1383.12.49.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 195,
+    "sku": "1383144961",
+    "article": "G1383.14.49.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 196,
+    "sku": "138842961",
+    "article": "G1388.4.29.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 197,
+    "sku": "138862961",
+    "article": "G1388.6.29.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 198,
+    "sku": "138882961",
+    "article": "G1388.8.29.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 199,
+    "sku": "1388102961",
+    "article": "G1388.10.29.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 200,
+    "sku": "1388122961",
+    "article": "G1388.12.29.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 201,
+    "sku": "1388142961",
+    "article": "G1388.14.29.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 202,
+    "sku": "538843161",
+    "article": "H5388.4.31.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 203,
+    "sku": "538863161",
+    "article": "H5388.6.31.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 204,
+    "sku": "538883161",
+    "article": "H5388.8.31.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 205,
+    "sku": "5388103161",
+    "article": "H5388.10.31.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 206,
+    "sku": "5388123161",
+    "article": "H5388.12.31.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 207,
+    "sku": "5388143161",
+    "article": "H5388.14.31.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 208,
+    "sku": "139420161",
+    "article": "G1394.2.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 209,
+    "sku": "139440161",
+    "article": "G1394.4.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 210,
+    "sku": "139460161",
+    "article": "G1394.6.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 211,
+    "sku": "139480161",
+    "article": "G1394.8.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 212,
+    "sku": "1394100161",
+    "article": "G1394.10.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 213,
+    "sku": "1394120161",
+    "article": "G1394.12.01.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 214,
+    "sku": "139420561",
+    "article": "G1394.2.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 215,
+    "sku": "139440561",
+    "article": "G1394.4.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 216,
+    "sku": "139460561",
+    "article": "G1394.6.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 217,
+    "sku": "139480561",
+    "article": "G1394.8.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 218,
+    "sku": "1394100561",
+    "article": "G1394.10.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 219,
+    "sku": "1394120561",
+    "article": "G1394.12.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 220,
+    "sku": "537144361",
+    "article": "C5371.4.43.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 221,
+    "sku": "537164361",
+    "article": "C5371.6.43.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 222,
+    "sku": "537184361",
+    "article": "C5371.8.43.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 223,
+    "sku": "5371104361",
+    "article": "C5371.10.43.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 224,
+    "sku": "5371124361",
+    "article": "C5371.12.43.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 225,
+    "sku": "141543161",
+    "article": "G1415.4.31.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 226,
+    "sku": "141563161",
+    "article": "G1415.6.31.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 227,
+    "sku": "141583161",
+    "article": "G1415.8.31.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 228,
+    "sku": "1415103161",
+    "article": "G1415.10.31.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 229,
+    "sku": "1415123161",
+    "article": "G1415.12.31.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 230,
+    "sku": "1415143161",
+    "article": "G1415.14.31.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 231,
+    "sku": "538040561",
+    "article": "H5380.4.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 232,
+    "sku": "538060561",
+    "article": "H5380.6.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 233,
+    "sku": "538080561",
+    "article": "H5380.8.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 234,
+    "sku": "5380100561",
+    "article": "H5380.10.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 235,
+    "sku": "5380120561",
+    "article": "H5380.12.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 236,
+    "sku": "5380140561",
+    "article": "H5380.14.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 237,
+    "sku": "530740561",
+    "article": "H5380.14.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 238,
+    "sku": "530760561",
+    "article": "H5380.14.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 239,
+    "sku": "530780561",
+    "article": "H5380.14.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 240,
+    "sku": "5307100561",
+    "article": "H5380.14.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 241,
+    "sku": "5307120561",
+    "article": "H5380.14.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 242,
+    "sku": "488442261",
+    "article": "C4884.4.22.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 243,
+    "sku": "488462261",
+    "article": "C4884.6.22.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 244,
+    "sku": "488482261",
+    "article": "C4884.8.22.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 245,
+    "sku": "4884102261",
+    "article": "C4884.10.22.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 246,
+    "sku": "4884122261",
+    "article": "C4884.12.22.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 247,
+    "sku": "516542861",
+    "article": "C5165.4.28.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 248,
+    "sku": "516562861",
+    "article": "C5165.6.28.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 249,
+    "sku": "516582861",
+    "article": "C5165.8.28.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 250,
+    "sku": "5165102861",
+    "article": "C5165.10.28.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 251,
+    "sku": "5165122861",
+    "article": "C5165.12.28.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 252,
+    "sku": "536540161",
+    "article": "C5165.12.28.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 253,
+    "sku": "536560161",
+    "article": "C5165.12.28.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 254,
+    "sku": "536580161",
+    "article": "C5165.12.28.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 255,
+    "sku": "5365100161",
+    "article": "C5165.12.28.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 256,
+    "sku": "5365120161",
+    "article": "C5165.12.28.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 257,
+    "sku": "533040561",
+    "article": "H5382.14.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 258,
+    "sku": "533060561",
+    "article": "H5382.14.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 259,
+    "sku": "533080561",
+    "article": "H5382.14.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 260,
+    "sku": "5330100561",
+    "article": "H5382.14.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 261,
+    "sku": "5330120561",
+    "article": "H5382.14.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 262,
+    "sku": "518142461",
+    "article": "H5382.14.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 263,
+    "sku": "518162461",
+    "article": "H5382.14.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 264,
+    "sku": "518182461",
+    "article": "H5382.14.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 265,
+    "sku": "5181102461",
+    "article": "H5382.14.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 266,
+    "sku": "5181122461",
+    "article": "H5382.14.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 267,
+    "sku": "523240561",
+    "article": "H5382.14.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 268,
+    "sku": "523260561",
+    "article": "H5382.14.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 269,
+    "sku": "523280561",
+    "article": "H5382.14.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 270,
+    "sku": "5232100561",
+    "article": "H5382.14.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 271,
+    "sku": "5232120561",
+    "article": "H5382.14.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 272,
+    "sku": "523242461",
+    "article": "H5382.14.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 273,
+    "sku": "523262461",
+    "article": "H5382.14.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 274,
+    "sku": "523282461",
+    "article": "H5382.14.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 275,
+    "sku": "5232102461",
+    "article": "H5382.14.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 276,
+    "sku": "5232122461",
+    "article": "H5382.14.06.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 277,
+    "sku": "523644361",
+    "article": "C5236.4.43.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 278,
+    "sku": "523664361",
+    "article": "C5236.6.43.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 279,
+    "sku": "523684361",
+    "article": "C5236.8.43.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 280,
+    "sku": "5236104361",
+    "article": "C5236.10.43.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 281,
+    "sku": "5236124361",
+    "article": "C5236.12.43.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 282,
+    "sku": "139040261",
+    "article": "G1390.4.02.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 283,
+    "sku": "139060261",
+    "article": "G1390.6.02.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 284,
+    "sku": "139080261",
+    "article": "G1390.8.02.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 285,
+    "sku": "1390100261",
+    "article": "G1390.10.02.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 286,
+    "sku": "1390120261",
+    "article": "G1390.12.02.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 287,
+    "sku": "1390140261",
+    "article": "G1390.14.02.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 288,
+    "sku": "523544361",
+    "article": "C5235.4.43.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 289,
+    "sku": "523564361",
+    "article": "C5235.6.43.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 290,
+    "sku": "523584361",
+    "article": "C5235.8.43.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 291,
+    "sku": "5235104361",
+    "article": "C5235.10.43.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 292,
+    "sku": "5235124361",
+    "article": "C5235.12.43.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 293,
+    "sku": "138924961",
+    "article": "G1389.2.49.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 294,
+    "sku": "138944961",
+    "article": "G1389.4.49.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 295,
+    "sku": "138964961",
+    "article": "G1389.6.49.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 296,
+    "sku": "138984961",
+    "article": "G1389.8.49.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 297,
+    "sku": "1389104961",
+    "article": "G1389.10.49.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 298,
+    "sku": "1389124961",
+    "article": "G1389.12.49.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 299,
+    "sku": "537443161",
+    "article": "C5374.4.31.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 300,
+    "sku": "537463161",
+    "article": "C5374.6.31.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 301,
+    "sku": "537483161",
+    "article": "C5374.8.31.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 302,
+    "sku": "5374103161",
+    "article": "C5374.10.31.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 303,
+    "sku": "5374123161",
+    "article": "C5374.12.31.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 304,
+    "sku": "544340561",
+    "article": "G5443.4.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 305,
+    "sku": "544360561",
+    "article": "G5443.6.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 306,
+    "sku": "544380561",
+    "article": "G5443.8.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 307,
+    "sku": "5443100561",
+    "article": "G5443.10.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 308,
+    "sku": "5443120561",
+    "article": "G5443.12.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 309,
+    "sku": "5443140561",
+    "article": "G5443.14.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 310,
+    "sku": "544342561",
+    "article": "G5443.4.25.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 311,
+    "sku": "544362561",
+    "article": "G5443.6.25.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 312,
+    "sku": "544382561",
+    "article": "G5443.8.25.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 313,
+    "sku": "5443102561",
+    "article": "G5443.10.25.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 314,
+    "sku": "5443122561",
+    "article": "G5443.12.25.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 315,
+    "sku": "5443142561",
+    "article": "G5443.14.25.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 316,
+    "sku": "140720561",
+    "article": "G1407.2.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 317,
+    "sku": "140740561",
+    "article": "G1407.4.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 318,
+    "sku": "140760561",
+    "article": "G1407.6.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 319,
+    "sku": "140780561",
+    "article": "G1407.8.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 320,
+    "sku": "1407100561",
+    "article": "G1407.10.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 321,
+    "sku": "1407120561",
+    "article": "G1407.12.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 322,
+    "sku": "1407140561",
+    "article": "G1407.14.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 323,
+    "sku": "1407160561",
+    "article": "G1407.16.05.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 324,
+    "sku": "536622961",
+    "article": "KS5366.2.29.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 325,
+    "sku": "536642961",
+    "article": "KS5366.4.29.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 326,
+    "sku": "536662961",
+    "article": "KS5366.6.29.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 327,
+    "sku": "536682961",
+    "article": "KS5366.8.29.61",
+    "source": "PRINCESSA FLAMI"
+  },
+  {
+    "id": 328,
+    "sku": "5366102961",
+    "article": "KS5366.10.29.61",
+    "source": "PRINCESSA FLAMI"
+  }
+]

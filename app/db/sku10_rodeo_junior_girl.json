@@ -1,0 +1,1376 @@
+[
+  {
+    "id": 1,
+    "sku": "15162026",
+    "article": "",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 2,
+    "sku": "710039321",
+    "article": "71003932B1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 3,
+    "sku": "710039323",
+    "article": "71003932B3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 4,
+    "sku": "710039324",
+    "article": "71003932B4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 5,
+    "sku": "710039325",
+    "article": "71003932B5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 6,
+    "sku": "710039326",
+    "article": "71003932B6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 7,
+    "sku": "710039328",
+    "article": "71003932B8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 8,
+    "sku": "710039521",
+    "article": "71003952N1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 9,
+    "sku": "710039523",
+    "article": "71003952N3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 10,
+    "sku": "710039524",
+    "article": "71003952N4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 11,
+    "sku": "710039525",
+    "article": "71003952N5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 12,
+    "sku": "710039526",
+    "article": "71003952N6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 13,
+    "sku": "710039528",
+    "article": "71003952N8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 14,
+    "sku": "710039721",
+    "article": "71003972N1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 15,
+    "sku": "710039723",
+    "article": "71003972N3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 16,
+    "sku": "710039724",
+    "article": "71003972N4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 17,
+    "sku": "710039725",
+    "article": "71003972N5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 18,
+    "sku": "710039726",
+    "article": "71003972N6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 19,
+    "sku": "710039728",
+    "article": "71003972N8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 20,
+    "sku": "715003321",
+    "article": "71500332B1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 21,
+    "sku": "715003323",
+    "article": "71500332B3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 22,
+    "sku": "715003324",
+    "article": "71500332B4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 23,
+    "sku": "715003325",
+    "article": "71500332B5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 24,
+    "sku": "715003326",
+    "article": "71500332B6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 25,
+    "sku": "715003328",
+    "article": "71500332B8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 26,
+    "sku": "715003421",
+    "article": "71500342W1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 27,
+    "sku": "715003423",
+    "article": "71500342W3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 28,
+    "sku": "715003424",
+    "article": "71500342W4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 29,
+    "sku": "715003425",
+    "article": "71500342W5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 30,
+    "sku": "715003426",
+    "article": "71500342W6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 31,
+    "sku": "715003428",
+    "article": "71500342W8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 32,
+    "sku": "715003521",
+    "article": "71500352K1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 33,
+    "sku": "715003523",
+    "article": "71500352K3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 34,
+    "sku": "715003524",
+    "article": "71500352K4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 35,
+    "sku": "715003525",
+    "article": "71500352K5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 36,
+    "sku": "715003526",
+    "article": "71500352K6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 37,
+    "sku": "715003528",
+    "article": "71500352K8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 38,
+    "sku": "715003621",
+    "article": "71500362F1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 39,
+    "sku": "715003623",
+    "article": "71500362F3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 40,
+    "sku": "715003624",
+    "article": "71500362F4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 41,
+    "sku": "715003625",
+    "article": "71500362F5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 42,
+    "sku": "715003626",
+    "article": "71500362F6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 43,
+    "sku": "715003628",
+    "article": "71500362F8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 44,
+    "sku": "715003721",
+    "article": "71500372P1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 45,
+    "sku": "715003723",
+    "article": "71500372P3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 46,
+    "sku": "715003724",
+    "article": "71500372P4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 47,
+    "sku": "715003725",
+    "article": "71500372P5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 48,
+    "sku": "715003726",
+    "article": "71500372P6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 49,
+    "sku": "715003728",
+    "article": "71500372P8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 50,
+    "sku": "717022321",
+    "article": "71702232B1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 51,
+    "sku": "717022323",
+    "article": "71702232B3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 52,
+    "sku": "717022324",
+    "article": "71702232B4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 53,
+    "sku": "717022325",
+    "article": "71702232B5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 54,
+    "sku": "717022326",
+    "article": "71702232B6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 55,
+    "sku": "717022328",
+    "article": "71702232B8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 56,
+    "sku": "717022511",
+    "article": "71702251B1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 57,
+    "sku": "717022513",
+    "article": "71702251B3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 58,
+    "sku": "717022514",
+    "article": "71702251B4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 59,
+    "sku": "717022515",
+    "article": "71702251B5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 60,
+    "sku": "717022516",
+    "article": "71702251B6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 61,
+    "sku": "717022518",
+    "article": "71702251B8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 62,
+    "sku": "717022611",
+    "article": "71702261W1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 63,
+    "sku": "717022613",
+    "article": "71702261W3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 64,
+    "sku": "717022614",
+    "article": "71702261W4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 65,
+    "sku": "717022615",
+    "article": "71702261W5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 66,
+    "sku": "717022616",
+    "article": "71702261W6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 67,
+    "sku": "717022618",
+    "article": "71702261W8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 68,
+    "sku": "717022821",
+    "article": "71702282C1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 69,
+    "sku": "717022823",
+    "article": "71702282C3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 70,
+    "sku": "717022824",
+    "article": "71702282C4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 71,
+    "sku": "717022825",
+    "article": "71702282C5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 72,
+    "sku": "717022826",
+    "article": "71702282C6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 73,
+    "sku": "717022828",
+    "article": "71702282C8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 74,
+    "sku": "71702292",
+    "article": "71702292BL",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 75,
+    "sku": "717023111",
+    "article": "71702311A1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 76,
+    "sku": "717023113",
+    "article": "71702311A3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 77,
+    "sku": "717023114",
+    "article": "71702311A4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 78,
+    "sku": "717023116",
+    "article": "71702311A6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 79,
+    "sku": "717023118",
+    "article": "71702311A8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 80,
+    "sku": "717023211",
+    "article": "71702321W1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 81,
+    "sku": "717023213",
+    "article": "71702321W3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 82,
+    "sku": "717023214",
+    "article": "71702321W4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 83,
+    "sku": "717023216",
+    "article": "71702321W6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 84,
+    "sku": "717023218",
+    "article": "71702321W8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 85,
+    "sku": "718065721",
+    "article": "71806572Q1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 86,
+    "sku": "718065723",
+    "article": "71806572Q3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 87,
+    "sku": "718065724",
+    "article": "71806572Q4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 88,
+    "sku": "718065725",
+    "article": "71806572Q5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 89,
+    "sku": "718065726",
+    "article": "71806572Q6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 90,
+    "sku": "718065728",
+    "article": "71806572Q8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 91,
+    "sku": "718065921",
+    "article": "71806592Y1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 92,
+    "sku": "718065923",
+    "article": "71806592Y3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 93,
+    "sku": "718065924",
+    "article": "71806592Y4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 94,
+    "sku": "718065925",
+    "article": "71806592Y5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 95,
+    "sku": "718065926",
+    "article": "71806592Y6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 96,
+    "sku": "718065928",
+    "article": "71806592Y8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 97,
+    "sku": "718066021",
+    "article": "71806602Q1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 98,
+    "sku": "718066023",
+    "article": "71806602Q3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 99,
+    "sku": "718066024",
+    "article": "71806602Q4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 100,
+    "sku": "718066025",
+    "article": "71806602Q5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 101,
+    "sku": "718066026",
+    "article": "71806602Q6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 102,
+    "sku": "718066028",
+    "article": "71806602Q8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 103,
+    "sku": "718066121",
+    "article": "71806612P1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 104,
+    "sku": "718066123",
+    "article": "71806612P3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 105,
+    "sku": "718066124",
+    "article": "71806612P4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 106,
+    "sku": "718066125",
+    "article": "71806612P5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 107,
+    "sku": "718066126",
+    "article": "71806612P6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 108,
+    "sku": "718066128",
+    "article": "71806612P8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 109,
+    "sku": "719014121",
+    "article": "71901412B1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 110,
+    "sku": "719014123",
+    "article": "71901412B3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 111,
+    "sku": "719014124",
+    "article": "71901412B4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 112,
+    "sku": "719014125",
+    "article": "71901412B5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 113,
+    "sku": "719014126",
+    "article": "71901412B6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 114,
+    "sku": "719014128",
+    "article": "71901412B8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 115,
+    "sku": "719014221",
+    "article": "71901422P1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 116,
+    "sku": "719014223",
+    "article": "71901422P3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 117,
+    "sku": "719014224",
+    "article": "71901422P4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 118,
+    "sku": "719014225",
+    "article": "71901422P5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 119,
+    "sku": "719014226",
+    "article": "71901422P6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 120,
+    "sku": "719014228",
+    "article": "71901422P8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 121,
+    "sku": "719014321",
+    "article": "71901432W1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 122,
+    "sku": "719014323",
+    "article": "71901432W3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 123,
+    "sku": "719014324",
+    "article": "71901432W4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 124,
+    "sku": "719014325",
+    "article": "71901432W5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 125,
+    "sku": "719014326",
+    "article": "71901432W6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 126,
+    "sku": "719014328",
+    "article": "71901432W8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 127,
+    "sku": "720004721",
+    "article": "72000472T1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 128,
+    "sku": "720004723",
+    "article": "72000472T3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 129,
+    "sku": "720004724",
+    "article": "72000472T4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 130,
+    "sku": "720004725",
+    "article": "72000472T5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 131,
+    "sku": "720004726",
+    "article": "72000472T6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 132,
+    "sku": "720004728",
+    "article": "72000472T8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 133,
+    "sku": "720004821",
+    "article": "72000482T1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 134,
+    "sku": "720004823",
+    "article": "72000482T3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 135,
+    "sku": "720004824",
+    "article": "72000482T4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 136,
+    "sku": "720004825",
+    "article": "72000482T5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 137,
+    "sku": "720004826",
+    "article": "72000482T6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 138,
+    "sku": "720004828",
+    "article": "72000482T8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 139,
+    "sku": "720004921",
+    "article": "72000492W1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 140,
+    "sku": "720004923",
+    "article": "72000492W3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 141,
+    "sku": "720004924",
+    "article": "72000492W4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 142,
+    "sku": "720004925",
+    "article": "72000492W5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 143,
+    "sku": "720004926",
+    "article": "72000492W6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 144,
+    "sku": "720004928",
+    "article": "72000492W8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 145,
+    "sku": "720005021",
+    "article": "72000502W1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 146,
+    "sku": "720005023",
+    "article": "72000502W3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 147,
+    "sku": "720005024",
+    "article": "72000502W4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 148,
+    "sku": "720005025",
+    "article": "72000502W5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 149,
+    "sku": "720005026",
+    "article": "72000502W6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 150,
+    "sku": "720005028",
+    "article": "72000502W8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 151,
+    "sku": "720005121",
+    "article": "72000512Q1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 152,
+    "sku": "720005123",
+    "article": "72000512Q3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 153,
+    "sku": "720005124",
+    "article": "72000512Q4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 154,
+    "sku": "720005125",
+    "article": "72000512Q5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 155,
+    "sku": "720005126",
+    "article": "72000512Q6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 156,
+    "sku": "720005128",
+    "article": "72000512Q8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 157,
+    "sku": "720005221",
+    "article": "72000522P1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 158,
+    "sku": "720005223",
+    "article": "72000522P3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 159,
+    "sku": "720005224",
+    "article": "72000522P4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 160,
+    "sku": "720005225",
+    "article": "72000522P5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 161,
+    "sku": "720005226",
+    "article": "72000522P6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 162,
+    "sku": "720005228",
+    "article": "72000522P8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 163,
+    "sku": "720005321",
+    "article": "72000532Y1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 164,
+    "sku": "720005323",
+    "article": "72000532Y3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 165,
+    "sku": "720005324",
+    "article": "72000532Y4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 166,
+    "sku": "720005325",
+    "article": "72000532Y5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 167,
+    "sku": "720005326",
+    "article": "72000532Y6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 168,
+    "sku": "720005328",
+    "article": "72000532Y8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 169,
+    "sku": "720005421",
+    "article": "72000542Q1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 170,
+    "sku": "720005423",
+    "article": "72000542Q3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 171,
+    "sku": "720005424",
+    "article": "72000542Q4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 172,
+    "sku": "720005425",
+    "article": "72000542Q5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 173,
+    "sku": "720005426",
+    "article": "72000542Q6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 174,
+    "sku": "720005428",
+    "article": "72000542Q8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 175,
+    "sku": "720005521",
+    "article": "72000552P1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 176,
+    "sku": "720005523",
+    "article": "72000552P3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 177,
+    "sku": "720005524",
+    "article": "72000552P4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 178,
+    "sku": "720005525",
+    "article": "72000552P5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 179,
+    "sku": "720005526",
+    "article": "72000552P6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 180,
+    "sku": "720005528",
+    "article": "72000552P8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 181,
+    "sku": "720005621",
+    "article": "72000562W1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 182,
+    "sku": "720005623",
+    "article": "72000562W3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 183,
+    "sku": "720005624",
+    "article": "72000562W4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 184,
+    "sku": "720005625",
+    "article": "72000562W5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 185,
+    "sku": "720005626",
+    "article": "72000562W6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 186,
+    "sku": "720005628",
+    "article": "72000562W8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 187,
+    "sku": "720005721",
+    "article": "72000572F1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 188,
+    "sku": "720005723",
+    "article": "72000572F3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 189,
+    "sku": "720005724",
+    "article": "72000572F4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 190,
+    "sku": "720005725",
+    "article": "72000572F5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 191,
+    "sku": "720005726",
+    "article": "72000572F6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 192,
+    "sku": "720005728",
+    "article": "72000572F8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 193,
+    "sku": "723006511",
+    "article": "72300651B1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 194,
+    "sku": "723006513",
+    "article": "72300651B3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 195,
+    "sku": "723006514",
+    "article": "72300651B4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 196,
+    "sku": "723006515",
+    "article": "72300651B5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 197,
+    "sku": "723006516",
+    "article": "72300651B6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 198,
+    "sku": "723006518",
+    "article": "72300651B8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 199,
+    "sku": "72300662",
+    "article": "72300662PL",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 200,
+    "sku": "723006711",
+    "article": "72300671A1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 201,
+    "sku": "723006713",
+    "article": "72300671A3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 202,
+    "sku": "723006714",
+    "article": "72300671A4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 203,
+    "sku": "723006716",
+    "article": "72300671A6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 204,
+    "sku": "723006718",
+    "article": "72300671A8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 205,
+    "sku": "723006811",
+    "article": "72300681B1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 206,
+    "sku": "723006813",
+    "article": "72300681B3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 207,
+    "sku": "723006814",
+    "article": "72300681B4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 208,
+    "sku": "723006815",
+    "article": "72300681B5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 209,
+    "sku": "723006816",
+    "article": "72300681B6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 210,
+    "sku": "723006818",
+    "article": "72300681B8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 211,
+    "sku": "72600882",
+    "article": "72600882BL",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 212,
+    "sku": "730004721",
+    "article": "73000472C1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 213,
+    "sku": "730004723",
+    "article": "73000472C3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 214,
+    "sku": "730004724",
+    "article": "73000472C4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 215,
+    "sku": "730004725",
+    "article": "73000472C5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 216,
+    "sku": "730004726",
+    "article": "73000472C6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 217,
+    "sku": "730004728",
+    "article": "73000472C8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 218,
+    "sku": "730004821",
+    "article": "73000482A1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 219,
+    "sku": "730004823",
+    "article": "73000482A3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 220,
+    "sku": "730004824",
+    "article": "73000482A4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 221,
+    "sku": "730004825",
+    "article": "73000482A5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 222,
+    "sku": "730004826",
+    "article": "73000482A6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 223,
+    "sku": "730004828",
+    "article": "73000482A8",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 224,
+    "sku": "736000421",
+    "article": "73600042P1",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 225,
+    "sku": "736000423",
+    "article": "73600042P3",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 226,
+    "sku": "736000424",
+    "article": "73600042P4",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 227,
+    "sku": "736000425",
+    "article": "73600042P5",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 228,
+    "sku": "736000426",
+    "article": "73600042P6",
+    "source": "RODEO JUNIOR GIRL"
+  },
+  {
+    "id": 229,
+    "sku": "736000428",
+    "article": "73600042P8",
+    "source": "RODEO JUNIOR GIRL"
+  }
+]

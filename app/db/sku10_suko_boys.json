@@ -1,0 +1,2348 @@
+[
+  {
+    "id": 1,
+    "sku": "15162026",
+    "article": "",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 2,
+    "sku": "61356352",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 3,
+    "sku": "61356361",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 4,
+    "sku": "61356370",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 5,
+    "sku": "61356398",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 6,
+    "sku": "61356389",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 7,
+    "sku": "61356405",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 8,
+    "sku": "61356414",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 9,
+    "sku": "61356423",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 10,
+    "sku": "61356441",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 11,
+    "sku": "61356432",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 12,
+    "sku": "61356450",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 13,
+    "sku": "61356469",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 14,
+    "sku": "61356478",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 15,
+    "sku": "61356496",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 16,
+    "sku": "61356487",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 17,
+    "sku": "61356656",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 18,
+    "sku": "61356665",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 19,
+    "sku": "61356674",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 20,
+    "sku": "61356692",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 21,
+    "sku": "61356683",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 22,
+    "sku": "61356558",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 23,
+    "sku": "61356567",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 24,
+    "sku": "61356576",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 25,
+    "sku": "61356594",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 26,
+    "sku": "61356585",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 27,
+    "sku": "61356601",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 28,
+    "sku": "61356610",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 29,
+    "sku": "61356629",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 30,
+    "sku": "61356647",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 31,
+    "sku": "61356638",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 32,
+    "sku": "61356503",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 33,
+    "sku": "61356512",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 34,
+    "sku": "61356521",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 35,
+    "sku": "61356549",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 36,
+    "sku": "61356530",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 37,
+    "sku": "61356709",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 38,
+    "sku": "61356718",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 39,
+    "sku": "61356727",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 40,
+    "sku": "61356745",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 41,
+    "sku": "61356736",
+    "article": "CBS01",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 42,
+    "sku": "61648644",
+    "article": "CBS02",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 43,
+    "sku": "61648653",
+    "article": "CBS02",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 44,
+    "sku": "61648662",
+    "article": "CBS02",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 45,
+    "sku": "61648680",
+    "article": "CBS02",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 46,
+    "sku": "61648671",
+    "article": "CBS02",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 47,
+    "sku": "61648448",
+    "article": "CBS02",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 48,
+    "sku": "61648457",
+    "article": "CBS02",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 49,
+    "sku": "61648466",
+    "article": "CBS02",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 50,
+    "sku": "61648484",
+    "article": "CBS02",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 51,
+    "sku": "61648475",
+    "article": "CBS02",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 52,
+    "sku": "61648546",
+    "article": "CBS02",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 53,
+    "sku": "61648555",
+    "article": "CBS02",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 54,
+    "sku": "61648564",
+    "article": "CBS02",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 55,
+    "sku": "61648582",
+    "article": "CBS02",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 56,
+    "sku": "61648573",
+    "article": "CBS02",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 57,
+    "sku": "61648591",
+    "article": "CBS02",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 58,
+    "sku": "61648608",
+    "article": "CBS02",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 59,
+    "sku": "61648617",
+    "article": "CBS02",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 60,
+    "sku": "61648635",
+    "article": "CBS02",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 61,
+    "sku": "61648626",
+    "article": "CBS02",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 62,
+    "sku": "61648493",
+    "article": "CBS02",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 63,
+    "sku": "61648519",
+    "article": "CBS02",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 64,
+    "sku": "61648537",
+    "article": "CBS02",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 65,
+    "sku": "61648528",
+    "article": "CBS02",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 66,
+    "sku": "61648242",
+    "article": "CBS03",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 67,
+    "sku": "61648251",
+    "article": "CBS03",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 68,
+    "sku": "61648260",
+    "article": "CBS03",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 69,
+    "sku": "61648288",
+    "article": "CBS03",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 70,
+    "sku": "61648279",
+    "article": "CBS03",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 71,
+    "sku": "61648340",
+    "article": "CBS03",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 72,
+    "sku": "61648359",
+    "article": "CBS03",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 73,
+    "sku": "61648368",
+    "article": "CBS03",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 74,
+    "sku": "61648386",
+    "article": "CBS03",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 75,
+    "sku": "61648377",
+    "article": "CBS03",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 76,
+    "sku": "61648395",
+    "article": "CBS03",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 77,
+    "sku": "61648402",
+    "article": "CBS03",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 78,
+    "sku": "61648411",
+    "article": "CBS03",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 79,
+    "sku": "61648439",
+    "article": "CBS03",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 80,
+    "sku": "61648420",
+    "article": "CBS03",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 81,
+    "sku": "61648199",
+    "article": "CBS03",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 82,
+    "sku": "61648206",
+    "article": "CBS03",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 83,
+    "sku": "61648215",
+    "article": "CBS03",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 84,
+    "sku": "61648233",
+    "article": "CBS03",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 85,
+    "sku": "61648224",
+    "article": "CBS03",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 86,
+    "sku": "61648297",
+    "article": "CBS03",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 87,
+    "sku": "61648304",
+    "article": "CBS03",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 88,
+    "sku": "61648313",
+    "article": "CBS03",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 89,
+    "sku": "61648331",
+    "article": "CBS03",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 90,
+    "sku": "61648322",
+    "article": "CBS03",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 91,
+    "sku": "61455138",
+    "article": "CBS020B",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 92,
+    "sku": "61455147",
+    "article": "CBS020B",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 93,
+    "sku": "61455156",
+    "article": "CBS020B",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 94,
+    "sku": "61455174",
+    "article": "CBS020B",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 95,
+    "sku": "61455165",
+    "article": "CBS020B",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 96,
+    "sku": "61455183",
+    "article": "CBS020C",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 97,
+    "sku": "61455192",
+    "article": "CBS020C",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 98,
+    "sku": "61455209",
+    "article": "CBS020C",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 99,
+    "sku": "61455227",
+    "article": "CBS020C",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 100,
+    "sku": "61455218",
+    "article": "CBS020C",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 101,
+    "sku": "61357119",
+    "article": "CBS024",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 102,
+    "sku": "61357128",
+    "article": "CBS024",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 103,
+    "sku": "61357146",
+    "article": "CBS024",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 104,
+    "sku": "61357137",
+    "article": "CBS024",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 105,
+    "sku": "61357057",
+    "article": "CBS024",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 106,
+    "sku": "61357066",
+    "article": "CBS024",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 107,
+    "sku": "61357075",
+    "article": "CBS024",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 108,
+    "sku": "61357093",
+    "article": "CBS024",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 109,
+    "sku": "61357084",
+    "article": "CBS024",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 110,
+    "sku": "70952673",
+    "article": "CBS024A",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 111,
+    "sku": "70952682",
+    "article": "CBS024A",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 112,
+    "sku": "70952691",
+    "article": "CBS024A",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 113,
+    "sku": "70952717",
+    "article": "CBS024A",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 114,
+    "sku": "70952708",
+    "article": "CBS024A",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 115,
+    "sku": "70952628",
+    "article": "CBS024A",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 116,
+    "sku": "70952637",
+    "article": "CBS024A",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 117,
+    "sku": "70952646",
+    "article": "CBS024A",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 118,
+    "sku": "70952664",
+    "article": "CBS024A",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 119,
+    "sku": "70952655",
+    "article": "CBS024A",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 120,
+    "sku": "71226867",
+    "article": "CBS063A",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 121,
+    "sku": "71226876",
+    "article": "CBS063A",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 122,
+    "sku": "71226885",
+    "article": "CBS063A",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 123,
+    "sku": "71226901",
+    "article": "CBS063A",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 124,
+    "sku": "71226894",
+    "article": "CBS063A",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 125,
+    "sku": "71226910",
+    "article": "CBS063B",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 126,
+    "sku": "71226929",
+    "article": "CBS063B",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 127,
+    "sku": "71226938",
+    "article": "CBS063B",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 128,
+    "sku": "71226956",
+    "article": "CBS063B",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 129,
+    "sku": "71226947",
+    "article": "CBS063B",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 130,
+    "sku": "71226965",
+    "article": "CBS063C",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 131,
+    "sku": "71226974",
+    "article": "CBS063C",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 132,
+    "sku": "71226983",
+    "article": "CBS063C",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 133,
+    "sku": "71227008",
+    "article": "CBS063C",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 134,
+    "sku": "71226992",
+    "article": "CBS063C",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 135,
+    "sku": "61454880",
+    "article": "CBS07",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 136,
+    "sku": "61454899",
+    "article": "CBS07",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 137,
+    "sku": "61454906",
+    "article": "CBS07",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 138,
+    "sku": "61454924",
+    "article": "CBS07",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 139,
+    "sku": "61454915",
+    "article": "CBS07",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 140,
+    "sku": "61454835",
+    "article": "CBS07",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 141,
+    "sku": "61454844",
+    "article": "CBS07",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 142,
+    "sku": "61454853",
+    "article": "CBS07",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 143,
+    "sku": "61454871",
+    "article": "CBS07",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 144,
+    "sku": "61454862",
+    "article": "CBS07",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 145,
+    "sku": "61454933",
+    "article": "CBS07",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 146,
+    "sku": "61454942",
+    "article": "CBS07",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 147,
+    "sku": "61454951",
+    "article": "CBS07",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 148,
+    "sku": "61454979",
+    "article": "CBS07",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 149,
+    "sku": "61454960",
+    "article": "CBS07",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 150,
+    "sku": "61357208",
+    "article": "CBS04",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 151,
+    "sku": "61357217",
+    "article": "CBS04",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 152,
+    "sku": "61357226",
+    "article": "CBS04",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 153,
+    "sku": "61357244",
+    "article": "CBS04",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 154,
+    "sku": "61357235",
+    "article": "CBS04",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 155,
+    "sku": "61357155",
+    "article": "CBS04",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 156,
+    "sku": "61357164",
+    "article": "CBS04",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 157,
+    "sku": "61357173",
+    "article": "CBS04",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 158,
+    "sku": "61357191",
+    "article": "CBS04",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 159,
+    "sku": "61357182",
+    "article": "CBS04",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 160,
+    "sku": "61357351",
+    "article": "CBS04",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 161,
+    "sku": "61357360",
+    "article": "CBS04",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 162,
+    "sku": "61357379",
+    "article": "CBS04",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 163,
+    "sku": "61357397",
+    "article": "CBS04",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 164,
+    "sku": "61357388",
+    "article": "CBS04",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 165,
+    "sku": "61357306",
+    "article": "CBS04",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 166,
+    "sku": "61357315",
+    "article": "CBS04",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 167,
+    "sku": "61357324",
+    "article": "CBS04",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 168,
+    "sku": "61357342",
+    "article": "CBS04",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 169,
+    "sku": "61357333",
+    "article": "CBS04",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 170,
+    "sku": "61357253",
+    "article": "CBS04",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 171,
+    "sku": "61357262",
+    "article": "CBS04",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 172,
+    "sku": "61357271",
+    "article": "CBS04",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 173,
+    "sku": "61357299",
+    "article": "CBS04",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 174,
+    "sku": "61357280",
+    "article": "CBS04",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 175,
+    "sku": "61357404",
+    "article": "CBS04",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 176,
+    "sku": "61357413",
+    "article": "CBS04",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 177,
+    "sku": "61357422",
+    "article": "CBS04",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 178,
+    "sku": "61357440",
+    "article": "CBS04",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 179,
+    "sku": "61357431",
+    "article": "CBS04",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 180,
+    "sku": "61357502",
+    "article": "CBS05",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 181,
+    "sku": "61357511",
+    "article": "CBS05",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 182,
+    "sku": "61357520",
+    "article": "CBS05",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 183,
+    "sku": "61357548",
+    "article": "CBS05",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 184,
+    "sku": "61357539",
+    "article": "CBS05",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 185,
+    "sku": "61357459",
+    "article": "CBS05",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 186,
+    "sku": "61357468",
+    "article": "CBS05",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 187,
+    "sku": "61357477",
+    "article": "CBS05",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 188,
+    "sku": "61357495",
+    "article": "CBS05",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 189,
+    "sku": "61357486",
+    "article": "CBS05",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 190,
+    "sku": "61357619",
+    "article": "CBS05",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 191,
+    "sku": "61357628",
+    "article": "CBS05",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 192,
+    "sku": "61357646",
+    "article": "CBS05",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 193,
+    "sku": "61357637",
+    "article": "CBS05",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 194,
+    "sku": "61357655",
+    "article": "CBS05",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 195,
+    "sku": "61357664",
+    "article": "CBS05",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 196,
+    "sku": "61357673",
+    "article": "CBS05",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 197,
+    "sku": "61357691",
+    "article": "CBS05",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 198,
+    "sku": "61357682",
+    "article": "CBS05",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 199,
+    "sku": "61357557",
+    "article": "CBS05",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 200,
+    "sku": "61357566",
+    "article": "CBS05",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 201,
+    "sku": "61357575",
+    "article": "CBS05",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 202,
+    "sku": "61357593",
+    "article": "CBS05",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 203,
+    "sku": "61357584",
+    "article": "CBS05",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 204,
+    "sku": "61358056",
+    "article": "CBS09",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 205,
+    "sku": "61358065",
+    "article": "CBS09",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 206,
+    "sku": "61358074",
+    "article": "CBS09",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 207,
+    "sku": "61358092",
+    "article": "CBS09",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 208,
+    "sku": "61358083",
+    "article": "CBS09",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 209,
+    "sku": "61358001",
+    "article": "CBS09",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 210,
+    "sku": "61358010",
+    "article": "CBS09",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 211,
+    "sku": "61358029",
+    "article": "CBS09",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 212,
+    "sku": "61358047",
+    "article": "CBS09",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 213,
+    "sku": "61358038",
+    "article": "CBS09",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 214,
+    "sku": "61358109",
+    "article": "CBS09",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 215,
+    "sku": "61358118",
+    "article": "CBS09",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 216,
+    "sku": "61358127",
+    "article": "CBS09",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 217,
+    "sku": "61358145",
+    "article": "CBS09",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 218,
+    "sku": "61358136",
+    "article": "CBS09",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 219,
+    "sku": "61357959",
+    "article": "CBS09",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 220,
+    "sku": "61357968",
+    "article": "CBS09",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 221,
+    "sku": "61357977",
+    "article": "CBS09",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 222,
+    "sku": "61357995",
+    "article": "CBS09",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 223,
+    "sku": "61357986",
+    "article": "CBS09",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 224,
+    "sku": "61444668",
+    "article": "CBS022",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 225,
+    "sku": "61444677",
+    "article": "CBS022",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 226,
+    "sku": "61444686",
+    "article": "CBS022",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 227,
+    "sku": "61444702",
+    "article": "CBS022",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 228,
+    "sku": "61444695",
+    "article": "CBS022",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 229,
+    "sku": "61444613",
+    "article": "CBS022",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 230,
+    "sku": "61444622",
+    "article": "CBS022",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 231,
+    "sku": "61444631",
+    "article": "CBS022",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 232,
+    "sku": "61444659",
+    "article": "CBS022",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 233,
+    "sku": "61444640",
+    "article": "CBS022",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 234,
+    "sku": "61444711",
+    "article": "CBS022",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 235,
+    "sku": "61444720",
+    "article": "CBS022",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 236,
+    "sku": "61444739",
+    "article": "CBS022",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 237,
+    "sku": "61444757",
+    "article": "CBS022",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 238,
+    "sku": "61444748",
+    "article": "CBS022",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 239,
+    "sku": "61647547",
+    "article": "CBS010",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 240,
+    "sku": "61647556",
+    "article": "CBS010",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 241,
+    "sku": "61647565",
+    "article": "CBS010",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 242,
+    "sku": "61647583",
+    "article": "CBS010",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 243,
+    "sku": "61647574",
+    "article": "CBS010",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 244,
+    "sku": "61647690",
+    "article": "CBS010",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 245,
+    "sku": "61647707",
+    "article": "CBS010",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 246,
+    "sku": "61647716",
+    "article": "CBS010",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 247,
+    "sku": "61647734",
+    "article": "CBS010",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 248,
+    "sku": "61647725",
+    "article": "CBS010",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 249,
+    "sku": "61647645",
+    "article": "CBS010",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 250,
+    "sku": "61647654",
+    "article": "CBS010",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 251,
+    "sku": "61647663",
+    "article": "CBS010",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 252,
+    "sku": "61647681",
+    "article": "CBS010",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 253,
+    "sku": "61647672",
+    "article": "CBS010",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 254,
+    "sku": "61647494",
+    "article": "CBS010",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 255,
+    "sku": "61647501",
+    "article": "CBS010",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 256,
+    "sku": "61647510",
+    "article": "CBS010",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 257,
+    "sku": "61647538",
+    "article": "CBS010",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 258,
+    "sku": "61647529",
+    "article": "CBS010",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 259,
+    "sku": "61647592",
+    "article": "CBS010",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 260,
+    "sku": "61647609",
+    "article": "CBS010",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 261,
+    "sku": "61647618",
+    "article": "CBS010",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 262,
+    "sku": "61647636",
+    "article": "CBS010",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 263,
+    "sku": "61647627",
+    "article": "CBS010",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 264,
+    "sku": "61647743",
+    "article": "CBS015",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 265,
+    "sku": "61647752",
+    "article": "CBS015",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 266,
+    "sku": "61647761",
+    "article": "CBS015",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 267,
+    "sku": "61647789",
+    "article": "CBS015",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 268,
+    "sku": "61647770",
+    "article": "CBS015",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 269,
+    "sku": "61647896",
+    "article": "CBS015",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 270,
+    "sku": "61647903",
+    "article": "CBS015",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 271,
+    "sku": "61647912",
+    "article": "CBS015",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 272,
+    "sku": "61647930",
+    "article": "CBS015",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 273,
+    "sku": "61647921",
+    "article": "CBS015",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 274,
+    "sku": "61647841",
+    "article": "CBS015",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 275,
+    "sku": "61647850",
+    "article": "CBS015",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 276,
+    "sku": "61647869",
+    "article": "CBS015",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 277,
+    "sku": "61647887",
+    "article": "CBS015",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 278,
+    "sku": "61647878",
+    "article": "CBS015",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 279,
+    "sku": "61647798",
+    "article": "CBS015",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 280,
+    "sku": "61647805",
+    "article": "CBS015",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 281,
+    "sku": "61647814",
+    "article": "CBS015",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 282,
+    "sku": "61647832",
+    "article": "CBS015",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 283,
+    "sku": "61647823",
+    "article": "CBS015",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 284,
+    "sku": "61647949",
+    "article": "CBS015",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 285,
+    "sku": "61647958",
+    "article": "CBS015",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 286,
+    "sku": "61647967",
+    "article": "CBS015",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 287,
+    "sku": "61647985",
+    "article": "CBS015",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 288,
+    "sku": "61647976",
+    "article": "CBS015",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 289,
+    "sku": "61647994",
+    "article": "CBS016",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 290,
+    "sku": "61648019",
+    "article": "CBS016",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 291,
+    "sku": "61648037",
+    "article": "CBS016",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 292,
+    "sku": "61648028",
+    "article": "CBS016",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 293,
+    "sku": "61648091",
+    "article": "CBS016",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 294,
+    "sku": "61648108",
+    "article": "CBS016",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 295,
+    "sku": "61648117",
+    "article": "CBS016",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 296,
+    "sku": "61648135",
+    "article": "CBS016",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 297,
+    "sku": "61648126",
+    "article": "CBS016",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 298,
+    "sku": "61648144",
+    "article": "CBS016",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 299,
+    "sku": "61648153",
+    "article": "CBS016",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 300,
+    "sku": "61648162",
+    "article": "CBS016",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 301,
+    "sku": "61648180",
+    "article": "CBS016",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 302,
+    "sku": "61648171",
+    "article": "CBS016",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 303,
+    "sku": "61648046",
+    "article": "CBS016",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 304,
+    "sku": "61648055",
+    "article": "CBS016",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 305,
+    "sku": "61648064",
+    "article": "CBS016",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 306,
+    "sku": "61648082",
+    "article": "CBS016",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 307,
+    "sku": "61648073",
+    "article": "CBS016",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 308,
+    "sku": "68653214",
+    "article": "CBS043",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 309,
+    "sku": "68653223",
+    "article": "CBS043",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 310,
+    "sku": "68653232",
+    "article": "CBS043",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 311,
+    "sku": "68653250",
+    "article": "CBS043",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 312,
+    "sku": "68653241",
+    "article": "CBS043",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 313,
+    "sku": "68653312",
+    "article": "CBS043",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 314,
+    "sku": "68653321",
+    "article": "CBS043",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 315,
+    "sku": "68653330",
+    "article": "CBS043",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 316,
+    "sku": "68653358",
+    "article": "CBS043",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 317,
+    "sku": "68653349",
+    "article": "CBS043",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 318,
+    "sku": "68653269",
+    "article": "CBS043",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 319,
+    "sku": "68653278",
+    "article": "CBS043",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 320,
+    "sku": "68653287",
+    "article": "CBS043",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 321,
+    "sku": "68653303",
+    "article": "CBS043",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 322,
+    "sku": "68653296",
+    "article": "CBS043",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 323,
+    "sku": "61358850",
+    "article": "CBS017",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 324,
+    "sku": "61358869",
+    "article": "CBS017",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 325,
+    "sku": "61358878",
+    "article": "CBS017",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 326,
+    "sku": "61358896",
+    "article": "CBS017",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 327,
+    "sku": "61358887",
+    "article": "CBS017",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 328,
+    "sku": "61358805",
+    "article": "CBS017",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 329,
+    "sku": "61358814",
+    "article": "CBS017",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 330,
+    "sku": "61358823",
+    "article": "CBS017",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 331,
+    "sku": "61358841",
+    "article": "CBS017",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 332,
+    "sku": "61358832",
+    "article": "CBS017",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 333,
+    "sku": "61358903",
+    "article": "CBS017",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 334,
+    "sku": "61358912",
+    "article": "CBS017",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 335,
+    "sku": "61358921",
+    "article": "CBS017",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 336,
+    "sku": "61358949",
+    "article": "CBS017",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 337,
+    "sku": "61358930",
+    "article": "CBS017",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 338,
+    "sku": "61358752",
+    "article": "CBS017",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 339,
+    "sku": "61358761",
+    "article": "CBS017",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 340,
+    "sku": "61358770",
+    "article": "CBS017",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 341,
+    "sku": "61358798",
+    "article": "CBS017",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 342,
+    "sku": "61358789",
+    "article": "CBS017",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 343,
+    "sku": "61358958",
+    "article": "CBS017",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 344,
+    "sku": "61358967",
+    "article": "CBS017",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 345,
+    "sku": "61358976",
+    "article": "CBS017",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 346,
+    "sku": "61358994",
+    "article": "CBS017",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 347,
+    "sku": "61358985",
+    "article": "CBS017",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 348,
+    "sku": "61359153",
+    "article": "CBS018",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 349,
+    "sku": "61359162",
+    "article": "CBS018",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 350,
+    "sku": "61359171",
+    "article": "CBS018",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 351,
+    "sku": "61359199",
+    "article": "CBS018",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 352,
+    "sku": "61359180",
+    "article": "CBS018",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 353,
+    "sku": "61359055",
+    "article": "CBS018",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 354,
+    "sku": "61359064",
+    "article": "CBS018",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 355,
+    "sku": "61359073",
+    "article": "CBS018",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 356,
+    "sku": "61359091",
+    "article": "CBS018",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 357,
+    "sku": "61359082",
+    "article": "CBS018",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 358,
+    "sku": "61359206",
+    "article": "CBS018",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 359,
+    "sku": "61359215",
+    "article": "CBS018",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 360,
+    "sku": "61359224",
+    "article": "CBS018",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 361,
+    "sku": "61359242",
+    "article": "CBS018",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 362,
+    "sku": "61359233",
+    "article": "CBS018",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 363,
+    "sku": "61359108",
+    "article": "CBS018",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 364,
+    "sku": "61359117",
+    "article": "CBS018",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 365,
+    "sku": "61359126",
+    "article": "CBS018",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 366,
+    "sku": "61359144",
+    "article": "CBS018",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 367,
+    "sku": "61359135",
+    "article": "CBS018",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 368,
+    "sku": "61359019",
+    "article": "CBS018",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 369,
+    "sku": "61359028",
+    "article": "CBS018",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 370,
+    "sku": "61359046",
+    "article": "CBS018",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 371,
+    "sku": "61359037",
+    "article": "CBS018",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 372,
+    "sku": "68653367",
+    "article": "CBS046A",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 373,
+    "sku": "68653376",
+    "article": "CBS046A",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 374,
+    "sku": "68653385",
+    "article": "CBS046A",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 375,
+    "sku": "68653401",
+    "article": "CBS046A",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 376,
+    "sku": "68653394",
+    "article": "CBS046A",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 377,
+    "sku": "68653410",
+    "article": "CBS046B",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 378,
+    "sku": "68653429",
+    "article": "CBS046B",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 379,
+    "sku": "68653438",
+    "article": "CBS046B",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 380,
+    "sku": "68653456",
+    "article": "CBS046B",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 381,
+    "sku": "68653447",
+    "article": "CBS046B",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 382,
+    "sku": "68653465",
+    "article": "CBS048A",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 383,
+    "sku": "68653474",
+    "article": "CBS048A",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 384,
+    "sku": "68653483",
+    "article": "CBS048A",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 385,
+    "sku": "68653509",
+    "article": "CBS048A",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 386,
+    "sku": "68653492",
+    "article": "CBS048A",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 387,
+    "sku": "68653518",
+    "article": "CBS048B",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 388,
+    "sku": "68653527",
+    "article": "CBS048B",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 389,
+    "sku": "68653536",
+    "article": "CBS048B",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 390,
+    "sku": "68653554",
+    "article": "CBS048B",
+    "source": "SUKO BOYS"
+  },
+  {
+    "id": 391,
+    "sku": "68653545",
+    "article": "CBS048B",
+    "source": "SUKO BOYS"
+  }
+]

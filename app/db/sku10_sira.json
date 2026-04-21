@@ -1,0 +1,1448 @@
+[
+  {
+    "id": 1,
+    "sku": "15162026",
+    "article": "",
+    "source": "SIRA"
+  },
+  {
+    "id": 2,
+    "sku": "63016171",
+    "article": "TSMA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 3,
+    "sku": "63016180",
+    "article": "TSMA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 4,
+    "sku": "63016199",
+    "article": "TSMA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 5,
+    "sku": "63016206",
+    "article": "TSMA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 6,
+    "sku": "63016215",
+    "article": "TSMA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 7,
+    "sku": "63016224",
+    "article": "TSMA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 8,
+    "sku": "63016233",
+    "article": "TSMA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 9,
+    "sku": "63016242",
+    "article": "TSMA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 10,
+    "sku": "63016251",
+    "article": "TSMA2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 11,
+    "sku": "63016260",
+    "article": "TSMA2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 12,
+    "sku": "63016279",
+    "article": "TSMA2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 13,
+    "sku": "63016288",
+    "article": "TSMA2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 14,
+    "sku": "63016297",
+    "article": "TSMA2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 15,
+    "sku": "63016304",
+    "article": "TSMA2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 16,
+    "sku": "63016313",
+    "article": "TSMA2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 17,
+    "sku": "63016322",
+    "article": "TSMA2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 18,
+    "sku": "63016331",
+    "article": "TSDA2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 19,
+    "sku": "63016340",
+    "article": "TSDA2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 20,
+    "sku": "63016359",
+    "article": "TSDA2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 21,
+    "sku": "63016368",
+    "article": "TSDA2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 22,
+    "sku": "63016377",
+    "article": "TSDA2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 23,
+    "sku": "63016386",
+    "article": "TSDA2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 24,
+    "sku": "63016395",
+    "article": "TSDA2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 25,
+    "sku": "63016402",
+    "article": "TSDA2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 26,
+    "sku": "63034302",
+    "article": "TSDA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 27,
+    "sku": "63034311",
+    "article": "TSDA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 28,
+    "sku": "63034320",
+    "article": "TSDA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 29,
+    "sku": "63034339",
+    "article": "TSDA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 30,
+    "sku": "63034348",
+    "article": "TSDA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 31,
+    "sku": "63034357",
+    "article": "TSDA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 32,
+    "sku": "63034366",
+    "article": "TSDA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 33,
+    "sku": "63034375",
+    "article": "TSDA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 34,
+    "sku": "63034384",
+    "article": "TSDA2503",
+    "source": "SIRA"
+  },
+  {
+    "id": 35,
+    "sku": "63034393",
+    "article": "TSDA2503",
+    "source": "SIRA"
+  },
+  {
+    "id": 36,
+    "sku": "63034419",
+    "article": "TSDA2503",
+    "source": "SIRA"
+  },
+  {
+    "id": 37,
+    "sku": "63015930",
+    "article": "TSDW2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 38,
+    "sku": "63015949",
+    "article": "TSDW2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 39,
+    "sku": "63015958",
+    "article": "TSDW2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 40,
+    "sku": "63015967",
+    "article": "TSDW2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 41,
+    "sku": "63015976",
+    "article": "TSDW2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 42,
+    "sku": "63015985",
+    "article": "TSDW2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 43,
+    "sku": "63015994",
+    "article": "TSDW2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 44,
+    "sku": "63016019",
+    "article": "TSDW2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 45,
+    "sku": "63016028",
+    "article": "TSDW2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 46,
+    "sku": "63016037",
+    "article": "TSDW2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 47,
+    "sku": "63016046",
+    "article": "TSDW2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 48,
+    "sku": "63015850",
+    "article": "TSIK2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 49,
+    "sku": "63015869",
+    "article": "TSIK2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 50,
+    "sku": "63015878",
+    "article": "TSIK2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 51,
+    "sku": "63015887",
+    "article": "TSIK2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 52,
+    "sku": "63015896",
+    "article": "TSIK2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 53,
+    "sku": "63015903",
+    "article": "TSIK2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 54,
+    "sku": "63015912",
+    "article": "TSIK2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 55,
+    "sku": "63015921",
+    "article": "TSIK2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 56,
+    "sku": "63016055",
+    "article": "TSIK2503",
+    "source": "SIRA"
+  },
+  {
+    "id": 57,
+    "sku": "63016064",
+    "article": "TSIK2503",
+    "source": "SIRA"
+  },
+  {
+    "id": 58,
+    "sku": "63016073",
+    "article": "TSIK2504",
+    "source": "SIRA"
+  },
+  {
+    "id": 59,
+    "sku": "63016082",
+    "article": "TSIK2504",
+    "source": "SIRA"
+  },
+  {
+    "id": 60,
+    "sku": "63016091",
+    "article": "TSIK2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 61,
+    "sku": "63016108",
+    "article": "TSIK2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 62,
+    "sku": "63016117",
+    "article": "TSIK2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 63,
+    "sku": "63016126",
+    "article": "TSIK2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 64,
+    "sku": "63016135",
+    "article": "TSIK2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 65,
+    "sku": "63016144",
+    "article": "TSIK2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 66,
+    "sku": "63016153",
+    "article": "TSIK2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 67,
+    "sku": "63016162",
+    "article": "TSIK2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 68,
+    "sku": "63029489",
+    "article": "TSIK2503",
+    "source": "SIRA"
+  },
+  {
+    "id": 69,
+    "sku": "63029498",
+    "article": "TSIK2504",
+    "source": "SIRA"
+  },
+  {
+    "id": 70,
+    "sku": "63169202",
+    "article": "TPIK2505",
+    "source": "SIRA"
+  },
+  {
+    "id": 71,
+    "sku": "63169211",
+    "article": "TPIK2505",
+    "source": "SIRA"
+  },
+  {
+    "id": 72,
+    "sku": "63169220",
+    "article": "TPIK2505",
+    "source": "SIRA"
+  },
+  {
+    "id": 73,
+    "sku": "63169239",
+    "article": "TPIK2505",
+    "source": "SIRA"
+  },
+  {
+    "id": 74,
+    "sku": "63169248",
+    "article": "TPIK2505",
+    "source": "SIRA"
+  },
+  {
+    "id": 75,
+    "sku": "63169257",
+    "article": "TPIK2505",
+    "source": "SIRA"
+  },
+  {
+    "id": 76,
+    "sku": "63169266",
+    "article": "TPIK2505",
+    "source": "SIRA"
+  },
+  {
+    "id": 77,
+    "sku": "63169275",
+    "article": "TPIK2505",
+    "source": "SIRA"
+  },
+  {
+    "id": 78,
+    "sku": "63169284",
+    "article": "TPIK2503",
+    "source": "SIRA"
+  },
+  {
+    "id": 79,
+    "sku": "63169293",
+    "article": "TPIK2503",
+    "source": "SIRA"
+  },
+  {
+    "id": 80,
+    "sku": "63169319",
+    "article": "TPIK2503",
+    "source": "SIRA"
+  },
+  {
+    "id": 81,
+    "sku": "63169328",
+    "article": "TPIK2503",
+    "source": "SIRA"
+  },
+  {
+    "id": 82,
+    "sku": "63169337",
+    "article": "TPIK2503",
+    "source": "SIRA"
+  },
+  {
+    "id": 83,
+    "sku": "63169346",
+    "article": "TPIK2503",
+    "source": "SIRA"
+  },
+  {
+    "id": 84,
+    "sku": "63169355",
+    "article": "TPIK2503",
+    "source": "SIRA"
+  },
+  {
+    "id": 85,
+    "sku": "63169364",
+    "article": "TPIK2504A",
+    "source": "SIRA"
+  },
+  {
+    "id": 86,
+    "sku": "63169373",
+    "article": "TPIK2504A",
+    "source": "SIRA"
+  },
+  {
+    "id": 87,
+    "sku": "63169382",
+    "article": "TPIK2504A",
+    "source": "SIRA"
+  },
+  {
+    "id": 88,
+    "sku": "63169391",
+    "article": "TPIK2504A",
+    "source": "SIRA"
+  },
+  {
+    "id": 89,
+    "sku": "63169408",
+    "article": "TPIK2504B",
+    "source": "SIRA"
+  },
+  {
+    "id": 90,
+    "sku": "63169417",
+    "article": "TPIK2504B",
+    "source": "SIRA"
+  },
+  {
+    "id": 91,
+    "sku": "63169426",
+    "article": "TPIK2504B",
+    "source": "SIRA"
+  },
+  {
+    "id": 92,
+    "sku": "63169435",
+    "article": "TPIK2504B",
+    "source": "SIRA"
+  },
+  {
+    "id": 93,
+    "sku": "63035703",
+    "article": "WTMP2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 94,
+    "sku": "63035712",
+    "article": "WTMP2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 95,
+    "sku": "63035721",
+    "article": "WTMP2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 96,
+    "sku": "63035730",
+    "article": "WTMP2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 97,
+    "sku": "63035749",
+    "article": "WTMP2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 98,
+    "sku": "63035758",
+    "article": "WTMP2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 99,
+    "sku": "63035767",
+    "article": "WTMP2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 100,
+    "sku": "63035776",
+    "article": "WTMP2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 101,
+    "sku": "63034142",
+    "article": "TSAK2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 102,
+    "sku": "63034151",
+    "article": "TSAK2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 103,
+    "sku": "63034160",
+    "article": "TSAK2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 104,
+    "sku": "63034179",
+    "article": "TSAK2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 105,
+    "sku": "63034188",
+    "article": "TSAK2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 106,
+    "sku": "63034197",
+    "article": "TSAK2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 107,
+    "sku": "63034204",
+    "article": "TSAK2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 108,
+    "sku": "63034213",
+    "article": "TSAK2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 109,
+    "sku": "63168990",
+    "article": "TSBL2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 110,
+    "sku": "63169006",
+    "article": "TSBL2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 111,
+    "sku": "63169015",
+    "article": "TSBL2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 112,
+    "sku": "63169024",
+    "article": "TSBL2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 113,
+    "sku": "63169033",
+    "article": "TSBL2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 114,
+    "sku": "63169042",
+    "article": "TSBL2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 115,
+    "sku": "63169051",
+    "article": "TSBL2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 116,
+    "sku": "63169060",
+    "article": "TSBL2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 117,
+    "sku": "63169444",
+    "article": "TPIK2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 118,
+    "sku": "63169453",
+    "article": "TPIK2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 119,
+    "sku": "63169462",
+    "article": "TPIK2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 120,
+    "sku": "63169480",
+    "article": "TPIK2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 121,
+    "sku": "63169499",
+    "article": "TPIK2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 122,
+    "sku": "63169506",
+    "article": "TPIK2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 123,
+    "sku": "63034428",
+    "article": "OCDA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 124,
+    "sku": "63034437",
+    "article": "OCDA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 125,
+    "sku": "63034446",
+    "article": "OCDA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 126,
+    "sku": "63034455",
+    "article": "OCDA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 127,
+    "sku": "63034464",
+    "article": "OCDA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 128,
+    "sku": "63034473",
+    "article": "OCDA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 129,
+    "sku": "63034482",
+    "article": "OCDA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 130,
+    "sku": "63034491",
+    "article": "OCDA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 131,
+    "sku": "63034508",
+    "article": "OCDA2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 132,
+    "sku": "63034517",
+    "article": "OCDA2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 133,
+    "sku": "63034526",
+    "article": "OCDA2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 134,
+    "sku": "63034535",
+    "article": "OCDA2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 135,
+    "sku": "63034544",
+    "article": "OCDA2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 136,
+    "sku": "63034553",
+    "article": "OCDA2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 137,
+    "sku": "63034562",
+    "article": "OCDA2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 138,
+    "sku": "63034571",
+    "article": "OCDA2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 139,
+    "sku": "63034580",
+    "article": "OCDA2503",
+    "source": "SIRA"
+  },
+  {
+    "id": 140,
+    "sku": "63034599",
+    "article": "OCDA2503",
+    "source": "SIRA"
+  },
+  {
+    "id": 141,
+    "sku": "63034606",
+    "article": "OCDA2503",
+    "source": "SIRA"
+  },
+  {
+    "id": 142,
+    "sku": "63034615",
+    "article": "OCDA2503",
+    "source": "SIRA"
+  },
+  {
+    "id": 143,
+    "sku": "63034624",
+    "article": "OCDA2503",
+    "source": "SIRA"
+  },
+  {
+    "id": 144,
+    "sku": "63034633",
+    "article": "OCDA2503",
+    "source": "SIRA"
+  },
+  {
+    "id": 145,
+    "sku": "63034642",
+    "article": "OCDA2503",
+    "source": "SIRA"
+  },
+  {
+    "id": 146,
+    "sku": "63034651",
+    "article": "OCDA2503",
+    "source": "SIRA"
+  },
+  {
+    "id": 147,
+    "sku": "63016411",
+    "article": "OWDW2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 148,
+    "sku": "63016420",
+    "article": "OWDW2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 149,
+    "sku": "63029505",
+    "article": "OWDW2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 150,
+    "sku": "63029514",
+    "article": "OWDW2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 151,
+    "sku": "63169079",
+    "article": "OWBL2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 152,
+    "sku": "68725084",
+    "article": "OWBL2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 153,
+    "sku": "68725093",
+    "article": "OWBL2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 154,
+    "sku": "63034982",
+    "article": "PWTM2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 155,
+    "sku": "63034991",
+    "article": "PWTM2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 156,
+    "sku": "63035007",
+    "article": "PWTM2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 157,
+    "sku": "63035016",
+    "article": "PWTM2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 158,
+    "sku": "63035025",
+    "article": "PWTM2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 159,
+    "sku": "63035034",
+    "article": "PWTM2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 160,
+    "sku": "63035043",
+    "article": "PWTM2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 161,
+    "sku": "63035052",
+    "article": "PWTM2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 162,
+    "sku": "63016439",
+    "article": "PWTC2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 163,
+    "sku": "63016448",
+    "article": "PWTC2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 164,
+    "sku": "63016457",
+    "article": "PWTC2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 165,
+    "sku": "63016466",
+    "article": "PWTC2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 166,
+    "sku": "63034660",
+    "article": "PDBL2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 167,
+    "sku": "63034679",
+    "article": "PDBL2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 168,
+    "sku": "63034688",
+    "article": "PDBL2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 169,
+    "sku": "63034697",
+    "article": "PDBL2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 170,
+    "sku": "63034704",
+    "article": "PDBL2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 171,
+    "sku": "63034713",
+    "article": "PDBL2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 172,
+    "sku": "63034722",
+    "article": "PDBL2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 173,
+    "sku": "63034731",
+    "article": "PDBL2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 174,
+    "sku": "63034740",
+    "article": "PDBL2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 175,
+    "sku": "63034759",
+    "article": "PDBL2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 176,
+    "sku": "63034768",
+    "article": "PDBL2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 177,
+    "sku": "63034777",
+    "article": "PDBL2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 178,
+    "sku": "63034786",
+    "article": "PDBL2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 179,
+    "sku": "63034795",
+    "article": "PDBL2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 180,
+    "sku": "63034802",
+    "article": "PDBL2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 181,
+    "sku": "63034811",
+    "article": "PDBL2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 182,
+    "sku": "63034820",
+    "article": "PDBL2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 183,
+    "sku": "63034839",
+    "article": "PDBL2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 184,
+    "sku": "63034848",
+    "article": "PDBL2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 185,
+    "sku": "63034857",
+    "article": "PDBL2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 186,
+    "sku": "63034866",
+    "article": "PDBL2504",
+    "source": "SIRA"
+  },
+  {
+    "id": 187,
+    "sku": "63034875",
+    "article": "PDBL2504",
+    "source": "SIRA"
+  },
+  {
+    "id": 188,
+    "sku": "63034884",
+    "article": "PDBL2504",
+    "source": "SIRA"
+  },
+  {
+    "id": 189,
+    "sku": "63034893",
+    "article": "PDBL2504",
+    "source": "SIRA"
+  },
+  {
+    "id": 190,
+    "sku": "63034919",
+    "article": "PDBL2503",
+    "source": "SIRA"
+  },
+  {
+    "id": 191,
+    "sku": "63034928",
+    "article": "PDBL2503",
+    "source": "SIRA"
+  },
+  {
+    "id": 192,
+    "sku": "63034937",
+    "article": "PDBL2503",
+    "source": "SIRA"
+  },
+  {
+    "id": 193,
+    "sku": "63034946",
+    "article": "PDBL2503",
+    "source": "SIRA"
+  },
+  {
+    "id": 194,
+    "sku": "63034955",
+    "article": "PDBL2503",
+    "source": "SIRA"
+  },
+  {
+    "id": 195,
+    "sku": "63034964",
+    "article": "PDBL2503",
+    "source": "SIRA"
+  },
+  {
+    "id": 196,
+    "sku": "63034973",
+    "article": "PDBL2503",
+    "source": "SIRA"
+  },
+  {
+    "id": 197,
+    "sku": "63016475",
+    "article": "SWMA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 198,
+    "sku": "63016484",
+    "article": "SWMA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 199,
+    "sku": "63016493",
+    "article": "SWMA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 200,
+    "sku": "63016519",
+    "article": "SWMA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 201,
+    "sku": "63016528",
+    "article": "SWMA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 202,
+    "sku": "63016537",
+    "article": "SWMA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 203,
+    "sku": "63016546",
+    "article": "SWMA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 204,
+    "sku": "63016555",
+    "article": "SWDW2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 205,
+    "sku": "63016564",
+    "article": "SWDW2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 206,
+    "sku": "63016573",
+    "article": "SWDW2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 207,
+    "sku": "63016582",
+    "article": "SWDW2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 208,
+    "sku": "63016591",
+    "article": "SWDW2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 209,
+    "sku": "63016608",
+    "article": "SWDW2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 210,
+    "sku": "63016617",
+    "article": "SWDW2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 211,
+    "sku": "63016626",
+    "article": "SWDW2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 212,
+    "sku": "63169524",
+    "article": "SDSA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 213,
+    "sku": "63169533",
+    "article": "SDSA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 214,
+    "sku": "63169542",
+    "article": "SDSA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 215,
+    "sku": "63169551",
+    "article": "SDSA2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 216,
+    "sku": "63016635",
+    "article": "SWTC2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 217,
+    "sku": "63016644",
+    "article": "SWTC2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 218,
+    "sku": "63016653",
+    "article": "SWTC2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 219,
+    "sku": "63016662",
+    "article": "SWTC2502",
+    "source": "SIRA"
+  },
+  {
+    "id": 220,
+    "sku": "63016671",
+    "article": "SWTC2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 221,
+    "sku": "63016680",
+    "article": "SWTC2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 222,
+    "sku": "63016699",
+    "article": "SWTC2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 223,
+    "sku": "63029523",
+    "article": "SWTC2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 224,
+    "sku": "63029532",
+    "article": "SWTC2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 225,
+    "sku": "63029541",
+    "article": "SWTC2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 226,
+    "sku": "63034222",
+    "article": "SWAK2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 227,
+    "sku": "63034231",
+    "article": "SWAK2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 228,
+    "sku": "63034240",
+    "article": "SWAK2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 229,
+    "sku": "63034259",
+    "article": "SWAK2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 230,
+    "sku": "63034268",
+    "article": "DWAK2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 231,
+    "sku": "63034277",
+    "article": "DWAK2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 232,
+    "sku": "63034286",
+    "article": "DWAK2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 233,
+    "sku": "63034295",
+    "article": "DWAK2501",
+    "source": "SIRA"
+  },
+  {
+    "id": 234,
+    "sku": "63169622",
+    "article": "MPKA501",
+    "source": "SIRA"
+  },
+  {
+    "id": 235,
+    "sku": "63169631",
+    "article": "MPKA501",
+    "source": "SIRA"
+  },
+  {
+    "id": 236,
+    "sku": "63169640",
+    "article": "ASKA501",
+    "source": "SIRA"
+  },
+  {
+    "id": 237,
+    "sku": "63169659",
+    "article": "ASKA501",
+    "source": "SIRA"
+  },
+  {
+    "id": 238,
+    "sku": "63169668",
+    "article": "ASKA501",
+    "source": "SIRA"
+  },
+  {
+    "id": 239,
+    "sku": "63039647",
+    "article": "AOAK501",
+    "source": "SIRA"
+  },
+  {
+    "id": 240,
+    "sku": "63039656",
+    "article": "AOAK502",
+    "source": "SIRA"
+  },
+  {
+    "id": 241,
+    "sku": "63169677",
+    "article": "AOAK2503",
+    "source": "SIRA"
+  }
+]

@@ -1,0 +1,176 @@
+[
+  {
+    "id": 1,
+    "sku": "15162026",
+    "article": "",
+    "source": "RODEO"
+  },
+  {
+    "id": 2,
+    "sku": "81500022",
+    "article": "81500022GL",
+    "source": "RODEO"
+  },
+  {
+    "id": 3,
+    "sku": "81500032",
+    "article": "81500032RL",
+    "source": "RODEO"
+  },
+  {
+    "id": 4,
+    "sku": "81500041",
+    "article": "81500041GL",
+    "source": "RODEO"
+  },
+  {
+    "id": 5,
+    "sku": "81500052",
+    "article": "81500052NL",
+    "source": "RODEO"
+  },
+  {
+    "id": 6,
+    "sku": "81500062",
+    "article": "81500062WL",
+    "source": "RODEO"
+  },
+  {
+    "id": 7,
+    "sku": "81500072",
+    "article": "81500072BL",
+    "source": "RODEO"
+  },
+  {
+    "id": 8,
+    "sku": "81500082",
+    "article": "81500082BL",
+    "source": "RODEO"
+  },
+  {
+    "id": 9,
+    "sku": "81500092",
+    "article": "81500092GL",
+    "source": "RODEO"
+  },
+  {
+    "id": 10,
+    "sku": "81500102",
+    "article": "81500102GL",
+    "source": "RODEO"
+  },
+  {
+    "id": 11,
+    "sku": "81500112",
+    "article": "81500112CL",
+    "source": "RODEO"
+  },
+  {
+    "id": 12,
+    "sku": "81500122",
+    "article": "81500122AL",
+    "source": "RODEO"
+  },
+  {
+    "id": 13,
+    "sku": "81500132",
+    "article": "81500132BL",
+    "source": "RODEO"
+  },
+  {
+    "id": 14,
+    "sku": "81500141",
+    "article": "81500141AL",
+    "source": "RODEO"
+  },
+  {
+    "id": 15,
+    "sku": "81700021",
+    "article": "81700021AL",
+    "source": "RODEO"
+  },
+  {
+    "id": 16,
+    "sku": "81700031",
+    "article": "81700031WL",
+    "source": "RODEO"
+  },
+  {
+    "id": 17,
+    "sku": "81700041",
+    "article": "81700041KL",
+    "source": "RODEO"
+  },
+  {
+    "id": 18,
+    "sku": "81800042",
+    "article": "81800042AL",
+    "source": "RODEO"
+  },
+  {
+    "id": 19,
+    "sku": "81900012",
+    "article": "81900012NLX",
+    "source": "RODEO"
+  },
+  {
+    "id": 20,
+    "sku": "81900032",
+    "article": "81900032CLX",
+    "source": "RODEO"
+  },
+  {
+    "id": 21,
+    "sku": "81900042",
+    "article": "81900042AL",
+    "source": "RODEO"
+  },
+  {
+    "id": 22,
+    "sku": "82000042",
+    "article": "82000042BL",
+    "source": "RODEO"
+  },
+  {
+    "id": 23,
+    "sku": "82000052",
+    "article": "82000052GL",
+    "source": "RODEO"
+  },
+  {
+    "id": 24,
+    "sku": "82000062",
+    "article": "82000062KL",
+    "source": "RODEO"
+  },
+  {
+    "id": 25,
+    "sku": "82600012",
+    "article": "82600012NL",
+    "source": "RODEO"
+  },
+  {
+    "id": 26,
+    "sku": "82600022",
+    "article": "82600022CL",
+    "source": "RODEO"
+  },
+  {
+    "id": 27,
+    "sku": "82600032",
+    "article": "82600032KML",
+    "source": "RODEO"
+  },
+  {
+    "id": 28,
+    "sku": "83000032",
+    "article": "83000032WLX",
+    "source": "RODEO"
+  },
+  {
+    "id": 29,
+    "sku": "83000042",
+    "article": "83000042KLX",
+    "source": "RODEO"
+  }
+]
