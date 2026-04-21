@@ -1,0 +1,1358 @@
+[
+  {
+    "id": 1,
+    "sku": "15162026",
+    "article": "",
+    "source": "ANNISA"
+  },
+  {
+    "id": 2,
+    "sku": "16773263",
+    "article": "MA808A",
+    "source": "ANNISA"
+  },
+  {
+    "id": 3,
+    "sku": "16773272",
+    "article": "MA808A",
+    "source": "ANNISA"
+  },
+  {
+    "id": 4,
+    "sku": "16773307",
+    "article": "MA808A",
+    "source": "ANNISA"
+  },
+  {
+    "id": 5,
+    "sku": "16773281",
+    "article": "MA808A",
+    "source": "ANNISA"
+  },
+  {
+    "id": 6,
+    "sku": "16773290",
+    "article": "MA808A",
+    "source": "ANNISA"
+  },
+  {
+    "id": 7,
+    "sku": "69597935",
+    "article": "WTMA2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 8,
+    "sku": "69597944",
+    "article": "WTMA2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 9,
+    "sku": "69597953",
+    "article": "WTMA2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 10,
+    "sku": "69597962",
+    "article": "WTMA2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 11,
+    "sku": "69597971",
+    "article": "WTMA2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 12,
+    "sku": "68203683",
+    "article": "WTDW2605",
+    "source": "ANNISA"
+  },
+  {
+    "id": 13,
+    "sku": "68203692",
+    "article": "WTDW2605",
+    "source": "ANNISA"
+  },
+  {
+    "id": 14,
+    "sku": "68203709",
+    "article": "WTDW2605",
+    "source": "ANNISA"
+  },
+  {
+    "id": 15,
+    "sku": "68203718",
+    "article": "WTDW2605",
+    "source": "ANNISA"
+  },
+  {
+    "id": 16,
+    "sku": "68203727",
+    "article": "WTDW2605",
+    "source": "ANNISA"
+  },
+  {
+    "id": 17,
+    "sku": "68806157",
+    "article": "WTDW2604",
+    "source": "ANNISA"
+  },
+  {
+    "id": 18,
+    "sku": "68806166",
+    "article": "WTDW2604",
+    "source": "ANNISA"
+  },
+  {
+    "id": 19,
+    "sku": "68806175",
+    "article": "WTDW2604",
+    "source": "ANNISA"
+  },
+  {
+    "id": 20,
+    "sku": "68806184",
+    "article": "WTDW2604",
+    "source": "ANNISA"
+  },
+  {
+    "id": 21,
+    "sku": "68806193",
+    "article": "WTDW2604",
+    "source": "ANNISA"
+  },
+  {
+    "id": 22,
+    "sku": "68806219",
+    "article": "WTDW2604",
+    "source": "ANNISA"
+  },
+  {
+    "id": 23,
+    "sku": "68806228",
+    "article": "WTDW2604",
+    "source": "ANNISA"
+  },
+  {
+    "id": 24,
+    "sku": "68806237",
+    "article": "WTDW2604",
+    "source": "ANNISA"
+  },
+  {
+    "id": 25,
+    "sku": "68806246",
+    "article": "WTDW2604",
+    "source": "ANNISA"
+  },
+  {
+    "id": 26,
+    "sku": "69811676",
+    "article": "WTDW2606",
+    "source": "ANNISA"
+  },
+  {
+    "id": 27,
+    "sku": "69811685",
+    "article": "WTDW2606",
+    "source": "ANNISA"
+  },
+  {
+    "id": 28,
+    "sku": "69811694",
+    "article": "WTDW2606",
+    "source": "ANNISA"
+  },
+  {
+    "id": 29,
+    "sku": "69811701",
+    "article": "WTDW2606",
+    "source": "ANNISA"
+  },
+  {
+    "id": 30,
+    "sku": "69811710",
+    "article": "WTDW2606",
+    "source": "ANNISA"
+  },
+  {
+    "id": 31,
+    "sku": "69811729",
+    "article": "WTDW2606",
+    "source": "ANNISA"
+  },
+  {
+    "id": 32,
+    "sku": "69811738",
+    "article": "WTDW2606",
+    "source": "ANNISA"
+  },
+  {
+    "id": 33,
+    "sku": "69811747",
+    "article": "WTDW2606",
+    "source": "ANNISA"
+  },
+  {
+    "id": 34,
+    "sku": "69811756",
+    "article": "WTDW2606",
+    "source": "ANNISA"
+  },
+  {
+    "id": 35,
+    "sku": "69811765",
+    "article": "WTDW2606",
+    "source": "ANNISA"
+  },
+  {
+    "id": 36,
+    "sku": "69920076",
+    "article": "WTME2604",
+    "source": "ANNISA"
+  },
+  {
+    "id": 37,
+    "sku": "69920085",
+    "article": "WTME2604",
+    "source": "ANNISA"
+  },
+  {
+    "id": 38,
+    "sku": "69920094",
+    "article": "WTME2604",
+    "source": "ANNISA"
+  },
+  {
+    "id": 39,
+    "sku": "69920101",
+    "article": "WTME2604",
+    "source": "ANNISA"
+  },
+  {
+    "id": 40,
+    "sku": "69598032",
+    "article": "WTTC2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 41,
+    "sku": "69598041",
+    "article": "WTTC2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 42,
+    "sku": "69598050",
+    "article": "WTTC2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 43,
+    "sku": "69598069",
+    "article": "WTTC2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 44,
+    "sku": "69598078",
+    "article": "WTTC2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 45,
+    "sku": "69598087",
+    "article": "WTTC2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 46,
+    "sku": "69598096",
+    "article": "WTTC2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 47,
+    "sku": "69598103",
+    "article": "WTTC2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 48,
+    "sku": "69598112",
+    "article": "WTTC2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 49,
+    "sku": "69598121",
+    "article": "WTTC2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 50,
+    "sku": "68806102",
+    "article": "WTMP2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 51,
+    "sku": "68806111",
+    "article": "WTMP2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 52,
+    "sku": "68806120",
+    "article": "WTMP2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 53,
+    "sku": "68806139",
+    "article": "WTMP2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 54,
+    "sku": "68806148",
+    "article": "WTMP2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 55,
+    "sku": "69597579",
+    "article": "WTCO2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 56,
+    "sku": "69597588",
+    "article": "WTCO2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 57,
+    "sku": "69597597",
+    "article": "WTCO2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 58,
+    "sku": "69597604",
+    "article": "WTCO2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 59,
+    "sku": "69597613",
+    "article": "WTCO2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 60,
+    "sku": "69597622",
+    "article": "WTCO2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 61,
+    "sku": "69597631",
+    "article": "WTCO2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 62,
+    "sku": "69597640",
+    "article": "WTCO2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 63,
+    "sku": "69597659",
+    "article": "WTCO2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 64,
+    "sku": "69597668",
+    "article": "WTCO2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 65,
+    "sku": "69597677",
+    "article": "WTAK2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 66,
+    "sku": "69597686",
+    "article": "WTAK2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 67,
+    "sku": "69597695",
+    "article": "WTAK2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 68,
+    "sku": "69597702",
+    "article": "WTAK2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 69,
+    "sku": "69597711",
+    "article": "WTAK2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 70,
+    "sku": "69597720",
+    "article": "WTAK2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 71,
+    "sku": "69597739",
+    "article": "WTAK2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 72,
+    "sku": "69597748",
+    "article": "WTAK2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 73,
+    "sku": "69597757",
+    "article": "WTAK2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 74,
+    "sku": "69597766",
+    "article": "WTAK2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 75,
+    "sku": "68806255",
+    "article": "KTDA2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 76,
+    "sku": "68806264",
+    "article": "KTDA2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 77,
+    "sku": "68806273",
+    "article": "KTDA2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 78,
+    "sku": "69378976",
+    "article": "KTDA2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 79,
+    "sku": "69378985",
+    "article": "KTDA2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 80,
+    "sku": "69378994",
+    "article": "KTDA2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 81,
+    "sku": "69597908",
+    "article": "KTDA2603",
+    "source": "ANNISA"
+  },
+  {
+    "id": 82,
+    "sku": "69597917",
+    "article": "KTDA2603",
+    "source": "ANNISA"
+  },
+  {
+    "id": 83,
+    "sku": "69597926",
+    "article": "KTDA2603",
+    "source": "ANNISA"
+  },
+  {
+    "id": 84,
+    "sku": "68806291",
+    "article": "KTDA2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 85,
+    "sku": "68806308",
+    "article": "KTDA2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 86,
+    "sku": "68806317",
+    "article": "KTDA2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 87,
+    "sku": "68806335",
+    "article": "KTDW2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 88,
+    "sku": "68806344",
+    "article": "KTDW2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 89,
+    "sku": "68806353",
+    "article": "KTDW2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 90,
+    "sku": "68806362",
+    "article": "KTDW2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 91,
+    "sku": "68806371",
+    "article": "KTDW2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 92,
+    "sku": "69597873",
+    "article": "OJME2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 93,
+    "sku": "69597882",
+    "article": "OJME2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 94,
+    "sku": "69597828",
+    "article": "OJHE2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 95,
+    "sku": "69597837",
+    "article": "OJHE2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 96,
+    "sku": "69597846",
+    "article": "OJHE2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 97,
+    "sku": "69597855",
+    "article": "OJHE2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 98,
+    "sku": "69597864",
+    "article": "OJHE2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 99,
+    "sku": "68204020",
+    "article": "DMDW2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 100,
+    "sku": "68204039",
+    "article": "DMDW2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 101,
+    "sku": "68204048",
+    "article": "DMDW2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 102,
+    "sku": "68204057",
+    "article": "DMDW2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 103,
+    "sku": "68204066",
+    "article": "DMDW2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 104,
+    "sku": "69597980",
+    "article": "WBMA2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 105,
+    "sku": "69597999",
+    "article": "WBMA2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 106,
+    "sku": "69598005",
+    "article": "WBMA2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 107,
+    "sku": "69598014",
+    "article": "WBMA2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 108,
+    "sku": "69598023",
+    "article": "WBMA2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 109,
+    "sku": "68204379",
+    "article": "WBDW2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 110,
+    "sku": "68204388",
+    "article": "WBDW2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 111,
+    "sku": "68204397",
+    "article": "WBDW2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 112,
+    "sku": "68204404",
+    "article": "WBDW2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 113,
+    "sku": "68204413",
+    "article": "WBDW2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 114,
+    "sku": "69598130",
+    "article": "WBHE2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 115,
+    "sku": "69598149",
+    "article": "WBHE2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 116,
+    "sku": "69598158",
+    "article": "WBHE2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 117,
+    "sku": "69598167",
+    "article": "WBHE2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 118,
+    "sku": "69598176",
+    "article": "WBHE2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 119,
+    "sku": "69674753",
+    "article": "WBGR2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 120,
+    "sku": "69674762",
+    "article": "WBGR2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 121,
+    "sku": "69674771",
+    "article": "WBGR2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 122,
+    "sku": "69674780",
+    "article": "WBGR2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 123,
+    "sku": "69674799",
+    "article": "WBGR2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 124,
+    "sku": "69674806",
+    "article": "WBGR2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 125,
+    "sku": "69674815",
+    "article": "WBGR2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 126,
+    "sku": "69674824",
+    "article": "WBGR2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 127,
+    "sku": "69674833",
+    "article": "WBGR2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 128,
+    "sku": "69674842",
+    "article": "WBGR2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 129,
+    "sku": "33414038",
+    "article": "NF220",
+    "source": "ANNISA"
+  },
+  {
+    "id": 130,
+    "sku": "33414047",
+    "article": "NF220",
+    "source": "ANNISA"
+  },
+  {
+    "id": 131,
+    "sku": "33414056",
+    "article": "NF220",
+    "source": "ANNISA"
+  },
+  {
+    "id": 132,
+    "sku": "33414065",
+    "article": "NF220",
+    "source": "ANNISA"
+  },
+  {
+    "id": 133,
+    "sku": "33414074",
+    "article": "NF220",
+    "source": "ANNISA"
+  },
+  {
+    "id": 134,
+    "sku": "22265783",
+    "article": "NF801",
+    "source": "ANNISA"
+  },
+  {
+    "id": 135,
+    "sku": "22265792",
+    "article": "NF801",
+    "source": "ANNISA"
+  },
+  {
+    "id": 136,
+    "sku": "22265809",
+    "article": "NF801",
+    "source": "ANNISA"
+  },
+  {
+    "id": 137,
+    "sku": "22265818",
+    "article": "NF801",
+    "source": "ANNISA"
+  },
+  {
+    "id": 138,
+    "sku": "22265827",
+    "article": "NF801",
+    "source": "ANNISA"
+  },
+  {
+    "id": 139,
+    "sku": "69811774",
+    "article": "WBLJ2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 140,
+    "sku": "69811783",
+    "article": "WBLJ2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 141,
+    "sku": "69811792",
+    "article": "WBLJ2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 142,
+    "sku": "69811809",
+    "article": "WBLJ2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 143,
+    "sku": "69811818",
+    "article": "WBLJ2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 144,
+    "sku": "17135790",
+    "article": "LG302",
+    "source": "ANNISA"
+  },
+  {
+    "id": 145,
+    "sku": "17135807",
+    "article": "LG302",
+    "source": "ANNISA"
+  },
+  {
+    "id": 146,
+    "sku": "17135816",
+    "article": "LG302",
+    "source": "ANNISA"
+  },
+  {
+    "id": 147,
+    "sku": "17135825",
+    "article": "LG302",
+    "source": "ANNISA"
+  },
+  {
+    "id": 148,
+    "sku": "17135834",
+    "article": "LG302",
+    "source": "ANNISA"
+  },
+  {
+    "id": 149,
+    "sku": "68806880",
+    "article": "KBPK2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 150,
+    "sku": "68806899",
+    "article": "KBPK2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 151,
+    "sku": "68806906",
+    "article": "KBPK2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 152,
+    "sku": "68806915",
+    "article": "KBPK2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 153,
+    "sku": "68806924",
+    "article": "KBPK2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 154,
+    "sku": "68988069",
+    "article": "LG302",
+    "source": "ANNISA"
+  },
+  {
+    "id": 155,
+    "sku": "68988078",
+    "article": "LG302",
+    "source": "ANNISA"
+  },
+  {
+    "id": 156,
+    "sku": "68988087",
+    "article": "LG302",
+    "source": "ANNISA"
+  },
+  {
+    "id": 157,
+    "sku": "68988096",
+    "article": "LG302",
+    "source": "ANNISA"
+  },
+  {
+    "id": 158,
+    "sku": "68988103",
+    "article": "LG302",
+    "source": "ANNISA"
+  },
+  {
+    "id": 159,
+    "sku": "68806586",
+    "article": "KBDW2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 160,
+    "sku": "68806595",
+    "article": "KBDW2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 161,
+    "sku": "68806602",
+    "article": "KBDW2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 162,
+    "sku": "68806611",
+    "article": "KBDW2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 163,
+    "sku": "68806620",
+    "article": "KBDW2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 164,
+    "sku": "68806639",
+    "article": "KBDW2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 165,
+    "sku": "68806648",
+    "article": "KBDW2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 166,
+    "sku": "68806657",
+    "article": "KBDW2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 167,
+    "sku": "68806666",
+    "article": "KBDW2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 168,
+    "sku": "68806675",
+    "article": "KBDW2602",
+    "source": "ANNISA"
+  },
+  {
+    "id": 169,
+    "sku": "68806782",
+    "article": "KBDW2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 170,
+    "sku": "68806791",
+    "article": "KBDW2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 171,
+    "sku": "68806817",
+    "article": "KBDW2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 172,
+    "sku": "68806835",
+    "article": "KBDW2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 173,
+    "sku": "68806844",
+    "article": "KBDW2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 174,
+    "sku": "68806862",
+    "article": "KBDW2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 175,
+    "sku": "68806871",
+    "article": "KBDW2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 176,
+    "sku": "68806808",
+    "article": "KBDW2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 177,
+    "sku": "68806826",
+    "article": "KBDW2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 178,
+    "sku": "68806853",
+    "article": "KBDW2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 179,
+    "sku": "65108872",
+    "article": "ESN05",
+    "source": "ANNISA"
+  },
+  {
+    "id": 180,
+    "sku": "65108881",
+    "article": "ESN05",
+    "source": "ANNISA"
+  },
+  {
+    "id": 181,
+    "sku": "65108890",
+    "article": "ESN05",
+    "source": "ANNISA"
+  },
+  {
+    "id": 182,
+    "sku": "65108907",
+    "article": "ESN05",
+    "source": "ANNISA"
+  },
+  {
+    "id": 183,
+    "sku": "65108916",
+    "article": "ESN05",
+    "source": "ANNISA"
+  },
+  {
+    "id": 184,
+    "sku": "76439119",
+    "article": "ESN05",
+    "source": "ANNISA"
+  },
+  {
+    "id": 185,
+    "sku": "76439128",
+    "article": "ESN05",
+    "source": "ANNISA"
+  },
+  {
+    "id": 186,
+    "sku": "76439137",
+    "article": "ESN05",
+    "source": "ANNISA"
+  },
+  {
+    "id": 187,
+    "sku": "76439146",
+    "article": "ESN05",
+    "source": "ANNISA"
+  },
+  {
+    "id": 188,
+    "sku": "65108970",
+    "article": "ESN06",
+    "source": "ANNISA"
+  },
+  {
+    "id": 189,
+    "sku": "65108989",
+    "article": "ESN06",
+    "source": "ANNISA"
+  },
+  {
+    "id": 190,
+    "sku": "65108998",
+    "article": "ESN06",
+    "source": "ANNISA"
+  },
+  {
+    "id": 191,
+    "sku": "65109004",
+    "article": "ESN06",
+    "source": "ANNISA"
+  },
+  {
+    "id": 192,
+    "sku": "65109013",
+    "article": "ESN06",
+    "source": "ANNISA"
+  },
+  {
+    "id": 193,
+    "sku": "65109077",
+    "article": "ESN06",
+    "source": "ANNISA"
+  },
+  {
+    "id": 194,
+    "sku": "65109086",
+    "article": "ESN06",
+    "source": "ANNISA"
+  },
+  {
+    "id": 195,
+    "sku": "65109095",
+    "article": "ESN06",
+    "source": "ANNISA"
+  },
+  {
+    "id": 196,
+    "sku": "65109102",
+    "article": "ESN06",
+    "source": "ANNISA"
+  },
+  {
+    "id": 197,
+    "sku": "65109111",
+    "article": "ESN06",
+    "source": "ANNISA"
+  },
+  {
+    "id": 198,
+    "sku": "68805961",
+    "article": "DTBL2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 199,
+    "sku": "68805970",
+    "article": "DTBL2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 200,
+    "sku": "68805989",
+    "article": "DTBL2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 201,
+    "sku": "68805998",
+    "article": "DTBL2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 202,
+    "sku": "68806988",
+    "article": "DSBL2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 203,
+    "sku": "68806997",
+    "article": "DSBL2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 204,
+    "sku": "68807003",
+    "article": "DSBL2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 205,
+    "sku": "68807012",
+    "article": "DSBL2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 206,
+    "sku": "68807021",
+    "article": "DSBL2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 207,
+    "sku": "68806933",
+    "article": "DPBL2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 208,
+    "sku": "68806942",
+    "article": "DPBL2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 209,
+    "sku": "68806951",
+    "article": "DPBL2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 210,
+    "sku": "68806960",
+    "article": "DPBL2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 211,
+    "sku": "68806979",
+    "article": "DPBL2601",
+    "source": "ANNISA"
+  },
+  {
+    "id": 212,
+    "sku": "70955947",
+    "article": "WTDW2607",
+    "source": "ANNISA"
+  },
+  {
+    "id": 213,
+    "sku": "70955956",
+    "article": "WTDW2607",
+    "source": "ANNISA"
+  },
+  {
+    "id": 214,
+    "sku": "70955965",
+    "article": "WTDW2607",
+    "source": "ANNISA"
+  },
+  {
+    "id": 215,
+    "sku": "70955974",
+    "article": "WTDW2607",
+    "source": "ANNISA"
+  },
+  {
+    "id": 216,
+    "sku": "70955983",
+    "article": "WTDW2607",
+    "source": "ANNISA"
+  },
+  {
+    "id": 217,
+    "sku": "71040110",
+    "article": "WTKA2604",
+    "source": "ANNISA"
+  },
+  {
+    "id": 218,
+    "sku": "71040129",
+    "article": "WTKA2604",
+    "source": "ANNISA"
+  },
+  {
+    "id": 219,
+    "sku": "71040138",
+    "article": "WTKA2604",
+    "source": "ANNISA"
+  },
+  {
+    "id": 220,
+    "sku": "71040147",
+    "article": "WTKA2604",
+    "source": "ANNISA"
+  },
+  {
+    "id": 221,
+    "sku": "71040156",
+    "article": "WTKA2604",
+    "source": "ANNISA"
+  },
+  {
+    "id": 222,
+    "sku": "70956044",
+    "article": "WBTM2605",
+    "source": "ANNISA"
+  },
+  {
+    "id": 223,
+    "sku": "70956053",
+    "article": "WBTM2605",
+    "source": "ANNISA"
+  },
+  {
+    "id": 224,
+    "sku": "70956062",
+    "article": "WBTM2605",
+    "source": "ANNISA"
+  },
+  {
+    "id": 225,
+    "sku": "70956071",
+    "article": "WBTM2605",
+    "source": "ANNISA"
+  },
+  {
+    "id": 226,
+    "sku": "70956080",
+    "article": "WBTM2605",
+    "source": "ANNISA"
+  }
+]
