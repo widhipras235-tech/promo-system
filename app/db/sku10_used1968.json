@@ -1,0 +1,1178 @@
+[
+  {
+    "id": 1,
+    "sku": "15162026",
+    "article": "15 APRIL - 16 MAY 2026",
+    "source": "USED1968"
+  },
+  {
+    "id": 2,
+    "sku": "003015013502",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 3,
+    "sku": "003015013503",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 4,
+    "sku": "003015013504",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 5,
+    "sku": "003015013902",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 6,
+    "sku": "003015013903",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 7,
+    "sku": "003015013904",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 8,
+    "sku": "003015019202",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 9,
+    "sku": "003015019203",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 10,
+    "sku": "003015019204",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 11,
+    "sku": "006021010202",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 12,
+    "sku": "006021010203",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 13,
+    "sku": "006021010204",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 14,
+    "sku": "006021013502",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 15,
+    "sku": "006021013503",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 16,
+    "sku": "015026010202",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 17,
+    "sku": "015026010203",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 18,
+    "sku": "015026010204",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 19,
+    "sku": "015026010205",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 20,
+    "sku": "015026010502",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 21,
+    "sku": "015026010503",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 22,
+    "sku": "015026010504",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 23,
+    "sku": "015026010505",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 24,
+    "sku": "227186010102",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 25,
+    "sku": "227186010103",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 26,
+    "sku": "227186010104",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 27,
+    "sku": "227186010202",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 28,
+    "sku": "227186010203",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 29,
+    "sku": "227186010204",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 30,
+    "sku": "227186013302",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 31,
+    "sku": "227186013303",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 32,
+    "sku": "227186013304",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 33,
+    "sku": "227326013902",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 34,
+    "sku": "227326013903",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 35,
+    "sku": "227326013904",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 36,
+    "sku": "227326015102",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 37,
+    "sku": "227326015103",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 38,
+    "sku": "227326015104",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 39,
+    "sku": "513026019629",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 40,
+    "sku": "513026019630",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 41,
+    "sku": "513026019631",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 42,
+    "sku": "513026019632",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 43,
+    "sku": "513026019633",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 44,
+    "sku": "513026019634",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 45,
+    "sku": "513026019636",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 46,
+    "sku": "513026019638",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 47,
+    "sku": "515040013829",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 48,
+    "sku": "515040013830",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 49,
+    "sku": "515040013831",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 50,
+    "sku": "515040013832",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 51,
+    "sku": "515040013833",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 52,
+    "sku": "515040013834",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 53,
+    "sku": "515040013836",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 54,
+    "sku": "515040013838",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 55,
+    "sku": "515040013840",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 56,
+    "sku": "515040013842",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 57,
+    "sku": "515040024229",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 58,
+    "sku": "515040024230",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 59,
+    "sku": "515040024231",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 60,
+    "sku": "515040024232",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 61,
+    "sku": "515040024233",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 62,
+    "sku": "515040024234",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 63,
+    "sku": "515040024236",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 64,
+    "sku": "515040024238",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 65,
+    "sku": "515040024240",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 66,
+    "sku": "515040024242",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 67,
+    "sku": "515041011329",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 68,
+    "sku": "515041011330",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 69,
+    "sku": "515041011331",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 70,
+    "sku": "515041011332",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 71,
+    "sku": "515041011333",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 72,
+    "sku": "515041011334",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 73,
+    "sku": "515041011336",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 74,
+    "sku": "515041011338",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 75,
+    "sku": "515041011340",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 76,
+    "sku": "515041011342",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 77,
+    "sku": "515094026129",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 78,
+    "sku": "515094026130",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 79,
+    "sku": "515094026131",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 80,
+    "sku": "515094026132",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 81,
+    "sku": "515094026133",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 82,
+    "sku": "515094026134",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 83,
+    "sku": "515094026136",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 84,
+    "sku": "515094026138",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 85,
+    "sku": "515094026140",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 86,
+    "sku": "515094026142",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 87,
+    "sku": "515094036029",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 88,
+    "sku": "515094036030",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 89,
+    "sku": "515094036031",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 90,
+    "sku": "515094036032",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 91,
+    "sku": "515094036033",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 92,
+    "sku": "515094036034",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 93,
+    "sku": "515094036036",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 94,
+    "sku": "515094036038",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 95,
+    "sku": "515094036040",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 96,
+    "sku": "515094036042",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 97,
+    "sku": "515095016129",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 98,
+    "sku": "515095016130",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 99,
+    "sku": "515095016131",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 100,
+    "sku": "515095016132",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 101,
+    "sku": "515095016133",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 102,
+    "sku": "515095016134",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 103,
+    "sku": "515095016136",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 104,
+    "sku": "515095016138",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 105,
+    "sku": "515095016140",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 106,
+    "sku": "515095016142",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 107,
+    "sku": "515095023729",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 108,
+    "sku": "515095023730",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 109,
+    "sku": "515095023731",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 110,
+    "sku": "515095023732",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 111,
+    "sku": "515095023733",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 112,
+    "sku": "515095023734",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 113,
+    "sku": "515095023736",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 114,
+    "sku": "515095023738",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 115,
+    "sku": "515095023740",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 116,
+    "sku": "515095023742",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 117,
+    "sku": "515095036029",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 118,
+    "sku": "515095036030",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 119,
+    "sku": "515095036031",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 120,
+    "sku": "515095036032",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 121,
+    "sku": "515095036033",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 122,
+    "sku": "515095036034",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 123,
+    "sku": "515095036036",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 124,
+    "sku": "515095036038",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 125,
+    "sku": "515095036040",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 126,
+    "sku": "515095036042",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 127,
+    "sku": "515099016129",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 128,
+    "sku": "515099016130",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 129,
+    "sku": "515099016131",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 130,
+    "sku": "515099016132",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 131,
+    "sku": "515099016133",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 132,
+    "sku": "515099016134",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 133,
+    "sku": "515099016136",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 134,
+    "sku": "515099016138",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 135,
+    "sku": "515099016140",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 136,
+    "sku": "515099016142",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 137,
+    "sku": "515185013129",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 138,
+    "sku": "515185013130",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 139,
+    "sku": "515185013131",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 140,
+    "sku": "515185013132",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 141,
+    "sku": "515185013133",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 142,
+    "sku": "515185013134",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 143,
+    "sku": "515185013136",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 144,
+    "sku": "515185013138",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 145,
+    "sku": "515185013140",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 146,
+    "sku": "515185013142",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 147,
+    "sku": "515185027229",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 148,
+    "sku": "515185027230",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 149,
+    "sku": "515185027231",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 150,
+    "sku": "515185027232",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 151,
+    "sku": "515185027233",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 152,
+    "sku": "515185027234",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 153,
+    "sku": "515185027236",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 154,
+    "sku": "515185027238",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 155,
+    "sku": "515185027240",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 156,
+    "sku": "515185027242",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 157,
+    "sku": "515185031329",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 158,
+    "sku": "515185031330",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 159,
+    "sku": "515185031331",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 160,
+    "sku": "515185031332",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 161,
+    "sku": "515185031333",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 162,
+    "sku": "515185031334",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 163,
+    "sku": "515185031336",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 164,
+    "sku": "515185031338",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 165,
+    "sku": "515185031340",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 166,
+    "sku": "515185031342",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 167,
+    "sku": "515302013729",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 168,
+    "sku": "515302013730",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 169,
+    "sku": "515302013731",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 170,
+    "sku": "515302013732",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 171,
+    "sku": "515302013733",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 172,
+    "sku": "515302013734",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 173,
+    "sku": "515302013736",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 174,
+    "sku": "515302013738",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 175,
+    "sku": "515302013740",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 176,
+    "sku": "515302013742",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 177,
+    "sku": "515302021329",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 178,
+    "sku": "515302021330",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 179,
+    "sku": "515302021331",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 180,
+    "sku": "515302021332",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 181,
+    "sku": "515302021333",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 182,
+    "sku": "515302021334",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 183,
+    "sku": "515302021336",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 184,
+    "sku": "515302021338",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 185,
+    "sku": "515302021340",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 186,
+    "sku": "515302021342",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 187,
+    "sku": "575099016129",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 188,
+    "sku": "575099016130",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 189,
+    "sku": "575099016131",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 190,
+    "sku": "575099016132",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 191,
+    "sku": "575099016133",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 192,
+    "sku": "575099016134",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 193,
+    "sku": "575099016136",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 194,
+    "sku": "575099016138",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 195,
+    "sku": "575099016140",
+    "article": "USED1968",
+    "source": "USED1968"
+  },
+  {
+    "id": 196,
+    "sku": "575099016142",
+    "article": "USED1968",
+    "source": "USED1968"
+  }
+]

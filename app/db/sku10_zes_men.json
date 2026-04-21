@@ -1,0 +1,4382 @@
+[
+  {
+    "id": 1,
+    "sku": "15162026",
+    "article": "",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 2,
+    "sku": "61943502",
+    "article": "Periode 15 April - 16 Mei 2026",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 3,
+    "sku": "61943511",
+    "article": "Tambahan disc 10% untuk transaksi dengan member MR Red / Diamond",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 4,
+    "sku": "61943520",
+    "article": "Tambahan disc 10% untuk transaksi dengan member MR Red / Diamond",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 5,
+    "sku": "61943539",
+    "article": "Tambahan disc 10% untuk transaksi dengan member MR Red / Diamond",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 6,
+    "sku": "61943548",
+    "article": "Tambahan disc 10% untuk transaksi dengan member MR Red / Diamond",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 7,
+    "sku": "61943557",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 8,
+    "sku": "61943566",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 9,
+    "sku": "61943575",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 10,
+    "sku": "61943664",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 11,
+    "sku": "61943673",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 12,
+    "sku": "61943682",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 13,
+    "sku": "61943691",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 14,
+    "sku": "61943584",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 15,
+    "sku": "61943593",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 16,
+    "sku": "61943619",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 17,
+    "sku": "61943628",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 18,
+    "sku": "61943637",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 19,
+    "sku": "61943646",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 20,
+    "sku": "61943655",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 21,
+    "sku": "68851634",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 22,
+    "sku": "68851625",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 23,
+    "sku": "68851643",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 24,
+    "sku": "68851652",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 25,
+    "sku": "68851689",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 26,
+    "sku": "68851661",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 27,
+    "sku": "68851670",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 28,
+    "sku": "68851698",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 29,
+    "sku": "69145888",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 30,
+    "sku": "69145897",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 31,
+    "sku": "69145904",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 32,
+    "sku": "69145940",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 33,
+    "sku": "69145959",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 34,
+    "sku": "69145968",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 35,
+    "sku": "69145913",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 36,
+    "sku": "69145922",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 37,
+    "sku": "69145931",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 38,
+    "sku": "69146145",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 39,
+    "sku": "69146154",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 40,
+    "sku": "69146163",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 41,
+    "sku": "69146172",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 42,
+    "sku": "69146181",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 43,
+    "sku": "69146190",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 44,
+    "sku": "61943940",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 45,
+    "sku": "61943959",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 46,
+    "sku": "61943968",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 47,
+    "sku": "61943977",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 48,
+    "sku": "61943986",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 49,
+    "sku": "61943995",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 50,
+    "sku": "61944001",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 51,
+    "sku": "61944010",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 52,
+    "sku": "61944029",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 53,
+    "sku": "61944038",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 54,
+    "sku": "61944047",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 55,
+    "sku": "61944056",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 56,
+    "sku": "61944065",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 57,
+    "sku": "61944074",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 58,
+    "sku": "67937151",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 59,
+    "sku": "67937160",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 60,
+    "sku": "67937179",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 61,
+    "sku": "67937188",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 62,
+    "sku": "68856308",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 63,
+    "sku": "68856317",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 64,
+    "sku": "68856326",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 65,
+    "sku": "68856335",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 66,
+    "sku": "68856344",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 67,
+    "sku": "68856353",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 68,
+    "sku": "69145806",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 69,
+    "sku": "69145815",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 70,
+    "sku": "69145824",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 71,
+    "sku": "69145833",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 72,
+    "sku": "69145842",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 73,
+    "sku": "69145851",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 74,
+    "sku": "69145860",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 75,
+    "sku": "69145879",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 76,
+    "sku": "69146109",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 77,
+    "sku": "69146118",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 78,
+    "sku": "69146127",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 79,
+    "sku": "69146136",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 80,
+    "sku": "69146065",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 81,
+    "sku": "69146074",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 82,
+    "sku": "69146083",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 83,
+    "sku": "69146092",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 84,
+    "sku": "68767253",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 85,
+    "sku": "68767262",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 86,
+    "sku": "68767271",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 87,
+    "sku": "68767280",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 88,
+    "sku": "68767299",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 89,
+    "sku": "68767306",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 90,
+    "sku": "68767315",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 91,
+    "sku": "68767324",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 92,
+    "sku": "68851143",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 93,
+    "sku": "68851152",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 94,
+    "sku": "68851161",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 95,
+    "sku": "68851170",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 96,
+    "sku": "68851189",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 97,
+    "sku": "68851198",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 98,
+    "sku": "68851205",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 99,
+    "sku": "68851214",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 100,
+    "sku": "68856362",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 101,
+    "sku": "68856371",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 102,
+    "sku": "68856380",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 103,
+    "sku": "68856399",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 104,
+    "sku": "68856442",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 105,
+    "sku": "68856451",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 106,
+    "sku": "68856479",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 107,
+    "sku": "68856460",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 108,
+    "sku": "68856433",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 109,
+    "sku": "68856406",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 110,
+    "sku": "68856415",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 111,
+    "sku": "68856424",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 112,
+    "sku": "69146038",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 113,
+    "sku": "69146047",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 114,
+    "sku": "69146056",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 115,
+    "sku": "69145995",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 116,
+    "sku": "69145977",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 117,
+    "sku": "69145986",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 118,
+    "sku": "69146029",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 119,
+    "sku": "69146001",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 120,
+    "sku": "69146010",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 121,
+    "sku": "68856513",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 122,
+    "sku": "68856522",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 123,
+    "sku": "68856531",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 124,
+    "sku": "68856488",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 125,
+    "sku": "68856497",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 126,
+    "sku": "68856504",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 127,
+    "sku": "68859814",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 128,
+    "sku": "68859823",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 129,
+    "sku": "68859832",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 130,
+    "sku": "68859841",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 131,
+    "sku": "68859850",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 132,
+    "sku": "68859869",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 133,
+    "sku": "68859878",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 134,
+    "sku": "68859887",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 135,
+    "sku": "68057869",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 136,
+    "sku": "68057878",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 137,
+    "sku": "68057887",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 138,
+    "sku": "68057896",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 139,
+    "sku": "68057823",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 140,
+    "sku": "68057832",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 141,
+    "sku": "68057841",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 142,
+    "sku": "68057850",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 143,
+    "sku": "68856228",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 144,
+    "sku": "68856237",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 145,
+    "sku": "68856246",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 146,
+    "sku": "68856255",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 147,
+    "sku": "68856264",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 148,
+    "sku": "68856273",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 149,
+    "sku": "68856282",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 150,
+    "sku": "68856291",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 151,
+    "sku": "69146323",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 152,
+    "sku": "69146332",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 153,
+    "sku": "69146341",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 154,
+    "sku": "69146350",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 155,
+    "sku": "69146289",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 156,
+    "sku": "69146314",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 157,
+    "sku": "69146298",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 158,
+    "sku": "69146305",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 159,
+    "sku": "69146207",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 160,
+    "sku": "69146216",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 161,
+    "sku": "69146225",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 162,
+    "sku": "69146234",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 163,
+    "sku": "69146243",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 164,
+    "sku": "69146252",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 165,
+    "sku": "69146261",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 166,
+    "sku": "69146270",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 167,
+    "sku": "68057903",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 168,
+    "sku": "68057912",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 169,
+    "sku": "68057921",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 170,
+    "sku": "68057930",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 171,
+    "sku": "68057967",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 172,
+    "sku": "68057976",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 173,
+    "sku": "68057949",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 174,
+    "sku": "68057958",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 175,
+    "sku": "63029327",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 176,
+    "sku": "63029336",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 177,
+    "sku": "63029345",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 178,
+    "sku": "63029354",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 179,
+    "sku": "63029363",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 180,
+    "sku": "63029372",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 181,
+    "sku": "63029381",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 182,
+    "sku": "63029390",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 183,
+    "sku": "67937357",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 184,
+    "sku": "67937366",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 185,
+    "sku": "67937375",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 186,
+    "sku": "67937384",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 187,
+    "sku": "67937437",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 188,
+    "sku": "67937446",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 189,
+    "sku": "67937455",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 190,
+    "sku": "67937464",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 191,
+    "sku": "68274642",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 192,
+    "sku": "68274651",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 193,
+    "sku": "68274660",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 194,
+    "sku": "68274679",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 195,
+    "sku": "68274722",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 196,
+    "sku": "68274731",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 197,
+    "sku": "68274740",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 198,
+    "sku": "68274759",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 199,
+    "sku": "68274768",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 200,
+    "sku": "68274777",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 201,
+    "sku": "68274786",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 202,
+    "sku": "68274795",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 203,
+    "sku": "68274802",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 204,
+    "sku": "68274811",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 205,
+    "sku": "68274820",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 206,
+    "sku": "68274839",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 207,
+    "sku": "68274848",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 208,
+    "sku": "68274857",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 209,
+    "sku": "68274866",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 210,
+    "sku": "68274875",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 211,
+    "sku": "68767459",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 212,
+    "sku": "68767468",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 213,
+    "sku": "68767477",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 214,
+    "sku": "68767486",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 215,
+    "sku": "61944083",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 216,
+    "sku": "61944092",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 217,
+    "sku": "61944109",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 218,
+    "sku": "61944118",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 219,
+    "sku": "61944163",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 220,
+    "sku": "61944172",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 221,
+    "sku": "61944181",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 222,
+    "sku": "61944190",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 223,
+    "sku": "61944127",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 224,
+    "sku": "61944136",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 225,
+    "sku": "61944145",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 226,
+    "sku": "61944154",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 227,
+    "sku": "63029247",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 228,
+    "sku": "63029256",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 229,
+    "sku": "63029265",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 230,
+    "sku": "63029274",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 231,
+    "sku": "63029283",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 232,
+    "sku": "63029292",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 233,
+    "sku": "63029309",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 234,
+    "sku": "63029318",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 235,
+    "sku": "63029407",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 236,
+    "sku": "63029416",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 237,
+    "sku": "63029425",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 238,
+    "sku": "63029434",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 239,
+    "sku": "63029443",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 240,
+    "sku": "63029452",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 241,
+    "sku": "63029461",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 242,
+    "sku": "63029470",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 243,
+    "sku": "67937311",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 244,
+    "sku": "67937320",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 245,
+    "sku": "67937339",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 246,
+    "sku": "67937348",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 247,
+    "sku": "67937071",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 248,
+    "sku": "67937080",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 249,
+    "sku": "67937099",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 250,
+    "sku": "67937106",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 251,
+    "sku": "67937115",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 252,
+    "sku": "67937124",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 253,
+    "sku": "67937133",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 254,
+    "sku": "67937142",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 255,
+    "sku": "67937393",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 256,
+    "sku": "67937419",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 257,
+    "sku": "67937428",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 258,
+    "sku": "68274606",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 259,
+    "sku": "68274615",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 260,
+    "sku": "68274624",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 261,
+    "sku": "68274633",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 262,
+    "sku": "68767495",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 263,
+    "sku": "68767502",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 264,
+    "sku": "68767511",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 265,
+    "sku": "68767520",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 266,
+    "sku": "68767539",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 267,
+    "sku": "68767548",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 268,
+    "sku": "68767557",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 269,
+    "sku": "68767566",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 270,
+    "sku": "68790594",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 271,
+    "sku": "68790601",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 272,
+    "sku": "68790610",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 273,
+    "sku": "68790629",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 274,
+    "sku": "68790638",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 275,
+    "sku": "68790647",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 276,
+    "sku": "68790656",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 277,
+    "sku": "68790665",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 278,
+    "sku": "68851081",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 279,
+    "sku": "68851063",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 280,
+    "sku": "68851072",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 281,
+    "sku": "68851090",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 282,
+    "sku": "68851223",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 283,
+    "sku": "68851232",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 284,
+    "sku": "68851241",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 285,
+    "sku": "68851250",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 286,
+    "sku": "68851269",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 287,
+    "sku": "68851278",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 288,
+    "sku": "68851287",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 289,
+    "sku": "68851296",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 290,
+    "sku": "61944458",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 291,
+    "sku": "61944467",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 292,
+    "sku": "61944476",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 293,
+    "sku": "61944485",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 294,
+    "sku": "61944494",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 295,
+    "sku": "61944501",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 296,
+    "sku": "61944510",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 297,
+    "sku": "61944529",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 298,
+    "sku": "68416257",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 299,
+    "sku": "68416266",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 300,
+    "sku": "68416275",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 301,
+    "sku": "68416284",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 302,
+    "sku": "68416293",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 303,
+    "sku": "68416319",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 304,
+    "sku": "68416328",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 305,
+    "sku": "68851705",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 306,
+    "sku": "68851714",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 307,
+    "sku": "68851723",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 308,
+    "sku": "68851732",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 309,
+    "sku": "68471189",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 310,
+    "sku": "68471198",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 311,
+    "sku": "68471205",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 312,
+    "sku": "68471214",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 313,
+    "sku": "68471223",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 314,
+    "sku": "68471232",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 315,
+    "sku": "69044451",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 316,
+    "sku": "69044460",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 317,
+    "sku": "69044479",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 318,
+    "sku": "69044488",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 319,
+    "sku": "69044497",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 320,
+    "sku": "69044504",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 321,
+    "sku": "69044675",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 322,
+    "sku": "69044684",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 323,
+    "sku": "69044693",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 324,
+    "sku": "69044728",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 325,
+    "sku": "69044719",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 326,
+    "sku": "61944332",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 327,
+    "sku": "61944341",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 328,
+    "sku": "61944350",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 329,
+    "sku": "61944369",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 330,
+    "sku": "61944298",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 331,
+    "sku": "61944305",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 332,
+    "sku": "61944314",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 333,
+    "sku": "61944323",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 334,
+    "sku": "68860053",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 335,
+    "sku": "68860062",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 336,
+    "sku": "68860071",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 337,
+    "sku": "68860080",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 338,
+    "sku": "68860099",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 339,
+    "sku": "68860106",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 340,
+    "sku": "68860115",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 341,
+    "sku": "68860124",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 342,
+    "sku": "61944378",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 343,
+    "sku": "61944387",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 344,
+    "sku": "61944396",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 345,
+    "sku": "61944403",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 346,
+    "sku": "61944412",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 347,
+    "sku": "61944421",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 348,
+    "sku": "61944430",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 349,
+    "sku": "61944449",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 350,
+    "sku": "69044371",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 351,
+    "sku": "69044380",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 352,
+    "sku": "69044399",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 353,
+    "sku": "69044406",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 354,
+    "sku": "69044415",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 355,
+    "sku": "69044424",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 356,
+    "sku": "69044433",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 357,
+    "sku": "69044442",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 358,
+    "sku": "68471027",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 359,
+    "sku": "68471036",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 360,
+    "sku": "68471045",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 361,
+    "sku": "68471054",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 362,
+    "sku": "68471063",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 363,
+    "sku": "68471072",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 364,
+    "sku": "68471081",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 365,
+    "sku": "68471090",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 366,
+    "sku": "68471107",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 367,
+    "sku": "68471116",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 368,
+    "sku": "68471125",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 369,
+    "sku": "68471134",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 370,
+    "sku": "68471143",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 371,
+    "sku": "68471152",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 372,
+    "sku": "68471161",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 373,
+    "sku": "68471170",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 374,
+    "sku": "61944207",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 375,
+    "sku": "61944216",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 376,
+    "sku": "61944225",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 377,
+    "sku": "69044139",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 378,
+    "sku": "69044148",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 379,
+    "sku": "69044157",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 380,
+    "sku": "69044166",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 381,
+    "sku": "69044095",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 382,
+    "sku": "69044102",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 383,
+    "sku": "69044111",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 384,
+    "sku": "69044120",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 385,
+    "sku": "67937197",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 386,
+    "sku": "67937213",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 387,
+    "sku": "67937204",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 388,
+    "sku": "68860017",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 389,
+    "sku": "68860026",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 390,
+    "sku": "68860035",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 391,
+    "sku": "68860044",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 392,
+    "sku": "68859976",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 393,
+    "sku": "68859985",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 394,
+    "sku": "68859994",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 395,
+    "sku": "68860008",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 396,
+    "sku": "68859734",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 397,
+    "sku": "68859743",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 398,
+    "sku": "68859752",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 399,
+    "sku": "68859761",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 400,
+    "sku": "68859770",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 401,
+    "sku": "68859789",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 402,
+    "sku": "68859798",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 403,
+    "sku": "68859805",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 404,
+    "sku": "69095272",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 405,
+    "sku": "69095281",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 406,
+    "sku": "69095290",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 407,
+    "sku": "69095245",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 408,
+    "sku": "69095254",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 409,
+    "sku": "69095263",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 410,
+    "sku": "68851303",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 411,
+    "sku": "68851312",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 412,
+    "sku": "68851321",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 413,
+    "sku": "68851330",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 414,
+    "sku": "68851349",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 415,
+    "sku": "68851358",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 416,
+    "sku": "68851367",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 417,
+    "sku": "68851376",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 418,
+    "sku": "68851385",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 419,
+    "sku": "68851394",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 420,
+    "sku": "68851401",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 421,
+    "sku": "68851410",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 422,
+    "sku": "68851429",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 423,
+    "sku": "68851438",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 424,
+    "sku": "68851447",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 425,
+    "sku": "68851456",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 426,
+    "sku": "68193720",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 427,
+    "sku": "68193739",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 428,
+    "sku": "68193748",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 429,
+    "sku": "68193757",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 430,
+    "sku": "68193686",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 431,
+    "sku": "68193695",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 432,
+    "sku": "68193702",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 433,
+    "sku": "68193711",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 434,
+    "sku": "68274688",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 435,
+    "sku": "68274697",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 436,
+    "sku": "68274704",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 437,
+    "sku": "68274713",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 438,
+    "sku": "68851545",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 439,
+    "sku": "68851554",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 440,
+    "sku": "68851563",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 441,
+    "sku": "68851572",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 442,
+    "sku": "68851107",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 443,
+    "sku": "68851116",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 444,
+    "sku": "68851125",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 445,
+    "sku": "68851134",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 446,
+    "sku": "69095165",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 447,
+    "sku": "69095174",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 448,
+    "sku": "69095183",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 449,
+    "sku": "69095192",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 450,
+    "sku": "69095209",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 451,
+    "sku": "69095218",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 452,
+    "sku": "69095227",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 453,
+    "sku": "69095236",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 454,
+    "sku": "68859896",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 455,
+    "sku": "68859903",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 456,
+    "sku": "68859912",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 457,
+    "sku": "68859921",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 458,
+    "sku": "68859930",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 459,
+    "sku": "68859949",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 460,
+    "sku": "68859958",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 461,
+    "sku": "68859967",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 462,
+    "sku": "61943879",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 463,
+    "sku": "61943888",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 464,
+    "sku": "61943897",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 465,
+    "sku": "61943860",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 466,
+    "sku": "61943904",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 467,
+    "sku": "61943913",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 468,
+    "sku": "61943922",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 469,
+    "sku": "61943931",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 470,
+    "sku": "61943824",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 471,
+    "sku": "61943833",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 472,
+    "sku": "61943842",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 473,
+    "sku": "61943851",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 474,
+    "sku": "69044175",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 475,
+    "sku": "69044184",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 476,
+    "sku": "69044193",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 477,
+    "sku": "69044219",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 478,
+    "sku": "69044228",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 479,
+    "sku": "69044237",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 480,
+    "sku": "69044246",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 481,
+    "sku": "69044255",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 482,
+    "sku": "69044264",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 483,
+    "sku": "69044273",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 484,
+    "sku": "69044282",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 485,
+    "sku": "61589539",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 486,
+    "sku": "61589548",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 487,
+    "sku": "61589557",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 488,
+    "sku": "69044513",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 489,
+    "sku": "69044522",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 490,
+    "sku": "69044531",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 491,
+    "sku": "69044540",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 492,
+    "sku": "69044559",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 493,
+    "sku": "69044568",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 494,
+    "sku": "69044577",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 495,
+    "sku": "69044586",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 496,
+    "sku": "69044595",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 497,
+    "sku": "69044602",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 498,
+    "sku": "69044611",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 499,
+    "sku": "69044620",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 500,
+    "sku": "69044639",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 501,
+    "sku": "69044648",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 502,
+    "sku": "69044657",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 503,
+    "sku": "69044666",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 504,
+    "sku": "68870097",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 505,
+    "sku": "68870104",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 506,
+    "sku": "68870113",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 507,
+    "sku": "68870122",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 508,
+    "sku": "63029121",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 509,
+    "sku": "63029130",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 510,
+    "sku": "63029149",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 511,
+    "sku": "63029158",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 512,
+    "sku": "63029087",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 513,
+    "sku": "63029096",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 514,
+    "sku": "63029103",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 515,
+    "sku": "63029112",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 516,
+    "sku": "68870131",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 517,
+    "sku": "68870140",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 518,
+    "sku": "68870159",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 519,
+    "sku": "68870168",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 520,
+    "sku": "69044291",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 521,
+    "sku": "69044308",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 522,
+    "sku": "69044317",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 523,
+    "sku": "69044326",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 524,
+    "sku": "69044335",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 525,
+    "sku": "69044353",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 526,
+    "sku": "69044344",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 527,
+    "sku": "69044362",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 528,
+    "sku": "69044737",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 529,
+    "sku": "69044746",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 530,
+    "sku": "69044755",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 531,
+    "sku": "69044764",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 532,
+    "sku": "69839174",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 533,
+    "sku": "69839183",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 534,
+    "sku": "69839192",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 535,
+    "sku": "69839209",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 536,
+    "sku": "69839138",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 537,
+    "sku": "69839147",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 538,
+    "sku": "69839156",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 539,
+    "sku": "69839165",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 540,
+    "sku": "63029185",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 541,
+    "sku": "63029167",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 542,
+    "sku": "63029176",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 543,
+    "sku": "63029194",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 544,
+    "sku": "63029201",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 545,
+    "sku": "63029210",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 546,
+    "sku": "63029229",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 547,
+    "sku": "63029238",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 548,
+    "sku": "68767333",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 549,
+    "sku": "68767342",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 550,
+    "sku": "68767351",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 551,
+    "sku": "68767360",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 552,
+    "sku": "68767413",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 553,
+    "sku": "68767422",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 554,
+    "sku": "68767431",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 555,
+    "sku": "68767440",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 556,
+    "sku": "68767379",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 557,
+    "sku": "68767388",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 558,
+    "sku": "68767397",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 559,
+    "sku": "68767404",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 560,
+    "sku": "55033702",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 561,
+    "sku": "55033711",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 562,
+    "sku": "55033720",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 563,
+    "sku": "55033739",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 564,
+    "sku": "55033748",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 565,
+    "sku": "55033757",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 566,
+    "sku": "54809377",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 567,
+    "sku": "54809386",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 568,
+    "sku": "54809395",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 569,
+    "sku": "54809439",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 570,
+    "sku": "54809448",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 571,
+    "sku": "54809402",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 572,
+    "sku": "54809411",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 573,
+    "sku": "54809420",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 574,
+    "sku": "55638603",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 575,
+    "sku": "55638612",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 576,
+    "sku": "55638701",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 577,
+    "sku": "55638578",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 578,
+    "sku": "55638658",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 579,
+    "sku": "55638694",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 580,
+    "sku": "55638550",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 581,
+    "sku": "55638569",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 582,
+    "sku": "55638587",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 583,
+    "sku": "55638596",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 584,
+    "sku": "55638621",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 585,
+    "sku": "55638630",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 586,
+    "sku": "55638649",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 587,
+    "sku": "55638667",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 588,
+    "sku": "55638676",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 589,
+    "sku": "55638685",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 590,
+    "sku": "61311686",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 591,
+    "sku": "61311720",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 592,
+    "sku": "61311668",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 593,
+    "sku": "61311677",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 594,
+    "sku": "61311695",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 595,
+    "sku": "61311702",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 596,
+    "sku": "61311711",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 597,
+    "sku": "61311739",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 598,
+    "sku": "62956167",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 599,
+    "sku": "62956176",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 600,
+    "sku": "62956185",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 601,
+    "sku": "62956194",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 602,
+    "sku": "62956130",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 603,
+    "sku": "62956149",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 604,
+    "sku": "62956158",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 605,
+    "sku": "62956201",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 606,
+    "sku": "54809591",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 607,
+    "sku": "54809608",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 608,
+    "sku": "54809555",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 609,
+    "sku": "54809564",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 610,
+    "sku": "54809582",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 611,
+    "sku": "54809546",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 612,
+    "sku": "54809573",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 613,
+    "sku": "54809537",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 614,
+    "sku": "61278446",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 615,
+    "sku": "61278455",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 616,
+    "sku": "61278464",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 617,
+    "sku": "61278473",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 618,
+    "sku": "61278482",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 619,
+    "sku": "61278491",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 620,
+    "sku": "61278508",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 621,
+    "sku": "61278517",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 622,
+    "sku": "61563191",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 623,
+    "sku": "61563208",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 624,
+    "sku": "61563217",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 625,
+    "sku": "61563226",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 626,
+    "sku": "61589431",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 627,
+    "sku": "61589413",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 628,
+    "sku": "61589422",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 629,
+    "sku": "61589440",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 630,
+    "sku": "61589360",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 631,
+    "sku": "61589351",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 632,
+    "sku": "61589333",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 633,
+    "sku": "61589342",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 634,
+    "sku": "62955980",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 635,
+    "sku": "62956014",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 636,
+    "sku": "62955971",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 637,
+    "sku": "62955999",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 638,
+    "sku": "62956005",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 639,
+    "sku": "62956023",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 640,
+    "sku": "62956041",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 641,
+    "sku": "62956032",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 642,
+    "sku": "61563235",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 643,
+    "sku": "61563244",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 644,
+    "sku": "61563253",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 645,
+    "sku": "61563262",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 646,
+    "sku": "61278320",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 647,
+    "sku": "61278339",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 648,
+    "sku": "61278348",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 649,
+    "sku": "61278357",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 650,
+    "sku": "68186845",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 651,
+    "sku": "68186854",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 652,
+    "sku": "68186863",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 653,
+    "sku": "68186872",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 654,
+    "sku": "68186881",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 655,
+    "sku": "68186890",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 656,
+    "sku": "68186907",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 657,
+    "sku": "68186916",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 658,
+    "sku": "68186925",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 659,
+    "sku": "68186934",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 660,
+    "sku": "68186943",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 661,
+    "sku": "68186952",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 662,
+    "sku": "61278428",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 663,
+    "sku": "61278419",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 664,
+    "sku": "61278437",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 665,
+    "sku": "68186809",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 666,
+    "sku": "68186818",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 667,
+    "sku": "68186827",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 668,
+    "sku": "68186836",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 669,
+    "sku": "62956210",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 670,
+    "sku": "62956229",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 671,
+    "sku": "62956238",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 672,
+    "sku": "62956247",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 673,
+    "sku": "62956256",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 674,
+    "sku": "62956265",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 675,
+    "sku": "62956274",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 676,
+    "sku": "62956283",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 677,
+    "sku": "62956078",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 678,
+    "sku": "62956069",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 679,
+    "sku": "62956050",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 680,
+    "sku": "62956096",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 681,
+    "sku": "62956112",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 682,
+    "sku": "62956087",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 683,
+    "sku": "62956103",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 684,
+    "sku": "62956121",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 685,
+    "sku": "62956292",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 686,
+    "sku": "62956309",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 687,
+    "sku": "62956318",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 688,
+    "sku": "62956327",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 689,
+    "sku": "61928734",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 690,
+    "sku": "61928743",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 691,
+    "sku": "61928752",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 692,
+    "sku": "61928761",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 693,
+    "sku": "61278535",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 694,
+    "sku": "61278544",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 695,
+    "sku": "61278580",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 696,
+    "sku": "61278571",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 697,
+    "sku": "61278526",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 698,
+    "sku": "61278553",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 699,
+    "sku": "61278562",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 700,
+    "sku": "61278599",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 701,
+    "sku": "68095523",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 702,
+    "sku": "68095532",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 703,
+    "sku": "68095541",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 704,
+    "sku": "68095550",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 705,
+    "sku": "67934958",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 706,
+    "sku": "67934967",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 707,
+    "sku": "67934976",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 708,
+    "sku": "67934985",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 709,
+    "sku": "67935153",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 710,
+    "sku": "67935162",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 711,
+    "sku": "67935171",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 712,
+    "sku": "67935180",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 713,
+    "sku": "67935073",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 714,
+    "sku": "67935082",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 715,
+    "sku": "67935091",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 716,
+    "sku": "67935108",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 717,
+    "sku": "67935199",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 718,
+    "sku": "67935206",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 719,
+    "sku": "67935215",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 720,
+    "sku": "67935224",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 721,
+    "sku": "62981666",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 722,
+    "sku": "62981675",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 723,
+    "sku": "61589459",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 724,
+    "sku": "61589468",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 725,
+    "sku": "61589477",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 726,
+    "sku": "61589486",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 727,
+    "sku": "61589495",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 728,
+    "sku": "61589502",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 729,
+    "sku": "61589511",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  },
+  {
+    "id": 730,
+    "sku": "61589520",
+    "article": "Disc 10% menjadi tanggungan brand yang ikut berpartisipasi",
+    "source": "ZES MEN"
+  }
+]

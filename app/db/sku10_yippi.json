@@ -1,0 +1,866 @@
+[
+  {
+    "id": 1,
+    "sku": "15162026",
+    "article": "",
+    "source": "YIPPI"
+  },
+  {
+    "id": 2,
+    "sku": "61508705",
+    "article": "9074AS001",
+    "source": "YIPPI"
+  },
+  {
+    "id": 3,
+    "sku": "61508714",
+    "article": "9074AS056",
+    "source": "YIPPI"
+  },
+  {
+    "id": 4,
+    "sku": "61508723",
+    "article": "9074AS050",
+    "source": "YIPPI"
+  },
+  {
+    "id": 5,
+    "sku": "61508732",
+    "article": "9074AS034",
+    "source": "YIPPI"
+  },
+  {
+    "id": 6,
+    "sku": "61508741",
+    "article": "9074AS049",
+    "source": "YIPPI"
+  },
+  {
+    "id": 7,
+    "sku": "61508750",
+    "article": "9226AS051",
+    "source": "YIPPI"
+  },
+  {
+    "id": 8,
+    "sku": "61508769",
+    "article": "9226AS057",
+    "source": "YIPPI"
+  },
+  {
+    "id": 9,
+    "sku": "61508778",
+    "article": "9226AS145",
+    "source": "YIPPI"
+  },
+  {
+    "id": 10,
+    "sku": "61508787",
+    "article": "9226AS084",
+    "source": "YIPPI"
+  },
+  {
+    "id": 11,
+    "sku": "61508796",
+    "article": "9226AS030",
+    "source": "YIPPI"
+  },
+  {
+    "id": 12,
+    "sku": "61508803",
+    "article": "9226AS029",
+    "source": "YIPPI"
+  },
+  {
+    "id": 13,
+    "sku": "61508812",
+    "article": "9218AS042",
+    "source": "YIPPI"
+  },
+  {
+    "id": 14,
+    "sku": "61508821",
+    "article": "9218AS009",
+    "source": "YIPPI"
+  },
+  {
+    "id": 15,
+    "sku": "61508830",
+    "article": "9218AS004",
+    "source": "YIPPI"
+  },
+  {
+    "id": 16,
+    "sku": "61508849",
+    "article": "9218AS006",
+    "source": "YIPPI"
+  },
+  {
+    "id": 17,
+    "sku": "61922212",
+    "article": "9074AS013",
+    "source": "YIPPI"
+  },
+  {
+    "id": 18,
+    "sku": "61922221",
+    "article": "9218AS015",
+    "source": "YIPPI"
+  },
+  {
+    "id": 19,
+    "sku": "68186470",
+    "article": "WBS2504A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 20,
+    "sku": "68186489",
+    "article": "WBS2504A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 21,
+    "sku": "68186498",
+    "article": "WBS2504A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 22,
+    "sku": "68186505",
+    "article": "WBS2505A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 23,
+    "sku": "68186514",
+    "article": "WBS2505A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 24,
+    "sku": "68186523",
+    "article": "WBS2505A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 25,
+    "sku": "68242113",
+    "article": "9218AS048",
+    "source": "YIPPI"
+  },
+  {
+    "id": 26,
+    "sku": "68171799",
+    "article": "255K103A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 27,
+    "sku": "68171806",
+    "article": "255K801A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 28,
+    "sku": "68171815",
+    "article": "249K503A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 29,
+    "sku": "68171824",
+    "article": "249K603A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 30,
+    "sku": "68171833",
+    "article": "249K701A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 31,
+    "sku": "68171842",
+    "article": "245K203A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 32,
+    "sku": "68171851",
+    "article": "239K102A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 33,
+    "sku": "68171860",
+    "article": "239K202A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 34,
+    "sku": "68171879",
+    "article": "25DY0201A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 35,
+    "sku": "68171888",
+    "article": "255K203A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 36,
+    "sku": "68171897",
+    "article": "255K902A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 37,
+    "sku": "68171904",
+    "article": "255K1102A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 38,
+    "sku": "68171913",
+    "article": "SK14001A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 39,
+    "sku": "68171922",
+    "article": "255K803A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 40,
+    "sku": "68171931",
+    "article": "255K201A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 41,
+    "sku": "68171940",
+    "article": "255K903A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 42,
+    "sku": "68171959",
+    "article": "SK14002A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 43,
+    "sku": "68171968",
+    "article": "255K805A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 44,
+    "sku": "68171977",
+    "article": "249K604A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 45,
+    "sku": "68171986",
+    "article": "239K105A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 46,
+    "sku": "68171995",
+    "article": "25DY0203A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 47,
+    "sku": "68172001",
+    "article": "255K205A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 48,
+    "sku": "68172010",
+    "article": "255K905A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 49,
+    "sku": "68172029",
+    "article": "255K1105A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 50,
+    "sku": "68172038",
+    "article": "255K1106A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 51,
+    "sku": "68172047",
+    "article": "SK14003A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 52,
+    "sku": "68172056",
+    "article": "255K105A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 53,
+    "sku": "68172065",
+    "article": "255K804A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 54,
+    "sku": "68172074",
+    "article": "249K504A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 55,
+    "sku": "68172083",
+    "article": "249K606A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 56,
+    "sku": "68172092",
+    "article": "249K706A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 57,
+    "sku": "68172109",
+    "article": "245K205A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 58,
+    "sku": "68172118",
+    "article": "239K104A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 59,
+    "sku": "68172127",
+    "article": "239K204A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 60,
+    "sku": "68172136",
+    "article": "25DY0202A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 61,
+    "sku": "68172145",
+    "article": "255K204A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 62,
+    "sku": "68172154",
+    "article": "255K1104A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 63,
+    "sku": "68206457",
+    "article": "249K902A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 64,
+    "sku": "68206466",
+    "article": "245K601A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 65,
+    "sku": "68206475",
+    "article": "245K1203A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 66,
+    "sku": "68206484",
+    "article": "239K902A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 67,
+    "sku": "68206519",
+    "article": "245K603A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 68,
+    "sku": "68206528",
+    "article": "245K1201A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 69,
+    "sku": "68206537",
+    "article": "249K307A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 70,
+    "sku": "68206546",
+    "article": "249K905A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 71,
+    "sku": "68206555",
+    "article": "245K604A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 72,
+    "sku": "68206564",
+    "article": "245K1205A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 73,
+    "sku": "68206573",
+    "article": "249K305A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 74,
+    "sku": "68206582",
+    "article": "249K904A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 75,
+    "sku": "68206591",
+    "article": "245K606A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 76,
+    "sku": "68206608",
+    "article": "245K1204A",
+    "source": "YIPPI"
+  },
+  {
+    "id": 77,
+    "sku": "68843358",
+    "article": "255K103S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 78,
+    "sku": "68843367",
+    "article": "255K801S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 79,
+    "sku": "68843376",
+    "article": "249K503S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 80,
+    "sku": "68843385",
+    "article": "249K603S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 81,
+    "sku": "68843394",
+    "article": "249K701S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 82,
+    "sku": "68843401",
+    "article": "245K203S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 83,
+    "sku": "68843410",
+    "article": "239K102S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 84,
+    "sku": "68843429",
+    "article": "239K202S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 85,
+    "sku": "68843438",
+    "article": "25DY0201S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 86,
+    "sku": "68843447",
+    "article": "255K203S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 87,
+    "sku": "68843456",
+    "article": "255K902S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 88,
+    "sku": "68843465",
+    "article": "255K1102S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 89,
+    "sku": "68843474",
+    "article": "249K303S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 90,
+    "sku": "68843483",
+    "article": "249K902S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 91,
+    "sku": "68843492",
+    "article": "245K601S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 92,
+    "sku": "68843509",
+    "article": "245K1203S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 93,
+    "sku": "68843518",
+    "article": "239K902S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 94,
+    "sku": "68843527",
+    "article": "239K903S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 95,
+    "sku": "68843536",
+    "article": "SK14001S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 96,
+    "sku": "68843545",
+    "article": "245K1102S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 97,
+    "sku": "68843554",
+    "article": "245K1602S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 98,
+    "sku": "68843563",
+    "article": "249K1202S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 99,
+    "sku": "68843572",
+    "article": "255K602S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 100,
+    "sku": "68843581",
+    "article": "225K1101S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 101,
+    "sku": "68843590",
+    "article": "249K1101S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 102,
+    "sku": "68843607",
+    "article": "255K1201S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 103,
+    "sku": "68843616",
+    "article": "255K1402S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 104,
+    "sku": "68843625",
+    "article": "255K803S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 105,
+    "sku": "68843634",
+    "article": "255K201S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 106,
+    "sku": "68843643",
+    "article": "255K903S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 107,
+    "sku": "68843652",
+    "article": "249K901S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 108,
+    "sku": "68843661",
+    "article": "245K603S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 109,
+    "sku": "68843670",
+    "article": "245K1201S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 110,
+    "sku": "68843689",
+    "article": "SK14002S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 111,
+    "sku": "68843698",
+    "article": "245K1103S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 112,
+    "sku": "68843705",
+    "article": "225K1103S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 113,
+    "sku": "68843714",
+    "article": "249K1103S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 114,
+    "sku": "68843723",
+    "article": "255K805S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 115,
+    "sku": "68843732",
+    "article": "249K604S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 116,
+    "sku": "68843741",
+    "article": "239K105S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 117,
+    "sku": "68843750",
+    "article": "25DY0203S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 118,
+    "sku": "68843769",
+    "article": "255K205S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 119,
+    "sku": "68843778",
+    "article": "255K905S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 120,
+    "sku": "68843787",
+    "article": "255K1105S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 121,
+    "sku": "68843796",
+    "article": "255K1106S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 122,
+    "sku": "68843803",
+    "article": "249K307S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 123,
+    "sku": "68843812",
+    "article": "249K905S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 124,
+    "sku": "68843821",
+    "article": "245K604S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 125,
+    "sku": "68843830",
+    "article": "245K1205S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 126,
+    "sku": "68843849",
+    "article": "SK14003S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 127,
+    "sku": "68843858",
+    "article": "255K105S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 128,
+    "sku": "68843867",
+    "article": "255K804S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 129,
+    "sku": "68843876",
+    "article": "249K504S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 130,
+    "sku": "68843885",
+    "article": "249K606S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 131,
+    "sku": "68843894",
+    "article": "249K706S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 132,
+    "sku": "68843901",
+    "article": "245K205S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 133,
+    "sku": "68843910",
+    "article": "239K104S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 134,
+    "sku": "68843929",
+    "article": "239K204S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 135,
+    "sku": "68843938",
+    "article": "25DY0202S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 136,
+    "sku": "68843947",
+    "article": "255K204S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 137,
+    "sku": "68843956",
+    "article": "255K1104S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 138,
+    "sku": "68843965",
+    "article": "249K305S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 139,
+    "sku": "68843974",
+    "article": "249K904S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 140,
+    "sku": "68843983",
+    "article": "245K606S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 141,
+    "sku": "68843992",
+    "article": "245K1204S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 142,
+    "sku": "68844008",
+    "article": "245K1603S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 143,
+    "sku": "68844017",
+    "article": "255K603S",
+    "source": "YIPPI"
+  },
+  {
+    "id": 144,
+    "sku": "68844026",
+    "article": "255K1403S",
+    "source": "YIPPI"
+  }
+]

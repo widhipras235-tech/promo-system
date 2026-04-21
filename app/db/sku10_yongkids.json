@@ -1,0 +1,218 @@
+[
+  {
+    "id": 1,
+    "sku": "15162026",
+    "article": "",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 2,
+    "sku": "2613301",
+    "article": "A26-MUKO13301",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 3,
+    "sku": "2613302",
+    "article": "A26-MUKO13302",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 4,
+    "sku": "2613303",
+    "article": "A26-MUKO13303",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 5,
+    "sku": "2613304",
+    "article": "A26-MUKO13304",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 6,
+    "sku": "2613306",
+    "article": "A26-MUKO13306",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 7,
+    "sku": "2613516",
+    "article": "A26-OAK13516",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 8,
+    "sku": "2613517",
+    "article": "A26-OAK13517",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 9,
+    "sku": "2614326",
+    "article": "A26-OAK14326",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 10,
+    "sku": "2613309",
+    "article": "A26-OJA13309",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 11,
+    "sku": "2613310",
+    "article": "A26-OJA13310",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 12,
+    "sku": "2613311",
+    "article": "A26-OJA13311",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 13,
+    "sku": "2613312",
+    "article": "A26-OJA13312",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 14,
+    "sku": "2613313",
+    "article": "A26-OJA13313",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 15,
+    "sku": "2613315",
+    "article": "A26-OJA13315",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 16,
+    "sku": "2613316",
+    "article": "A26-OJA13316",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 17,
+    "sku": "2613318",
+    "article": "A26-OJA13318",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 18,
+    "sku": "2613319",
+    "article": "A26-OJA13319",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 19,
+    "sku": "2613314",
+    "article": "A26-OKA13314",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 20,
+    "sku": "2613320",
+    "article": "A26-OKA13320",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 21,
+    "sku": "2613321",
+    "article": "A26-OKA13321",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 22,
+    "sku": "2613322",
+    "article": "A26-OKA13322",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 23,
+    "sku": "2613323",
+    "article": "A26-OKA13323",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 24,
+    "sku": "2614324",
+    "article": "A26-OKA14324",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 25,
+    "sku": "2613515",
+    "article": "A26-OTK13515",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 26,
+    "sku": "2614325",
+    "article": "A26-OTK14325",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 27,
+    "sku": "2513301",
+    "article": "H25-OKA13301",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 28,
+    "sku": "2513302",
+    "article": "H25-OKA13302",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 29,
+    "sku": "2513303",
+    "article": "I25-OKA13303",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 30,
+    "sku": "2513304",
+    "article": "J25-OJA13304",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 31,
+    "sku": "2513305",
+    "article": "J25-OJA13305",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 32,
+    "sku": "2513501",
+    "article": "J25-OKA13501",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 33,
+    "sku": "2513502",
+    "article": "J25-OKA13502",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 34,
+    "sku": "2513503",
+    "article": "J25-OKA13503",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 35,
+    "sku": "2513307",
+    "article": "K25-OJA13307",
+    "source": "YONGKIDS"
+  },
+  {
+    "id": 36,
+    "sku": "2513308",
+    "article": "K25-OKA13308",
+    "source": "YONGKIDS"
+  }
+]
