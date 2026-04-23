@@ -211,84 +211,64 @@ AUTO HIDE ANIMATION
   border-radius: 10px;
 }
 
-/* APPLE STYLE MODAL */
-.ios-overlay{
+.md-overlay{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,0.25);
-  backdrop-filter: blur(14px);
+  background:rgba(0,0,0,0.5);
   display:flex;
   justify-content:center;
   align-items:center;
-  z-index:2000;
 }
 
-.ios-modal{
+/* Google Style */
+.md-modal{
   width:90%;
-  max-width:340px;
-  background:rgba(255,255,255,0.9);
-  border-radius:26px;
-  padding:20px;
-  box-shadow:0 20px 40px rgba(0,0,0,0.2);
-  animation:iosFade 0.25s ease;
+  max-width:360px;
+  background:white;
+  border-radius:12px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.25);
+  overflow:hidden;
+  animation:mdFade 0.2s ease;
 }
 
-@keyframes iosFade{
-  from{opacity:0; transform:scale(0.95);}
-  to{opacity:1; transform:scale(1);}
+@keyframes mdFade{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
 }
 
-.ios-content h3{
-  margin:0 0 10px;
-  font-size:18px;
-  font-weight:600;
-  text-align:center;
+.md-header{
+  padding:16px;
+  font-weight:bold;
+  font-size:16px;
 }
 
-.ios-content p{
+.md-body{
+  padding:0 16px 16px;
   font-size:14px;
-  color:#333;
-  margin:6px 0;
-  text-align:center;
+  color:#444;
 }
 
-.sub{
-  color:#666;
-}
-
-.help{
-  margin-top:10px;
-  font-size:13px;
-  color:#888;
-}
-
-.ios-actions{
-  margin-top:15px;
+.md-actions{
   display:flex;
-  flex-direction:column;
-  gap:8px;
+  justify-content:flex-end;
+  gap:10px;
+  padding:8px;
 }
 
-/* tombol utama */
-.ios-primary{
-  background:#007AFF;
+.md-actions button{
+  border:none;
+  background:none;
+  padding:10px;
+  cursor:pointer;
+}
+
+.md-primary{
+  background:#d32f2f;
   color:white;
-  padding:12px;
-  border-radius:16px;
-  text-align:center;
+  padding:10px 14px;
+  border-radius:8px;
   text-decoration:none;
   font-weight:500;
-}
-
-/* tombol secondary */
-.ios-secondary{
-  background:#f2f2f2;
-  border:none;
-  color:#007AFF;
-  padding:10px;
-  border-radius:14px;
-  font-weight:500;
-  cursor:pointer;
 }
 </style>
 
@@ -357,33 +337,22 @@ AUTO HIDE ANIMATION
 <!-- APP -->
 <script src="app.js"></script>
 
-<div id="promoPopup" class="ios-overlay">
-  <div class="ios-modal">
+<div class="md-overlay" id="popup">
+  <div class="md-modal">
 
-    <div class="ios-content">
-      <h3>Informasi</h3>
-      
-      <p>
-        Promo Beli 3 Diskon 10% telah berakhir sejak <b>9 April 2026</b>.
-      </p>
-
-      <p class="sub">
-        Jika promo masih muncul, maka mengikuti <b>SHARP PRICE</b>.
-      </p>
-
-      <p class="help">
-        Kendala teknis atau request fitur bisa chat admin
-      </p>
+    <div class="md-header">
+      ⚠️ Informasi Promo
     </div>
 
-    <div class="ios-actions">
-      <a href="https://wa.me/6285713382219" target="_blank" class="ios-primary">
-        Chat Admin
-      </a>
+    <div class="md-body">
+      Promo Beli 3 Diskon 10% sudah berakhir sejak 9 April 2026.
+      <br><br>
+      Jika masih muncul, maka mengikuti <b>SHARP PRICE</b>.
+    </div>
 
-      <button onclick="closePopup()" class="ios-secondary">
-        Tutup
-      </button>
+    <div class="md-actions">
+      <button onclick="closeModal()">Tutup</button>
+      <a href="https://wa.me/628xxxx" class="md-primary">CHAT ADMIN</a>
     </div>
 
   </div>
