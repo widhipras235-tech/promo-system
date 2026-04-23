@@ -211,75 +211,84 @@ AUTO HIDE ANIMATION
   border-radius: 10px;
 }
 
-/* POP UP PROMO */
-.popup-overlay{
+/* APPLE STYLE MODAL */
+.ios-overlay{
   position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-
-  background:rgba(0,0,0,0.5);
-
+  inset:0;
+  background:rgba(0,0,0,0.25);
+  backdrop-filter: blur(14px);
   display:flex;
   justify-content:center;
   align-items:center;
-
   z-index:2000;
 }
 
-.popup-box{
-  background:white;
+.ios-modal{
+  width:90%;
+  max-width:340px;
+  background:rgba(255,255,255,0.9);
+  border-radius:26px;
   padding:20px;
-  border-radius:15px;
-  width:85%;
-  max-width:320px;
-
-  text-align:center;
-  box-shadow:0 10px 25px rgba(0,0,0,0.2);
-
-  animation:popupFade 0.3s ease;
+  box-shadow:0 20px 40px rgba(0,0,0,0.2);
+  animation:iosFade 0.25s ease;
 }
 
-.popup-box p{
+@keyframes iosFade{
+  from{opacity:0; transform:scale(0.95);}
+  to{opacity:1; transform:scale(1);}
+}
+
+.ios-content h3{
+  margin:0 0 10px;
+  font-size:18px;
+  font-weight:600;
+  text-align:center;
+}
+
+.ios-content p{
   font-size:14px;
   color:#333;
-  line-height:1.5;
+  margin:6px 0;
+  text-align:center;
 }
 
-.popup-box button{
-  margin-top:15px;
-  padding:10px 20px;
-
-  border:none;
-  border-radius:10px;
-
-  background:#ff2d2d;
-  color:white;
-  font-weight:bold;
-
-  cursor:pointer;
+.sub{
+  color:#666;
 }
 
-@keyframes popupFade{
-  from{
-    transform:scale(0.8);
-    opacity:0;
-  }
-  to{
-    transform:scale(1);
-    opacity:1;
-  }
-}
-.wa-link{
-  display:inline-block;
+.help{
   margin-top:10px;
-  padding:10px 15px;
-  background:#25D366;
+  font-size:13px;
+  color:#888;
+}
+
+.ios-actions{
+  margin-top:15px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+/* tombol utama */
+.ios-primary{
+  background:#007AFF;
   color:white;
+  padding:12px;
+  border-radius:16px;
+  text-align:center;
   text-decoration:none;
-  border-radius:10px;
-  font-weight:bold;
+  font-weight:500;
+}
+
+/* tombol secondary */
+.ios-secondary{
+  background:#f2f2f2;
+  border:none;
+  color:#007AFF;
+  padding:10px;
+  border-radius:14px;
+  font-weight:500;
+  cursor:pointer;
 }
 </style>
 
@@ -348,17 +357,35 @@ AUTO HIDE ANIMATION
 <!-- APP -->
 <script src="app.js"></script>
 
-<div id="promoPopup" class="popup-overlay">
-  <div class="popup-box">
-    <p>
-  Promo Beli 3 Diskon 10% sudah berakhir sejak tanggal 9 April 2026.<br>
-  Apabila di hasil pencarian masih terdapat promo tersebut maka diikutkan <b>SHARP PRICE</b>.<br><br>
+<div id="promoPopup" class="ios-overlay">
+  <div class="ios-modal">
 
- Kendala teknis atau request fitur bisa chat admin<br>
+    <div class="ios-content">
+      <h3>Informasi</h3>
+      
+      <p>
+        Promo Beli 3 Diskon 10% telah berakhir sejak <b>9 April 2026</b>.
+      </p>
 
-  <a href="https://wa.me/6285713382219" target="_blank" class="wa-link">WhatsApp</a>
-</p>
-    <button onclick="closePopup()">OK</button>
+      <p class="sub">
+        Jika promo masih muncul, maka mengikuti <b>SHARP PRICE</b>.
+      </p>
+
+      <p class="help">
+        Kendala teknis atau request fitur bisa chat admin
+      </p>
+    </div>
+
+    <div class="ios-actions">
+      <a href="https://wa.me/6285713382219" target="_blank" class="ios-primary">
+        Chat Admin
+      </a>
+
+      <button onclick="closePopup()" class="ios-secondary">
+        Tutup
+      </button>
+    </div>
+
   </div>
 </div>
 </body>
