@@ -17,14 +17,21 @@ let currentKeyword = ""
     
 const SOFT_LIMIT = 1300   
 const HARD_LIMIT = 1500    
-const TOTAL_FILE = 100      
+const TOTAL_FILE = 150     
     
 /* =========================      
 ELEMENT      
 ========================= */      
 const searchInput = document.getElementById("search")      
 const resultEl = document.getElementById("result")      
-const statusEl = document.getElementById("status")      
+const statusEl = document.getElementById("status")  
+const resultInfo = document.getElementById("resultInfo")
+const jumlahData = document.getElementById("jumlahData")
+const keywordCari = document.getElementById("keywordCari")
+const emptyState=document.getElementById("emptyState")
+const emptyKeyword=document.getElementById("emptyKeyword")
+const btnRetry=document.getElementById("btnRetry") 
+const sortSelect = document.getElementById("sortSelect")   
 const btnCamera = document.getElementById("btnCamera")    
 const video = document.getElementById("camera")    
 const canvas = document.getElementById("canvas")    
@@ -674,6 +681,57 @@ function finalSort(results, keyword) {
     return a._priority - b._priority    
   })    
 }    
+
+function sortCurrentResults(mode){
+
+    switch(mode){
+
+        case "status":
+            currentResults.sort((a,b)=>
+                getStatusPriority(a._status)-getStatusPriority(b._status)
+            )
+        break
+
+        case "promoAsc":
+            currentResults.sort((a,b)=>
+                (Number(a.harga_promo)||999999999)-
+                (Number(b.harga_promo)||999999999)
+            )
+        break
+
+        case "promoDesc":
+            currentResults.sort((a,b)=>
+                (Number(b.harga_promo)||0)-
+                (Number(a.harga_promo)||0)
+            )
+        break
+
+        case "brand":
+            currentResults.sort((a,b)=>
+                (a.brand||"").localeCompare(b.brand||"")
+            )
+        break
+
+        case "diskon":
+
+            currentResults.sort((a,b)=>{
+
+                let da=parseFloat(a.diskon)||0
+                let db=parseFloat(b.diskon)||0
+
+                return db-da
+
+            })
+
+        break
+
+        default:
+
+            currentResults=finalSort(currentResults,currentKeyword)
+
+    }
+
+}
     
 /* =========================      
 EXACT RESULT      
@@ -1021,24 +1079,49 @@ function showLoadingSkeleton() {
   }    
 }    
     
-function renderLoadMore() {    
-  const oldBtn = document.getElementById("loadMore")    
-  if (oldBtn) oldBtn.remove()    
-    
-  if (currentResults.length <= currentPage * PER_PAGE) return    
-    
-  const btn = document.createElement("button")    
-  btn.id = "loadMore"    
-  btn.innerText = "Lihat Selanjutnya"    
-  btn.className = "btn-load-more"    
-    
-  btn.onclick = () => {    
-    currentPage++    
-    renderPage()    
-  }    
-    
-  resultEl.appendChild(btn)    
-}    
+function renderLoadMore() {
+
+    const oldBtn = document.getElementById("loadMore")
+    if (oldBtn) oldBtn.remove()
+
+    if (currentResults.length <= currentPage * PER_PAGE) return
+
+    const btn = document.createElement("button")
+    btn.id = "loadMore"
+    btn.innerText = "Lihat Selanjutnya"
+    btn.className = "btn-load-more"
+
+    btn.onclick = () => {
+        currentPage++
+        renderPage()
+    }
+
+    resultEl.appendChild(btn)
+}
+
+/* =========================
+EMPTY STATE
+========================= */
+
+function showEmpty(keyword){
+
+    emptyKeyword.textContent = keyword
+
+    emptyState.style.display = "block"
+
+    resultEl.innerHTML = ""
+
+    statusEl.style.display = "none"
+
+    resultInfo.style.display = "none"
+
+}
+
+function hideEmpty(){
+
+    emptyState.style.display = "none"
+
+}
     
 /* =========================      
 EVENT      
@@ -1056,24 +1139,79 @@ searchInput.addEventListener("input", e => {
   }      
     
   timer = setTimeout(async () => {      
-    if (!keyword.trim()) {      
-      resultEl.innerHTML = ""      
-      statusEl.innerText = "Ketik untuk mencari"      
-      return      
-    }      
-    
-    statusEl.innerText = "Mencari..."      
-    
-    const result = await searchData(keyword, HARD_LIMIT, 0)   
-    
-    currentKeyword = keyword    
-    currentResults = result    
-    currentPage = 1    
-    
-    renderPage()    
-    
-    statusEl.innerText = `Ditemukan ${currentResults.length} data`      
+    if (!keyword.trim()) {
+
+    hideEmpty()
+
+    resultEl.innerHTML = ""
+
+    statusEl.style.display = "block"
+    statusEl.innerText = "Ketik untuk mencari"
+
+    resultInfo.style.display = "none"
+
+    return
+}
+
+statusEl.style.display = "block"
+statusEl.innerText = "Mencari..."
+
+const result = await searchData(keyword, HARD_LIMIT, 0)
+
+currentKeyword = keyword
+currentResults = result
+currentPage = 1
+
+renderPage()
+
+// sembunyikan tulisan lama
+statusEl.style.display = "none"
+
+// tampilkan card hasil
+resultInfo.style.display = "flex"
+
+jumlahData.textContent = currentResults.length
+keywordCari.textContent = keyword
+
+if(currentResults.length===0){
+
+    showEmpty(keyword)
+
+}else{
+
+    hideEmpty()
+
+    statusEl.style.display="none"
+
+    resultInfo.style.display="flex"
+
+    jumlahData.textContent=currentResults.length
+
+    keywordCari.textContent=keyword
+
+}
   }, 200)      
+})
+
+/* =========================
+EVENT BUTTON
+========================= */
+
+btnRetry.addEventListener("click", () => {
+
+    searchInput.value = ""
+
+    hideEmpty()
+
+    resultEl.innerHTML = ""
+
+    statusEl.style.display = "block"
+    statusEl.innerText = "Ketik untuk mencari"
+
+    resultInfo.style.display = "none"
+
+    searchInput.focus()
+
 })    
     
 /* =========================      
@@ -1174,3 +1312,13 @@ window.addEventListener("scroll", () => {
     ticking = true    
   }    
 })    
+
+sortSelect.addEventListener("change",()=>{
+
+    sortCurrentResults(sortSelect.value)
+
+    currentPage=1
+
+    renderPage()
+
+})
